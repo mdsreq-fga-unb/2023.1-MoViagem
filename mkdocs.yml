@@ -8,3 +8,24 @@ nav:
  - Visão do produto e projeto:
       - Visão geral do produto: visao_do_produto_e_projeto/visao-do-produto.md
       - Visão geral do projeto: visao_do_produto_e_projeto/visao-do-produto.md
+
+extra_css: 
+-css/custom.css
+
+theme:
+  name: 'material'
+  language: 'pt'
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  feature:
+    - navigation.tabs
+    - navigation.expand
+    - navigation.sections
+    - navigation.top
+    - toc.numbered
+  search: true
+  search_index_only: ['content']
