@@ -10,7 +10,7 @@ nav:
       - Visão geral do projeto: visao_do_produto_e_projeto/visao-do-produto.md
 
 extra_css: 
--css/custom.css
+  - css/custom.css
 
 theme:
   name: 'material'
