@@ -2,3 +2,9 @@ site_name: MoViagem
 docs_dir: gitpages/docs
 repo_url: https://github.com/mdsreq-fga-unb/2023.1-MoViagem
 repo_name: MoViagem
+
+nav: 
+ - Inicio: index.md
+ - Visão do produto e projeto:
+      - Visão geral do produto: visao_do_produto_e_projeto/visao-do-produto.md
+      - Visão geral do projeto: visao_do_produto_e_projeto/visao-do-produto.md
