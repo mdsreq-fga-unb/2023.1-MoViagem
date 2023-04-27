@@ -36,7 +36,14 @@ Este repositório contém a documentação do planejamento e execução, além d
     <a href="https://github.com/Gabrielribeirof19">Ver perfil</a>
   </div>
 </div>
-
+<div class="card">
+  <img src="https://github.com/Eduardo-RFarias.png" alt="EduardoRfarias">
+  <div class="info">
+    <h3>Eduardo Rodrigues Farias</h3>
+    <p>@EduardoRfarias</p>
+    <a href="https://github.com/Eduardo-RFarias">Ver perfil</a>
+  </div>
+</div>
 
 ## Histórico de revisão
 
