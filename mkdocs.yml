@@ -5,8 +5,7 @@ repo_name: MoViagem
 
 nav: 
  - Inicio: index.md
- - Visão do produto e projeto:
-      - Visão geral do produto: documentos/visao-do-produto-e-projeto.md
+ - Visão do produto e projeto: documentos/visao-do-produto-e-projeto.md
  - Apresentações:
       - Ciclos de Vida - Scrum: apresentacoes/ciclos-de-vida.md
       - Processos de ER: apresentacoes/processos-de-ER.md

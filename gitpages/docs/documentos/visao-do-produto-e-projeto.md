@@ -101,43 +101,52 @@ Por fim, queremos garantir que o processo de gerenciamento de pagamentos e divis
 
 | Papel | Atribuições | Responsável | Participantes |
 |-------|-------------|-------------|---------------|
-| Desenvolvedor | Codificar o produto, codificar testes unitários, realizar refatoração | Eduardo | Pedro, João, Gabriel, Siqueira |
-| Product Owner | Atualizar o escopo do produto, organizar o escopo das sprints, validar as entregas | Pedro | Siqueira, Eduardo |
-| Analista de Qualidade | Garantir a qualidade do produto, garantir o cumprimento do conceito de pronto, realizar inspeções de código | Gabriel | João, Siqueira |
-| Design e UX | Responsável por criar a identidade visual da plataforma, bem como garantir uma experiência de usuário intuitiva e agradável | João | Pedro, Eduardo |
+| Arquiteto | Conduzir o design técnico do sistema documentando os aspectos arquiteturalmente significativos do sistema como visões que descrevem requisitos, design, implementação e distribuição | Eduardo | Eduardo |
+| Gerente de projeto | Conduzir o time, avaliar os riscos e garantir que o projeto cumpra a necessidade dos stakeholders | Pedro | Pedro |
+| Analista | Identificar, detalhar e consolidar requisitos, ajudar os stakeholders a escrever estórias | João | Todos |
+| Testador | Criar casos de teste, scripts de teste e os executar de acordo com os critérios de aceitação de uma estória | Mateus | Todos |
+| Desenvolvedor |Implementar o projeto em si, conversar com os outros papéis para seguir o planejamento e criar o produto certo | Gabriel | Todos |
+| Stakeholder | Identificar requisitos, validar entregas, fornecer feedback, aprovar iterações e tomar decisões de negócios | Lucas Boaventura | Lucas, ChatGPT, Prof. George |
 
 ## 2.2	Planejamento das Fases e/ou Iterações do Projeto
 
-| Sprint | Produto (entrega) | Data Início | Data Fim |
+| Fase | Produto (entrega) | Data Início | Data Fim |
 |-------|-------------|-------------|---------------|
-| Sprint 1 | MVP e Planejamento do Projeto | 25/04/23 | 08/05/23 |
-| Sprint 2 | Implementação da interface básica da plataforma web e mobile (login e cadastro) | 09/05/23 | 22/05/23 |
-| Sprint 3 | Implementação da funcionalidade de gerenciamento de viagens (CRUD’s) | 23/05/23 | 05/06/23 |
-| Sprint 4 | Implementação da funcionalidade de gerenciamento de pagamentos e divisão de valores | 06/06/23 | 19/06/23 |
+| Fase de concepção | Documento de visão do produto, planejamento inicial de riscos | 10/04/23 | 27/04/23 |
+| Fase de elaboração | Arquitetura do projeto e Backlog | 28/05/23 | 25/05/23 |
+| Fase de construção | Implementação das funcionalidades do produto | 26/05/23 | 10/07/23 |
+| Fase de transição | Produto em produção | 11/07/23 | 18/07/23 |
 
 ## 2.3	Matriz de Comunicação
 
 | Descrição | Área/Envolvidos | Periodicidade | Produtos Gerados |
 |-------|-------------|-------------|---------------|
-| Acompanhamento das Atividades em Andamento; Acompanhamento dos Riscos, Compromissos, Ações Pendentes, Indicadores | Toda equipe | Quinzenal (e em dias de aula) | Ata de reunião; Relatório de situação do projeto |
-| Comunicar situação do projeto | Toda equipe; Professor | Quinzenal | Ata de reunião; Relatório de Situação do Projeto |
+| Reunião de planejamento de iteração | Toda equipe, Stakeholder | A cada duas semanas | Plano de iteração, backlog atualizado |
+| Reunião de alinhamento | Toda equipe | Uma vez por semana | Nenhum artefato, mas a equipe deve estar mais alinhada sobre o status das tarefas de cada pessoa do grupo |
+| Revisão de iteração | Toda equipe | A cada duas semanas | Backlog atualizado, lista de riscos atualizada |
+| Retrospectiva de iteração | Toda equipe | A cada duas semanas | Documento de visão do projeto atualizado (lições aprendidas) |
 
 ## 2.4	Gerenciamento de Riscos
 
-No contexto do projeto de desenvolvimento do site/app de gerenciamento de viagens, alguns dos riscos que podem ser identificados incluem problemas de segurança de dados, problemas de escalabilidade, problemas de compatibilidade com diferentes dispositivos e navegadores, e problemas de integração com serviços externos.
-
-A cada ciclo de sprint, é importante avaliar os riscos existentes e atualizar a lista de riscos, a fim de garantir que os riscos sejam monitorados e gerenciados adequadamente. Isso permite que a equipe do projeto possa agir rapidamente no caso de um risco se materializar, minimizando o impacto no projeto. Os riscos devem ser registrados no painel de controle do projeto e no plano do projeto, de forma a garantir que sejam levados em consideração em todas as fases do projeto.
-
+- Trancamento de membros do projeto
+- Modificação do Escopo
+- A equipe não conseguiu cumprir os prazos
+- Imprevistos diversos
 
 ## 2.5	Critérios de Replanejamento
 
-No projeto de gerenciamento de viagens, os critérios de replanejamento devem ser estabelecidos desde o início do projeto. Alguns possíveis critérios incluem mudanças significativas nos requisitos do projeto, atrasos na execução de tarefas, mudanças na disponibilidade de recursos, entre outros. Caso um ou mais critérios sejam atendidos, o time do projeto deve avaliar e decidir se é necessário realizar um replanejamento, levando em consideração os impactos e possíveis alternativas. É importante que a equipe mantenha uma comunicação clara e transparente com todas as partes interessadas sobre as decisões de replanejamento, a fim de garantir o sucesso do projeto.
+Acontecerá o replanejamento do projeto caso ocorra:
+
+- Não cumprimento dos prazos: Causará um replanejamento do cronograma das fases.
+- Alterações graves de requisitos durante a fase de elaboração: Teremos mais iterações na fase de elaboração, causando o replanejamento do cronograma das fases.
+- Saída de dois membros ou mais da equipe: Acarretará em diminuição do escopo.
+
 
 # PROCESSO DE DESENVOLVIMENTO DE SOFTWARE
 
 ## 3.1 Abordagem de desenvolvimento
 
-Para definir a abordagem de desenvolvimento de software que o projeto irá seguir, nos baseamos na metodologia proposta por Gupta (2019). Portanto foram respondidas questões sobre tópicos pré determinados para definir a abordagem que mais se adequa à equipe e ao projeto. Os tópicos são:
+Para definir a abordagem de desenvolvimento de software que o projeto irá seguir, nos **baseamos** na metodologia proposta por Gupta (2019), tomando os resultados dela **somente como um norte**. Portanto foram respondidas questões sobre tópicos pré determinados para definir a abordagem que mais se adequa à equipe e ao projeto. Os tópicos são:
 
 - Requisitos;
 - Equipe de desenvolvimento;
@@ -225,9 +234,11 @@ Obs: Considere que, em resultados, cada caracter ‘+’ é a quantidade de veze
 - Incremental 6+
 - Evolutivo 7+
 - Espiral 9+
-- ### RAD 12+
+- **RAD 12+**
 
 Ao analisar os resultados individuais de cada tópico, foi obtida a metodologia de desenvolvimento mais adequada, o RAD (Rapid Application Development). Esta é uma abordagem ágil e tem como pontos característicos ser centrada no usuário e no design do produto, permitindo uma prototipagem mais rápida e uma entrega iterativa.
+
+Levando em conta as peculiaridades da disciplina, decidimos desconsiderar o RAD e utilizar uma **abordagem híbrida baseada no OpenUP**. Pois assim, conseguimos trabalhar melhor os requisitos no início de nosso projeto e adequar nossas entregas com a disciplina. A estruturação de nossos requisitos será feita em **User Stories**.
 
 
 ## 3.2 Escolhas de Engenharia de Requisitos
@@ -255,7 +266,7 @@ Ao fazer a análise do projeto, os facetas resultantes foram:
 
 Conforme a divisão das atividades de Engenharia de Requisitos acima (MARSICANO, 2023), integramos as atividades de requisitos à metodologia de desenvolvimento de software do projeto, definida na seção 3.1.
 
-![Integração RAD - ER](assets/RAD-e-Requisitos.jpeg)
+![Integração OpenUP - ER](assets/OpenUP-e-ER.png)
 
 
 # LIÇÕES APRENDIDAS
