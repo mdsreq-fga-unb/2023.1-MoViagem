@@ -113,7 +113,7 @@ Por fim, queremos garantir que o processo de gerenciamento de pagamentos e divis
 | Fase | Produto (entrega) | Data Início | Data Fim |
 |-------|-------------|-------------|---------------|
 | Fase de concepção | Documento de visão do produto, planejamento inicial de riscos | 10/04/23 | 27/04/23 |
-| Fase de elaboração | Arquitetura do projeto e Backlog | 28/05/23 | 25/05/23 |
+| Fase de elaboração | Arquitetura do projeto e Backlog | 28/04/23 | 25/05/23 |
 | Fase de construção | Implementação das funcionalidades do produto | 26/05/23 | 10/07/23 |
 | Fase de transição | Produto em produção | 11/07/23 | 18/07/23 |
 

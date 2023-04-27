@@ -1,3 +1,11 @@
+## Link para as apresentações das unidades
+<a href="https://youtu.be/pDSMaeipmTE"> Link para a apresentação da unidade 1.</a>
+<br>
+
+
+
+
+
 ## Sobre
 Este repositório contém a documentação do planejamento e execução, além de demais artefatos gerados ao longo da avaliação de Requisitos de software. Este projeto tem como intuito promover uma solução integrada para o gerenciamento de viagens. Desde a criação de um itinerário até recomendações sobre destinos turísticos!
 
