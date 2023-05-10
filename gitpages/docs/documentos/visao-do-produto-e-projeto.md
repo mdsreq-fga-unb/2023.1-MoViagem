@@ -46,7 +46,13 @@
 
 # VISÃO GERAL DO PRODUTO
 
-## 1.1 Declaração de Posição do Produto
+## 1.1 Problema
+
+Tendo em vista que o projeto é trabalhado em cima de uma oportunidade obtida através de uma lacuna presente em soluções já existentes. Aqui temos um diagrama que cita problemas que o público alvo possuem nas soluções já existentes que é passível de ser solucionada através do projeto em questão.
+
+![Problema](assets/Organiza%C3%A7%C3%A3o%20de%20viagens%20-%20Ishikawa.png)
+
+## 1.2 Declaração de Posição do Produto
 
 Estamos propondo o desenvolvimento de um site/app para gerenciamento de viagens, que permitirá que os usuários façam todo o planejamento de suas viagens em um único lugar, gerenciem pagamentos e dividam valores. O objetivo é proporcionar aos usuários uma experiência mais fácil, organizada e prática de planejamento de viagens, ao mesmo tempo em que ajuda a gerenciar as finanças e divisões de valores entre os membros do grupo de viagem.
 
@@ -55,6 +61,10 @@ O que torna este produto diferente dos concorrentes é a sua funcionalidade inte
 Nossos usuários-alvo são pessoas que viajam em grupos, como famílias, amigos ou colegas de trabalho. Eles são indivíduos que valorizam a conveniência e a organização em sua vida cotidiana e desejam a mesma facilidade e praticidade ao planejar suas viagens. Nossos clientes são aqueles que procuram uma solução integrada para gerenciar todas as suas necessidades de planejamento de viagens em um único lugar, economizando tempo e minimizando a possibilidade de erros.
 
 Os clientes devem utilizar/comprar este produto porque ele oferece uma maneira eficiente e fácil de planejar e gerenciar viagens em grupo. Eles podem economizar tempo e esforço ao planejar sua viagem, bem como evitar erros e desentendimentos no gerenciamento de pagamentos e divisão de valores entre membros do grupo. Em resumo, nosso site/app oferece uma solução completa e integrada para o planejamento de viagens em grupo, tornando a experiência mais prática e agradável para os usuários.
+
+Diferente do Notion que é uma aplicação de organização pessoal e não possui cálculos para estimar os gastos de viagens em grupo e nem templates prontos para viagens. 
+
+Não podemos estabelecer como conquerretes agencias de viagens como CVC e decolar.com... Porque o projeto em questão vem para suprir lacunas de empresas como elas. 
 
 | Pergunta | Resposta |
 |----------|----------|
@@ -65,7 +75,7 @@ Os clientes devem utilizar/comprar este produto porque ele oferece uma maneira e
 | Ao contrário | Os usuários precisam usar várias ferramentas diferentes para planejar suas viagens em grupo |
 | Nosso produto | É uma plataforma integrada que oferece uma solução completa e fácil para o planejamento de viagens em grupo, com uma funcionalidade de gerenciamento de pagamentos e divisão de valores e uma interface intuitiva e fácil de usar |
 
-## 1.2 Objetivos do Produto
+## 1.3 Objetivos do Produto
 
 O objetivo principal do nosso projeto é desenvolver uma plataforma online (site/app) para gerenciamento de viagens em grupo, com o intuito de facilitar o planejamento, organização e divisão de valores entre os membros do grupo.
 
@@ -75,7 +85,7 @@ Outro objetivo é permitir que os usuários convidem outros membros do grupo par
 Por fim, queremos garantir que o processo de gerenciamento de pagamentos e divisão de valores seja simples e transparente, para que os membros do grupo não precisem lidar com cálculos complexos ou confusos. Com esses objetivos em mente, esperamos oferecer uma solução completa e eficiente para o planejamento de viagens em grupo.
 
 
-## 1.3 Tecnologias a Serem Utilizadas
+## 1.4 Tecnologias a Serem Utilizadas
 
 ### Web
 | Categoria | Tecnologias |
