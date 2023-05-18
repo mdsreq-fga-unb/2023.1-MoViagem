@@ -48,10 +48,15 @@
 
 ## 1.1 Problema
 
-Tendo em vista que o projeto é trabalhado em cima de uma oportunidade obtida através de uma lacuna presente em soluções já existentes. Aqui temos um diagrama que cita problemas que o público alvo possuem nas soluções já existentes que é passível de ser solucionada através do projeto em questão.
+Tendo em vista que o projeto é trabalhado em cima de uma oportunidade obtida através de uma lacuna presente em soluções já existentes. Aqui temos um diagrama que cita eventuais problemas que o público alvo  possuem nas soluções já existentes que é passível de ser solucionada através do projeto em questão.
 
-![Problema](assets/Organiza%C3%A7%C3%A3o%20de%20viagens%20-%20Ishikawa.png)
+![Problema](assets/Organiza%C3%A7%C3%A3o%20de%20viagens%20-%20Ishikawa.png).
 
+Porém, tendo em vista que é uma ramificação que possue um número significativo de problemáticas e lenvando em consideração o tempo da disciplina. Fizemos a lista das problemáticas primordias que serão solucionadas pelo projeto durante o período da displina:
+
+- Dificuldade em manter as informações de viagens organizadas e centralizadas
+- Dificuldade em planejar atividades e verificar a disponibilidade dos membros da viagem
+- Dificuldade em manter a comunicação e atualização entre os membros da viagem
 ## 1.2 Declaração de Posição do Produto
 
 Estamos propondo o desenvolvimento de um site/app para gerenciamento de viagens, que permitirá que os usuários façam todo o planejamento de suas viagens em um único lugar, gerenciem pagamentos e dividam valores. O objetivo é proporcionar aos usuários uma experiência mais fácil, organizada e prática de planejamento de viagens, ao mesmo tempo em que ajuda a gerenciar as finanças e divisões de valores entre os membros do grupo de viagem.
@@ -126,6 +131,15 @@ Por fim, queremos garantir que o processo de gerenciamento de pagamentos e divis
 | Fase de elaboração | Arquitetura do projeto e Backlog | 28/04/23 | 25/05/23 |
 | Fase de construção | Implementação das funcionalidades do produto | 26/05/23 | 10/07/23 |
 | Fase de transição | Produto em produção | 11/07/23 | 18/07/23 |
+
+###	Fases da Disciplina
+
+| Fase | Produto (entrega) | Data Início | Data Fim |
+|-------|-------------|-------------|---------------|
+| Entrega 1 Avaliação | Documento de visão do produto, planejamento inicial de riscos | |  |
+|  Entrega 2 Avaliação | Arquitetura do projeto e Backlog |  | |
+|  Entrega 3 Avaliação | Implementação das funcionalidades do produto | | |
+| Fase de transição | Produto em produção | | |
 
 ## 2.3	Matriz de Comunicação
 
@@ -248,7 +262,16 @@ Obs: Considere que, em resultados, cada caracter ‘+’ é a quantidade de veze
 
 Ao analisar os resultados individuais de cada tópico, foi obtida a metodologia de desenvolvimento mais adequada, o RAD (Rapid Application Development). Esta é uma abordagem ágil e tem como pontos característicos ser centrada no usuário e no design do produto, permitindo uma prototipagem mais rápida e uma entrega iterativa.
 
-Levando em conta as peculiaridades da disciplina, decidimos desconsiderar o RAD e utilizar uma **abordagem híbrida baseada no OpenUP**. Pois assim, conseguimos trabalhar melhor os requisitos no início de nosso projeto e adequar nossas entregas com a disciplina. A estruturação de nossos requisitos será feita em **User Stories**.
+Apesar de toda a base introdutória mostrando-se favorável para a implementação do ciclo de vida RAD com o GUPTA. Foi feita uma reunião de Brainstorm com os membros da equipe com axilio do Chat-GPT da OpenAI para nos auxiliar nesse processo de concepção do ciclo de vida que mais se adapta-se ao projeto levando em consideração os seguintes pontos:
+- O foco da diciplina (Requisitos de Software)
+- O planejamento da disciplina.
+- Disponibilidade dos membros da equipe.  
+
+O GUPTA nos sugeriu o RAD, porém o RAD é uma abordagem centrada no cliente. O que não é condizente com o projeto em questão, não possuimos um cliente bem definido exploramos uma oportunidade de mercado.
+
+![Problema](assets/RAD_GPT.png)
+
+Depois de debates e em pesquisas feitas fazendo uso do chatGPT, mas não somente ele, decidimos desconsiderar o RAD e utilizar uma **abordagem híbrida baseada no OpenUP**. Pois assim, conseguimos trabalhar melhor os requisitos no início de nosso projeto e adequar nossas entregas com a disciplina. Além disso, temos também um maior proveito no que tange ao foco nas areás especicas do desenvolvimento dando foco maior pela fase de engenharia de requisitos. É importante ressaltar que a estruturação de nossos requisitos será feita em **User Stories**.
 
 
 ## 3.2 Escolhas de Engenharia de Requisitos
