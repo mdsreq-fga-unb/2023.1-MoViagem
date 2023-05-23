@@ -1,4 +1,4 @@
-# Visão do Produto e Projeto
+# Visão do Produto e Projeto (Pega a Visão 😎)
 
 ## Histórico de Revisão
 
@@ -67,7 +67,7 @@ Nossos usuários-alvo são pessoas que viajam em grupos, como famílias, amigos 
 
 Os clientes devem utilizar/comprar este produto porque ele oferece uma maneira eficiente e fácil de planejar e gerenciar viagens em grupo. Eles podem economizar tempo e esforço ao planejar sua viagem, bem como evitar erros e desentendimentos no gerenciamento de pagamentos e divisão de valores entre membros do grupo. Em resumo, nosso site/app oferece uma solução completa e integrada para o planejamento de viagens em grupo, tornando a experiência mais prática e agradável para os usuários.
 
-Isso faz o projento se direncia diferenciar de aplicações de organização e de tarefas como o Notion ou que é uma aplicação de organização pessoal e não possui cálculos para estimar os gastos de viagens em grupo e nem templates prontos para viagens. Ou ainda o Trello que também é de organização pessoal que possui um kankam que na verdade tem um enfoque maior para a área do design. O projeto tem um foco maior e talvez até exclusivamente no processo de gerenciamento e organização de uma viagem. 
+Isso faz o projeto se direncia diferenciar de aplicações de organização e de tarefas como o Notion ou que é uma aplicação de organização pessoal e não possui cálculos para estimar os gastos de viagens em grupo e nem templates prontos para viagens. Ou ainda o Trello que também é de organização pessoal que possui um kankam que na verdade tem um enfoque maior para a área do design. O projeto tem um foco maior e talvez até exclusivamente no processo de gerenciamento e organização de uma viagem. 
 
 É importante ressaltar que não podemos estabelecer como concorrentes agências de viagens como CVC e/ou decolar.com porque o projeto em questão vem para suprir lacunas de empresas como estas. 
 
@@ -85,9 +85,9 @@ Isso faz o projento se direncia diferenciar de aplicações de organização e d
 O objetivo principal do nosso projeto é desenvolver uma plataforma online (site/app) para gerenciamento de viagens em grupo, com o intuito de facilitar o planejamento, organização e divisão de valores entre os membros do grupo.
 
 Além disso, buscamos oferecer uma interface clara que possui os elementos essenciais para gerenciar uma viagem, para que os usuários possam planejar suas viagens sem dificuldade. A plataforma permitirá que os usuários armazenem e gerenciem informações importantes de suas viagens, como voos, reservas de hotel e itinerários, em um único lugar.
-Outro objetivo é permitir que os usuários convidem outros membros do grupo para participar do planejamento da viagem e gerenciar o acesso de cada um às informações. Não será necessário uma ferramenta de comunicação integrada para que os membros do grupo possam se comunicar, pois soluções atuais já desempenho esse papel de maneira eficiente. A menos que seja necessário uma comunicação inteiramente 
+Outro objetivo é permitir que os usuários convidem outros membros do grupo para participar do planejamento da viagem e gerenciar o acesso de cada um às informações. Não será necessário uma ferramenta de comunicação integrada para que os membros do grupo possam se comunicar, pois soluções atuais já desempenho esse papel de maneira eficiente. A menos que seja necessário uma comunicação inteiramente.
 
-Por fim, queremos garantir que o processo de gerenciamento de pagamentos e divisão de valores seja simples e transparente, para que os membros do grupo não precisem lidar com cálculos complexos ou confusos. Com esses objetivos em mente, esperamos oferecer uma solução completa e eficiente para o planejamento de viagens em grupo.
+Por fim, apesar do diferencial do projeto ser a possibilidade de cálculos de valores finanecieros. Na primeira fase do projeto o foco é desenvolver uma base na qual seja possivel criar essa função. Queremos garantir que o processo de gerenciamento de pagamentos e divisão de valores seja simples, transparente e seguro para que os membros do grupo não precisem lidar com cálculos complexos ou confusos. Com esses objetivos em mente, esperamos oferecer uma solução completa e eficiente para o planejamento de viagens em grupo.
 
 
 ## 1.4 Tecnologias a Serem Utilizadas
@@ -129,17 +129,17 @@ Por fim, queremos garantir que o processo de gerenciamento de pagamentos e divis
 |-------|-------------|-------------|---------------|
 | Fase de concepção | Documento de visão do produto, planejamento inicial de riscos | 10/04/23 | 27/04/23 |
 | Fase de elaboração | Arquitetura do projeto e Backlog | 28/04/23 | 25/05/23 |
-| Fase de construção | Implementação das funcionalidades do produto | 26/05/23 | 10/07/23 |
-| Fase de transição | Produto em produção | 11/07/23 | 18/07/23 |
+| Fase de construção | Implementação das funcionalidades do produto | 26/05/23 | 22/07/23 |
+| Fase de transição | Produto em produção | 23/07/23 | 20/07/23 |
 
 ###	Fases da Disciplina
 
 | Fase | Produto (entrega) | Data Início | Data Fim |
 |-------|-------------|-------------|---------------|
-| Entrega 1 Avaliação | Documento de visão do produto, planejamento inicial de riscos | |  |
-|  Entrega 2 Avaliação | Arquitetura do projeto e Backlog |  | |
-|  Entrega 3 Avaliação | Implementação das funcionalidades do produto | | |
-| Fase de transição | Produto em produção | | |
+| Avaliação 1 | Documento de visão do produto, planejamento inicial de riscos | 10/04/23 | 27/04/23 |
+| Avaliação 2 | Arquitetura do projeto e Backlog | 28/04/23 | 25/05/23 |
+| Avaliação 3 | Implementação das funcionalidades do produto | 26/05/23 | 22/07/23 |
+| Avaliação 4 | Produto em produção | 23/07/23 | 20/07/23 |
 
 ## 2.3	Matriz de Comunicação
 
@@ -152,11 +152,13 @@ Por fim, queremos garantir que o processo de gerenciamento de pagamentos e divis
 
 ## 2.4	Gerenciamento de Riscos
 
-- Trancamento de membros do projeto
-- Modificação do Escopo
-- A equipe não conseguiu cumprir os prazos
-- Imprevistos diversos
-
+| **Risco**                     | **Causa**                                                                                                                         | **Probabilidade** | **Estratégia de mitigação**                                          |
+|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-------------------|----------------------------------------------------------------------|
+| Redução da equipe             | Trancamento da disciplina ou qualquer questão pessoal que impeça, de forma permanente ou temporária, a realização das atividades. | Média             | Redistribuição do trabalho entre os integrantes restantes.           |
+| Falha na comunicação interna. | Falhas de comunicação entre os integrantes que podem causar intercorrências e mal-entendidos                                      | Baixa             | Repensar as formas de comunicação entre os integrantes.              |
+| Baixa produtividade da equipe | Produtividade abaixo do esperado por baixa disponibilidade dos integrantes e por falta de conhecimento.                           | Alta              | Melhorar a gestão, reformular e redistribuir as tarefas pendentes.   |
+| Mudança no escopo             | Atraso no desenvolvimento das tarefas ou alterações no backlog a pedido do cliente.                                               | Média             | Replanejamento do escopo existente com a adição dos novos elementos. |
+|Atraso nas entregas| Falta de conhecimento técnico dos membros da equipe. Dimensionamento incorreto do escopo da sprint e do projeto | Média | Estudo e otimização de técnicas para buscar um nivelamento do conhecimento da equipe |
 ## 2.5	Critérios de Replanejamento
 
 Acontecerá o replanejamento do projeto caso ocorra:
