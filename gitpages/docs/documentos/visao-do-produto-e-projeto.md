@@ -48,11 +48,11 @@
 
 ## 1.1 Problema
 
-Tendo em vista que o projeto é trabalhado em cima de uma oportunidade obtida através de uma lacuna presente em soluções já existentes. Aqui temos um diagrama que cita eventuais problemas que o público alvo  possuem nas soluções já existentes que é passível de ser solucionada através do projeto em questão.
+ Tendo em vista que o projeto é trabalhado em cima de uma oportunidade obtida através de uma lacuna presente em soluções já existentes no ramo das viagens, o projeto não possui um problema específico bem definido. A figura a seguir mostra o diagrama Ishikawa que lista eventuais problemas  que o público alvo possui nas soluções já existentes que são passíveis de serem solucionados através deste projeto.
 
 ![Problema](assets/Organiza%C3%A7%C3%A3o%20de%20viagens%20-%20Ishikawa.png).
 
-Porém, tendo em vista que é uma ramificação que possue um número significativo de problemáticas e lenvando em consideração o tempo da disciplina. Fizemos a lista das problemáticas primordias que serão solucionadas pelo projeto durante o período da displina:
+Porém, lebando em consideração que é uma ramificação que possue um número significativo de problemáticas e considerando o tempo da disciplina. Fizemos a lista das problemáticas primordias que serão solucionadas pelo projeto durante o período da displina:
 
 - Dificuldade em manter as informações de viagens organizadas e centralizadas
 - Dificuldade em planejar atividades e verificar a disponibilidade dos membros da viagem
@@ -61,15 +61,15 @@ Porém, tendo em vista que é uma ramificação que possue um número significat
 
 Estamos propondo o desenvolvimento de um site/app para gerenciamento de viagens, que permitirá que os usuários façam todo o planejamento de suas viagens em um único lugar, gerenciem pagamentos e dividam valores. O objetivo é proporcionar aos usuários uma experiência mais fácil, organizada e prática de planejamento de viagens, ao mesmo tempo em que ajuda a gerenciar as finanças e divisões de valores entre os membros do grupo de viagem.
 
-O que torna este produto diferente dos concorrentes é a sua funcionalidade integrada de gerenciamento de pagamentos e divisão de valores, que permite os usuários calculem e gerenciem facilmente o quanto cada membro do grupo deve contribuir para despesas compartilhadas, como hospedagem, aluguel de carros e refeições. Além disso, nosso site/app fornecerá uma interface intuitiva e fácil de usar, tornando a experiência de planejamento de viagens mais agradável e eficiente para os usuários.
+O que torna este produto diferente dos concorrentes é a sua funcionalidade integrada de gerenciamento de pagamentos e divisão de valores, que permite os usuários calculem e gerenciem facilmente o quanto cada membro do grupo deve contribuir para despesas compartilhadas, como hospedagem, aluguel de carros e refeições. Além disso, nosso site/app fornecerá uma interface fará uso de técnicas de Interação Humano Computador (IHC) visando uma tentando supor e prever possíveis ações do usuário antes dele executá-la, para assim, tornar a experiência de planejamento de viagens mais agradável e eficiente para os usuários.
 
 Nossos usuários-alvo são pessoas que viajam em grupos, como famílias, amigos ou colegas de trabalho. Eles são indivíduos que valorizam a conveniência e a organização em sua vida cotidiana e desejam a mesma facilidade e praticidade ao planejar suas viagens. Nossos clientes são aqueles que procuram uma solução integrada para gerenciar todas as suas necessidades de planejamento de viagens em um único lugar, economizando tempo e minimizando a possibilidade de erros.
 
 Os clientes devem utilizar/comprar este produto porque ele oferece uma maneira eficiente e fácil de planejar e gerenciar viagens em grupo. Eles podem economizar tempo e esforço ao planejar sua viagem, bem como evitar erros e desentendimentos no gerenciamento de pagamentos e divisão de valores entre membros do grupo. Em resumo, nosso site/app oferece uma solução completa e integrada para o planejamento de viagens em grupo, tornando a experiência mais prática e agradável para os usuários.
 
-Diferente do Notion que é uma aplicação de organização pessoal e não possui cálculos para estimar os gastos de viagens em grupo e nem templates prontos para viagens. 
+Isso faz o projento se direncia diferenciar de aplicações de organização e de tarefas como o Notion ou que é uma aplicação de organização pessoal e não possui cálculos para estimar os gastos de viagens em grupo e nem templates prontos para viagens. Ou ainda o Trello que também é de organização pessoal que possui um kankam que na verdade tem um enfoque maior para a área do design. O projeto tem um foco maior e talvez até exclusivamente no processo de gerenciamento e organização de uma viagem. 
 
-Não podemos estabelecer como conquerretes agencias de viagens como CVC e decolar.com... Porque o projeto em questão vem para suprir lacunas de empresas como elas. 
+É importante ressaltar que não podemos estabelecer como concorrentes agências de viagens como CVC e/ou decolar.com porque o projeto em questão vem para suprir lacunas de empresas como estas. 
 
 | Pergunta | Resposta |
 |----------|----------|
@@ -84,8 +84,8 @@ Não podemos estabelecer como conquerretes agencias de viagens como CVC e decola
 
 O objetivo principal do nosso projeto é desenvolver uma plataforma online (site/app) para gerenciamento de viagens em grupo, com o intuito de facilitar o planejamento, organização e divisão de valores entre os membros do grupo.
 
-Além disso, buscamos oferecer uma interface intuitiva e fácil de usar, para que os usuários possam planejar suas viagens sem dificuldade. A plataforma também permitirá que os usuários armazenem e gerenciem informações importantes de suas viagens, como voos, reservas de hotel e itinerários, em um único lugar.
-Outro objetivo é permitir que os usuários convidem outros membros do grupo para participar do planejamento da viagem e gerenciar o acesso de cada um às informações. A ferramenta de comunicação integrada também será disponibilizada, para que os membros do grupo possam se comunicar facilmente durante o planejamento da viagem.
+Além disso, buscamos oferecer uma interface clara que possui os elementos essenciais para gerenciar uma viagem, para que os usuários possam planejar suas viagens sem dificuldade. A plataforma permitirá que os usuários armazenem e gerenciem informações importantes de suas viagens, como voos, reservas de hotel e itinerários, em um único lugar.
+Outro objetivo é permitir que os usuários convidem outros membros do grupo para participar do planejamento da viagem e gerenciar o acesso de cada um às informações. Não será necessário uma ferramenta de comunicação integrada para que os membros do grupo possam se comunicar, pois soluções atuais já desempenho esse papel de maneira eficiente. A menos que seja necessário uma comunicação inteiramente 
 
 Por fim, queremos garantir que o processo de gerenciamento de pagamentos e divisão de valores seja simples e transparente, para que os membros do grupo não precisem lidar com cálculos complexos ou confusos. Com esses objetivos em mente, esperamos oferecer uma solução completa e eficiente para o planejamento de viagens em grupo.
 
