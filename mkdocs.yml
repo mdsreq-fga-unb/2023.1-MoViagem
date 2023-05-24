@@ -6,6 +6,12 @@ repo_name: MoViagem
 nav: 
  - Inicio: index.md
  - Visão do produto e projeto: documentos/visao-do-produto-e-projeto.md
+ - Backlog: documentos/backlog.md
+ - Pontuação dos requisitos: documentos/pontuacao-requisitos.md
+ - História da Engenharia de Requisitos: documentos/historia-engenharia-de-requisitos.md
+ - MVPs:
+      - MVP 1: documentos/mvp1.md
+      - MVP 2: documentos/mvp2.md
  - Apresentações:
       - Ciclos de Vida - Scrum: apresentacoes/ciclos-de-vida.md
       - Processos de ER: apresentacoes/processos-de-ER.md
