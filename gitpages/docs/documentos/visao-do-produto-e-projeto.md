@@ -1,165 +1,156 @@
-# Visão do Produto e Projeto (Pega a Visão 😎)
+# Visão do Produto e Projeto
 
 ## Histórico de Revisão
 
-| Data | Versão | Descrição | Autor |
-|------|--------|-----------|-------|
-| 26/04/23 | 0.1 | Início do documento | Equipe Mochileiros |
-| 27/04/23 | 1.0 | Documento pronto para a Entrega 1 | Equipe Mochileiros |
-
-
+| Data     | Versão | Descrição                         | Autor              |
+| -------- | ------ | --------------------------------- | ------------------ |
+| 26/04/23 | 0.1    | Início do documento               | Equipe Mochileiros |
+| 27/04/23 | 1.0    | Documento pronto para a Entrega 1 | Equipe Mochileiros |
+| 24/05/23 | 2.0pre | Documento pronto para a Entrega 2 | Equipe Mochileiros |
 
 ## Sumário
----
-- VISÃO GERAL DO PRODUTO
 
-    - 1.1	Declaração de Posição do Produto
-    - 1.2	Objetivos do Produto
-    - 1.3	Tecnologias a Serem Utilizadas  
 ---
-- VISÃO GERAL DO PROJETO
 
-    - 2.1	Organização do Projeto
-    - 2.2	Planejamento das Fases e/ou Iterações do Projeto
-    - 2.3	Matriz de Comunicação
-    - 2.4	Gerenciamento de Riscos
-    - 2.5	Critérios de Replanejamento
----
-- PROCESSO DE DESENVOLVIMENTO DE SOFTWARE
+- 1 VISÃO GERAL DO PRODUTO
 
-    - 3.1 Abordagem de desenvolvimento
-        - 3.1.1 Requisitos
-        - 3.1.2 Equipe de desenvolvimento
-        - 3.1.3 Usuários
-        - 3.1.4 Tipo de projeto e riscos associados
-        - 3.1.5 Conclusão
-    - 3.2 Escolhas de Engenharia de Requisitos
-        - 3.2.1 Processo de ER
-        - 3.2.2 Atividades de ER
----
-- LIÇÕES APRENDIDAS
+  - 1.1 Problema
+  - 1.2 Declaração de Posição do Produto
+  - 1.3 Objetivos do Produto
+  - 1.4 Tecnologias a Serem Utilizadas
 
-    - 4.1 Unidade 1
 ---
+
+- 2 VISÃO GERAL DO PROJETO
+
+  - 2.1 Organização do Projeto
+  - 2.2 Planejamento das Fases e/ou Iterações do Projeto
+  - 2.3 Matriz de Comunicação
+  - 2.4 Gerenciamento de Riscos
+  - 2.5 Critérios de Replanejamento
+
+---
+
+- 3 PROCESSO DE DESENVOLVIMENTO DE SOFTWARE
+
+  - 3.1 Abordagem de desenvolvimento
+    - 3.1.1 Metodologia
+    - 3.1.2 Questões técnicas
+    - 3.1.3 Questões humanas
+    - 3.1.4 Questões organizacionais
+    - 3.1.5 Conclusão
+  - 3.2 Escolhas de Engenharia de Requisitos
+    - 3.2.1 Processo de ER
+    - 3.2.2 Atividades de ER
+
+---
+
+- 4 LIÇÕES APRENDIDAS
+
+  - 4.1 Unidade 1
+
+---
+
 - REFERÊNCIAS BIBLIOGRÁFICAS
+
 ---
 
 # VISÃO GERAL DO PRODUTO
 
 ## 1.1 Problema
 
- Tendo em vista que o projeto é trabalhado em cima de uma oportunidade obtida através de uma lacuna presente em soluções já existentes no ramo das viagens, o projeto não possui um problema específico bem definido. A figura a seguir mostra o diagrama Ishikawa que lista eventuais problemas  que o público alvo possui nas soluções já existentes que são passíveis de serem solucionados através deste projeto.
+Tendo em vista que o projeto é desenvolvido com base em uma oportunidade identificada em relação a lacunas presentes nas soluções já existentes no setor de viagens, o projeto não apresenta um problema específico bem definido. A figura a seguir ilustra o diagrama Ishikawa, que enumera possíveis problemas enfrentados pelo público-alvo nas soluções já existentes e que podem ser solucionados por meio deste projeto.
 
 ![Problema](assets/Organiza%C3%A7%C3%A3o%20de%20viagens%20-%20Ishikawa.png).
 
-Porém, lebando em consideração que é uma ramificação que possue um número significativo de problemáticas e considerando o tempo da disciplina. Fizemos a lista das problemáticas primordias que serão solucionadas pelo projeto durante o período da displina:
+No entanto, considerando que essa é uma área que abrange um número significativo de desafios e levando em consideração o prazo da disciplina, elaboramos uma lista das principais problemáticas que serão abordadas e solucionadas pelo projeto ao longo do período da disciplina:
 
-- Dificuldade em manter as informações de viagens organizadas e centralizadas
-- Dificuldade em planejar atividades e verificar a disponibilidade dos membros da viagem
-- Dificuldade em manter a comunicação e atualização entre os membros da viagem
+- Dificuldade em manter as informações de viagens devidamente organizadas e centralizadas.
+- Dificuldade em planejar atividades e verificar a disponibilidade dos membros da viagem.
+- Dificuldade em manter uma comunicação eficiente e atualizada entre os membros da viagem.
+
 ## 1.2 Declaração de Posição do Produto
 
-Estamos propondo o desenvolvimento de um site/app para gerenciamento de viagens, que permitirá que os usuários façam todo o planejamento de suas viagens em um único lugar, gerenciem pagamentos e dividam valores. O objetivo é proporcionar aos usuários uma experiência mais fácil, organizada e prática de planejamento de viagens, ao mesmo tempo em que ajuda a gerenciar as finanças e divisões de valores entre os membros do grupo de viagem.
+Estamos propondo o desenvolvimento de um site/aplicativo para o gerenciamento de viagens, que permitirá que os usuários realizem todo o planejamento de suas viagens em um único local, gerenciem pagamentos e dividam despesas. O objetivo é proporcionar aos usuários uma experiência mais fácil, organizada e prática no planejamento de viagens, ao mesmo tempo em que ajuda a gerenciar as finanças e divisões de despesas entre os membros do grupo de viagem.
 
-O que torna este produto diferente dos concorrentes é a sua funcionalidade integrada de gerenciamento de pagamentos e divisão de valores, que permite os usuários calculem e gerenciem facilmente o quanto cada membro do grupo deve contribuir para despesas compartilhadas, como hospedagem, aluguel de carros e refeições. Além disso, nosso site/app fornecerá uma interface fará uso de técnicas de Interação Humano Computador (IHC) visando uma tentando supor e prever possíveis ações do usuário antes dele executá-la, para assim, tornar a experiência de planejamento de viagens mais agradável e eficiente para os usuários.
+O que torna este produto distinto em relação aos concorrentes é a sua funcionalidade integrada de gerenciamento de pagamentos e divisão de despesas, que permite aos usuários calcular e gerenciar facilmente a contribuição de cada membro do grupo para despesas compartilhadas, como hospedagem, aluguel de carros e refeições. Além disso, nosso site/aplicativo fornecerá uma interface que fará uso de técnicas de Interação Humano-Computador (IHC) com o objetivo de antecipar e prever possíveis ações do usuário antes que sejam executadas, a fim de tornar a experiência de planejamento de viagens mais agradável e eficiente.
 
-Nossos usuários-alvo são pessoas que viajam em grupos, como famílias, amigos ou colegas de trabalho. Eles são indivíduos que valorizam a conveniência e a organização em sua vida cotidiana e desejam a mesma facilidade e praticidade ao planejar suas viagens. Nossos clientes são aqueles que procuram uma solução integrada para gerenciar todas as suas necessidades de planejamento de viagens em um único lugar, economizando tempo e minimizando a possibilidade de erros.
+Nossos usuários-alvo são pessoas que viajam em grupos, como famílias, amigos ou colegas de trabalho. São indivíduos que valorizam a conveniência e a organização em suas vidas cotidianas e desejam a mesma praticidade ao planejar suas viagens. Nossos clientes são aqueles que procuram uma solução integrada para gerenciar todas as suas necessidades de planejamento de viagens em um só lugar, economizando tempo e minimizando a possibilidade de erros.
 
-Os clientes devem utilizar/comprar este produto porque ele oferece uma maneira eficiente e fácil de planejar e gerenciar viagens em grupo. Eles podem economizar tempo e esforço ao planejar sua viagem, bem como evitar erros e desentendimentos no gerenciamento de pagamentos e divisão de valores entre membros do grupo. Em resumo, nosso site/app oferece uma solução completa e integrada para o planejamento de viagens em grupo, tornando a experiência mais prática e agradável para os usuários.
+Os clientes devem utilizar/comprar este produto porque ele oferece uma maneira eficiente e fácil de planejar e gerenciar viagens em grupo. Eles podem economizar tempo e esforço ao planejar suas viagens, além de evitar erros e desentendimentos no gerenciamento de pagamentos e divisão de despesas entre os membros do grupo. Em resumo, nosso site/aplicativo oferece uma solução completa e integrada para o planejamento de viagens em grupo, tornando a experiência mais prática e agradável para os usuários.
 
-Isso faz o projeto se direncia diferenciar de aplicações de organização e de tarefas como o Notion ou que é uma aplicação de organização pessoal e não possui cálculos para estimar os gastos de viagens em grupo e nem templates prontos para viagens. Ou ainda o Trello que também é de organização pessoal que possui um kankam que na verdade tem um enfoque maior para a área do design. O projeto tem um foco maior e talvez até exclusivamente no processo de gerenciamento e organização de uma viagem. 
+Isso diferencia o projeto de aplicações de organização e tarefas, como o Notion, que é uma aplicação de organização pessoal e não possui templates prontos para viagens, ou o Trello, que também é uma ferramenta de organização pessoal com foco principalmente no gerenciamento de projetos. Nosso projeto tem um enfoque maior, talvez exclusivamente, no processo de gerenciamento e organização de viagens.
 
-É importante ressaltar que não podemos estabelecer como concorrentes agências de viagens como CVC e/ou decolar.com porque o projeto em questão vem para suprir lacunas de empresas como estas. 
+É importante ressaltar que não consideramos agências de viagens, como a CVC ou decolar.com, como concorrentes, pois o projeto em questão visa suprir lacunas existentes nessas empresas.
 
-| Pergunta | Resposta |
-|----------|----------|
-| Para | Famílias e viajantes em grupo |
-| Quem | Busca uma solução fácil e organizada para o planejamento de viagens em grupo |
-| O (nome do produto) | MóViagem |
-| Que | Permite o planejamento completo de viagens em grupo e o gerenciamento de pagamentos e divisão de valores |
-| Ao contrário | Os usuários precisam usar várias ferramentas diferentes para planejar suas viagens em grupo |
-| Nosso produto | É uma plataforma integrada que oferece uma solução completa e fácil para o planejamento de viagens em grupo, com uma funcionalidade de gerenciamento de pagamentos e divisão de valores e uma interface intuitiva e fácil de usar |
+| Pergunta            | Resposta                                                                                                                                                                                                             |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Para                | Famílias e amigos                                                                                                                                                                                                    |
+| Quem                | Busca uma solução integrada para o planejamento de viagens em grupo ou individuais                                                                                                                                   |
+| O (nome do produto) | MóViagem                                                                                                                                                                                                             |
+| Que                 | Gerencia a organização de uma viagem através de um controle de informações e de cronograma, além de recolher informações úteis sobre a situação do local da viagem                                                   |
+| Ao contrário        | de outras ferramentas que oferecem somente algumas dessas funcionalidades, requisitando utilização de programas de terceiros                                                                                         |
+| Nosso produto       | É uma plataforma integrada que oferece uma solução para o planejamento de viagens com a possibilidade de criar e compartilhar cronogramas com outras pessoas, receber avisos sobre clima e lembretes personalizados. |
 
 ## 1.3 Objetivos do Produto
 
-O objetivo principal do nosso projeto é desenvolver uma plataforma online (site/app) para gerenciamento de viagens em grupo, com o intuito de facilitar o planejamento, organização e divisão de valores entre os membros do grupo.
+O objetivo principal do nosso projeto consiste em desenvolver uma plataforma online (site/aplicativo) para o gerenciamento de viagens em grupo, com o intuito de facilitar o planejamento, a organização e a divisão de valores entre os membros do grupo.
 
-Além disso, buscamos oferecer uma interface clara que possui os elementos essenciais para gerenciar uma viagem, para que os usuários possam planejar suas viagens sem dificuldade. A plataforma permitirá que os usuários armazenem e gerenciem informações importantes de suas viagens, como voos, reservas de hotel e itinerários, em um único lugar.
-Outro objetivo é permitir que os usuários convidem outros membros do grupo para participar do planejamento da viagem e gerenciar o acesso de cada um às informações. Não será necessário uma ferramenta de comunicação integrada para que os membros do grupo possam se comunicar, pois soluções atuais já desempenho esse papel de maneira eficiente. A menos que seja necessário uma comunicação inteiramente.
+Ademais, almejamos fornecer uma interface intuitiva, contendo os elementos essenciais para a gestão de uma viagem, de modo que os usuários possam planejar suas viagens de forma descomplicada. A plataforma permitirá que os usuários armazenem e gerenciem informações relevantes sobre suas viagens, como voos, reservas de hotéis e itinerários, tudo em um único local.
 
-Por fim, apesar do diferencial do projeto ser a possibilidade de cálculos de valores finanecieros. Na primeira fase do projeto o foco é desenvolver uma base na qual seja possivel criar essa função. Queremos garantir que o processo de gerenciamento de pagamentos e divisão de valores seja simples, transparente e seguro para que os membros do grupo não precisem lidar com cálculos complexos ou confusos. Com esses objetivos em mente, esperamos oferecer uma solução completa e eficiente para o planejamento de viagens em grupo.
+Outro objetivo consiste em possibilitar que os usuários convidem outros membros do grupo para participar do planejamento da viagem e gerenciar o acesso de cada um às informações. Não será necessário incluir uma ferramenta de comunicação integrada, visto que soluções já existentes desempenham esse papel de maneira eficiente. A menos que seja necessário um sistema de comunicação completamente integrado.
 
+Por fim, embora o aspecto diferencial do projeto seja a capacidade de realizar cálculos financeiros, na primeira fase do desenvolvimento, focaremos em criar uma base sólida que permita a implementação dessa funcionalidade. Nosso objetivo é garantir que o processo de gerenciamento de pagamentos e divisão de valores seja simples, transparente e seguro, de modo que os membros do grupo não precisem lidar com cálculos complexos ou confusos. Com essas metas em mente, esperamos fornecer uma solução completa e eficiente para o planejamento de viagens em grupo.
 
 ## 1.4 Tecnologias a Serem Utilizadas
 
-### Web
-| Categoria | Tecnologias |
-|-----------|-------------|
+| Categoria                | Tecnologias            |
+| ------------------------ | ---------------------- |
 | Linguagem de programação | JavaScript, TypeScript |
-| Framework de frontend | React |
-| Backend | Node.js |
-| Banco de Dados | MySQL |
-| Hospedagem | Heroku |
-
-### Mobile
-| Categoria | Tecnologias |
-|-----------|-------------|
-| Linguagem de programação | JavaScript, TypeScript |
-| Framework de frontend | React Native |
-| Backend | Node.js |
-| Banco de Dados | SQLite |
-| Hospedagem | AWS |
+| Framework de frontend    | React                  |
+| Backend                  | Nest                   |
+| Banco de Dados           | MySQL                  |
+| Hospedagem               | Servidor VPS           |
 
 # VISÃO GERAL DO PROJETO
 
 ## 2.1 Organização do Projeto
 
-| Papel | Atribuições | Responsável | Participantes |
-|-------|-------------|-------------|---------------|
-| Arquiteto | Conduzir o design técnico do sistema documentando os aspectos arquiteturalmente significativos do sistema como visões que descrevem requisitos, design, implementação e distribuição | Eduardo | Eduardo |
-| Gerente de projeto | Conduzir o time, avaliar os riscos e garantir que o projeto cumpra a necessidade dos stakeholders | Pedro | Pedro |
-| Analista | Identificar, detalhar e consolidar requisitos, ajudar os stakeholders a escrever estórias | João | Todos |
-| Testador | Criar casos de teste, scripts de teste e os executar de acordo com os critérios de aceitação de uma estória | Mateus | Todos |
-| Desenvolvedor |Implementar o projeto em si, conversar com os outros papéis para seguir o planejamento e criar o produto certo | Gabriel | Todos |
-| Stakeholder | Identificar requisitos, validar entregas, fornecer feedback, aprovar iterações e tomar decisões de negócios | Lucas Boaventura | Lucas, ChatGPT, Prof. George |
+| Papel              | Atribuições                                                                                                  | Participantes                |
+| ------------------ | ------------------------------------------------------------------------------------------------------------ | ---------------------------- |
+| Gerente de projeto | Conduzir o time, avaliar os riscos e garantir que o projeto cumpra a necessidade dos stakeholders.           | Pedro                        |
+| Desenvolvedor      | Implementar o projeto em si, criar arquitetura, testar, etc.                                                 | Todos                        |
+| Stakeholder        | Identificar requisitos, validar entregas, fornecer feedback, aprovar iterações e tomar decisões de negócios. | Lucas, ChatGPT, Prof. George |
 
-## 2.2	Planejamento das Fases e/ou Iterações do Projeto
+## 2.2 Planejamento das Fases e/ou Iterações do Projeto
 
-| Fase | Produto (entrega) | Data Início | Data Fim |
-|-------|-------------|-------------|---------------|
-| Fase de concepção | Documento de visão do produto, planejamento inicial de riscos | 10/04/23 | 27/04/23 |
-| Fase de elaboração | Arquitetura do projeto e Backlog | 28/04/23 | 25/05/23 |
-| Fase de construção | Implementação das funcionalidades do produto | 26/05/23 | 22/07/23 |
-| Fase de transição | Produto em produção | 23/07/23 | 20/07/23 |
+| Fase               | Produto (entrega)                                             | Data Início | Data Fim |
+| ------------------ | ------------------------------------------------------------- | ----------- | -------- |
+| Fase de concepção  | Documento de visão do produto, planejamento inicial de riscos | 10/04/23    | 27/04/23 |
+| Fase de elaboração | Arquitetura do projeto e Backlog                              | 28/04/23    | 25/05/23 |
+| Fase de construção | Implementação das funcionalidades do produto                  | 26/05/23    | 22/07/23 |
+| Fase de transição  | Produto em produção                                           | 23/07/23    | 20/07/23 |
 
-###	Fases da Disciplina
+## 2.3 Matriz de Comunicação
 
-| Fase | Produto (entrega) | Data Início | Data Fim |
-|-------|-------------|-------------|---------------|
-| Avaliação 1 | Documento de visão do produto, planejamento inicial de riscos | 10/04/23 | 27/04/23 |
-| Avaliação 2 | Arquitetura do projeto e Backlog | 28/04/23 | 25/05/23 |
-| Avaliação 3 | Implementação das funcionalidades do produto | 26/05/23 | 22/07/23 |
-| Avaliação 4 | Produto em produção | 23/07/23 | 20/07/23 |
+| Descrição                           | Área/Envolvidos          | Periodicidade                     | Produtos Gerados                                                                                           |
+| ----------------------------------- | ------------------------ | --------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Reunião de planejamento de iteração | Toda equipe, Stakeholder | Uma vez por semana                | Plano de iteração, backlog atualizado.                                                                     |
+| Alinhamento individual              | Toda equipe              | Duas vezes por semana no WhatsApp | Nenhum artefato, mas a equipe deve estar mais alinhada sobre o status das tarefas de cada pessoa do grupo. |
+| Revisão de iteração                 | Toda equipe              | Uma vez por semana                | Backlog atualizado, lista de riscos atualizada.                                                            |
 
-## 2.3	Matriz de Comunicação
+## 2.4 Gerenciamento de Riscos
 
-| Descrição | Área/Envolvidos | Periodicidade | Produtos Gerados |
-|-------|-------------|-------------|---------------|
-| Reunião de planejamento de iteração | Toda equipe, Stakeholder | A cada duas semanas | Plano de iteração, backlog atualizado |
-| Reunião de alinhamento | Toda equipe | Uma vez por semana | Nenhum artefato, mas a equipe deve estar mais alinhada sobre o status das tarefas de cada pessoa do grupo |
-| Revisão de iteração | Toda equipe | A cada duas semanas | Backlog atualizado, lista de riscos atualizada |
-| Retrospectiva de iteração | Toda equipe | A cada duas semanas | Documento de visão do projeto atualizado (lições aprendidas) |
+| **Risco**                     | **Causa**                                                                                                                         | **Probabilidade** | **Estratégia de mitigação**                                        |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------ |
+| Atraso nas entregas           | Baixa produtividade dos membros da equipe e/ou dimensionamento incorreto do escopo da iteração e dos MVPs                         | Alta              | Melhorar a gestão, reformular e redistribuir as tarefas pendentes. |
+| Redução da equipe             | Trancamento da disciplina ou qualquer questão pessoal que impeça, de forma permanente ou temporária, a realização das atividades. | Baixa             | Redistribuição do trabalho entre os integrantes restantes.         |
+| Falha na comunicação interna  | Falhas de comunicação entre os integrantes que podem causar intercorrências e mal-entendidos                                      | Média             | Repensar as formas de comunicação entre os integrantes.            |
+| Mudança no escopo             | Atraso nas entregas ou alterações no backlog a pedido do cliente.                                                                 | Média             | Replanejamento do escopo existente.                                |
+| Inviabilidade de um requisito | Requisitos que não podem ser implementados por questões técnicas ou de negócio.                                                   | Baixa             | Replanejamento do escopo existente.                                |
+| Equipamento danificado        | Danos físicos ou virtuais nos equipamentos utilizados para o desenvolvimento do projeto.                                          | Baixa             | Redistribuição do trabalho entre os integrantes restantes.         |
 
-## 2.4	Gerenciamento de Riscos
-
-| **Risco**                     | **Causa**                                                                                                                         | **Probabilidade** | **Estratégia de mitigação**                                          |
-|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-------------------|----------------------------------------------------------------------|
-| Redução da equipe             | Trancamento da disciplina ou qualquer questão pessoal que impeça, de forma permanente ou temporária, a realização das atividades. | Média             | Redistribuição do trabalho entre os integrantes restantes.           |
-| Falha na comunicação interna. | Falhas de comunicação entre os integrantes que podem causar intercorrências e mal-entendidos                                      | Baixa             | Repensar as formas de comunicação entre os integrantes.              |
-| Baixa produtividade da equipe | Produtividade abaixo do esperado por baixa disponibilidade dos integrantes e por falta de conhecimento.                           | Alta              | Melhorar a gestão, reformular e redistribuir as tarefas pendentes.   |
-| Mudança no escopo             | Atraso no desenvolvimento das tarefas ou alterações no backlog a pedido do cliente.                                               | Média             | Replanejamento do escopo existente com a adição dos novos elementos. |
-|Atraso nas entregas| Falta de conhecimento técnico dos membros da equipe. Dimensionamento incorreto do escopo da sprint e do projeto | Média | Estudo e otimização de técnicas para buscar um nivelamento do conhecimento da equipe |
-## 2.5	Critérios de Replanejamento
+## 2.5 Critérios de Replanejamento
 
 Acontecerá o replanejamento do projeto caso ocorra:
 
@@ -167,114 +158,68 @@ Acontecerá o replanejamento do projeto caso ocorra:
 - Alterações graves de requisitos durante a fase de elaboração: Teremos mais iterações na fase de elaboração, causando o replanejamento do cronograma das fases.
 - Saída de dois membros ou mais da equipe: Acarretará em diminuição do escopo.
 
-
 # PROCESSO DE DESENVOLVIMENTO DE SOFTWARE
 
 ## 3.1 Abordagem de desenvolvimento
 
-Para definir a abordagem de desenvolvimento de software que o projeto irá seguir, nos **baseamos** na metodologia proposta por Gupta (2019), tomando os resultados dela **somente como um norte**. Portanto foram respondidas questões sobre tópicos pré determinados para definir a abordagem que mais se adequa à equipe e ao projeto. Os tópicos são:
+## 3.1.1 Metodologia
 
-- Requisitos;
-- Equipe de desenvolvimento;
-- Usuários;
-- Tipo de projeto e riscos associados.
+Em um primeiro momento, nós decidimos utilizar a metodologia proposta por Gupta (2019), porém após um estudo da metodologia RAD, nós não ficamos satisfeitos com o resultado, pois ela não se encaixava na configuração da disciplina. Apesar de toda a base introdutória mostrando-se favorável para a implementação do ciclo de vida RAD com o GUPTA. Foi feita uma reunião de Brainstorm com os membros da equipe com auxílio do Chat-GPT da OpenAI para nos auxiliar nesse processo de concepção do ciclo de vida que mais se adapta ao projeto levando em consideração os seguintes pontos:
 
-Obs: Considere que, em resultados, cada caracter ‘+’ é a quantidade de vezes em que o processo especificado se encaixa com nosso projeto baseado em nossas respostas.
+- O foco da disciplina (Requisitos de Software)
+- O planejamento da disciplina que contém duas entregas de MVP ao final da disciplina.
+- Disponibilidade dos membros da equipe.
 
-
-## 3.1.1 Requisitos
-
-| Perguntas | Respostas |
-|-----------|-------------|
-| Os requisitos são fáceis de entender e definir? | Sim |
-| Nós mudamos os requisitos com bastante frequência? | Não |
-| Nós podemos definir os requisitos ao início de cada ciclo? | Sim |
-| Os requisitos estão indicando um sistema complexo para se construir? | Sim |
-
-### Resultados: 
-- Cascata +++
-- Protótipo +
-- Incremental +++
-- Evolutivo +++
-- Espiral +
-- RAD +++
-
-
-## 3.1.2 Equipe de desenvolvimento
-
-| Perguntas | Respostas |
-|-----------|-------------|
-| Pouca experiência em projetos similares? | Sim |
-| Pouco conhecimento de domínio (novato na tecnologia)? | Não |
-| Pouca experiência com as ferramentas que serão usadas? | Sim |
-| Disponibilidade para treinamento, se necessário | Sim |
-
-### Resultados: 
-- Cascata +
-- Protótipo ++
-- Incremental +
-- Evolutivo +
-- Espiral ++
-- RAD ++
-
-## 3.1.3 Usuários
-
-| Perguntas | Respostas |
-|-----------|-------------|
-| Usuário está envolvido em todas as fases? | Sim |
-| Participação limitada do usuário? | Não |
-| Usuário não tem experiência prévia de participações em projetos similares? | Sim |
-| Usuário é especialista no domínio do problema? | Não |
-
-### Resultados: 
-- Cascata +
-- Protótipo +++
-- Incremental +
-- Evolutivo ++
-- Espiral ++
-- RAD ++
-
-## 3.1.4 Tipo de projeto e riscos associados
-
-| Perguntas | Respostas |
-|-----------|-------------|
-| O projeto é a melhoria de um sistema existente? | Não |
-| O financiamento é estável para o projeto? | Sim |
-| Requisitos de alta confiabilidade? | Não |
-| Cronograma do projeto é apertado? | Sim |
-| Uso de componentes reutilizáveis? | Sim |
-| Os recursos (Tempo, dinheiro, pessoas etc) estão escassos? | Não |
-
-### Resultados: 
-- Cascata +++
-- Protótipo +++++
-- Incremental +
-- Evolutivo +
-- Espiral ++++
-- RAD +++++
-
-## 3.1.5 Conclusão
-
-- Cascata 8+
-- Protótipo 11+
-- Incremental 6+
-- Evolutivo 7+
-- Espiral 9+
-- **RAD 12+**
-
-Ao analisar os resultados individuais de cada tópico, foi obtida a metodologia de desenvolvimento mais adequada, o RAD (Rapid Application Development). Esta é uma abordagem ágil e tem como pontos característicos ser centrada no usuário e no design do produto, permitindo uma prototipagem mais rápida e uma entrega iterativa.
-
-Apesar de toda a base introdutória mostrando-se favorável para a implementação do ciclo de vida RAD com o GUPTA. Foi feita uma reunião de Brainstorm com os membros da equipe com axilio do Chat-GPT da OpenAI para nos auxiliar nesse processo de concepção do ciclo de vida que mais se adapta-se ao projeto levando em consideração os seguintes pontos:
-- O foco da diciplina (Requisitos de Software)
-- O planejamento da disciplina.
-- Disponibilidade dos membros da equipe.  
-
-O GUPTA nos sugeriu o RAD, porém o RAD é uma abordagem centrada no cliente. O que não é condizente com o projeto em questão, não possuimos um cliente bem definido exploramos uma oportunidade de mercado.
+O GUPTA nos sugeriu o RAD, porém o RAD é uma abordagem centrada no cliente e com entregas recorrentes, o que não é condizente com o projeto em questão, não possuímos um cliente bem definido exploramos uma oportunidade de mercado.
 
 ![Problema](assets/RAD_GPT.png)
 
-Depois de debates e em pesquisas feitas fazendo uso do chatGPT, mas não somente ele, decidimos desconsiderar o RAD e utilizar uma **abordagem híbrida baseada no OpenUP**. Pois assim, conseguimos trabalhar melhor os requisitos no início de nosso projeto e adequar nossas entregas com a disciplina. Além disso, temos também um maior proveito no que tange ao foco nas areás especicas do desenvolvimento dando foco maior pela fase de engenharia de requisitos. É importante ressaltar que a estruturação de nossos requisitos será feita em **User Stories**.
+A abordagem utilizada originalmente está presente nesta página: [Abordagem de Gupta](abordagem-gupta.md)
 
+Depois de debates e em pesquisas feitas fazendo uso do chatGPT, mas não somente ele, decidimos desconsiderar o RAD e utilizar uma **abordagem híbrida baseada no OpenUP**. Pois assim, conseguimos trabalhar melhor os requisitos no início de nosso projeto e adequar nossas entregas com a disciplina. Além disso, temos também um maior proveito no que tange ao foco nas áreas específicas do desenvolvimento dando foco maior pela fase de engenharia de requisitos. É importante ressaltar que a estruturação de nossos requisitos será feita em **User Stories**.
+
+Para validar essa escolha utilizamos a metodologia de Sommerville. O processo foi especificado abaixo:
+
+### 3.1.2 Questões técnicas
+
+- Qual é o tamanho do sistema que está sendo desenvolvido?
+  - O sistema é de pequeno porte pois não possui muitas funcionalidades e não deverá precisar de manutenção após a entrega.
+- Que tipo de sistema está sendo desenvolvido?
+  - É um sistema web.
+- Qual é a vida útil prevista para o sistema?
+  - 2 meses.
+- O sistema está sujeito a controle externo?
+  - Não.
+
+### 3.1.3 Questões humanas
+
+- Qual é o nível de competência dos projetistas e programadores do time de desenvolvimento?
+  - O nível é bom, todos os integrantes já possuem experiência com desenvolvimento web.
+- Como está organizado o time de desenvolvimento?
+  - Temos um time pequeno com 5 integrantes, todos com experiência em desenvolvimento web, porém com pouco tempo disponível para o projeto.
+- Quais são as tecnologias disponíveis para apoiar o desenvolvimento do sistema?
+  - ChatGPT, GitHub, Visual Studio Code, Figma, framework Javascript para desenvolvimento web.
+
+### 3.1.4 Questões organizacionais:
+
+- É importante ter uma especificação e um projeto (design) bem detalhados antes de passar para a implementação — talvez por motivos contratuais?
+  - Não, não há motivos contratuais e nem da disciplina para isso.
+- É realista uma estratégia de entrega incremental, na qual o software é entregue aos clientes ou outros stakeholders e um rápido feedback é obtido?
+  - É realista, mas como a disciplina prevê apenas duas entregas no final do semestre, não é possível fazer entregas incrementais.
+- Os representantes do cliente estarão disponíveis e dispostos a participar do time de desenvolvimento?
+  - Sim, o cliente tem contato frequente com um dos integrantes do time de desenvolvimento mas não tem disponibilidade para participar do time.
+- Existem questões culturais que possam afetar o desenvolvimento do sistema?
+  - Não.
+
+### 3.1.5 Conclusão
+
+Considerando as respostas das questões acima, a metodologia mais adequada para o projeto é uma abordagem híbrida orientada a plano (graças ao foco maior da disciplina em engenharia de requisitos) com algumas características das metodologias ágeis como a priorização de requisitos (tempo curto de desenvolvimento), a programação em pares (bom conhecimento da equipe), iterações curtas e reuniões frequentes (o cliente tem contato frequente).
+
+Segue uma imagem de uma validação feita com o ChatGPT:
+
+![Abordagem sommerville](assets/sommerville.png)
+
+Podemos validar nossa escolha do OpenUP com a metodologia de Sommerville, pois o OpenUP é uma metodologia híbrida que se encaixa perfeitamente com as respostas das questões acima, podendo ser adaptada para o projeto.
 
 ## 3.2 Escolhas de Engenharia de Requisitos
 
@@ -284,40 +229,36 @@ As facetas do processo de requisitos foram definidas seguindo o proposto pelo IR
 
 ![Facetas de ER](assets/Facetas-de-ER.png)
 
-Ao fazer a análise do projeto, os facetas resultantes foram:
+Ao realizar a análise do projeto, as facetas resultantes foram:
 
 - Alvo: Orientado ao Mercado
-    - Nossa solução é voltada para um grande número de pessoas, não um cliente específico. O nosso cliente servirá como um representante do público-alvo.
-
+  - Nossa solução é direcionada a um amplo público, e não a um cliente específico. Nosso cliente atuará como representante do público-alvo.
 - Propósito: Exploratório
-    - Nossos requisitos serão descobertos durante o projeto, sendo constantemente atualizados devido à: conversas com o cliente, implementação do código, ...
-
+  - Nossos requisitos serão descobertos durante o projeto, sendo constantemente atualizados devido a conversas com o cliente, implementação do código, etc.
 - Tempo: Iterativo
-    - Feedback rápido para diminuir o risco e alterar os requisitos conforme necessário.
+  - Buscamos obter um feedback rápido para reduzir riscos e realizar alterações nos requisitos conforme necessário.
 
 ## 3.2.2 Atividades de ER
 
 ![Atividades de ER](assets/Atividades-de-Requisitos.png)
 
-Conforme a divisão das atividades de Engenharia de Requisitos acima (MARSICANO, 2023), integramos as atividades de requisitos à metodologia de desenvolvimento de software do projeto, definida na seção 3.1.
+Conforme a divisão das atividades de Engenharia de Requisitos mencionada acima (MARSICANO, 2023), integramos as atividades de requisitos à metodologia de desenvolvimento de software adotada pelo projeto, conforme definido na seção 3.1.
 
 ![Integração OpenUP - ER](assets/OpenUP-e-ER.png)
-
 
 # LIÇÕES APRENDIDAS
 
 ## 4.1 Unidade 1
 
-Na unidade 1 foi possível ter uma introdução com relação aos processos de desenvolvimento de software. Na qual foi possível ver suas abordagens dirigidas a plano e ágeis em que  teve bastante enfoque na parte de ciclos de vida de um software como preditivo, iterativo, incremental, ágil e híbridos alguns exemplos práticos são Cascata, Spiral, RAD dentre outras. É dentro destes ciclos que é utilizado um  método de engenharia de requisitos de software, por isso foi importante essa introdução para que começássemos a entender sobre as atividades da engenharia de requisitos. Foi entendido também como definir o processo de desenvolvimento de um produto utilizando métodos como Sommerville e Gupta.
+Na Unidade 1, foi possível obter uma introdução aos processos de desenvolvimento de software, abordando as abordagens planejadas e ágeis, com destaque para os ciclos de vida do software, como preditivo, iterativo, incremental, ágil e híbrido, mencionando exemplos práticos como Cascata, Spiral, RAD, entre outros. Esses ciclos são onde o método de engenharia de requisitos de software é aplicado, o que tornou essa introdução importante para o entendimento das atividades da engenharia de requisitos. Também foi abordado como definir o processo de desenvolvimento de um produto, utilizando métodos como Sommerville e Gupta.
 
-Outras lições foram entender as necessidades e desejos dos envolvidos, bem como entender melhor qual é de fato o problema a ser resolvido por meio da análise do problema fazendo o uso do diagrama de causa-efeito (fishbone) dentre outras ferramentas.
+Outras lições abordaram a compreensão das necessidades e desejos dos envolvidos, bem como a compreensão mais aprofundada do problema a ser resolvido por meio da análise do problema, utilizando ferramentas como o diagrama de causa e efeito (espinha de peixe), entre outras.
 
-Para realizar um melhor projeto a partir da próxima etapa, uma possível melhoria seria uma melhor organização do tempo da equipe. Nesta unidade algumas entregas foram feitas muito em cima da hora, o que compromete a qualidade do trabalho. Portanto, a realização das atividades deve começar a ser realizada mais rápido nas próximas unidades.
-
+Para melhorar o planejamento na próxima etapa do projeto, uma possível melhoria seria uma organização mais eficiente do tempo da equipe. Nesta unidade, algumas entregas foram realizadas em cima da hora, comprometendo a qualidade do trabalho. Portanto, é importante que as atividades sejam iniciadas mais cedo nas próximas unidades, a fim de garantir a qualidade e o cumprimento dos prazos.
 
 # REFERÊNCIAS BIBLIOGRÁFICAS
 
-Raja Gupta. Fundamentals of Software Engineering. Engineering Handbook. 2019. 
+Raja Gupta. Fundamentals of Software Engineering. Engineering Handbook. 2019.
 
 MARSICANO, George. Slides da matéria Requisitos. 2023
 
