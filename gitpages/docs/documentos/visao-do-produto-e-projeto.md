@@ -174,7 +174,7 @@ O GUPTA nos sugeriu o RAD, porém o RAD é uma abordagem centrada no cliente e c
 
 ![Problema](assets/RAD_GPT.png)
 
-A abordagem utilizada originalmente está presente nesta página: [Abordagem de Gupta](abordagem-gupta.md)
+A abordagem utilizada originalmente está presente nesta página: [Abordagem de Gupta](https://mdsreq-fga-unb.github.io/2023.1-MoViagem/documentos/abordagem-gupta/)
 
 Depois de debates e em pesquisas feitas fazendo uso do chatGPT, mas não somente ele, decidimos desconsiderar o RAD e utilizar uma **abordagem híbrida baseada no OpenUP**. Pois assim, conseguimos trabalhar melhor os requisitos no início de nosso projeto e adequar nossas entregas com a disciplina. Além disso, temos também um maior proveito no que tange ao foco nas áreas específicas do desenvolvimento dando foco maior pela fase de engenharia de requisitos. É importante ressaltar que a estruturação de nossos requisitos será feita em **User Stories**.
 

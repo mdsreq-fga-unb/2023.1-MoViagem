@@ -6,6 +6,7 @@ repo_name: MoViagem
 nav: 
  - Inicio: index.md
  - Visão do produto e projeto: documentos/visao-do-produto-e-projeto.md
+ - Abordagem Gupta: documentos/abordagem-gupta.md
  - Backlog: documentos/backlog.md
  - Pontuação dos requisitos: documentos/pontuacao-requisitos.md
  - História da Engenharia de Requisitos: documentos/historia-engenharia-de-requisitos.md
