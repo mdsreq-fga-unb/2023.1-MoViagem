@@ -28,6 +28,27 @@ Apesar de sabermos que o processo de engenheria de requisitos (ER) é flexível,
 - **Análise de Viabilidade:**
   Foi feito uma lista ordenada, na qual os primeiros elementos seriam os considerados pelos membros da equipe os que seriam mais viável para serem desenvolvidos no período da disciplina e os ultimos elementos os menos viáveis. Além disso, foi feito uma primeira categorização de possíveis temas por cores.
 
+## Na fase de Declaração foram utilizadas as seguintes técnicas:
+
+- **Temas:**
+  Os temas são um conjunto de vários Épicos diferentes.
+
+- **Épicos:**
+  As User Stories foram separadas em Épicos para uma maior rastreabilidade.
+
+- **User Stories:**
+  Nossos requisitos foram estruturados como User Stories, seguindo este padrão:
+  - Eu, como *QUEM SOU EU*, desejo *QUAL O REQUISITO*, para *QUAL O VALOR DE NEGÓCIO DO REQUISITO*
+
+## Na fase de Verificação e Validação foram utilizadas as seguintes técnicas:
+
+- **Feedback:**
+  - *Verificação:*
+    Recebemos o feedback da verificação de nossos requisitos através do professor George Marsicano. Devido à isso, retiramos um requisito e fizemos leves alterações em outros.
+  
+  - *Validação:*
+    Recebemos o feedback da validação de nossos requisitos através do nosso cliente. Foi feita uma reunião na qual ele validou os requisitos decididos e o escopo do projeto.
+
 ## Na fase de Organização e Atualização foram utilizadas as seguintes técnicas:
 
 - **Pontos por história:**
