@@ -4,6 +4,7 @@ import { IsEnum, IsNumber, IsOptional, Length, Matches, validateSync } from "cla
 enum Environment {
   Development = "development",
   Production = "production",
+  Test = "test",
 }
 
 class EnvironmentVariables {

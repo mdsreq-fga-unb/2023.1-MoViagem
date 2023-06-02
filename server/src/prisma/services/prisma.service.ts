@@ -1,7 +1,7 @@
 import { INestApplication, Injectable, Logger, OnModuleInit } from "@nestjs/common";
 import { PrismaClient } from "@prisma/client";
-import { PrismaClientOptions } from "@prisma/client/runtime";
-import { EnvironmentService } from "src/environment/services/environment.service";
+import { PrismaClientOptions } from "@prisma/client/runtime/library";
+import { EnvironmentService } from "../../environment/services/environment.service";
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {

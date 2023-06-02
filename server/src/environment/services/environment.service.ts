@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import ms from "ms";
 
 @Injectable()
 export class EnvironmentService {
@@ -40,22 +41,6 @@ export class EnvironmentService {
   }
 
   private parseStringToSeconds(env: string): number {
-    const valueStr = env.substring(0, env.length - 1);
-
-    const unit = env.substring(env.length - 1, env.length);
-    const value = parseInt(valueStr, 10);
-
-    switch (unit) {
-      case "s":
-        return value;
-      case "m":
-        return value * 60;
-      case "h":
-        return value * 60 * 60;
-      case "d":
-        return value * 60 * 60 * 24;
-      default:
-        return value;
-    }
+    return ms(env) / 1000;
   }
 }

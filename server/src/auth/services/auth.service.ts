@@ -1,32 +1,37 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { EnvironmentService } from "src/environment/services/environment.service";
-import { LoginResponseDTO, RefreshTokenPayload } from "../dto/token.dto";
-import { UserService } from "./user.service";
-import { v4 as uuidV4 } from "uuid";
-import { addSeconds } from "date-fns";
-import { UserInRequest } from "../dto/user.dto";
-import { PrismaService } from "../../prisma/services/prisma.service";
 import { User } from "@prisma/client";
+import { addSeconds } from "date-fns";
+import { v4 as uuidV4 } from "uuid";
+import { EnvironmentService } from "../../environment/services/environment.service";
+import { LoginResponseDTO, RefreshTokenPayload } from "../dto/token.dto";
+import { UserInRequest } from "../dto/user.dto";
+import { UserRepository } from "../repositories/user.repository";
+import { UserService } from "./user.service";
 
 @Injectable()
 export class AuthService {
   constructor(
-    private prisma: PrismaService,
+    private userRepository: UserRepository,
     private userService: UserService,
     private jwtService: JwtService,
     private env: EnvironmentService
   ) {}
 
   async validateCredentialsAndGetUser(email: string, password: string): Promise<User | null> {
-    const user = await this.prisma.user.findUnique({ where: { email } });
+    const user = await this.userRepository.findUserByEmail(email);
 
-    if (user && (await this.userService.comparePassword(password, user.password))) {
-      user.password = "";
-      return user;
+    if (!user) {
+      return null;
     }
 
-    return null;
+    const isPasswordValid = await this.userService.comparePassword(password, user.password);
+
+    if (!isPasswordValid) {
+      return null;
+    }
+
+    return user;
   }
 
   async triggerAfterLocalLogin(user: UserInRequest): Promise<LoginResponseDTO> {

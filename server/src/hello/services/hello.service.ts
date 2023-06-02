@@ -1,15 +1,12 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { PrismaService } from "src/prisma/services/prisma.service";
+import { UserRepository } from "../../auth/repositories/user.repository";
 
 @Injectable()
 export class HelloService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private userRepository: UserRepository) {}
 
   async getHello(userId: number): Promise<string> {
-    const user = await this.prismaService.user.findUnique({
-      where: { id: userId },
-      select: { name: true },
-    });
+    const user = await this.userRepository.findUserById(userId);
 
     if (!user) {
       throw new UnauthorizedException();
