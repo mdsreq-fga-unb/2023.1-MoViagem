@@ -6,11 +6,7 @@ interface AuthContextInterface {
   logout: () => void;
 }
 
-export const AuthContext = React.createContext<AuthContextInterface>({
-  isLoggedIn: false,
-  login: () => undefined,
-  logout: () => undefined,
-});
+export const AuthContext = React.createContext<AuthContextInterface | null>(null);
 
 export default function AuthProvider({ children }: React.PropsWithChildren) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
