@@ -1,9 +1,9 @@
 import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import helmet from "helmet";
 import { AppModule } from "./app.module";
 import { EnvironmentService } from "./environment/services/environment.service";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { PrismaExceptionFilter } from "./prisma/filters/prisma-exception.filter";
 
 async function bootstrap() {

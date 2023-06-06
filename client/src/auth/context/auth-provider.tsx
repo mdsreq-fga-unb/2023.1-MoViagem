@@ -1,26 +1,45 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+
+interface LoginParams {
+  accessToken: string;
+  refreshToken: string;
+}
 
 interface AuthContextInterface {
   isLoggedIn: boolean;
-  login: () => void;
-  logout: () => void;
+  saveTokens: (data: LoginParams) => void;
+  eraseTokens: () => void;
 }
 
-export const AuthContext = React.createContext<AuthContextInterface | null>(null);
+export const AuthContext = React.createContext<AuthContextInterface | undefined>(undefined);
 
 export default function AuthProvider({ children }: React.PropsWithChildren) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  function login() {
-    console.log("login");
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    if (accessToken && refreshToken) {
+      setIsLoggedIn(true);
+    }
+  }, [isLoggedIn]);
+
+  function saveTokens({ accessToken, refreshToken }: LoginParams) {
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("refreshToken", refreshToken);
+
     setIsLoggedIn(true);
   }
 
-  function logout() {
+  function eraseTokens() {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+
     setIsLoggedIn(false);
   }
 
-  const value = useMemo(() => ({ isLoggedIn, login, logout }), [isLoggedIn]);
+  const value = useMemo(() => ({ isLoggedIn, saveTokens, eraseTokens }), [isLoggedIn]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

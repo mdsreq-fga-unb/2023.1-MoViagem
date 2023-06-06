@@ -1,3 +1,5 @@
+import { IsJWT } from "class-validator";
+
 export class LoginResponseDTO {
   accessToken: string;
   refreshToken: string;
@@ -5,6 +7,7 @@ export class LoginResponseDTO {
 }
 
 export class RefreshTokenRequestDTO {
+  @IsJWT()
   refreshToken: string;
 }
 

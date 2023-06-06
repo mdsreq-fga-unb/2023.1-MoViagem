@@ -9,7 +9,7 @@ import { HelloModule } from "./hello/hello.module";
   imports: [
     ThrottlerModule.forRoot({
       ttl: 60,
-      limit: 10,
+      limit: 100,
     }),
     EnvironmentModule,
     AuthModule,
