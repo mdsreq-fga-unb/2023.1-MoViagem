@@ -1,21 +1,50 @@
 import { Injectable } from "@nestjs/common";
-import jwt from "jsonwebtoken";
+import { JwtService as NestJwtService } from "@nestjs/jwt";
 import { EnvironmentService } from "src/environment/services/environment.service";
-import { TokenPayload, UserInfoDTO } from "../dto/token.dto";
+import {
+  AccessTokenPayload,
+  LoginResponseDTO,
+  RefreshTokenPayload,
+  TokenPayload,
+  UserInfoDTO,
+} from "../dto/token.dto";
 
 @Injectable()
 export class JwtService {
-  constructor(private env: EnvironmentService) {}
+  constructor(private env: EnvironmentService, private nestJwtService: NestJwtService) {}
 
   createAccessToken(user: UserInfoDTO): string {
-    return jwt.sign(user, this.env.jwtSecret, { expiresIn: this.env.jwtExpiresInSeconds });
+    const payload: Omit<AccessTokenPayload, "iat" | "exp"> = {
+      user: {
+        email: user.email,
+        id: user.id,
+        name: user.name,
+      },
+    };
+
+    return this.nestJwtService.sign(payload, { expiresIn: this.env.jwtExpiresInSeconds });
   }
 
-  createRefreshToken(user: UserInfoDTO): string {
-    return jwt.sign(user, this.env.jwtSecret, { expiresIn: this.env.jwtRefreshExpiresInSeconds });
+  createRefreshToken(userId: number): string {
+    const payload: Omit<RefreshTokenPayload, "iat" | "exp"> = {
+      id: userId,
+    };
+
+    return this.nestJwtService.sign(payload, { expiresIn: this.env.jwtRefreshExpiresInSeconds });
   }
 
-  verify<T = TokenPayload>(token: string): T {
-    return jwt.verify(token, this.env.jwtSecret) as T;
+  verify<T extends TokenPayload>(token: string): T {
+    return this.nestJwtService.verify<T>(token);
+  }
+
+  createTokens(user: UserInfoDTO): LoginResponseDTO {
+    const accessToken = this.createAccessToken(user);
+    const refreshToken = this.createRefreshToken(user.id);
+
+    return {
+      accessToken,
+      refreshToken,
+      user,
+    };
   }
 }

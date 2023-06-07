@@ -36,8 +36,13 @@ export class EnvironmentService {
     return this.nodeEnv === "production";
   }
 
-  get corsOrigin(): string {
-    return this.config.get("CORS_ORIGIN", "http://localhost:5173");
+  get corsOrigin(): string[] {
+    const corsOriginStr = this.config.get(
+      "CORS_ORIGIN",
+      "http://localhost:5173;http://127.0.0.1:5173"
+    );
+
+    return corsOriginStr.split(";");
   }
 
   private parseStringToSeconds(env: string): number {

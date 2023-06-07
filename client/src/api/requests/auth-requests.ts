@@ -1,10 +1,10 @@
 import axios from "axios";
+import request from "../api-instance";
 import {
   LoginResponseDTO,
   RefreshTokenRequestDTO,
   UserCreateDTO,
   UserLoginDTO,
-  UserResponseDTO,
 } from "../dto/auth-dtos";
 
 const authApi = axios.create({
@@ -14,14 +14,29 @@ const authApi = axios.create({
   },
 });
 
-export function requestTokenRefresh(body: RefreshTokenRequestDTO) {
-  return authApi.post<LoginResponseDTO>("refresh", body);
+export function requestLogin(body: UserLoginDTO) {
+  return request<UserLoginDTO, LoginResponseDTO>({
+    method: "POST",
+    url: "login",
+    body,
+    alternativeInstance: authApi,
+  });
 }
 
-export function requestLogin(body: UserLoginDTO) {
-  return authApi.post<LoginResponseDTO>("login", body);
+export function requestTokenRefresh(body: RefreshTokenRequestDTO) {
+  return request<RefreshTokenRequestDTO, LoginResponseDTO>({
+    method: "POST",
+    url: "refresh",
+    body,
+    alternativeInstance: authApi,
+  });
 }
 
 export function register(body: UserCreateDTO) {
-  return authApi.post<UserResponseDTO>("register", body);
+  return request<UserCreateDTO, LoginResponseDTO>({
+    method: "POST",
+    url: "register",
+    body,
+    alternativeInstance: authApi,
+  });
 }

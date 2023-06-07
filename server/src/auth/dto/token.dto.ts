@@ -18,7 +18,14 @@ export class RefreshTokenRequestDTO {
 }
 
 export class TokenPayload {
-  user: UserInfoDTO;
   iat: number;
   exp: number;
+}
+
+export class AccessTokenPayload extends TokenPayload {
+  user: UserInfoDTO;
+}
+
+export class RefreshTokenPayload extends TokenPayload {
+  id: number;
 }

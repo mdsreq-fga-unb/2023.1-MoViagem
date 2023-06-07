@@ -1,6 +1,6 @@
-import { AxiosError } from "axios";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { ErrorResponse } from "../../api/api-instance";
 import { register, requestLogin } from "../../api/requests/auth-requests";
 import useAuth from "../../auth/context/auth-hook";
 import Navbar from "../../components/Navbar";
@@ -27,27 +27,21 @@ export default function Login() {
     event.preventDefault();
 
     // Try to login
-    try {
-      const response = await requestLogin({ email, password });
+    const response = await requestLogin({ email, password });
 
-      saveTokens({
-        accessToken: response.data.accessToken,
-        refreshToken: response.data.refreshToken,
-        userInfo: response.data.user,
-      });
-
-      // After login, redirect to home page
-      navigate("/", { replace: true });
-    } catch (error) {
-      // If login fails, show error message
-      if (error instanceof AxiosError) {
-        alert(error.response?.status === 401 ? "Credenciais inválidas" : "Erro ao fazer login");
-      }
-      // If error is not an AxiosError (unexpected error) then throw it (to be handled by React)
-      else {
-        throw error;
-      }
+    if (response instanceof ErrorResponse) {
+      alert(response.status === 401 ? "E-mail ou senha incorretos" : "Erro ao fazer login");
+      return;
     }
+
+    saveTokens({
+      accessToken: response.data.accessToken,
+      refreshToken: response.data.refreshToken,
+      userInfo: response.data.user,
+    });
+
+    // After login, redirect to home page
+    navigate("/", { replace: true });
   }
 
   async function handleSubmitRegister(event: React.FormEvent<HTMLFormElement>) {
@@ -66,52 +60,25 @@ export default function Login() {
     }
 
     // Try to register
-    try {
-      await register({
-        name: registerName,
-        email: registerEmail,
-        password: registerPassword,
-      });
+    const response = await register({
+      name: registerName,
+      email: registerEmail,
+      password: registerPassword,
+    });
 
-      alert("Usuário criado com sucesso");
-    } catch (error) {
-      // If registration fails, show error message and return (don't try to login)
-      if (error instanceof AxiosError) {
-        alert(error.response?.data.message);
-        return;
-      }
-      // If error is not an AxiosError (unexpected error) then throw it (to be handled by React)
-      else {
-        throw error;
-      }
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
     }
 
-    // Try to login with the new user
-    try {
-      const loginResponse = await requestLogin({
-        email: registerEmail,
-        password: registerPassword,
-      });
+    saveTokens({
+      accessToken: response.data.accessToken,
+      refreshToken: response.data.refreshToken,
+      userInfo: response.data.user,
+    });
 
-      saveTokens({
-        accessToken: loginResponse.data.accessToken,
-        refreshToken: loginResponse.data.refreshToken,
-        userInfo: loginResponse.data.user,
-      });
-
-      // After login, redirect to home page
-      navigate("/", { replace: true });
-    } catch (error) {
-      // If login fails, show error message
-      if (error instanceof AxiosError) {
-        console.error(error.response?.data);
-        alert("Erro ao fazer login, tente entrar com o usuário criado anteriormente.");
-      }
-      // If error is not an AxiosError (unexpected error) then throw it (to be handled by React)
-      else {
-        throw error;
-      }
-    }
+    // After register, redirect to home page
+    navigate("/", { replace: true });
   }
 
   return (

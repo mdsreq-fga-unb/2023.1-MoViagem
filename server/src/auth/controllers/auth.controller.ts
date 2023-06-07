@@ -3,7 +3,7 @@ import { ApiBody, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from "@nestj
 import { User } from "@prisma/client";
 import { Request } from "express";
 import { LoginResponseDTO, RefreshTokenRequestDTO } from "../dto/token.dto";
-import { UserCreateDTO, UserLoginDTO, UserResponseDTO } from "../dto/user.dto";
+import { UserCreateDTO, UserLoginDTO } from "../dto/user.dto";
 import { LocalAuthGuard } from "../guards/local-auth.guard";
 import { AuthService } from "../services/auth.service";
 import { UserService } from "../services/user.service";
@@ -15,7 +15,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post("login")
-  @ApiOkResponse({ type: UserResponseDTO })
+  @ApiOkResponse({ type: LoginResponseDTO })
   @ApiUnauthorizedResponse()
   @ApiBody({ type: UserLoginDTO })
   async login(@Req() req: Request): Promise<LoginResponseDTO> {
@@ -23,7 +23,7 @@ export class AuthController {
   }
 
   @Post("register")
-  async register(@Body() dto: UserCreateDTO): Promise<UserResponseDTO> {
+  async register(@Body() dto: UserCreateDTO): Promise<LoginResponseDTO> {
     return this.userService.register(dto);
   }
 

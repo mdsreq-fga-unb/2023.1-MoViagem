@@ -1,13 +1,15 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import bcrypt from "bcrypt";
-import { UserCreateDTO, UserResponseDTO } from "../dto/user.dto";
+import { LoginResponseDTO } from "../dto/token.dto";
+import { UserCreateDTO } from "../dto/user.dto";
 import { UserRepository } from "../repositories/user.repository";
+import { JwtService } from "./jwt.service";
 
 @Injectable()
 export class UserService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userRepository: UserRepository, private jwtService: JwtService) {}
 
-  async register(user: UserCreateDTO): Promise<UserResponseDTO> {
+  async register(user: UserCreateDTO): Promise<LoginResponseDTO> {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(user.password, salt);
 
@@ -23,7 +25,7 @@ export class UserService {
       password: hashedPassword,
     });
 
-    return new UserResponseDTO(createdUser);
+    return this.jwtService.createTokens(createdUser);
   }
 
   async comparePassword(plainPassword: string, hashedPassword: string): Promise<boolean> {

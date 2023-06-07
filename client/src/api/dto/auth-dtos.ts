@@ -24,9 +24,3 @@ export interface UserCreateDTO {
   name: string;
   password: string;
 }
-
-export interface UserResponseDTO {
-  id: number;
-  email: string;
-  name: string;
-}

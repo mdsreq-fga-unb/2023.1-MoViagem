@@ -1,7 +1,6 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { User } from "@prisma/client";
-import { EnvironmentService } from "../../environment/services/environment.service";
-import { LoginResponseDTO, TokenPayload } from "../dto/token.dto";
+import { LoginResponseDTO, RefreshTokenPayload } from "../dto/token.dto";
 import { UserRepository } from "../repositories/user.repository";
 import { JwtService } from "./jwt.service";
 import { UserService } from "./user.service";
@@ -11,8 +10,7 @@ export class AuthService {
   constructor(
     private userRepository: UserRepository,
     private userService: UserService,
-    private jwtService: JwtService,
-    private env: EnvironmentService
+    private jwtService: JwtService
   ) {}
 
   async validateCredentialsAndGetUser(email: string, password: string): Promise<User | null> {
@@ -32,50 +30,24 @@ export class AuthService {
   }
 
   async triggerAfterLocalLogin(user: User): Promise<LoginResponseDTO> {
-    const accessToken = this.jwtService.createAccessToken({
-      id: user.id,
-      email: user.email,
-      name: user.name,
-    });
-
-    const refreshToken = this.jwtService.createRefreshToken({
-      id: user.id,
-      email: user.email,
-      name: user.name,
-    });
-
-    return {
-      accessToken,
-      refreshToken,
-      user,
-    };
+    return this.jwtService.createTokens(user);
   }
 
   async refreshToken(receivedRefreshToken: string): Promise<LoginResponseDTO> {
-    let decodedToken: TokenPayload;
+    let decodedToken: RefreshTokenPayload;
 
     try {
-      decodedToken = await this.jwtService.verify(receivedRefreshToken);
+      decodedToken = this.jwtService.verify<RefreshTokenPayload>(receivedRefreshToken);
     } catch (err) {
       throw new UnauthorizedException();
     }
 
-    const accessToken = this.jwtService.createAccessToken({
-      id: decodedToken.user.id,
-      email: decodedToken.user.email,
-      name: decodedToken.user.name,
-    });
+    const user = await this.userRepository.findUserById(decodedToken.id);
 
-    const refreshToken = this.jwtService.createRefreshToken({
-      id: decodedToken.user.id,
-      email: decodedToken.user.email,
-      name: decodedToken.user.name,
-    });
+    if (!user) {
+      throw new UnauthorizedException();
+    }
 
-    return {
-      accessToken,
-      refreshToken,
-      user: decodedToken.user,
-    };
+    return this.jwtService.createTokens(user);
   }
 }
