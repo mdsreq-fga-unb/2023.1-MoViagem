@@ -7,6 +7,7 @@ import { PrismaModule } from "../prisma/prisma.module";
 import { AuthController } from "./controllers/auth.controller";
 import { UserRepository } from "./repositories/user.repository";
 import { AuthService } from "./services/auth.service";
+import { JwtService } from "./services/jwt.service";
 import { UserService } from "./services/user.service";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import { LocalStrategy } from "./strategies/local.strategy";
@@ -27,7 +28,7 @@ import { LocalStrategy } from "./strategies/local.strategy";
     PassportModule,
     EnvironmentModule,
   ],
-  providers: [UserService, AuthService, LocalStrategy, JwtStrategy, UserRepository],
+  providers: [UserService, AuthService, LocalStrategy, JwtStrategy, JwtService, UserRepository],
   controllers: [AuthController],
   exports: [UserRepository],
 })

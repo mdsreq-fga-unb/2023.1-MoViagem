@@ -37,7 +37,7 @@ export class EnvironmentService {
   }
 
   get corsOrigin(): string {
-    return this.config.get("CORS_ORIGIN", "http://localhost:3000");
+    return this.config.get("CORS_ORIGIN", "http://localhost:5173");
   }
 
   private parseStringToSeconds(env: string): number {

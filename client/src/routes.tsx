@@ -1,14 +1,21 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import About from "./pages/About";
-import Home from "./pages/Home";
+import AuthProviderComponent from "./auth/components/auth-context-component";
+import ProtectedComponent from "./auth/components/protected-component";
+import LoginAndRegister from "./pages/LoginAndRegister";
+import Travels from "./pages/Travels";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Navbar />}>
-      <Route index element={<Home />} />
-      <Route path="/about" element={<About />} />
-    </Route>
+    <>
+      {/* Routes that need to access the auth context need to be inside this route */}
+      <Route element={<AuthProviderComponent />}>
+        <Route path="/login-and-register" element={<LoginAndRegister />} />
+        {/* Routes that need login need to be inside this route */}
+        <Route element={<ProtectedComponent />}>
+          <Route path="/" element={<Travels />} />
+        </Route>
+      </Route>
+    </>
   )
 );
 

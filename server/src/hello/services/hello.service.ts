@@ -1,17 +1,9 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { UserRepository } from "../../auth/repositories/user.repository";
+import { Injectable } from "@nestjs/common";
+import { UserInfoDTO } from "src/auth/dto/token.dto";
 
 @Injectable()
 export class HelloService {
-  constructor(private userRepository: UserRepository) {}
-
-  async getHello(userId: number): Promise<string> {
-    const user = await this.userRepository.findUserById(userId);
-
-    if (!user) {
-      throw new UnauthorizedException();
-    }
-
+  async getHello(user: UserInfoDTO): Promise<string> {
     return `Hello ${user.name}!`;
   }
 }

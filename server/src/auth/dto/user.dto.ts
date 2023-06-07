@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { Length, IsEmail } from "class-validator";
+import { IsEmail, Length } from "class-validator";
 
 export class UserResponseDTO {
   id: number;
@@ -30,10 +30,6 @@ export class UserCreateDTO {
   @Length(4, 100)
   name: string;
 
-  @Length(4, 100)
+  @Length(8, 100)
   password: string;
-}
-
-export class UserInRequest {
-  id: number;
 }
