@@ -10,7 +10,7 @@ const api = axios.create({
 
 function refreshFailed() {
   alert("Please login again.");
-  window.location.href = "/login";
+  window.location.href = "/login-and-register";
 }
 
 api.interceptors.request.use((config) => {

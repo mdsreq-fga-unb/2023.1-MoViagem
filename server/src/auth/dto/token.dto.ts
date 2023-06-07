@@ -1,9 +1,15 @@
 import { IsJWT } from "class-validator";
 
+export class UserInfoDTO {
+  id: number;
+  email: string;
+  name: string;
+}
+
 export class LoginResponseDTO {
   accessToken: string;
   refreshToken: string;
-  expirationDate: Date;
+  user: UserInfoDTO;
 }
 
 export class RefreshTokenRequestDTO {
@@ -11,12 +17,8 @@ export class RefreshTokenRequestDTO {
   refreshToken: string;
 }
 
-export class AccessTokenPayload {
-  sub: string;
+export class TokenPayload {
+  user: UserInfoDTO;
   iat: number;
   exp: number;
-}
-
-export class RefreshTokenPayload extends AccessTokenPayload {
-  jti: string;
 }

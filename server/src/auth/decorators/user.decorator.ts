@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext, UnauthorizedException } from "@nestjs/common";
-import { UserInRequest } from "../dto/user.dto";
+import { UserInfoDTO } from "../dto/token.dto";
 
 export const User = createParamDecorator((_: unknown, ctx: ExecutionContext) => {
   const request = ctx.switchToHttp().getRequest();
@@ -9,5 +9,5 @@ export const User = createParamDecorator((_: unknown, ctx: ExecutionContext) => 
     throw new UnauthorizedException();
   }
 
-  return user as UserInRequest;
+  return user as UserInfoDTO;
 });

@@ -1,12 +1,9 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
-import { addSeconds } from "date-fns";
-import { v4 as uuidV4 } from "uuid";
 import { EnvironmentService } from "../../environment/services/environment.service";
-import { LoginResponseDTO, RefreshTokenPayload } from "../dto/token.dto";
-import { UserInRequest } from "../dto/user.dto";
+import { LoginResponseDTO, TokenPayload } from "../dto/token.dto";
 import { UserRepository } from "../repositories/user.repository";
+import { JwtService } from "./jwt.service";
 import { UserService } from "./user.service";
 
 @Injectable()
@@ -34,65 +31,51 @@ export class AuthService {
     return user;
   }
 
-  async triggerAfterLocalLogin(user: UserInRequest): Promise<LoginResponseDTO> {
-    const accessToken = await this.jwtService.signAsync(
-      {},
-      {
-        expiresIn: this.env.jwtExpiresInSeconds,
-        subject: user.id.toString(),
-      }
-    );
+  async triggerAfterLocalLogin(user: User): Promise<LoginResponseDTO> {
+    const accessToken = this.jwtService.createAccessToken({
+      id: user.id,
+      email: user.email,
+      name: user.name,
+    });
 
-    const refreshToken = await this.jwtService.signAsync(
-      {},
-      {
-        expiresIn: this.env.jwtRefreshExpiresInSeconds,
-        subject: user.id.toString(),
-        jwtid: uuidV4(),
-      }
-    );
-
-    const expirationDate = addSeconds(Date.now(), this.env.jwtExpiresInSeconds);
+    const refreshToken = this.jwtService.createRefreshToken({
+      id: user.id,
+      email: user.email,
+      name: user.name,
+    });
 
     return {
       accessToken,
       refreshToken,
-      expirationDate,
+      user,
     };
   }
 
   async refreshToken(receivedRefreshToken: string): Promise<LoginResponseDTO> {
-    let decodedToken: RefreshTokenPayload | null = null;
+    let decodedToken: TokenPayload;
 
     try {
-      decodedToken = await this.jwtService.verifyAsync<RefreshTokenPayload>(receivedRefreshToken);
+      decodedToken = await this.jwtService.verify(receivedRefreshToken);
     } catch (err) {
       throw new UnauthorizedException();
     }
 
-    const accessToken = await this.jwtService.signAsync(
-      {},
-      {
-        expiresIn: this.env.jwtExpiresInSeconds,
-        subject: decodedToken.sub,
-      }
-    );
+    const accessToken = this.jwtService.createAccessToken({
+      id: decodedToken.user.id,
+      email: decodedToken.user.email,
+      name: decodedToken.user.name,
+    });
 
-    const refreshToken = await this.jwtService.signAsync(
-      {},
-      {
-        expiresIn: this.env.jwtRefreshExpiresInSeconds,
-        subject: decodedToken.sub,
-        jwtid: uuidV4(),
-      }
-    );
-
-    const expirationDate = addSeconds(Date.now(), this.env.jwtExpiresInSeconds);
+    const refreshToken = this.jwtService.createRefreshToken({
+      id: decodedToken.user.id,
+      email: decodedToken.user.email,
+      name: decodedToken.user.name,
+    });
 
     return {
       accessToken,
       refreshToken,
-      expirationDate,
+      user: decodedToken.user,
     };
   }
 }

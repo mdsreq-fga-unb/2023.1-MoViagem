@@ -1,5 +1,11 @@
 import axios from "axios";
-import { LoginResponseDTO, RefreshTokenRequestDTO, UserLoginDTO } from "../dto/auth-dtos";
+import {
+  LoginResponseDTO,
+  RefreshTokenRequestDTO,
+  UserCreateDTO,
+  UserLoginDTO,
+  UserResponseDTO,
+} from "../dto/auth-dtos";
 
 const authApi = axios.create({
   baseURL: "http://localhost:8000/auth",
@@ -14,4 +20,8 @@ export function requestTokenRefresh(body: RefreshTokenRequestDTO) {
 
 export function requestLogin(body: UserLoginDTO) {
   return authApi.post<LoginResponseDTO>("login", body);
+}
+
+export function register(body: UserCreateDTO) {
+  return authApi.post<UserResponseDTO>("register", body);
 }

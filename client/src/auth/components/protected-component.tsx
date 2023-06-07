@@ -2,10 +2,10 @@ import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../context/auth-hook";
 
 export default function ProtectedComponent() {
-  const { isLoggedIn } = useAuth();
+  const auth = useAuth();
 
-  if (!isLoggedIn) {
-    return <Navigate to="/login" replace />;
+  if (auth.userInfo === null) {
+    return <Navigate to="/login-and-register" replace />;
   }
 
   return <Outlet />;
