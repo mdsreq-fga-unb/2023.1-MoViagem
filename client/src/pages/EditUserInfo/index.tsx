@@ -15,6 +15,8 @@ export default function EditUserInfo() {
 
   const [currentPasswordConfirmation, setCurrentPasswordConfirmation] = useState("");
 
+  const [tryingDeleteAccount, setTryingDeleteAccount] = useState(false)
+
   // Opens the input field for a new name
   const handleNameEdit = () => {
     setIsEditingName(!isEditingName);
@@ -61,8 +63,18 @@ export default function EditUserInfo() {
     setIsEditingPassword(false);
   }
 
+  // Verify if the user really wants to delete their account
+  const handleDeleteAccount = () => {
+    setTryingDeleteAccount(!tryingDeleteAccount)
+  }
+
+  const deleteAccount = () => {
+    // Delete the account
+    window.location.href = "/login-and-register";
+  }
+
   return (
-    <Navbar pageName="Minha conta">
+    <Navbar pageName="Minha Conta">
       <div className={styles.pageContainer}>
         <div className={styles.boxContainer}>
           <div className={styles.outsideBox}>
@@ -147,7 +159,18 @@ export default function EditUserInfo() {
                   <button className={styles.editButton} onClick={handlePasswordEdit}>Edit</button>
                 </div>
               }
-              <button className={styles.deleteButton}>EXCLUIR CONTA</button>
+              <button className={styles.deleteButton} onClick={handleDeleteAccount}>EXCLUIR CONTA</button>
+              {
+                tryingDeleteAccount
+                ?
+                <div className={styles.confirmBox}>
+                  <button className={styles.exitDeleteButton} onClick={handleDeleteAccount}>X</button>
+                  <div className={styles.infoBox}>Você tem certeza que deseja excluir sua conta?</div>
+                  <button className={styles.deleteButton} onClick={deleteAccount}>Excluir</button>
+                </div>
+                :
+                <></>
+              }
             </div>
           </div>
         </div>
