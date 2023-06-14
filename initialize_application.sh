@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Change to the parent directory containing the "client" and "server" directories
 cd "$(2023-MoViagem "$0")"
 
