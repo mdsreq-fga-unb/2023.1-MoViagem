@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import bcrypt from "bcrypt";
 import { LoginResponseDTO } from "../dto/token.dto";
-import { UserCreateDTO } from "../dto/user.dto";
+import { UserCreateDTO, UserEditDTO } from "../dto/user.dto";
 import { UserRepository } from "../repositories/user.repository";
 import { JwtService } from "./jwt.service";
 
@@ -26,6 +26,10 @@ export class UserService {
     });
 
     return this.jwtService.createTokens(createdUser);
+  }
+
+  async editUser(paramater: UserEditDTO, id: string): Promise<void> {
+    return this.userRepository.UpdateUser(paramater, id);
   }
 
   async comparePassword(plainPassword: string, hashedPassword: string): Promise<boolean> {

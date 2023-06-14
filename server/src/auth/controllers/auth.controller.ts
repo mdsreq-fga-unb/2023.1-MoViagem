@@ -1,9 +1,9 @@
-import { Body, Controller, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Param, Post, Put, Req, UseGuards } from "@nestjs/common";
 import { ApiBody, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
 import { User } from "@prisma/client";
 import { Request } from "express";
 import { LoginResponseDTO, RefreshTokenRequestDTO } from "../dto/token.dto";
-import { UserCreateDTO, UserLoginDTO } from "../dto/user.dto";
+import { UserCreateDTO, UserEditDTO, UserLoginDTO } from "../dto/user.dto";
 import { LocalAuthGuard } from "../guards/local-auth.guard";
 import { AuthService } from "../services/auth.service";
 import { UserService } from "../services/user.service";
@@ -25,6 +25,11 @@ export class AuthController {
   @Post("register")
   async register(@Body() dto: UserCreateDTO): Promise<LoginResponseDTO> {
     return this.userService.register(dto);
+  }
+
+  @Put("edit/:id")
+  async edit(@Param("id") id: string, @Body() dto: UserEditDTO): Promise<void> {
+    return this.userService.editUser(dto, id);
   }
 
   @Post("refresh")

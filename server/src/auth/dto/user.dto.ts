@@ -20,3 +20,9 @@ export class UserCreateDTO {
   @Length(8, 100)
   password: string;
 }
+
+export class UserEditDTO {
+  @IsEmail()
+  @Length(4, 50)
+  email: string;
+}
