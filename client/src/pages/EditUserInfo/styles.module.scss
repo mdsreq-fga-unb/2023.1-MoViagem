@@ -45,11 +45,25 @@
   border-radius: 10px;
 }
 
+.confirmBox {
+  height: 30%;
+  width: 30%;
+  position: absolute;
+
+  display: grid;
+  justify-items: center;
+  
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  border: 2px solid rgba(221, 223, 228, 1);
+}
+
 .formsBox {
   width: 70%;
   height: 2rem;
 
-  background: rgba(79, 119, 45, 0.7);
+  background: rgba(230, 230, 230, 1);
 
   display: flex;
 
@@ -76,7 +90,7 @@
   width: 100%;
   height: 2rem;
 
-  background: rgba(79, 119, 45, 0.5);
+  background: rgba(230, 230, 230, 1);
 
   border: none;
   border-radius: 10px 10px 10px 10px;
@@ -90,7 +104,7 @@
   width: 100%;
   height: 2rem;
 
-  background: rgba(79, 119, 45, 0);
+  background: rgba(230, 230, 230, 1);
 
   border: none;
   border-radius: 10px 0px 0px 10px;
@@ -109,7 +123,7 @@
   width: 10%;
   height: 100%;
 
-  background: rgba(79, 119, 45, 0);
+  background: rgba(230, 230, 230, 1);
 
   border: none;
   border-radius: 10px 10px 10px 10px;
@@ -133,12 +147,13 @@
   width: 10%;
   height: 100%;
 
-  background: rgba(79, 119, 45, 0);
+  background: rgba(230, 230, 230, 1);
+  margin-left: 5px;
 
   border: none;
   border-radius: 10px 0px 0px 10px;
+  border: 2px solid $color-secondary;
 
-  padding-top: 5px;
   padding-bottom: 2rem;
 
   font-size: 1.5rem;
@@ -157,38 +172,12 @@
   width: 10%;
   height: 100%;
 
-  background: rgba(79, 119, 45, 0);
+  background: rgba(230, 230, 230, 1);
 
   border: none;
-  border-left: 2px solid black;
+  border: 2px solid rgba(198, 40, 40, 0.54);
   border-radius: 0px 10px 10px 0px;
 
-  padding-top: 5px;
-  padding-bottom: 2rem;
-
-  font-size: 1.5rem;
-  text-align: center;
-  align-items: center;
-
-  cursor: pointer;
-  transition: .4s;
-
-  &:hover {
-    background: rgba(79, 119, 45, 0.5);
-  }
-}
-
-.exitEditButton {
-  width: 10%;
-  height: 100%;
-
-  background: rgba(79, 119, 45, 0);
-
-  border: none;
-  border-left: 2px solid black;
-  border-radius: 0px 10px 10px 0px;
-
-  padding-top: 5px;
   padding-bottom: 2rem;
 
   font-size: 1.5rem;
@@ -207,10 +196,10 @@
   width: 10%;
   height: 2.5rem;
 
-  background: rgba(198, 204, 133, 1);
+  background: rgba(230, 230, 230, 1);
 
   border: none;
-  border-left: 2px solid black;
+  border: 2px solid rgba(198, 40, 40, 0.54);
   border-radius: 0px 10px 10px 0px;
 
 
@@ -223,9 +212,6 @@
 
   &:hover {
     background: rgba(198, 40, 40, 0.54);
-    border-top: 2px solid rgba(198, 40, 40, 0.54);
-    border-right: 2px solid rgba(198, 40, 40, 0.54);
-    border-bottom: 2px solid rgba(198, 40, 40, 0.54);
   }
 }
 
@@ -254,12 +240,29 @@
   border: 2px solid rgba(198, 204, 133, 1);
   border-radius: 10px 0px 0px 10px;
 
-  background: rgba(198, 204, 133, 1);
+  background: rgba(230, 230, 230, 1);
   font-size: 1.5rem;
   transition: 0.4s;
   cursor: pointer;
 
   &:hover {
+    background: rgba(79, 119, 45, 0.5);
     border: 2px solid $color-secondary;
+  }
+}
+
+.exitDeleteButton {
+  margin-left: 90%;
+  height: 3rem;
+  width: 9%;
+  border: 2px solid black;
+  border-radius: 100%;
+  color: black;
+  font-size: 1.5rem;
+  transition: .4s;
+  
+  &:hover {
+    border: 2px solid rgba(198, 40, 40, 0.54);
+    color: rgba(198, 40, 40, 0.54);
   }
 }
