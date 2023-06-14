@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import bcrypt from "bcrypt";
 import { LoginResponseDTO } from "../dto/token.dto";
-import { UserCreateDTO, UserEditDTO } from "../dto/user.dto";
+import { UserCreateDTO, UserEditDTO, UserEditNameDTO } from "../dto/user.dto";
 import { UserRepository } from "../repositories/user.repository";
 import { JwtService } from "./jwt.service";
 
@@ -14,6 +14,8 @@ export class UserService {
     const hashedPassword = await bcrypt.hash(user.password, salt);
 
     const userAlreadyExist = await this.userRepository.findUserByEmail(user.email);
+
+    console.log(userAlreadyExist)
 
     if (userAlreadyExist !== null) {
       throw new BadRequestException("Usuário já existe");
@@ -30,6 +32,10 @@ export class UserService {
 
   async editUser(paramater: UserEditDTO, id: string): Promise<void> {
     return this.userRepository.UpdateUser(paramater, id);
+  }
+
+  async editName(params: UserEditNameDTO, id: string): Promise<void> {
+    return this.userRepository.UpdateName(params, id) 
   }
 
   async comparePassword(plainPassword: string, hashedPassword: string): Promise<boolean> {

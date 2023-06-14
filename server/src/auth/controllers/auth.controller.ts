@@ -3,7 +3,7 @@ import { ApiBody, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from "@nestj
 import { User } from "@prisma/client";
 import { Request } from "express";
 import { LoginResponseDTO, RefreshTokenRequestDTO } from "../dto/token.dto";
-import { UserCreateDTO, UserEditDTO, UserLoginDTO } from "../dto/user.dto";
+import { UserCreateDTO, UserEditDTO, UserEditNameDTO, UserLoginDTO } from "../dto/user.dto";
 import { LocalAuthGuard } from "../guards/local-auth.guard";
 import { AuthService } from "../services/auth.service";
 import { UserService } from "../services/user.service";
@@ -30,6 +30,11 @@ export class AuthController {
   @Put("edit/:id")
   async edit(@Param("id") id: string, @Body() dto: UserEditDTO): Promise<void> {
     return this.userService.editUser(dto, id);
+  }
+
+  @Put("editName/:id")
+  async editName(@Param("id") id: string, @Body() name: UserEditNameDTO): Promise<void> {
+    return this.userService.editName(name, id)
   }
 
   @Post("refresh")

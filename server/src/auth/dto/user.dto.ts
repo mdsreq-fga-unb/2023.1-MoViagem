@@ -26,3 +26,8 @@ export class UserEditDTO {
   @Length(4, 50)
   email: string;
 }
+
+export class UserEditNameDTO{
+  @Length(4, 100)
+  name: string;
+}
