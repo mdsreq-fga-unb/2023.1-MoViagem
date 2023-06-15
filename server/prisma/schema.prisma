@@ -16,3 +16,11 @@ model User {
   name     String @db.VarChar(100)
   password String @db.VarChar(100)
 }
+
+
+// model viagem {
+//   id       Int    @id @default(autoincrement()) @db.UnsignedInt
+//   email    String @unique @db.VarChar(50)
+//   name     String @db.VarChar(100)
+//   password String @db.VarChar(100)
+// }
