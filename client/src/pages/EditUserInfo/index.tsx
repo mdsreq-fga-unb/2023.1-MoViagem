@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { ErrorResponse } from "../../api/api-instance";
+import { editName } from "../../api/requests/auth-requests";
+import useAuth from "../../auth/context/auth-hook";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
 
 export default function EditUserInfo() {
-
+  const auth = useAuth();
   const [isEditingName, setIsEditingName] = useState(false);
   const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [isEditingPassword, setIsEditingPassword] = useState(false);
@@ -15,7 +18,7 @@ export default function EditUserInfo() {
 
   const [currentPasswordConfirmation, setCurrentPasswordConfirmation] = useState("");
 
-  const [tryingDeleteAccount, setTryingDeleteAccount] = useState(false)
+  const [tryingDeleteAccount, setTryingDeleteAccount] = useState(false);
 
   // Opens the input field for a new name
   const handleNameEdit = () => {
@@ -23,25 +26,42 @@ export default function EditUserInfo() {
     setIsEditingEmail(false);
     setIsEditingPassword(false);
 
-    setNewName("")
-    setNewEmail("")
-    setNewPassword("")
-    setNewPasswordConfirmation("")
-    setCurrentPasswordConfirmation("")
-  }
+    setNewName("");
+    setNewEmail("");
+    setNewPassword("");
+    setNewPasswordConfirmation("");
+    setCurrentPasswordConfirmation("");
+  };
 
+  const sendNewName = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (auth.userInfo == null) {
+      throw "userInfo context is null";
+    }
+    const response = await editName({ name: newName }, auth.userInfo.id.toString());
+
+    if (response instanceof ErrorResponse) {
+      alert(response.status === 400 ? "não foi possivel editar o nome" : "");
+      return;
+    }
+    auth.updateUserInfo({ name: newName });
+    setNewName("");
+    setIsEditingName(false);
+    return response;
+  };
   // Opens the input field for a new email
   const handleEmailEdit = () => {
     setIsEditingName(false);
     setIsEditingEmail(!isEditingEmail);
     setIsEditingPassword(false);
 
-    setNewName("")
-    setNewEmail("")
-    setNewPassword("")
-    setNewPasswordConfirmation("")
-    setCurrentPasswordConfirmation("")
-  }
+    setNewName("");
+    setNewEmail("");
+    setNewPassword("");
+    setNewPasswordConfirmation("");
+    setCurrentPasswordConfirmation("");
+  };
 
   // Opens the input field for a new password
   const handlePasswordEdit = () => {
@@ -49,30 +69,30 @@ export default function EditUserInfo() {
     setIsEditingEmail(false);
     setIsEditingPassword(!isEditingPassword);
 
-    setNewName("")
-    setNewEmail("")
-    setNewPassword("")
-    setNewPasswordConfirmation("")
-    setCurrentPasswordConfirmation("")
-  }
+    setNewName("");
+    setNewEmail("");
+    setNewPassword("");
+    setNewPasswordConfirmation("");
+    setCurrentPasswordConfirmation("");
+  };
 
   // Closes the input field for all user information
   const handleExitEdition = () => {
     setIsEditingName(false);
     setIsEditingEmail(false);
     setIsEditingPassword(false);
-  }
+  };
 
   // Verify if the user really wants to delete their account
   const handleDeleteAccount = () => {
-    setTryingDeleteAccount(!tryingDeleteAccount)
-  }
+    setTryingDeleteAccount(!tryingDeleteAccount);
+  };
 
   const deleteAccount = () => {
     // Delete the account
     window.location.href = "/login-and-register";
-  }
-
+  };
+  console.log(auth?.userInfo?.name);
   return (
     <Navbar pageName="Minha Conta">
       <div className={styles.pageContainer}>
@@ -80,10 +100,8 @@ export default function EditUserInfo() {
           <div className={styles.outsideBox}>
             <div className={styles.insideBox}>
               <h2>Dados</h2>
-              {
-                isEditingName
-                ?
-                <form className={styles.formsBox}>
+              {isEditingName ? (
+                <form className={styles.formsBox} onSubmit={sendNewName}>
                   <input
                     type="text"
                     placeholder="Digite o novo nome..."
@@ -93,17 +111,34 @@ export default function EditUserInfo() {
                     onChange={(event) => setNewName(event.target.value)}
                   />
                   <button className={styles.confirmEditButton}>Ok</button>
-                  <button className={styles.exitEditButton} onClick={handleExitEdition}>X</button>
+                  <button className={styles.exitEditButton} onClick={handleExitEdition}>
+                    X
+                  </button>
                 </form>
-                :
-                <div className={styles.formsBox}>
-                  <div className={styles.infoBox}>** Nome da pessoa **</div>
-                  <button className={styles.editButton} onClick={handleNameEdit}>Edit</button>
-                </div>
-              }
-              {
-                isEditingEmail
-                ?
+              ) : (
+                <form className={styles.formsBox}>
+                  <input
+                    type="text"
+                    placeholder={auth.userInfo?.name}
+                    className={styles.inputBox}
+                    required
+                    disabled
+                    value={newName}
+                    onChange={(event) => setNewName(event.target.value)}
+                  />
+                  <button className={styles.editButton} onClick={handleNameEdit}>
+                    Edit
+                  </button>
+                </form>
+
+                // <div className={styles.formsBox}>
+                //   <div className={styles.infoBox}>** Nome da pessoa **</div>
+                //   <button className={styles.editButton} onClick={handleNameEdit}>
+                //     Edit
+                //   </button>
+                // </div>
+              )}
+              {isEditingEmail ? (
                 <form className={styles.formsBox}>
                   <input
                     type="text"
@@ -114,17 +149,19 @@ export default function EditUserInfo() {
                     onChange={(event) => setNewEmail(event.target.value)}
                   />
                   <button className={styles.confirmEditButton}>Ok</button>
-                  <button className={styles.exitEditButton} onClick={handleExitEdition}>X</button>
+                  <button className={styles.exitEditButton} onClick={handleExitEdition}>
+                    X
+                  </button>
                 </form>
-                :
+              ) : (
                 <div className={styles.formsBox}>
                   <div className={styles.infoBox}>** Email da pessoa **</div>
-                  <button className={styles.editButton} onClick={handleEmailEdit}>Edit</button>
+                  <button className={styles.editButton} onClick={handleEmailEdit}>
+                    Edit
+                  </button>
                 </div>
-              }
-              {
-                isEditingPassword
-                ?
+              )}
+              {isEditingPassword ? (
                 <form className={styles.passwordFormsBox}>
                   <input
                     type="password"
@@ -151,30 +188,40 @@ export default function EditUserInfo() {
                     onChange={(event) => setNewPasswordConfirmation(event.target.value)}
                   />
                   <button className={styles.passwordButton}>Ok</button>
-                  <button className={styles.exitPasswordEditButton} onClick={handleExitEdition}>X</button>
+                  <button className={styles.exitPasswordEditButton} onClick={handleExitEdition}>
+                    X
+                  </button>
                 </form>
-                :
+              ) : (
                 <div className={styles.formsBox}>
                   <div className={styles.infoBox}>********</div>
-                  <button className={styles.editButton} onClick={handlePasswordEdit}>Edit</button>
+                  <button className={styles.editButton} onClick={handlePasswordEdit}>
+                    Edit
+                  </button>
                 </div>
-              }
-              <button className={styles.deleteButton} onClick={handleDeleteAccount}>EXCLUIR CONTA</button>
-              {
-                tryingDeleteAccount
-                ?
+              )}
+              <button className={styles.deleteButton} onClick={handleDeleteAccount}>
+                EXCLUIR CONTA
+              </button>
+              {tryingDeleteAccount ? (
                 <div className={styles.confirmBox}>
-                  <button className={styles.exitDeleteButton} onClick={handleDeleteAccount}>X</button>
-                  <div className={styles.infoBox}>Você tem certeza que deseja excluir sua conta?</div>
-                  <button className={styles.deleteButton} onClick={deleteAccount}>Excluir</button>
+                  <button className={styles.exitDeleteButton} onClick={handleDeleteAccount}>
+                    X
+                  </button>
+                  <div className={styles.infoBox}>
+                    Você tem certeza que deseja excluir sua conta?
+                  </div>
+                  <button className={styles.deleteButton} onClick={deleteAccount}>
+                    Excluir
+                  </button>
                 </div>
-                :
+              ) : (
                 <></>
-              }
+              )}
             </div>
           </div>
         </div>
       </div>
     </Navbar>
-  )
+  );
 }

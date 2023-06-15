@@ -52,7 +52,7 @@
 
   display: grid;
   justify-items: center;
-  
+
   background: white;
   padding: 50px;
   border-radius: 10px;
@@ -112,6 +112,9 @@
   font-size: 1.5rem;
   text-align: center;
 }
+.inputBox::placeholder {
+  color: black;
+}
 
 .infoBox {
   width: 100%;
@@ -136,7 +139,7 @@
   align-items: center;
 
   cursor: pointer;
-  transition: .4s;
+  transition: 0.4s;
 
   &:hover {
     background: rgba(79, 119, 45, 0.5);
@@ -161,7 +164,7 @@
   align-items: center;
 
   cursor: pointer;
-  transition: .4s;
+  transition: 0.4s;
 
   &:hover {
     background: rgba(79, 119, 45, 0.5);
@@ -185,7 +188,7 @@
   align-items: center;
 
   cursor: pointer;
-  transition: .4s;
+  transition: 0.4s;
 
   &:hover {
     background: rgba(198, 40, 40, 0.54);
@@ -202,13 +205,12 @@
   border: 2px solid rgba(198, 40, 40, 0.54);
   border-radius: 0px 10px 10px 0px;
 
-
   font-size: 1.5rem;
   text-align: center;
   align-items: center;
 
   cursor: pointer;
-  transition: .4s;
+  transition: 0.4s;
 
   &:hover {
     background: rgba(198, 40, 40, 0.54);
@@ -259,8 +261,8 @@
   border-radius: 100%;
   color: black;
   font-size: 1.5rem;
-  transition: .4s;
-  
+  transition: 0.4s;
+
   &:hover {
     border: 2px solid rgba(198, 40, 40, 0.54);
     color: rgba(198, 40, 40, 0.54);

@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, Put, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Param, Post, Put, Req, UseGuards } from "@nestjs/common";
 import { ApiBody, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
 import { User } from "@prisma/client";
 import { Request } from "express";
@@ -51,5 +51,10 @@ export class AuthController {
   @Post("refresh")
   async refresh(@Body() { refreshToken }: RefreshTokenRequestDTO): Promise<LoginResponseDTO> {
     return this.authService.refreshToken(refreshToken);
+  }
+
+  @Delete("deleteUser/:id")
+  async deleteUser(@Param("id") id: string): Promise<void>{
+    return this.userService.deleteUser(id)
   }
 }

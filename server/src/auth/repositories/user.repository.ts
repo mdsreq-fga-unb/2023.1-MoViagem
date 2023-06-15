@@ -36,9 +36,8 @@ export class UserRepository {
     });
   }
 
-  async UpdateName(data: UserEditNameDTO, id: string): Promise<void> {
-    console.log("id:", id);
-    await this.prismaService.user.update({
+  async UpdateName(data: UserEditNameDTO, id: string): Promise<void> {      
+     await this.prismaService.user.update({
       data: {
         name: data.name,
       },
@@ -58,5 +57,14 @@ export class UserRepository {
         id: parseInt(id),
       },
     });
+  }
+
+  async deleteUser(id: string): Promise<void>{
+    console.log("id do usuario", id)
+    await this.prismaService.user.delete({
+      where: {
+        id: parseInt(id)
+      }
+    })
   }
 }

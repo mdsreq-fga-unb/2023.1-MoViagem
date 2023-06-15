@@ -4,6 +4,7 @@ import {
   LoginResponseDTO,
   RefreshTokenRequestDTO,
   UserCreateDTO,
+  UserEditNameDTO,
   UserLoginDTO,
 } from "../dto/auth-dtos";
 
@@ -36,6 +37,15 @@ export function register(body: UserCreateDTO) {
   return request<UserCreateDTO, LoginResponseDTO>({
     method: "POST",
     url: "register",
+    body,
+    alternativeInstance: authApi,
+  });
+}
+
+export function editName(body: UserEditNameDTO, id: string) {
+  return request<UserEditNameDTO, void>({
+    method: "PUT",
+    url: `editName/${id}`,
     body,
     alternativeInstance: authApi,
   });
