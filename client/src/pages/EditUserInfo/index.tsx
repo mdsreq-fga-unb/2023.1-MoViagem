@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { ErrorResponse } from "../../api/api-instance";
-import { editName } from "../../api/requests/auth-requests";
+import { deleteAccount, editEmail, editName, editPassword } from "../../api/requests/auth-requests";
 import useAuth from "../../auth/context/auth-hook";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
@@ -50,6 +50,57 @@ export default function EditUserInfo() {
     setIsEditingName(false);
     return response;
   };
+
+  const sendNewEmail = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (auth.userInfo == null) {
+      throw "userInfo context is null";
+    }
+    const response = await editEmail({ email: newEmail }, auth.userInfo.id.toString());
+
+    if (response instanceof ErrorResponse) {
+      alert(response.status === 400 ? "não foi possivel editar o email" : "");
+      return;
+    }
+    auth.updateUserInfo({ email: newEmail });
+    setNewEmail("");
+    setIsEditingEmail(false);
+    return response;
+  };
+  const sendDeleteAccount = async () => {
+    if (auth.userInfo == null) {
+      throw "userInfo context is null";
+    }
+    const response = await deleteAccount(auth.userInfo?.id.toString());
+    if (response instanceof ErrorResponse) {
+      alert(response.status === 400 ? "não foi possivel editar o email" : "");
+      return;
+    }
+    auth.eraseTokens();
+    window.location.href = "/login-and-register";
+  };
+
+  const sendNewPassword = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    let response: any;
+
+    if (auth.userInfo == null) {
+      throw "userInfo context is null";
+    }
+    if (newPassword === newPasswordConfirmation) {
+      response = await editPassword(
+        { newPassword: newPasswordConfirmation, currentPassword: currentPasswordConfirmation },
+        auth.userInfo.id.toString()
+      );
+    }
+    if (response instanceof ErrorResponse) {
+      alert(response.status === 400 ? "não foi possivel editar a senha" : "");
+      return;
+    }
+    setIsEditingPassword(false);
+    return response;
+  };
   // Opens the input field for a new email
   const handleEmailEdit = () => {
     setIsEditingName(false);
@@ -88,10 +139,6 @@ export default function EditUserInfo() {
     setTryingDeleteAccount(!tryingDeleteAccount);
   };
 
-  const deleteAccount = () => {
-    // Delete the account
-    window.location.href = "/login-and-register";
-  };
   console.log(auth?.userInfo?.name);
   return (
     <Navbar pageName="Minha Conta">
@@ -139,7 +186,7 @@ export default function EditUserInfo() {
                 // </div>
               )}
               {isEditingEmail ? (
-                <form className={styles.formsBox}>
+                <form className={styles.formsBox} onSubmit={sendNewEmail}>
                   <input
                     type="text"
                     placeholder="Digite o novo e-mail..."
@@ -154,15 +201,30 @@ export default function EditUserInfo() {
                   </button>
                 </form>
               ) : (
-                <div className={styles.formsBox}>
-                  <div className={styles.infoBox}>** Email da pessoa **</div>
+                <form className={styles.formsBox}>
+                  <input
+                    type="text"
+                    placeholder={auth.userInfo?.email}
+                    className={styles.inputBox}
+                    required
+                    disabled
+                    value={newEmail}
+                    onChange={(event) => setNewEmail(event.target.value)}
+                  />
                   <button className={styles.editButton} onClick={handleEmailEdit}>
                     Edit
                   </button>
-                </div>
+                </form>
+
+                // <div className={styles.formsBox}>
+                //   <div className={styles.infoBox}>** Email da pessoa **</div>
+                //   <button className={styles.editButton} onClick={handleEmailEdit}>
+                //     Edit
+                //   </button>
+                // </div>
               )}
               {isEditingPassword ? (
-                <form className={styles.passwordFormsBox}>
+                <form className={styles.passwordFormsBox} onSubmit={sendNewPassword}>
                   <input
                     type="password"
                     placeholder="Digite a senha atual..."
@@ -211,7 +273,7 @@ export default function EditUserInfo() {
                   <div className={styles.infoBox}>
                     Você tem certeza que deseja excluir sua conta?
                   </div>
-                  <button className={styles.deleteButton} onClick={deleteAccount}>
+                  <button className={styles.deleteButton} onClick={sendDeleteAccount}>
                     Excluir
                   </button>
                 </div>

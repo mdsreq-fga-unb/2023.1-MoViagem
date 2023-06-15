@@ -48,6 +48,7 @@ export class UserRepository {
   }
 
   async updatePassword(data: string, id: string): Promise<void> {
+    console.log("nova senha: ", data)
     await this.prismaService.user.update({
       data: {
         password: data,

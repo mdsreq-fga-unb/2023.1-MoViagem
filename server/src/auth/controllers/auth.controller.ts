@@ -33,7 +33,7 @@ export class AuthController {
     return this.userService.register(dto);
   }
 
-  @Put("edit/:id")
+  @Put("editEmail/:id")
   async edit(@Param("id") id: string, @Body() dto: UserEditDTO): Promise<void> {
     return this.userService.editUser(dto, id);
   }

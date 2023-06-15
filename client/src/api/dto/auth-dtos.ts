@@ -28,3 +28,12 @@ export interface UserCreateDTO {
 export interface UserEditNameDTO {
   name: string;
 }
+
+export interface UserEditEmailDTO {
+  email: string;
+}
+
+export interface UserEditPasswordDTO {
+  currentPassword: string;
+  newPassword: string;
+}

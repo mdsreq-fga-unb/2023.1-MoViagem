@@ -48,7 +48,7 @@ export class UserService {
 
   async editPassword(params: UserEditPasswordDTO, id: string): Promise<void> {
     const user = await this.userRepository.findUserById(parseInt(id));
-
+    
     if (!user) {
       throw new BadRequestException("Usuário não existe");
     }

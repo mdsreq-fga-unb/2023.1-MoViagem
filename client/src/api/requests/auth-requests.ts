@@ -4,7 +4,9 @@ import {
   LoginResponseDTO,
   RefreshTokenRequestDTO,
   UserCreateDTO,
+  UserEditEmailDTO,
   UserEditNameDTO,
+  UserEditPasswordDTO,
   UserLoginDTO,
 } from "../dto/auth-dtos";
 
@@ -47,6 +49,29 @@ export function editName(body: UserEditNameDTO, id: string) {
     method: "PUT",
     url: `editName/${id}`,
     body,
+    alternativeInstance: authApi,
+  });
+}
+export function editEmail(body: UserEditEmailDTO, id: string) {
+  return request<UserEditEmailDTO, void>({
+    method: "PUT",
+    url: `editEmail/${id}`,
+    body,
+    alternativeInstance: authApi,
+  });
+}
+export function editPassword(body: UserEditPasswordDTO, id: string) {
+  return request<UserEditPasswordDTO, void>({
+    method: "PUT",
+    url: `editPassword/${id}`,
+    body,
+    alternativeInstance: authApi,
+  });
+}
+export function deleteAccount(id: string) {
+  return request<never, never>({
+    method: "DELETE",
+    url: `deleteUser/${id}`,
     alternativeInstance: authApi,
   });
 }
