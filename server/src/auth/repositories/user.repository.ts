@@ -36,8 +36,8 @@ export class UserRepository {
     });
   }
 
-  async UpdateName(data: UserEditNameDTO, id: string): Promise<void> {      
-     await this.prismaService.user.update({
+  async UpdateName(data: UserEditNameDTO, id: string): Promise<void> {
+    await this.prismaService.user.update({
       data: {
         name: data.name,
       },
@@ -48,7 +48,6 @@ export class UserRepository {
   }
 
   async updatePassword(data: string, id: string): Promise<void> {
-    console.log("nova senha na query", data);
     await this.prismaService.user.update({
       data: {
         password: data,
@@ -59,12 +58,11 @@ export class UserRepository {
     });
   }
 
-  async deleteUser(id: string): Promise<void>{
-    console.log("id do usuario", id)
+  async deleteUser(id: string): Promise<void> {
     await this.prismaService.user.delete({
       where: {
-        id: parseInt(id)
-      }
-    })
+        id: parseInt(id),
+      },
+    });
   }
 }

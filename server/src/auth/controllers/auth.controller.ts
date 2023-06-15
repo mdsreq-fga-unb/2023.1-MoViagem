@@ -54,7 +54,7 @@ export class AuthController {
   }
 
   @Delete("deleteUser/:id")
-  async deleteUser(@Param("id") id: string): Promise<void>{
-    return this.userService.deleteUser(id)
+  async deleteUser(@Param("id") id: string): Promise<void> {
+    return this.userService.deleteUser(id);
   }
 }

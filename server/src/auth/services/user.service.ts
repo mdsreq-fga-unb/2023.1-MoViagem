@@ -41,9 +41,9 @@ export class UserService {
   async comparePassword(plainPassword: string, hashedPassword: string): Promise<boolean> {
     return bcrypt.compare(plainPassword, hashedPassword);
   }
-  
-  async deleteUser(id: string): Promise<void>{
-    return this.userRepository.deleteUser(id)
+
+  async deleteUser(id: string): Promise<void> {
+    return this.userRepository.deleteUser(id);
   }
 
   async editPassword(params: UserEditPasswordDTO, id: string): Promise<void> {
