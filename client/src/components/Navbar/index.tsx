@@ -17,6 +17,14 @@ const NavbarPages = {
   TASKS: ListIcon,
 };
 
+const navigateToUserInfo = () => {
+  window.location.href = "/user-info";
+}
+
+const navigateToHome = () => {
+  window.location.href = "/";
+}
+
 export interface NavbarProps {
   pageName: string;
   selectedPage?: "TRAVELS" | "GROUPS" | "CALENDAR" | "TASKS";
@@ -44,7 +52,7 @@ export default function Navbar({
       <div id={styles.topBar}>
         <h1>{pageName}</h1>
         {auth?.userInfo && (
-          <div id={styles.topBarMenu}>
+          <div id={styles.topBarMenu} onClick={navigateToUserInfo}>
             <AccountIcon fontSize="large" />
             <p>{auth.userInfo.name}</p>
           </div>
@@ -52,7 +60,7 @@ export default function Navbar({
       </div>
 
       <div id={styles.sideBar}>
-        <div id={styles.sideBarIcon}></div>
+        <div id={styles.sideBarIcon} onClick={navigateToHome}></div>
         <div id={styles.sideBarLinksContainer}>
           {Object.entries(NavbarPages).map(([page, Icon]) => (
             <div

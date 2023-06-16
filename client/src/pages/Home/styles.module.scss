@@ -1,0 +1,64 @@
+#outsideBox {
+  height: 90%;
+  display: flex;
+  align-items: center;
+}
+
+#insideBox {
+  width: 40%;
+  margin-left: 5%;
+}
+
+#imageBox {
+  width: 40%;
+  margin-left: 5%;
+  text-align: center;
+}
+
+#title {
+  font-size: 5rem;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+#subtitle {
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+#description {
+  font-weight: 300;
+  text-indent: 2rem;
+  text-align: justify;
+}
+
+#createTravelButton {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  background: rgba(79, 119, 45, 1);
+  color: rgba(201, 255, 153, 1);
+  box-shadow: 5px 5px 5px rgb(175, 175, 175);
+
+  margin-top: 10%;
+  margin-bottom: 10%;
+  padding: 10px;
+  border-radius: 15px;
+  border: 2px solid rgba(79, 119, 45, 1);
+
+  transition: .4s;
+  font-size: 1.7rem;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateX(-10px);
+    border: 2px solid rgba(201, 255, 153, 1);
+  }
+}
+
+#buttonText {
+  margin-left: 10%;
+}

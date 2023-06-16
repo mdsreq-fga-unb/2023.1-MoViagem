@@ -4,7 +4,7 @@ import { getHello } from "../../api/requests/travels-requests";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
 
-export default function Home() {
+export default function Travels() {
   const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
