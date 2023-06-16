@@ -7,6 +7,7 @@ import { HelloService } from "../services/hello.service";
 
 @Controller("/api/hello")
 @ApiTags("hello")
+// Precisa estar logado para acessar qualquer rota desse controller
 @EnableAuth()
 export class HelloController {
   constructor(private helloService: HelloService) {}
