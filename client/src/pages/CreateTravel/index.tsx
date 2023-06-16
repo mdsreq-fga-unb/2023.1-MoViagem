@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ErrorResponse } from "../../api/api-instance";
+import { requestCreateTravel } from "../../api/requests/travels-requests";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
 
@@ -9,37 +11,59 @@ export default function CreateTravel() {
   const [proposito, setProposito] = useState<string>("");
   const [numDePessoas, setNumDePessoas] = useState("");
 
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!dataInicio || !dataFim) {
+      alert("Data inválida");
+      return;
+    }
+
+    const response = await requestCreateTravel({
+      local: local,
+      startDate: dataInicio,
+      endDate: dataFim,
+      description: proposito,
+      numParticipants: parseInt(numDePessoas),
+    });
+
+    if (response instanceof ErrorResponse) {
+      alert("Erro ao criar viagem\n" + response.message);
+      return;
+    }
+
+    // TODO: Redirecionar para a página de lista de viagens
+    alert("Viagem criada com sucesso");
+  }
+
   return (
     <Navbar pageName="Criar Viagem">
       <div className={styles.pageContainer}>
         <div className={styles.boxContainer}>
           <div className={styles.outsideBox}>
             {/* <h1>Teste</h1> */}
-            <form
-              className={styles.insideBox}
-              onSubmit={() => {
-                console.log("Submit do form");
-              }}
-            >
-              <label htmlFor="local">Local:</label>
-              <input
-                type="text"
-                name="local"
-                placeholder="Local"
-                className={styles.inputBox}
-                required
-                value={local}
-                onChange={(event) => {
-                  setLocal(event.target.value);
-                }}
-              />
+            <form className={styles.insideBox} onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="local">Local:</label>
+                <input
+                  type="text"
+                  name="local"
+                  placeholder="Local"
+                  className={styles.inputBox}
+                  required
+                  value={local}
+                  onChange={(event) => {
+                    setLocal(event.target.value);
+                  }}
+                />
+              </div>
               <div className={styles.inputGroup}>
-                <div className="inputDataIni">
-                  <label htmlFor="email"></label>
+                <div className="">
+                  <label htmlFor="local">Dia de início:</label>
                   <input
                     type="date"
                     placeholder="Data"
-                    className={styles.inputBox}
+                    className={styles.inputDate}
                     required
                     value={dataInicio ? dataInicio.toISOString().split("T")[0] : ""}
                     onChange={(event) => {
@@ -52,11 +76,13 @@ export default function CreateTravel() {
                     }}
                   />
                 </div>
-                <div className="inputDataFim">
+                <div className="">
+                  <label htmlFor="local">Dia de fim:</label>
+
                   <input
                     type="date"
                     placeholder="Data"
-                    className={styles.inputBox}
+                    className={styles.inputDate}
                     required
                     value={dataFim ? dataFim.toISOString().split("T")[0] : ""}
                     onChange={(event) => {
@@ -71,27 +97,39 @@ export default function CreateTravel() {
                 </div>
               </div>
 
-              <textarea
-                placeholder="Proposito da viagem"
-                rows={3}
-                className={styles.textAreaBox}
-                required
-                value={proposito}
-                onChange={(event) => {
-                  setProposito(event.target.value);
-                }}
-              />
-              <input
-                type="Number"
-                placeholder="Número de pessoas na viagem"
-                className={styles.inputBox}
-                required
-                value={numDePessoas}
-                onChange={(event) => {
-                  setNumDePessoas(event.target.value);
-                }}
-              />
-              <button className={styles.submitButton}> CRIAR</button>
+              <div>
+                <label htmlFor="proposito">Proposito:</label>
+                <textarea
+                  placeholder="Proposito da viagem"
+                  name="proposito"
+                  rows={3}
+                  className={styles.textAreaBox}
+                  required
+                  value={proposito}
+                  onChange={(event) => {
+                    setProposito(event.target.value);
+                  }}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="numDePessoas">Numero de Pessoas:</label>
+                <input
+                  type="Number"
+                  name="numDePessoas"
+                  placeholder="Número de pessoas na viagem"
+                  className={styles.inputNum}
+                  required
+                  value={numDePessoas}
+                  onChange={(event) => {
+                    setNumDePessoas(event.target.value);
+                  }}
+                />
+              </div>
+
+              <button className={styles.submitButton} type="submit">
+                CRIAR
+              </button>
             </form>
           </div>
         </div>

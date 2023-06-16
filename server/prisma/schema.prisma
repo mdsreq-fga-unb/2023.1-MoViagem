@@ -11,16 +11,57 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement()) @db.UnsignedInt
-  email    String @unique @db.VarChar(50)
-  name     String @db.VarChar(100)
-  password String @db.VarChar(100)
+  id       Int      @id @default(autoincrement()) @db.UnsignedInt
+  email    String   @unique @db.VarChar(50)
+  name     String   @db.VarChar(100)
+  password String   @db.VarChar(100)
+  travels  Travel[]
 }
 
+model Travel {
+  id              Int         @id @default(autoincrement()) @db.UnsignedInt
+  userId          Int         @db.UnsignedInt
+  user            User        @relation(fields: [userId], references: [id], onDelete: Restrict)
+  local           String      @db.VarChar(100)
+  startDate       DateTime    @db.Date
+  endDate         DateTime    @db.Date
+  description     String      @db.VarChar(100)
+  numParticipants Int         @db.UnsignedInt
+  hosts           Host[]
+  transports      Transport[]
+  events          Event[]
+}
 
-// model viagem {
-//   id       Int    @id @default(autoincrement()) @db.UnsignedInt
-//   email    String @unique @db.VarChar(50)
-//   name     String @db.VarChar(100)
-//   password String @db.VarChar(100)
-// }
+model Host {
+  id        Int      @id @default(autoincrement()) @db.UnsignedInt
+  type      String   @db.VarChar(50)
+  startTime DateTime @db.DateTime
+  endTime   DateTime @db.DateTime
+  local     String   @db.VarChar(100)
+  price     Decimal  @db.Decimal(10, 2)
+  contact   String   @db.VarChar(50)
+  travelId  Int      @db.UnsignedInt
+  travel    Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
+}
+
+model Transport {
+  id         Int      @id @default(autoincrement()) @db.UnsignedInt
+  type       String   @db.VarChar(50)
+  startLocal String   @db.VarChar(100)
+  endLocal   String   @db.VarChar(100)
+  startTime  DateTime @db.DateTime
+  endTime    DateTime @db.DateTime
+  price      Decimal  @db.Decimal(10, 2)
+  contacts   String   @db.VarChar(50)
+  travelId   Int      @db.UnsignedInt
+  travel     Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
+}
+
+model Event {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  startTime   DateTime @db.DateTime
+  endTime     DateTime @db.DateTime
+  description String   @db.Text
+  travelId    Int      @db.UnsignedInt
+  travel      Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
+}
