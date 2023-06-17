@@ -11,6 +11,7 @@ import { AuthContext } from "../../auth/context/auth-provider";
 import styles from "./styles.module.scss";
 
 const NavbarPages = {
+  CREATETRAVEL: PlaneIcon,
   TRAVELS: PlaneIcon,
   GROUPS: FamilyIcon,
   CALENDAR: CalendarIcon,
@@ -27,7 +28,7 @@ const navigateToHome = () => {
 
 export interface NavbarProps {
   pageName: string;
-  selectedPage?: "TRAVELS" | "GROUPS" | "CALENDAR" | "TASKS";
+  selectedPage?: "CREATETRAVEL" | "TRAVELS" | "GROUPS" | "CALENDAR" | "TASKS";
 }
 
 export default function Navbar({
@@ -46,6 +47,10 @@ export default function Navbar({
     auth.eraseTokens();
     navigate("/login-and-register", { replace: true });
   }
+
+  // function handleCreateTravel() {
+  //   navigate("/login-and-register", { replace: true });
+  // }
 
   return (
     <div id={styles.container}>
@@ -70,6 +75,7 @@ export default function Navbar({
                   ? styles.sideBarLinkContainerActive
                   : styles.sideBarLinkContainer
               }
+              // Botar href neste link
             >
               <IconButton>
                 <Icon

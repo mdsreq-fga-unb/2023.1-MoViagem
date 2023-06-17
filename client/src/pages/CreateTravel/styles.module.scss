@@ -1,0 +1,113 @@
+@import "../../variables.scss";
+
+.pageContainer {
+  display: grid;
+
+  h2 {
+    margin-bottom: 2rem;
+  }
+}
+
+.boxContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.outsideBox {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  height: 80%;
+  width: 75%;
+  margin-top: 3%;
+  justify-items: center;
+  align-items: center;
+}
+
+.verticalLine {
+  min-height: 110%;
+  width: 0.4rem;
+  background: rgba(49, 87, 44, 1);
+  border-radius: 20px;
+}
+
+.insideBox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  justify-content: left;
+  text-align: left;
+  width: 60%;
+  padding: 3rem;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border: 1px solid rgba(221, 223, 228, 1);
+  border-radius: 10px;
+}
+
+.inputBox {
+  width: 100%;
+  height: 2rem;
+  background: rgba(79, 119, 45, 0.5);
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+.inputNum {
+  width: 50px;
+  height: 2rem;
+  background: rgba(79, 119, 45, 0.5);
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+.inputDate {
+  width: 100px;
+  height: 2rem;
+  background: rgba(79, 119, 45, 0.5);
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+.submitButton {
+  margin-top: 2rem;
+  width: 40%;
+  height: 2.5rem;
+  border: 2px solid rgba(198, 204, 133, 1);
+  border-radius: 10px;
+  background: rgba(198, 204, 133, 1);
+  font-size: 1.5rem;
+  transition: 0.4s;
+  cursor: pointer;
+  &:hover {
+    border: 2px solid $color-secondary;
+  }
+}
+
+.inputGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  // justify-content: space-around;
+  justify-content: space-between;
+}
+
+.textAreaBox {
+  width: 100%;
+  height: 5rem;
+  background: rgba(79, 119, 45, 0.5);
+  border: #111;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 1.5rem;
+  text-align: left;
+}
