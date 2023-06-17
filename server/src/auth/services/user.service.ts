@@ -15,8 +15,6 @@ export class UserService {
 
     const userAlreadyExist = await this.userRepository.findUserByEmail(user.email);
 
-    console.log(userAlreadyExist);
-
     if (userAlreadyExist !== null) {
       throw new BadRequestException("Usuário já existe");
     }
@@ -48,7 +46,7 @@ export class UserService {
 
   async editPassword(params: UserEditPasswordDTO, id: string): Promise<void> {
     const user = await this.userRepository.findUserById(parseInt(id));
-    
+
     if (!user) {
       throw new BadRequestException("Usuário não existe");
     }
