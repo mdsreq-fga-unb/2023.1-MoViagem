@@ -139,7 +139,6 @@ export default function EditUserInfo() {
     setTryingDeleteAccount(!tryingDeleteAccount);
   };
 
-  console.log(auth?.userInfo?.name);
   return (
     <Navbar pageName="Minha Conta">
       <div className={styles.pageContainer}>

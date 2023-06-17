@@ -1,6 +1,7 @@
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
+import HomeImage from "../../assets/HomeImage.png"
 
 export default function Home() {
 
@@ -29,7 +30,7 @@ export default function Home() {
           </button>
         </div>
         <div id={styles.imageBox}>
-          <img alt="MóViagem logo" src="https://raw.githubusercontent.com/JoaoSchmitz/Teste/master/HomeImage.png?token=GHSAT0AAAAAACDMYOL35YDA6AYFL4PRFORCZELWVTA" ></img>
+          <img alt="MóViagem logo" src={HomeImage} ></img>
         </div>
       </div>
     </Navbar>

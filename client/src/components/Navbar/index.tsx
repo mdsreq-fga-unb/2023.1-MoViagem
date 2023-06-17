@@ -17,15 +17,6 @@ const NavbarPages = {
   CALENDAR: CalendarIcon,
   TASKS: ListIcon,
 };
-
-const navigateToUserInfo = () => {
-  window.location.href = "/user-info";
-}
-
-const navigateToHome = () => {
-  window.location.href = "/";
-}
-
 export interface NavbarProps {
   pageName: string;
   selectedPage?: "CREATETRAVEL" | "TRAVELS" | "GROUPS" | "CALENDAR" | "TASKS";
@@ -46,6 +37,14 @@ export default function Navbar({
 
     auth.eraseTokens();
     navigate("/login-and-register", { replace: true });
+  }
+
+  const navigateToUserInfo = () => {
+    navigate("/user-info", { replace: true });
+  }
+  
+  const navigateToHome = () => {
+    navigate("/", { replace: true });
   }
 
   // function handleCreateTravel() {
