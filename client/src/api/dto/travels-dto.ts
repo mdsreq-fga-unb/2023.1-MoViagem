@@ -6,10 +6,10 @@ export interface CreateTravelRequestDTO {
   numParticipants: number;
 }
 
-export interface StayInfoDTO {
-  stayType: string;
-  startDate: Date;
-  endDate: Date;
+export interface CreateHostRequestDTO {
+  type: string;
+  startTime: Date;
+  endTime: Date;
   local: string;
   price: number;
   contact: string;

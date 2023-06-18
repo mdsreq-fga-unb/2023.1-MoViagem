@@ -32,8 +32,8 @@ export default function CreateTravel() {
       return;
     }
 
-    // TODO: Redirecionar para a página de lista de viagens
     alert("Viagem criada com sucesso");
+    // navigate("/edit-travel", { replace: true });
   }
 
   return (

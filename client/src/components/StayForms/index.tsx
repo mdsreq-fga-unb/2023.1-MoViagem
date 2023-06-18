@@ -1,15 +1,14 @@
 import { useState } from "react";
-import styles from "./styles.module.scss";
-import { requestCreateStay, requestEditStay } from "../../api/requests/travels-requests";
-import { ErrorResponse } from "../../api/api-instance";
 import { useNavigate } from "react-router-dom";
+import { ErrorResponse } from "../../api/api-instance";
+import { requestCreateHost } from "../../api/requests/travels-requests";
+import styles from "./styles.module.scss";
 
 interface StayFormsProps {
   whichAction: boolean;
 }
 
 const StayForms: React.FC<StayFormsProps> = ({ whichAction }) => {
-
   const [local, setLocal] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<Date | null>(null);
   const [dataFim, setDataFim] = useState<Date | null>(null);
@@ -17,15 +16,35 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction }) => {
   const [preco, setPreco] = useState<number>(0);
   const [contato, setContato] = useState<string>("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // console.log("Cliquei patrão");
+    // return;
 
     if (!dataInicio || !dataFim) {
       alert("Data inválida");
       return;
     }
+
+    const response = await requestCreateHost({
+      type: tipoEstadia,
+      startTime: dataInicio,
+      endTime: dataFim,
+      local: local,
+      price: preco,
+      contact: contato,
+    });
+
+    if (response instanceof ErrorResponse) {
+      alert("Erro ao tentar cadastrar a estadia\n" + response.message);
+      return;
+    }
+
+    alert("Estadia salva com sucesso");
+    navigate("/edit-travel", { replace: true });
 
     /* Create is false */
     if (!whichAction) {
@@ -37,13 +56,11 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction }) => {
       //   price: preco,
       //   contact: contato,
       // })
-
       // if (response instanceof ErrorResponse) {
       //   alert("Erro ao criar estadia\n" + response.message);
       //   return;
       // }
-
-    /* Edit is true */
+      /* Edit is true */
     } else {
       // const response = await requestEditStay({
       //   stayType: tipoEstadia,
@@ -53,15 +70,11 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction }) => {
       //   price: preco,
       //   contact: contato,
       // })
-
       // if (response instanceof ErrorResponse) {
       //   alert("Erro ao editar estadia\n" + response.message);
       //   return;
       // }
     }
-
-    navigate("/edit-travel", { replace: true })
-    alert("Estadia salva com sucesso");
   }
 
   return (
@@ -134,7 +147,7 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction }) => {
           }}
         />
       </div>
-        
+
       <div className={styles.inputGroup}>
         <div className={styles.inputContainer}>
           <label htmlFor="preco">Preço:</label>
@@ -148,7 +161,7 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction }) => {
             onChange={(event) => {
               setPreco(event.target.valueAsNumber);
             }}
-            />
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="contato">Contato:</label>
@@ -162,15 +175,15 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction }) => {
             onChange={(event) => {
               setContato(event.target.value);
             }}
-            />
+          />
         </div>
       </div>
-          
+
       <button className={styles.submitButton} type="submit">
         SALVAR
       </button>
     </form>
   );
-}
+};
 
 export default StayForms;

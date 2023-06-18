@@ -1,5 +1,5 @@
 import request from "../api-instance";
-import { StayInfoDTO, CreateTravelRequestDTO } from "../dto/travels-dto";
+import { CreateHostRequestDTO, CreateTravelRequestDTO } from "../dto/travels-dto";
 
 export function getHello() {
   return request<never, string>({
@@ -16,18 +16,22 @@ export function requestCreateTravel(form: CreateTravelRequestDTO) {
   });
 }
 
-export function requestCreateStay (body: StayInfoDTO) {
-  return request<StayInfoDTO, never>({
+export function requestCreateHost(form: CreateHostRequestDTO) {
+  return request<CreateHostRequestDTO, never>({
     method: "POST",
-    url: `createStay`,
-    body,
+    url: "host",
+    body: form,
   });
 }
 
-export function requestEditStay (body: StayInfoDTO) {
-  return request<StayInfoDTO, never>({
-    method: "PUT",
-    url: `editStay`,
-    body,
-  });
-}
+// function requestCreateHost(arg0: { stayType: string; startDate: Date; endDate: Date; local: string; price: number; contact: string; }) {
+//   throw new Error("Function not implemented.");
+// }
+
+// export function requestEditStay(body: StayInfoDTO) {
+//   return request<StayInfoDTO, never>({
+//     method: "PUT",
+//     url: `editStay`,
+//     body,
+//   });
+// }
