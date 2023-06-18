@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Travel } from "@prisma/client";
 import { CreateTravelRequestDTO } from "../dto/travel.dto";
-import { TravelRepository } from "../repositories/travel.repository";
+import { TravelRepository } from './../repositories/travel.repository';
 
 @Injectable()
 export class TravelService {
@@ -25,5 +25,9 @@ export class TravelService {
   async getTravels(id: string): Promise<Travel[]> {
     console.log(id);
     return await this.travelRepository.getTravels(id);
+  }
+
+  async edit_Travel(data:CreateTravelRequestDTO ,id:string): Promise<void> {
+    this.travelRepository.editTravel( data, id)
   }
 }

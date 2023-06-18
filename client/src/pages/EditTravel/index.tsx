@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { ErrorResponse } from "../../api/api-instance";
-import { requestCreateTravel } from "../../api/requests/travels-requests";
+import { editTravel } from "../../api/requests/travels-requests";
 import useAuth from "../../auth/context/auth-hook";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
 
-export default async function EditTravel() {
+export default function EditTravel() {
   const auth = useAuth();
 
   // async function getTravelsList() {
@@ -18,7 +18,7 @@ export default async function EditTravel() {
   //   return travels;
   // }
 
-  // getTravelsList()
+  // getTravelsList();
 
   const [local, setLocal] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<Date | null>(null);
@@ -34,7 +34,7 @@ export default async function EditTravel() {
       return;
     }
 
-    const response = await requestCreateTravel({
+    const response = await editTravel({
       local: local,
       startDate: dataInicio,
       endDate: dataFim,
@@ -43,12 +43,12 @@ export default async function EditTravel() {
     });
 
     if (response instanceof ErrorResponse) {
-      alert("Erro ao criar viagem\n" + response.message);
+      alert("Erro ao editar viagem\n" + response.message);
       return;
     }
 
     // TODO: Redirecionar para a página de lista de viagens
-    alert("Viagem criada com sucesso");
+    alert("Viagem editada com sucesso");
   }
 
   return (
@@ -142,7 +142,7 @@ export default async function EditTravel() {
           </div>
 
           <button className={styles.submitButton} type="submit">
-            CRIAR
+            EDITAR
           </button>
         </form>
       </div>

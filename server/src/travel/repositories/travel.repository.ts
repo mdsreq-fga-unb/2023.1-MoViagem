@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Prisma, Travel } from "@prisma/client";
 import { PrismaService } from "src/prisma/services/prisma.service";
+import { CreateTravelRequestDTO } from '../dto/travel.dto';
 
 @Injectable()
 export class TravelRepository {
@@ -20,7 +21,21 @@ export class TravelRepository {
         },
       },
     });
-    console.log(travels);
     return travels;
+  }
+
+  async editTravel(data: CreateTravelRequestDTO, id: string) {
+    return this.prismaService.travel.update({
+      data: {
+        description: data.description,
+        endDate: data.endDate,
+        local: data.local,
+        startDate: data.startDate,
+        numParticipants: data.numParticipants
+      },
+      where: {
+        id: parseInt(id)
+      }
+    })
   }
 }

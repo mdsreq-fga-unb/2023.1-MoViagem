@@ -20,6 +20,14 @@ export function requestCreateTravel(form: CreateTravelRequestDTO) {
   });
 }
 
+export function editTravel(form: CreateTravelRequestDTO) {
+  return request<CreateTravelRequestDTO, never>({
+    method: "PUT",
+    url: `travel/edit-travel/${"1"}`,
+    body: form,
+  });
+}
+
 export function getTravels(id: string) {
   return request<never, ListTravelsResponseDTO>({
     method: "GET",
