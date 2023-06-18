@@ -1,5 +1,6 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
+import { Travel } from "@prisma/client";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
 import { User } from "src/auth/decorators/user.decorator";
 import { UserInfoDTO } from "src/auth/dto/token.dto";
@@ -18,5 +19,11 @@ export class TravelController {
     @Body() createTravelRequestDTO: CreateTravelRequestDTO
   ): Promise<void> {
     return this.travelService.create(loggedInUser.id, createTravelRequestDTO);
+  }
+
+  @Get("get-travels/:id")
+  async getTravels(@Param("id") id: string): Promise<Travel[]> {
+    console.log("passou");
+    return this.travelService.getTravels(id);
   }
 }

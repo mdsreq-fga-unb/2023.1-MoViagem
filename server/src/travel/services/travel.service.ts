@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { Travel } from "@prisma/client";
 import { CreateTravelRequestDTO } from "../dto/travel.dto";
 import { TravelRepository } from "../repositories/travel.repository";
 
@@ -19,5 +20,10 @@ export class TravelService {
       description: createTravelRequestDTO.description,
       numParticipants: createTravelRequestDTO.numParticipants,
     });
+  }
+
+  async getTravels(id: string): Promise<Travel[]> {
+    console.log(id);
+    return await this.travelRepository.getTravels(id);
   }
 }

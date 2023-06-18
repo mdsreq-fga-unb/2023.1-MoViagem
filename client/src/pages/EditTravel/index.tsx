@@ -1,10 +1,25 @@
 import { useState } from "react";
 import { ErrorResponse } from "../../api/api-instance";
 import { requestCreateTravel } from "../../api/requests/travels-requests";
+import useAuth from "../../auth/context/auth-hook";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
 
-export default function CreateTravel() {
+export default async function EditTravel() {
+  const auth = useAuth();
+
+  // async function getTravelsList() {
+  //   if (auth.userInfo == null) {
+  //     throw "userInfo context is null";
+  //   }
+
+  //   const travels = await getTravels(auth.userInfo.id.toString());
+  //   // console.log(travels.data);
+  //   return travels;
+  // }
+
+  // getTravelsList()
+
   const [local, setLocal] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<Date | null>(null);
   const [dataFim, setDataFim] = useState<Date | null>(null);

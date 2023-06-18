@@ -1,5 +1,9 @@
 import request from "../api-instance";
-import { CreateHostRequestDTO, CreateTravelRequestDTO } from "../dto/travels-dto";
+import {
+  CreateHostRequestDTO,
+  CreateTravelRequestDTO,
+  ListTravelsResponseDTO,
+} from "../dto/travels-dto";
 
 export function getHello() {
   return request<never, string>({
@@ -13,6 +17,13 @@ export function requestCreateTravel(form: CreateTravelRequestDTO) {
     method: "POST",
     url: "travel",
     body: form,
+  });
+}
+
+export function getTravels(id: string) {
+  return request<never, ListTravelsResponseDTO>({
+    method: "GET",
+    url: `travel/get-travels/${id}`,
   });
 }
 

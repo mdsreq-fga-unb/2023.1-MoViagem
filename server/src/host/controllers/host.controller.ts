@@ -10,8 +10,9 @@ import { HostService } from "../services/host.service";
 export class HostController {
   constructor(private hostService: HostService) {}
 
-  @Post("editHost/:id")
+  @Post("create/:id")
   async create(
+    //
     @Param("id") id: number,
     @Body() createHostRequestDTO: CreateHostRequestDTO
   ): Promise<void> {

@@ -17,3 +17,13 @@ export class CreateTravelRequestDTO {
   @IsInt()
   numParticipants: number;
 }
+
+// interface TravelsResponseDTO {
+//   id: number;
+//   local: string;
+//   startDate: Date;
+//   endDate: Date;
+//   description: string;
+//   numParticipants: number;
+// }
+// export type ListTravelsResponseDTO = TravelsResponseDTO[];

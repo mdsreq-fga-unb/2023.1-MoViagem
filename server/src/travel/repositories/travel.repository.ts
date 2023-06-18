@@ -11,4 +11,16 @@ export class TravelRepository {
       data,
     });
   }
+
+  async getTravels(userId: string): Promise<Travel[]> {
+    const travels = await this.prismaService.travel.findMany({
+      where: {
+        user: {
+          id: parseInt(userId),
+        },
+      },
+    });
+    console.log(travels);
+    return travels;
+  }
 }
