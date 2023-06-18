@@ -1,9 +1,15 @@
-import { Body, Controller, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Param, Post, Put, Req, UseGuards } from "@nestjs/common";
 import { ApiBody, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
 import { User } from "@prisma/client";
 import { Request } from "express";
 import { LoginResponseDTO, RefreshTokenRequestDTO } from "../dto/token.dto";
-import { UserCreateDTO, UserLoginDTO } from "../dto/user.dto";
+import {
+  UserCreateDTO,
+  UserEditDTO,
+  UserEditNameDTO,
+  UserEditPasswordDTO,
+  UserLoginDTO,
+} from "../dto/user.dto";
 import { LocalAuthGuard } from "../guards/local-auth.guard";
 import { AuthService } from "../services/auth.service";
 import { UserService } from "../services/user.service";
@@ -27,8 +33,28 @@ export class AuthController {
     return this.userService.register(dto);
   }
 
+  @Put("editEmail/:id")
+  async edit(@Param("id") id: string, @Body() dto: UserEditDTO): Promise<void> {
+    return this.userService.editUser(dto, id);
+  }
+
+  @Put("editName/:id")
+  async editName(@Param("id") id: string, @Body() name: UserEditNameDTO): Promise<void> {
+    return this.userService.editName(name, id);
+  }
+
+  @Put("editPassword/:id")
+  async UserEditPassword(@Param("id") id: string, @Body() dto: UserEditPasswordDTO): Promise<void> {
+    return this.userService.editPassword(dto, id);
+  }
+
   @Post("refresh")
   async refresh(@Body() { refreshToken }: RefreshTokenRequestDTO): Promise<LoginResponseDTO> {
     return this.authService.refreshToken(refreshToken);
+  }
+
+  @Delete("deleteUser/:id")
+  async deleteUser(@Param("id") id: string): Promise<void> {
+    return this.userService.deleteUser(id);
   }
 }

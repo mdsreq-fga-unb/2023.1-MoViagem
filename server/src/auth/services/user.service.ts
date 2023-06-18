@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import bcrypt from "bcrypt";
 import { LoginResponseDTO } from "../dto/token.dto";
-import { UserCreateDTO } from "../dto/user.dto";
+import { UserCreateDTO, UserEditDTO, UserEditNameDTO, UserEditPasswordDTO } from "../dto/user.dto";
 import { UserRepository } from "../repositories/user.repository";
 import { JwtService } from "./jwt.service";
 
@@ -28,7 +28,37 @@ export class UserService {
     return this.jwtService.createTokens(createdUser);
   }
 
+  async editUser(paramater: UserEditDTO, id: string): Promise<void> {
+    return this.userRepository.UpdateUser(paramater, id);
+  }
+
+  async editName(params: UserEditNameDTO, id: string): Promise<void> {
+    return this.userRepository.UpdateName(params, id);
+  }
+
   async comparePassword(plainPassword: string, hashedPassword: string): Promise<boolean> {
     return bcrypt.compare(plainPassword, hashedPassword);
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    return this.userRepository.deleteUser(id);
+  }
+
+  async editPassword(params: UserEditPasswordDTO, id: string): Promise<void> {
+    const user = await this.userRepository.findUserById(parseInt(id));
+
+    if (!user) {
+      throw new BadRequestException("Usuário não existe");
+    }
+    const isPasswordValid = await this.comparePassword(params.currentPassword, user.password);
+
+    if (!isPasswordValid) {
+      throw new BadRequestException("Senha Atual inválida");
+    } else {
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(params.newPassword, salt);
+
+      return this.userRepository.updatePassword(hashedPassword, id);
+    }
   }
 }

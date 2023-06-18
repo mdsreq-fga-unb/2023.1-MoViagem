@@ -4,7 +4,7 @@ import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { AuthModule } from "./auth/auth.module";
 import { EnvironmentModule } from "./environment/environment.module";
 import { HelloModule } from "./hello/hello.module";
-import { TravelModule } from './travel/travel.module';
+import { TravelModule } from "./travel/travel.module";
 
 @Module({
   imports: [
