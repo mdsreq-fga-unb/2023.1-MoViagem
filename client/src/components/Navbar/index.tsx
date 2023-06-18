@@ -41,11 +41,11 @@ export default function Navbar({
 
   const navigateToUserInfo = () => {
     navigate("/user-info", { replace: true });
-  }
-  
+  };
+
   const navigateToHome = () => {
     navigate("/", { replace: true });
-  }
+  };
 
   // function handleCreateTravel() {
   //   navigate("/login-and-register", { replace: true });

@@ -1,9 +1,10 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import AuthProviderComponent from "./auth/components/auth-context-component";
 import ProtectedComponent from "./auth/components/protected-component";
-import LoginAndRegister from "./pages/LoginAndRegister";
+import CreateTravel from "./pages/CreateTravel";
 import EditUserInfo from "./pages/EditUserInfo";
 import Home from "./pages/Home";
+import LoginAndRegister from "./pages/LoginAndRegister";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
         <Route element={<ProtectedComponent />}>
           <Route path="/" element={<Home />} />
           <Route path="/user-info" element={<EditUserInfo />} />
+          <Route path="/create-travel" element={<CreateTravel />} />
         </Route>
       </Route>
     </>
