@@ -28,7 +28,7 @@ export default function CreateTravel() {
     });
 
     if (response instanceof ErrorResponse) {
-      alert("Erro ao editar viagem\n" + response.message);
+      alert("Erro ao criar viagem\n" + response.message);
       return;
     }
 
@@ -37,7 +37,7 @@ export default function CreateTravel() {
   }
 
   return (
-    <Navbar pageName="Editar Viagem">
+    <Navbar pageName="Criar Viagem">
       <div className={styles.pageContainer}>
         {/* <div className={styles.boxContainer}>
           <div className={styles.outsideBox}> */}
@@ -127,7 +127,7 @@ export default function CreateTravel() {
           </div>
 
           <button className={styles.submitButton} type="submit">
-            SALVAR
+            CRIAR
           </button>
         </form>
       </div>
