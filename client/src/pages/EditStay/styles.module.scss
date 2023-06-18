@@ -1,0 +1,11 @@
+@import "../../variables.scss";
+
+.pageContainer {
+  display: grid;
+  margin-top: 5%;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+}
