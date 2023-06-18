@@ -37,7 +37,7 @@ export default function CreateTravel() {
   }
 
   return (
-    <Navbar pageName="Editar Viagem">
+    <Navbar pageName="Criar Viagem">
       <div className={styles.pageContainer}>
         {/* <div className={styles.boxContainer}>
           <div className={styles.outsideBox}> */}
