@@ -5,3 +5,12 @@ export interface CreateTravelRequestDTO {
   description: string;
   numParticipants: number;
 }
+
+export interface StayInfoDTO {
+  stayType: string;
+  startDate: Date;
+  endDate: Date;
+  local: string;
+  price: number;
+  contact: string;
+}

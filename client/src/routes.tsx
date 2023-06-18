@@ -5,6 +5,8 @@ import CreateTravel from "./pages/CreateTravel";
 import EditTravel from "./pages/EditTravel";
 import LoginAndRegister from "./pages/LoginAndRegister";
 import Travels from "./pages/Travels";
+import CreateStay from "./pages/CreateStay";
+import EditStay from "./pages/EditStay";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -13,6 +15,8 @@ const router = createBrowserRouter(
       <Route element={<AuthProviderComponent />}>
         <Route path="/create-travel" element={<CreateTravel />} />
         <Route path="/edit-travel" element={<EditTravel />} />
+        <Route path="/create-stay" element={<CreateStay />} />
+        <Route path="/edit-stay" element={<EditStay />} />
         <Route path="/login-and-register" element={<LoginAndRegister />} />
         {/* Routes that need login need to be inside this route */}
         <Route element={<ProtectedComponent />}>
