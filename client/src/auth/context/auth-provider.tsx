@@ -11,6 +11,7 @@ interface AuthContextInterface {
   userInfo: UserInfo | null;
   saveTokens: (data: LoginParams) => void;
   eraseTokens: () => void;
+  updateUserInfo: (data: Partial<UserInfo>) => void;
 }
 
 export const AuthContext = React.createContext<AuthContextInterface | undefined>(undefined);
@@ -44,9 +45,25 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
     setUserInfo(null);
   }, []);
 
+  const updateUserInfo = useCallback(
+    (newUserInfo: Partial<UserInfo>) => {
+      if (userInfo === null) {
+        throw "erro inesperado";
+      }
+
+      userInfo.name = newUserInfo.name ?? userInfo.name;
+
+      userInfo.email = newUserInfo.email ?? userInfo.email;
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+
+      setUserInfo(userInfo);
+    },
+    [userInfo]
+  );
+
   const value = useMemo(
-    () => ({ userInfo, saveTokens, eraseTokens }),
-    [eraseTokens, saveTokens, userInfo]
+    () => ({ userInfo, saveTokens, eraseTokens, updateUserInfo }),
+    [eraseTokens, saveTokens, userInfo, updateUserInfo]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

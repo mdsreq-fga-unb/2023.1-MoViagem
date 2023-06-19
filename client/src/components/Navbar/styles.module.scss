@@ -41,6 +41,7 @@
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 #sideBarIcon {
@@ -53,6 +54,8 @@
 
   align-self: center;
   justify-self: center;
+
+  cursor: pointer;
 }
 
 #sideBarLinksContainer {

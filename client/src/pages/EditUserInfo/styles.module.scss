@@ -1,0 +1,270 @@
+@import "../../variables.scss";
+
+.pageContainer {
+  display: grid;
+
+  h2 {
+    margin-bottom: 2rem;
+  }
+}
+
+.boxContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.outsideBox {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+  height: 80%;
+  width: 75%;
+  margin-top: 3%;
+
+  justify-items: center;
+  align-items: center;
+}
+
+.insideBox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  width: 70%;
+  height: 90%;
+
+  padding: 3rem;
+  margin-top: 5%;
+  margin-bottom: 5%;
+
+  border: 1px solid rgba(221, 223, 228, 1);
+  border-radius: 10px;
+}
+
+.confirmBox {
+  height: 30%;
+  width: 30%;
+  position: absolute;
+
+  display: grid;
+  justify-items: center;
+
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  border: 2px solid rgba(221, 223, 228, 1);
+}
+
+.formsBox {
+  width: 70%;
+  height: 2rem;
+
+  background: rgba(230, 230, 230, 1);
+
+  display: flex;
+
+  border: none;
+  border-radius: 10px;
+  padding-bottom: 5px;
+
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.passwordFormsBox {
+  width: 70%;
+
+  border: none;
+  border-radius: 10px;
+  padding-bottom: 5px;
+
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.passwordInputBox {
+  width: 100%;
+  height: 2rem;
+
+  background: rgba(230, 230, 230, 1);
+
+  border: none;
+  border-radius: 10px 10px 10px 10px;
+  margin-bottom: 1rem;
+
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.inputBox {
+  width: 100%;
+  height: 2rem;
+
+  background: rgba(230, 230, 230, 1);
+
+  border: none;
+  border-radius: 10px 0px 0px 10px;
+
+  font-size: 1.5rem;
+  text-align: center;
+}
+.inputBox::placeholder {
+  color: black;
+}
+
+.infoBox {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.editButton {
+  width: 10%;
+  height: 100%;
+
+  background: rgba(230, 230, 230, 1);
+
+  border: none;
+  border-radius: 10px 10px 10px 10px;
+
+  padding-top: 5px;
+  padding-bottom: 2rem;
+
+  font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    background: rgba(79, 119, 45, 0.5);
+  }
+}
+
+.confirmEditButton {
+  width: 10%;
+  height: 100%;
+
+  background: rgba(230, 230, 230, 1);
+  margin-left: 5px;
+
+  border: none;
+  border-radius: 10px 0px 0px 10px;
+  border: 2px solid $color-secondary;
+
+  padding-bottom: 2rem;
+
+  font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    background: rgba(79, 119, 45, 0.5);
+  }
+}
+
+.exitEditButton {
+  width: 10%;
+  height: 100%;
+
+  background: rgba(230, 230, 230, 1);
+
+  border: none;
+  border: 2px solid rgba(198, 40, 40, 0.54);
+  border-radius: 0px 10px 10px 0px;
+
+  padding-bottom: 2rem;
+
+  font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    background: rgba(198, 40, 40, 0.54);
+  }
+}
+
+.exitPasswordEditButton {
+  width: 10%;
+  height: 2.5rem;
+
+  background: rgba(230, 230, 230, 1);
+
+  border: none;
+  border: 2px solid rgba(198, 40, 40, 0.54);
+  border-radius: 0px 10px 10px 0px;
+
+  font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    background: rgba(198, 40, 40, 0.54);
+  }
+}
+
+.deleteButton {
+  margin-top: 2rem;
+  width: 40%;
+  height: 2.5rem;
+
+  border: 2px solid rgba(198, 40, 40, 0);
+  border-radius: 10px;
+
+  background: rgba(198, 40, 40, 0.54);
+  font-size: 1.5rem;
+  transition: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid rgba(198, 40, 40, 0.54);
+  }
+}
+
+.passwordButton {
+  width: 40%;
+  height: 2.5rem;
+
+  border: 2px solid rgba(198, 204, 133, 1);
+  border-radius: 10px 0px 0px 10px;
+
+  background: rgba(230, 230, 230, 1);
+  font-size: 1.5rem;
+  transition: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(79, 119, 45, 0.5);
+    border: 2px solid $color-secondary;
+  }
+}
+
+.exitDeleteButton {
+  margin-left: 90%;
+  height: 3rem;
+  width: 9%;
+  border: 2px solid black;
+  border-radius: 100%;
+  color: black;
+  font-size: 1.5rem;
+  transition: 0.4s;
+
+  &:hover {
+    border: 2px solid rgba(198, 40, 40, 0.54);
+    color: rgba(198, 40, 40, 0.54);
+  }
+}
