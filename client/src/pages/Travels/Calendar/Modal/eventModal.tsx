@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./styles.module.scss";
 
 interface EventModalProps {
   selectedDate: Date | null;
@@ -42,7 +43,7 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
   };
 
   return (
-    <div className="modal">
+    <div className={styles.modal}>
       <div className="modal-content">
         <h2>Add Event</h2>
         <div className="form-field">
