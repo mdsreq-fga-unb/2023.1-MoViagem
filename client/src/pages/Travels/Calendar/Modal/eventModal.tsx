@@ -10,6 +10,7 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
   const [transportType, setTransportType] = useState("");
   const [departureLocation, setDepartureLocation] = useState("");
   const [arrivalLocation, setArrivalLocation] = useState("");
+  const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
   const [eventValue, setEventValue] = useState("");
   const [eventExtras, setEventExtras] = useState("");
@@ -28,6 +29,7 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
       transportType,
       departureLocation,
       arrivalLocation,
+      eventDate,
       eventTime,
       eventValue,
       eventExtras,
@@ -59,6 +61,10 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
             value={departureLocation}
             onChange={(e) => setDepartureLocation(e.target.value)}
           />
+        </div>
+        <div className={styles.formField}>
+          <label>Data:</label>
+          <input type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
         </div>
         <div className={styles.formField}>
           <label>Horário:</label>

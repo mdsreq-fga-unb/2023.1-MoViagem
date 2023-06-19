@@ -13,22 +13,6 @@ const Calendar: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const currYearRef = useRef<number>(date.getFullYear());
 
-  // Handle day click event
-  const handleDayClick = (day: number, month: number, year: number) => {
-    const selectedDateEvent = new Date(year, month, day);
-    setSelectedDate(selectedDateEvent);
-
-    const currentDayForSidebar = selectedDateEvent.toLocaleDateString(undefined, {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-    setCurrentDateForSidebar(currentDayForSidebar);
-
-    setShowModal(true);
-    console.log("Day clicked:", selectedDate);
-  };
-
   // Render the calendar
   const renderCalendar = useCallback(() => {
     const firstDayOfMonth = new Date(date.getFullYear(), currMonth, 1).getDay();
@@ -52,6 +36,22 @@ const Calendar: React.FC = () => {
     ];
 
     const days: JSX.Element[] = [];
+
+    // Handle day click event
+    const handleDayClick = (day: number, month: number, year: number) => {
+      const selectedDateEvent = new Date(year, month, day);
+      setSelectedDate(selectedDateEvent);
+
+      const currentDayForSidebar = selectedDateEvent.toLocaleDateString(undefined, {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+      setCurrentDateForSidebar(currentDayForSidebar);
+
+      setShowModal(true);
+      console.log("Day clicked:", selectedDate);
+    };
 
     // Add inactive days from the previous month
     for (let i = firstDayOfMonth; i > 0; i--) {
@@ -109,7 +109,7 @@ const Calendar: React.FC = () => {
 
     setCurrentDate(`${currentDay} ${months[currMonth]} ${currYearRef.current}`);
     setDaysTag(ReactDOMServer.renderToString(<ul>{days}</ul>));
-  }, [currMonth, date, handleDayClick, selectedDate]);
+  }, [currMonth, date]);
 
   useEffect(() => {
     renderCalendar();
