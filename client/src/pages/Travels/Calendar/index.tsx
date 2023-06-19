@@ -11,11 +11,25 @@ const Calendar: React.FC = () => {
   const [currMonth, setCurrMonth] = useState<number>(date.getMonth());
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDateForSidebar, setSelectedDateForSidebar] = useState<Date | null>(null);
   const currYearRef = useRef<number>(date.getFullYear());
 
   const handleDayClick = (day: number) => {
     const selectedDateEvent = new Date(currYearRef.current, currMonth, day);
     setSelectedDate(selectedDateEvent);
+    setShowModal(true);
+    console.log("Day clicked:", selectedDate);
+  };
+
+  const handleDayClickForSidebar = (
+    sidebarDay: number,
+    sidebarMonth: number,
+    sidebarYear: number
+  ) => {
+    const selectedDateEventForSidebar = new Date(sidebarDay, sidebarMonth, sidebarYear);
+
+    setSelectedDateForSidebar(selectedDateEventForSidebar);
+
     setShowModal(true);
     console.log("Day clicked:", selectedDate);
   };
@@ -64,6 +78,7 @@ const Calendar: React.FC = () => {
           className={styles.days + " " + isToday}
           onClick={() => {
             handleDayClick(i);
+            handleDayClickForSidebar(i, currMonth, currYearRef.current);
           }}
         >
           {i}
@@ -83,7 +98,14 @@ const Calendar: React.FC = () => {
     const currentDay = date.getDate();
 
     const selectedDateEvent = new Date(currYearRef.current, currMonth);
-    const currentDayForSidebar = selectedDateEvent;
+
+    const currentDayForSidebar = selectedDateEvent.toLocaleDateString(undefined, {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+
+    setCurrentDateForSidebar(currentDayForSidebar);
 
     setSelectedDate(selectedDateEvent);
     setCurrentDateForSidebar(`${currentDayForSidebar} ${months[currMonth]} ${currYearRef.current}`);
