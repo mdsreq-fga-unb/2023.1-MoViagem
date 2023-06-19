@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Prisma, Travel } from "@prisma/client";
 import { PrismaService } from "src/prisma/services/prisma.service";
-import { CreateTravelRequestDTO } from '../dto/travel.dto';
+import { CreateTravelRequestDTO } from "../dto/travel.dto";
 
 @Injectable()
 export class TravelRepository {
@@ -16,9 +16,7 @@ export class TravelRepository {
   async getTravel(userId: string): Promise<Travel | null> {
     const travels = await this.prismaService.travel.findUnique({
       where: {
-         
-       id: parseInt(userId),
-        
+        id: parseInt(userId),
       },
     });
     return travels;
@@ -31,11 +29,11 @@ export class TravelRepository {
         endDate: data.endDate,
         local: data.local,
         startDate: data.startDate,
-        numParticipants: data.numParticipants
+        numParticipants: data.numParticipants,
       },
       where: {
-        id: parseInt(id)
-      }
-    })
+        id: parseInt(id),
+      },
+    });
   }
 }

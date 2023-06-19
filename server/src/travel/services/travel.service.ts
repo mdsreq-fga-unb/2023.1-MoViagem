@@ -1,7 +1,6 @@
-import { Injectable } from "@nestjs/common";
-import { Travel } from "@prisma/client";
-import { CreateTravelRequestDTO } from "../dto/travel.dto";
-import { TravelRepository } from './../repositories/travel.repository';
+import { BadRequestException, Injectable } from "@nestjs/common";
+import { CreateTravelRequestDTO, TravelsResponseDTO } from "../dto/travel.dto";
+import { TravelRepository } from "./../repositories/travel.repository";
 
 @Injectable()
 export class TravelService {
@@ -22,12 +21,15 @@ export class TravelService {
     });
   }
 
-  async getTravels(id: string): Promise<Travel | null> {
-    console.log(id);
-    return await this.travelRepository.getTravel(id);
+  async getTravels(id: string): Promise<TravelsResponseDTO> {
+    const travel = await this.travelRepository.getTravel(id);
+    if (travel == null) {
+      throw new BadRequestException("viagem nao existe");
+    }
+    return new TravelsResponseDTO(travel);
   }
 
-  async edit_Travel(data:CreateTravelRequestDTO ,id:string): Promise<void> {
-    this.travelRepository.editTravel( data, id)
+  async edit_Travel(data: CreateTravelRequestDTO, id: string): Promise<void> {
+    this.travelRepository.editTravel(data, id);
   }
 }

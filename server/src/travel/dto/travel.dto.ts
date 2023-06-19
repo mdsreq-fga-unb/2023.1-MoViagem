@@ -1,3 +1,4 @@
+import { Travel } from "@prisma/client";
 import { IsDate, IsInt, IsPositive, Length } from "class-validator";
 
 export class CreateTravelRequestDTO {
@@ -18,12 +19,21 @@ export class CreateTravelRequestDTO {
   numParticipants: number;
 }
 
-// interface TravelsResponseDTO {
-//   id: number;
-//   local: string;
-//   startDate: Date;
-//   endDate: Date;
-//   description: string;
-//   numParticipants: number;
-// }
+export class TravelsResponseDTO {
+  id: number;
+  local: string;
+  startDate: Date;
+  endDate: Date;
+  this: any;
+  numParticipants: number;
+  description: string;
+  constructor(travel: Travel) {
+    this.id = travel.id;
+    this.local = travel.local;
+    this.startDate = travel.startDate;
+    this.endDate = travel.endDate;
+    this.description = travel.description;
+    this.numParticipants = travel.numParticipants;
+  }
+}
 // export type ListTravelsResponseDTO = TravelsResponseDTO[];

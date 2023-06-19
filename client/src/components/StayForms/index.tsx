@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
-import { requestCreateHost } from "../../api/requests/travels-requests";
+import { editHost, getHost } from "../../api/requests/travels-requests";
 import styles from "./styles.module.scss";
 
 interface StayFormsProps {
   whichAction: boolean;
+  id?: string;
 }
 
-const StayForms: React.FC<StayFormsProps> = ({ whichAction }) => {
+const StayForms: React.FC<StayFormsProps> = ({ whichAction, id }) => {
   const [local, setLocal] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<Date | null>(null);
   const [dataFim, setDataFim] = useState<Date | null>(null);
@@ -17,6 +18,28 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction }) => {
   const [contato, setContato] = useState<string>("");
 
   const navigate = useNavigate();
+
+  const fetchHost = async () => {
+    if (whichAction === true) {
+      if (id === undefined) {
+        throw "Necessario o id";
+      }
+      const response = await getHost(id);
+      if (response instanceof ErrorResponse) {
+        console.log(response.message);
+        return;
+      }
+      setContato(response.data.contact);
+      setPreco(response.data.price);
+      setDataFim(new Date(response.data.endTime));
+      setDataInicio(new Date(response.data.startTime));
+      setLocal(response.data.local);
+      setTipoEstadia(response.data.type);
+    }
+  };
+  useEffect(() => {
+    fetchHost();
+  }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -29,52 +52,30 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction }) => {
       return;
     }
 
-    const response = await requestCreateHost({
-      type: tipoEstadia,
-      startTime: dataInicio,
-      endTime: dataFim,
+    if (id === undefined){
+      return "id null"
+    }
+
+    const response = await editHost({
+      contact: contato,
+      endTime: dataFim, 
       local: local,
       price: preco,
-      contact: contato,
-    });
+      startTime: dataInicio,
+      type: tipoEstadia,
+    }, parseInt(id));
+
+    console.log(response)
 
     if (response instanceof ErrorResponse) {
-      alert("Erro ao tentar cadastrar a estadia\n" + response.message);
+      alert("Erro ao tentar editarr a estadia\n" + response.message);
       return;
     }
 
     alert("Estadia salva com sucesso");
-    navigate("/edit-travel", { replace: true });
+    navigate("/travel-info/1", { replace: true });
 
     /* Create is false */
-    if (!whichAction) {
-      // const response = await requestCreateStay({
-      //   stayType: tipoEstadia,
-      //   startDate: dataInicio,
-      //   endDate: dataFim,
-      //   local: local,
-      //   price: preco,
-      //   contact: contato,
-      // })
-      // if (response instanceof ErrorResponse) {
-      //   alert("Erro ao criar estadia\n" + response.message);
-      //   return;
-      // }
-      /* Edit is true */
-    } else {
-      // const response = await requestEditStay({
-      //   stayType: tipoEstadia,
-      //   startDate: dataInicio,
-      //   endDate: dataFim,
-      //   local: local,
-      //   price: preco,
-      //   contact: contato,
-      // })
-      // if (response instanceof ErrorResponse) {
-      //   alert("Erro ao editar estadia\n" + response.message);
-      //   return;
-      // }
-    }
   }
 
   return (

@@ -28,10 +28,10 @@ export function editTravel(form: CreateTravelRequestDTO) {
   });
 }
 
-export async function getTravel() {
+export async function getTravel(id: string) {
   return request<never, TravelsResponseDTO>({
     method: "GET",
-    url: `travel/get-travels/${"1"}`,
+    url: `travel/get-travels/${id}`,
   });
 }
 
@@ -41,6 +41,21 @@ export function requestCreateHost(form: CreateHostRequestDTO) {
     url: "host",
     body: form,
   });
+}
+
+export async function getHost(id: string) {
+  return request<never, CreateHostRequestDTO>({
+    method: "GET",
+    url: `host/get-host/${id}`,
+  });
+}
+
+export async function editHost(form: CreateHostRequestDTO, id: number) {
+  return request<CreateHostRequestDTO, never>({
+    method: "PUT",
+    url: `host/editHost/${id}`,
+    body: form
+  })
 }
 
 // function requestCreateHost(arg0: { stayType: string; startDate: Date; endDate: Date; local: string; price: number; contact: string; }) {

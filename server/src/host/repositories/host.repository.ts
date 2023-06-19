@@ -11,4 +11,22 @@ export class HostRepository {
       data,
     });
   }
+
+  async updateHost(id: number, data: Prisma.HostUpdateInput): Promise<Host> {
+    return await this.prismaService.host.update({
+      where: {
+        id,
+      },
+      data,
+    });
+  }
+
+  async getHost(id: number): Promise<Host | null> {
+    const host = await this.prismaService.host.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return host;
+  }
 }

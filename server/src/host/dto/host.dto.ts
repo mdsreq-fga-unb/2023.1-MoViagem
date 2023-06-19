@@ -1,4 +1,4 @@
-import { Decimal } from "@prisma/client/runtime";
+import { Host } from "@prisma/client";
 import { IsDate, IsPositive, Length } from "class-validator";
 
 export class CreateHostRequestDTO {
@@ -15,8 +15,27 @@ export class CreateHostRequestDTO {
   local: string;
 
   @IsPositive()
-  price: Decimal;
+  price: number;
 
   @Length(4, 100)
   contact: string;
+}
+
+export class HostResponseDTO {
+  id: number;
+  type: string;
+  startTime: Date;
+  endTime: Date;
+  local: string;
+  price: number;
+  contact: string;
+  constructor(host: Host) {
+    this.id = host.id;
+    this.local = host.local;
+    this.type = host.type;
+    this.startTime = host.startTime;
+    this.endTime = host.endTime;
+    this.price = host.price.toNumber();
+    this.contact = host.contact;
+  }
 }

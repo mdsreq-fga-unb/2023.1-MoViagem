@@ -3,7 +3,6 @@ import StayForms from "../../components/StayForms";
 import styles from "./styles.module.scss";
 
 export default function CreateStay() {
-
   const whichAction = false;
 
   return (

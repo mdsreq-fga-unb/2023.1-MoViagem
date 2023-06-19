@@ -9,8 +9,8 @@ export interface CreateTravelRequestDTO {
 export interface TravelsResponseDTO {
   id: number;
   local: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   description: string;
   numParticipants: number;
 }
@@ -23,3 +23,4 @@ export interface CreateHostRequestDTO {
   price: number;
   contact: string;
 }
+
