@@ -17,7 +17,7 @@ const NavbarPages = {
 };
 export interface NavbarProps {
   pageName: string;
-  selectedPage?: "TRAVELS" | "GROUPS" | "CALENDAR" | "TASKS";
+  selectedPage?: "TRAVELS" | "GROUPS" | "CALENDAR";
 }
 
 export default function Navbar({

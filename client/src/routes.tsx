@@ -10,6 +10,7 @@ import EditUserInfo from "./pages/EditUserInfo";
 import Home from "./pages/Home";
 import LoginAndRegister from "./pages/LoginAndRegister";
 import TravelInfo from "./pages/TravelInfo";
+import TravelList from "./pages/TravelList";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
           <Route path="/" element={<Home />} />
           <Route path="/user-info" element={<EditUserInfo />} />
           <Route path="/create-travel" element={<CreateTravel />} />
+          <Route path="/travels" element={<TravelList />} />
           <Route path="/travel-info/:id" element={<TravelInfo />} />
           <Route path="/create-transport/:id" element={<CreateTransport />} />
           <Route path="/edit-transport/:id" element={<EditTransport />} />

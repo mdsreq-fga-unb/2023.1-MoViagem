@@ -3,6 +3,7 @@ import { ErrorResponse } from "../../api/api-instance";
 import { requestCreateTravel } from "../../api/requests/travels-requests";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateTravel() {
   const [local, setLocal] = useState<string>("");
@@ -10,6 +11,8 @@ export default function CreateTravel() {
   const [dataFim, setDataFim] = useState<Date | null>(null);
   const [proposito, setProposito] = useState<string>("");
   const [numDePessoas, setNumDePessoas] = useState("");
+
+  const navigate = useNavigate()
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -33,7 +36,7 @@ export default function CreateTravel() {
     }
 
     alert("Viagem criada com sucesso");
-    // navigate("/edit-travel", { replace: true });
+    navigate("/travels", { replace: true });
   }
 
   return (
