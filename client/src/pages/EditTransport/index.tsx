@@ -3,7 +3,6 @@ import TransportForms from "../../components/TransportForms";
 import styles from "./styles.module.scss";
 
 export default function EditTransport() {
-
   const whichAction = true;
 
   return (

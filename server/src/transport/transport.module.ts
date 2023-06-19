@@ -1,12 +1,12 @@
 import { Module } from "@nestjs/common";
 import { PrismaModule } from "src/prisma/prisma.module";
-import { HostController } from "./controllers/host.controller";
-import { HostRepository } from "./repositories/host.repository";
-import { HostService } from "./services/host.service";
+import { TransportController } from './controllers/transport.controller';
+import { TransportRepository } from './repositories/transport.repository';
+import { TransportService } from './services/transport.service';
 
 @Module({
   imports: [PrismaModule],
-  controllers: [HostController],
-  providers: [HostService, HostRepository],
+  controllers: [TransportController],
+  providers: [TransportService, TransportRepository],
 })
 export class HostModule {}

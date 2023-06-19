@@ -12,10 +12,10 @@ export class CreateTransportRequestDTO {
   endLocal: string;
 
   @IsDate()
-  startTime: Date;
+  startTime: string;
 
   @IsDate()
-  endTime: Date;
+  endTime: string;
 
   @IsPositive()
   price: Decimal;

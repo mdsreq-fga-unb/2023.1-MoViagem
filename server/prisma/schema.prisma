@@ -49,8 +49,8 @@ model Transport {
   type       String   @db.VarChar(50)
   startLocal String   @db.VarChar(100)
   endLocal   String   @db.VarChar(100)
-  startTime  DateTime @db.DateTime
-  endTime    DateTime @db.DateTime
+  startTime  String   @db.VarChar(20)
+  endTime    String   @db.VarChar(20)
   price      Decimal  @db.Decimal(10, 2)
   contacts   String   @db.VarChar(50)
   travelId   Int      @db.UnsignedInt

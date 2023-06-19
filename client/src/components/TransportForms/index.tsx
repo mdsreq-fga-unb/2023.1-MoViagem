@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ErrorResponse } from "../../api/api-instance";
+import { requestCreateTransport } from "../../api/requests/travels-requests";
 import styles from "./styles.module.scss";
-import { useNavigate } from "react-router-dom";
 
 interface TransportFormsProps {
   whichAction: boolean;
 }
 
 const TransportForms: React.FC<TransportFormsProps> = ({ whichAction }) => {
-
+  const params = useParams()
   const [tipoTransporte, setTipoTransporte] = useState<string>("");
   const [localIda, setLocalIda] = useState<string>("");
   const [localChegada, setLocalChegada] = useState<string>("");
@@ -16,46 +18,35 @@ const TransportForms: React.FC<TransportFormsProps> = ({ whichAction }) => {
   const [preco, setPreco] = useState<number>(0);
   const [contato, setContato] = useState<string>("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    
 
-    /* Create is false */
-    if (!whichAction) {
-      // const response = await requestCreateStay({
-      //   stayType: tipoTransporte,
-      //   startDate: dataInicio,
-      //   endDate: dataFim,
-      //   local: local,
-      //   price: preco,
-      //   contact: contato,
-      // })
-
-      // if (response instanceof ErrorResponse) {
-      //   alert("Erro ao criar estadia\n" + response.message);
-      //   return;
-      // }
-
-    /* Edit is true */
-    } else {
-      // const response = await requestEditStay({
-      //   stayType: tipoTransporte,
-      //   startDate: dataInicio,
-      //   endDate: dataFim,
-      //   local: local,
-      //   price: preco,
-      //   contact: contato,
-      // })
-
-      // if (response instanceof ErrorResponse) {
-      //   alert("Erro ao editar estadia\n" + response.message);
-      //   return;
-      // }
+    if (!horaSaida || !horaChegada) {
+      alert("horarios invalidos");
+      return;
     }
 
-    navigate("/travel-info/1", { replace: true })
-    alert("Estadia salva com sucesso");
+    const response = await requestCreateTransport({
+      contacts: contato,
+      endLocal: localChegada,
+      startLocal: localIda,
+      endTime: horaSaida,
+      startTime: horaChegada,
+      price: preco,
+      type: tipoTransporte,
+    });
+    console.log(response)
+
+    if (response instanceof ErrorResponse) {
+      alert("Erro ao criar transporte\n" + response.message);
+      return;
+    }
+
+    navigate("/travel-info/1", { replace: true });
+    alert("Transporte salvo com sucesso");
   }
 
   return (
@@ -132,7 +123,7 @@ const TransportForms: React.FC<TransportFormsProps> = ({ whichAction }) => {
           />
         </div>
       </div>
-        
+
       <div className={styles.inputGroup}>
         <div className={styles.inputContainer}>
           <label htmlFor="preco">Preço:</label>
@@ -146,7 +137,7 @@ const TransportForms: React.FC<TransportFormsProps> = ({ whichAction }) => {
             onChange={(event) => {
               setPreco(event.target.valueAsNumber);
             }}
-            />
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="contato">Contato:</label>
@@ -160,15 +151,15 @@ const TransportForms: React.FC<TransportFormsProps> = ({ whichAction }) => {
             onChange={(event) => {
               setContato(event.target.value);
             }}
-            />
+          />
         </div>
       </div>
-          
+
       <button className={styles.submitButton} type="submit">
         SALVAR
       </button>
     </form>
   );
-}
+};
 
 export default TransportForms;

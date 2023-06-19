@@ -5,3 +5,19 @@ export interface CreateTravelRequestDTO {
   description: string;
   numParticipants: number;
 }
+
+export interface CreateTransportRequestDTO {
+  type: string;
+
+  startLocal: string;
+
+  endLocal: string;
+
+  startTime: string;
+
+  endTime: string;
+
+  price: number;
+
+  contacts: string;
+}

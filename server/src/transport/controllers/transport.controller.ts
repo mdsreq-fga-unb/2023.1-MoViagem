@@ -10,7 +10,7 @@ import { TransportService } from "../services/transport.service";
 export class TransportController {
   constructor(private transportService: TransportService) {}
 
-  @Post("create/:id")
+  @Post()
   async create(
     @Param("id") id: number,
     @Body() createTransportRequestDTO: CreateTransportRequestDTO
