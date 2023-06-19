@@ -1,5 +1,5 @@
 import request from "../api-instance";
-import { CreateTransportRequestDTO, CreateTravelRequestDTO } from "../dto/travels-dto";
+import { CreateHostRequestDTO, CreateTransportRequestDTO, CreateTravelRequestDTO, TravelsResponseDTO } from "../dto/travels-dto";
 
 export function getHello() {
   return request<never, string>({
@@ -23,3 +23,52 @@ export function requestCreateTransport(form: CreateTransportRequestDTO) {
     body: form,
   });
 }
+export function editTravel(form: CreateTravelRequestDTO) {
+  return request<CreateTravelRequestDTO, never>({
+    method: "PUT",
+    url: `travel/edit-travel/${"1"}`,
+    body: form,
+  });
+}
+
+export async function getTravel(id: string) {
+  return request<never, TravelsResponseDTO>({
+    method: "GET",
+    url: `travel/get-travels/${id}`,
+  });
+}
+
+export function requestCreateHost(form: CreateHostRequestDTO) {
+  return request<CreateHostRequestDTO, never>({
+    method: "POST",
+    url: "host",
+    body: form,
+  });
+}
+
+export async function getHost(id: string) {
+  return request<never, CreateHostRequestDTO>({
+    method: "GET",
+    url: `host/get-host/${id}`,
+  });
+}
+
+export async function editHost(form: CreateHostRequestDTO, id: number) {
+  return request<CreateHostRequestDTO, never>({
+    method: "PUT",
+    url: `host/editHost/${id}`,
+    body: form
+  })
+}
+
+// function requestCreateHost(arg0: { stayType: string; startDate: Date; endDate: Date; local: string; price: number; contact: string; }) {
+//   throw new Error("Function not implemented.");
+// }
+
+// export function requestEditStay(body: StayInfoDTO) {
+//   return request<StayInfoDTO, never>({
+//     method: "PUT",
+//     url: `editStay`,
+//     body,
+//   });
+// }

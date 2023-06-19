@@ -1,12 +1,15 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import AuthProviderComponent from "./auth/components/auth-context-component";
 import ProtectedComponent from "./auth/components/protected-component";
+import CreateStay from './pages/CreateStay';
 import CreateTransport from "./pages/CreateTransport";
 import CreateTravel from "./pages/CreateTravel";
+import EditStay from './pages/EditStay';
 import EditTransport from "./pages/EditTransport";
 import EditUserInfo from "./pages/EditUserInfo";
 import Home from "./pages/Home";
 import LoginAndRegister from "./pages/LoginAndRegister";
+import TravelInfo from './pages/TravelInfo';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +24,9 @@ const router = createBrowserRouter(
           <Route path="/create-travel" element={<CreateTravel />} />
           <Route path="/create-transport/:id" element={<CreateTransport />} />
           <Route path="/edit-transport" element={<EditTransport />} />
+          <Route path="/travel-info/:id" element={<TravelInfo />} />
+          <Route path="/create-stay" element={<CreateStay />} />
+          <Route path="/edit-stay/:id" element={<EditStay />} />
         </Route>
       </Route>
     </>

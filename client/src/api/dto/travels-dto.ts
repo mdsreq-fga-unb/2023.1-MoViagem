@@ -21,3 +21,21 @@ export interface CreateTransportRequestDTO {
 
   contacts: string;
 }
+export interface TravelsResponseDTO {
+  id: number;
+  local: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  numParticipants: number;
+}
+// export type ListTravelsResponseDTO = TravelsResponseDTO[];
+export interface CreateHostRequestDTO {
+  type: string;
+  startTime: Date;
+  endTime: Date;
+  local: string;
+  price: number;
+  contact: string;
+}
+
