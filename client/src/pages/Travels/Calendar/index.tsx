@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
@@ -10,6 +10,7 @@ const Calendar: React.FC = () => {
   const [currMonth, setCurrMonth] = useState<number>(date.getMonth());
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const currYearRef = useRef<number>(date.getFullYear());
 
   const renderCalendar = useCallback(() => {
     const firstDayOfMonth = new Date(date.getFullYear(), currMonth, 1).getDay();
@@ -18,7 +19,7 @@ const Calendar: React.FC = () => {
     const lastDateOfLastMonth = new Date(date.getFullYear(), currMonth, 0).getDate();
 
     const handleDayClick = (day: number) => {
-      const selectedDate = new Date(date.getFullYear(), currMonth, day);
+      const selectedDate = new Date(currYearRef.current, currMonth, day);
       setSelectedDate(selectedDate);
       setShowModal(true);
       console.log("Day clicked:", selectedDate);
@@ -71,7 +72,7 @@ const Calendar: React.FC = () => {
       );
     }
 
-    setCurrentDate(`${months[currMonth]} ${date.getFullYear()}`);
+    setCurrentDate(`${months[currMonth]} ${currYearRef.current}`);
     setDaysTag(ReactDOMServer.renderToString(<ul>{days}</ul>));
   }, [currMonth, date]);
 
@@ -92,6 +93,8 @@ const Calendar: React.FC = () => {
           updatedMonth = 0;
           updatedYear++;
         }
+
+        currYearRef.current = updatedYear; // Update year reference
 
         return updatedMonth;
       });
