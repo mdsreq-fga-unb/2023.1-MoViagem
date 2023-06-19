@@ -2,7 +2,7 @@ import request from "../api-instance";
 import {
   CreateHostRequestDTO,
   CreateTravelRequestDTO,
-  ListTravelsResponseDTO,
+  TravelsResponseDTO,
 } from "../dto/travels-dto";
 
 export function getHello() {
@@ -28,10 +28,10 @@ export function editTravel(form: CreateTravelRequestDTO) {
   });
 }
 
-export function getTravels(id: string) {
-  return request<never, ListTravelsResponseDTO>({
+export async function getTravel() {
+  return request<never, TravelsResponseDTO>({
     method: "GET",
-    url: `travel/get-travels/${id}`,
+    url: `travel/get-travels/${"1"}`,
   });
 }
 

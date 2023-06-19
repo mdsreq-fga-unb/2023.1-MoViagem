@@ -22,8 +22,8 @@ export class TravelController {
   }
 
   @Get("get-travels/:id")
-  async getTravels(@Param("id") id: string): Promise<Travel[]> {
-    console.log("passou");
+  async getTravels(@Param("id") id: string): Promise<Travel | null> {
+    
     return this.travelService.getTravels(id);
   }
 

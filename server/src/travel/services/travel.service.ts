@@ -22,9 +22,9 @@ export class TravelService {
     });
   }
 
-  async getTravels(id: string): Promise<Travel[]> {
+  async getTravels(id: string): Promise<Travel | null> {
     console.log(id);
-    return await this.travelRepository.getTravels(id);
+    return await this.travelRepository.getTravel(id);
   }
 
   async edit_Travel(data:CreateTravelRequestDTO ,id:string): Promise<void> {

@@ -13,12 +13,12 @@ export class TravelRepository {
     });
   }
 
-  async getTravels(userId: string): Promise<Travel[]> {
-    const travels = await this.prismaService.travel.findMany({
+  async getTravel(userId: string): Promise<Travel | null> {
+    const travels = await this.prismaService.travel.findUnique({
       where: {
-        user: {
-          id: parseInt(userId),
-        },
+         
+       id: parseInt(userId),
+        
       },
     });
     return travels;

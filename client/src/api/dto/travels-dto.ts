@@ -6,7 +6,7 @@ export interface CreateTravelRequestDTO {
   numParticipants: number;
 }
 
-interface TravelsResponseDTO {
+export interface TravelsResponseDTO {
   id: number;
   local: string;
   startDate: Date;
@@ -14,7 +14,7 @@ interface TravelsResponseDTO {
   description: string;
   numParticipants: number;
 }
-export type ListTravelsResponseDTO = TravelsResponseDTO[];
+// export type ListTravelsResponseDTO = TravelsResponseDTO[];
 export interface CreateHostRequestDTO {
   type: string;
   startTime: Date;
