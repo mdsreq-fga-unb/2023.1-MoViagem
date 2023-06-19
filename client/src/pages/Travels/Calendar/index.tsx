@@ -56,9 +56,10 @@ const Calendar: React.FC = () => {
           ? "active"
           : "";
       days.push(
-        <li key={`curr-${i}`} className={isToday}>
+        <li key={`curr-${i}`} className={styles[isToday]}>
           {i}
         </li>
+        // Use styles[isToday] to apply the correct CSS class
       );
       // Adding active class to li if current day, month, and year match
     }
