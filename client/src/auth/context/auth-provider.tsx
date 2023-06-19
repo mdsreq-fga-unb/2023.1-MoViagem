@@ -18,6 +18,7 @@ export const AuthContext = React.createContext<AuthContextInterface | undefined>
 
 export default function AuthProvider({ children }: React.PropsWithChildren) {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -27,6 +28,8 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
     if (accessToken !== null && refreshToken !== null && userInfo !== null) {
       setUserInfo(JSON.parse(userInfo));
     }
+
+    setLoading(false);
   }, []);
 
   const saveTokens = useCallback(({ accessToken, refreshToken, userInfo }: LoginParams) => {
@@ -65,6 +68,10 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
     () => ({ userInfo, saveTokens, eraseTokens, updateUserInfo }),
     [eraseTokens, saveTokens, userInfo, updateUserInfo]
   );
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
