@@ -8,17 +8,11 @@ export interface CreateTravelRequestDTO {
 
 export interface CreateTransportRequestDTO {
   type: string;
-
   startLocal: string;
-
   endLocal: string;
-
   startTime: string;
-
   endTime: string;
-
   price: number;
-
   contacts: string;
 }
 export interface TravelsResponseDTO {
@@ -29,6 +23,17 @@ export interface TravelsResponseDTO {
   description: string;
   numParticipants: number;
 }
+
+export interface TransportResponseDTO {
+  id: number;
+  type: string;
+  startLocal: string;
+  endLocal: string;
+  startTime: string;
+  endTime: string;
+  price: number;
+  contacts: string;
+}
 // export type ListTravelsResponseDTO = TravelsResponseDTO[];
 export interface CreateHostRequestDTO {
   type: string;
@@ -38,4 +43,3 @@ export interface CreateHostRequestDTO {
   price: number;
   contact: string;
 }
-

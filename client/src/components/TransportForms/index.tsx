@@ -1,15 +1,19 @@
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
-import { requestCreateTransport } from "../../api/requests/travels-requests";
+import {
+  editTransport,
+  getTrasnsport,
+  requestCreateTransport,
+} from "../../api/requests/travels-requests";
 import styles from "./styles.module.scss";
 
 interface TransportFormsProps {
   whichAction: boolean;
+  id?: string;
 }
 
-const TransportForms: React.FC<TransportFormsProps> = ({ whichAction }) => {
-  const params = useParams()
+const TransportForms: React.FC<TransportFormsProps> = ({ whichAction, id }) => {
   const [tipoTransporte, setTipoTransporte] = useState<string>("");
   const [localIda, setLocalIda] = useState<string>("");
   const [localChegada, setLocalChegada] = useState<string>("");
@@ -20,33 +24,86 @@ const TransportForms: React.FC<TransportFormsProps> = ({ whichAction }) => {
 
   const navigate = useNavigate();
 
+  const fetchTransport = async () => {
+    if (whichAction === true) {
+      if (id === undefined) {
+        throw "Necessario o id";
+      }
+      const response = await getTrasnsport(id);
+      if (response instanceof ErrorResponse) {
+        console.log(response.message);
+        return;
+      }
+      setContato(response.data.contacts);
+      setHoraChegada(response.data.startTime);
+      setHoraSaida(response.data.endTime);
+      setLocalChegada(response.data.endLocal);
+      setLocalIda(response.data.startLocal);
+      setPreco(response.data.price);
+      setTipoTransporte(response.data.type);
+    }
+  };
+  useEffect(() => {
+    fetchTransport();
+  }, []);
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    
 
     if (!horaSaida || !horaChegada) {
       alert("horarios invalidos");
       return;
     }
 
-    const response = await requestCreateTransport({
-      contacts: contato,
-      endLocal: localChegada,
-      startLocal: localIda,
-      endTime: horaSaida,
-      startTime: horaChegada,
-      price: preco,
-      type: tipoTransporte,
-    });
-    console.log(response)
-
-    if (response instanceof ErrorResponse) {
-      alert("Erro ao criar transporte\n" + response.message);
-      return;
+    if (id === undefined) {
+      return "id null";
     }
 
-    navigate("/travel-info/1", { replace: true });
-    alert("Transporte salvo com sucesso");
+    if (whichAction === true) {
+      const response = editTransport(
+        {
+          contacts: contato,
+          endLocal: localChegada,
+          endTime: horaChegada,
+          price: preco,
+          startLocal: localIda,
+          startTime: horaSaida,
+          type: tipoTransporte,
+        },
+        parseInt(id)
+      );
+      console.log(response);
+
+      if (response instanceof ErrorResponse) {
+        alert("Erro ao tentar editar o Transporte\n" + response.message);
+        return;
+      }
+
+      alert("Transporte editado com sucesso");
+      navigate(`/travel-info/${id}`, { replace: true });
+    } else {
+      if (id === undefined) {
+        return "id null";
+      }
+      const transportCreated = await requestCreateTransport(parseInt(id), {
+        contacts: contato,
+        endLocal: localChegada,
+        startLocal: localIda,
+        endTime: horaSaida,
+        startTime: horaChegada,
+        price: preco,
+        type: tipoTransporte,
+      });
+      console.log("transport criado", transportCreated);
+
+      if (transportCreated instanceof ErrorResponse) {
+        alert("Erro ao criar transporte\n" + transportCreated.message);
+        return;
+      }
+      alert("Transporte salvo com sucesso");
+      navigate(`/travel-info/${id}`, { replace: true });
+      
+    }
   }
 
   return (

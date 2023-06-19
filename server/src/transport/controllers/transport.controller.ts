@@ -1,7 +1,7 @@
-import { Body, Controller, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { EnableAuth } from "src/auth/decorators/auth.decorator";
-import { CreateTransportRequestDTO } from "../dto/transport.dto";
+import { EnableAuth } from 'src/auth/decorators/auth.decorator';
+import { CreateTransportRequestDTO, TransportResponseDTO } from "../dto/transport.dto";
 import { TransportService } from "../services/transport.service";
 
 @Controller("/api/transport")
@@ -10,19 +10,25 @@ import { TransportService } from "../services/transport.service";
 export class TransportController {
   constructor(private transportService: TransportService) {}
 
-  @Post()
+  @Post("create/:id")
   async create(
     @Param("id") id: number,
     @Body() createTransportRequestDTO: CreateTransportRequestDTO
   ): Promise<void> {
+    console.log("chegou na controller")
     return this.transportService.create(id, createTransportRequestDTO);
   }
 
-  // @Put("editHost/:id")
-  // async editName(
-  //   @Param("id") id: string,
-  //   @Body() editHostRequestDTO: EditHostRequestDTO
-  // ): Promise<void> {
-  //   return this.hostService.edit(id, editHostRequestDTO);
-  // }
+  @Get("get-transport/:id")
+  async getHost(@Param("id") id: number): Promise<TransportResponseDTO> {
+    return this.transportService.getTransport(id);
+  }
+
+  @Put("edit-transport/:id")
+  async editTransport(
+    @Param("id") id: number,
+    @Body() editTransportRequestDTO: CreateTransportRequestDTO
+  ): Promise<void> {
+    return this.transportService.editTransport(id, editTransportRequestDTO);
+  }
 }

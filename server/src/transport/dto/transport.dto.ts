@@ -1,5 +1,6 @@
+import { Transport } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime";
-import { IsDate, IsPositive, Length } from "class-validator";
+import { IsPositive, Length } from "class-validator";
 
 export class CreateTransportRequestDTO {
   @Length(4, 100)
@@ -11,10 +12,10 @@ export class CreateTransportRequestDTO {
   @Length(4, 100)
   endLocal: string;
 
-  @IsDate()
+  @Length(4, 100)
   startTime: string;
 
-  @IsDate()
+  @Length(4, 100)
   endTime: string;
 
   @IsPositive()
@@ -22,4 +23,25 @@ export class CreateTransportRequestDTO {
 
   @Length(4, 100)
   contacts: string;
+}
+
+export class TransportResponseDTO {
+  id: number;
+  type: string;
+  startLocal: string;
+  endLocal: string;
+  startTime: string;
+  endTime: string;
+  price: number;
+  contacts: string;
+  constructor(transport: Transport) {
+    this.id = transport.id;
+    this.contacts = transport.contacts;
+    this.endLocal = transport.endLocal;
+    this.startLocal = transport.startLocal;
+    this.endTime = transport.endTime;
+    this.startTime = transport.startTime;
+    this.type = transport.type;
+    this.price = transport.price.toNumber();
+  }
 }

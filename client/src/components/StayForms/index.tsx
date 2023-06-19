@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
-import { editHost, getHost } from "../../api/requests/travels-requests";
+import { editHost, getHost, requestCreateHost } from "../../api/requests/travels-requests";
 import styles from "./styles.module.scss";
 
 interface StayFormsProps {
@@ -52,28 +52,52 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction, id }) => {
       return;
     }
 
-    if (id === undefined){
-      return "id null"
+    if (id === undefined) {
+      return "id null";
     }
+    if (whichAction === true) {
+      const response = await editHost(
+        {
+          contact: contato,
+          endTime: dataFim,
+          local: local,
+          price: preco,
+          startTime: dataInicio,
+          type: tipoEstadia,
+        },
+        parseInt(id)
+      );
 
-    const response = await editHost({
-      contact: contato,
-      endTime: dataFim, 
-      local: local,
-      price: preco,
-      startTime: dataInicio,
-      type: tipoEstadia,
-    }, parseInt(id));
+      console.log(response);
 
-    console.log(response)
+      if (response instanceof ErrorResponse) {
+        alert("Erro ao tentar editar a estadia\n" + response.message);
+        return;
+      }
 
-    if (response instanceof ErrorResponse) {
-      alert("Erro ao tentar editarr a estadia\n" + response.message);
-      return;
+      alert("Estadia editada com sucesso");
+      navigate(`/travel-info/${id}`, { replace: true });
+    } else {
+      if (id === undefined) {
+        return "id null";
+      }
+      const createdHost = await requestCreateHost(parseInt(id), {
+        contact: contato,
+        endTime: dataFim,
+        local: local,
+        price: preco,
+        startTime: dataInicio,
+        type: tipoEstadia,
+      });
+
+      console.log("createdHost", createdHost);
+      if (createdHost instanceof ErrorResponse) {
+        alert("Erro ao tentar criar a estadia\n" + createdHost.message);
+        return;
+      }
+      alert("Estadia criada com sucesso");
+      navigate(`/travel-info/${id}`, { replace: true });
     }
-
-    alert("Estadia salva com sucesso");
-    navigate("/travel-info/1", { replace: true });
 
     /* Create is false */
   }
