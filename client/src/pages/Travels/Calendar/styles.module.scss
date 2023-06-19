@@ -52,6 +52,24 @@
   border-radius: 10px;
 }
 
+.sidebar {
+  padding: 20px;
+  background-color: #4f772d;
+  border-radius: 10px;
+
+  ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .current-date {
+    font-size: 1.45rem;
+    font-weight: 500;
+  }
+}
+
 .calendar {
   padding: 20px;
   background-color: #ecf39e;
