@@ -49,13 +49,23 @@
   height: 50px;
 
   border-radius: 50%;
+  padding: 10px;
 
-  background-color: black;
+  background-color: inherit;
+  border: 2px solid $color-secondary;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   align-self: center;
   justify-self: center;
 
   cursor: pointer;
+  transition: .4s;
+
+  &:hover {
+    background: #35521b;
+  }
 }
 
 #sideBarLinksContainer {
