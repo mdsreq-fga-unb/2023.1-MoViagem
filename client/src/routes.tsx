@@ -5,6 +5,8 @@ import CreateTravel from "./pages/CreateTravel";
 import EditUserInfo from "./pages/EditUserInfo";
 import Home from "./pages/Home";
 import LoginAndRegister from "./pages/LoginAndRegister";
+import CreateTransport from "./pages/CreateTransport";
+import EditTransport from "./pages/EditTransport";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +19,8 @@ const router = createBrowserRouter(
           <Route path="/" element={<Home />} />
           <Route path="/user-info" element={<EditUserInfo />} />
           <Route path="/create-travel" element={<CreateTravel />} />
+          <Route path="/create-transport" element={<CreateTransport /> } />
+          <Route path="/edit-transport" element={<EditTransport /> } />
         </Route>
       </Route>
     </>
