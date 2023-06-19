@@ -5,136 +5,19 @@
   content: "";
   z-index: 999;
   background: $color-secondary;
-}
-
-.pageContainer {
-  display: grid;
-
-  h2 {
-    margin-bottom: 2rem;
-  }
-}
-
-.boxContainer {
-  display: flex;
-  justify-content: center;
-}
-
-.outsideBox {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
-  height: 80%;
-  width: 75%;
-  margin-top: 3%;
-
-  justify-items: center;
-  align-items: center;
-}
-
-.insideBox {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1.5rem;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  width: 125%;
-  height: 90%;
-
-  padding: 3rem;
-  margin-top: 5%;
-  margin-bottom: 5%;
-
-  border: 1px solid rgba(221, 223, 228, 1);
   border-radius: 10px;
+  display: flex;
 }
 
-.calendar {
+.modalContent {
   padding: 20px;
-  background-color: #ecf39e;
-
-  ul {
-    display: flex;
-    list-style: none;
-    flex-wrap: wrap;
-    text-align: center;
-  }
-
-  .current-date {
-    font-size: 1.45rem;
-    font-weight: 500;
-  }
-
-  .days {
-    li {
-      z-index: 1;
-      cursor: pointer;
-      margin-top: 30px;
-
-      &::before {
-        position: relative;
-        content: "";
-        height: 40px;
-        width: 40px;
-        top: 50%;
-        left: 50%;
-        border-radius: 50%;
-        z-index: -1;
-        transform: translate(-50%, -50%);
-      }
-    }
-
-    .inactive {
-      color: #aaa;
-    }
-
-    .active {
-      background: $color-secondary;
-      position: relative;
-      content: "";
-      color: #97f9f9;
-      width: 40px;
-      border-radius: 50%;
-    }
-
-    li:hover:before {
-      background: $color-secondary;
-    }
-  }
-
-  .weeks li {
-    font-weight: 500;
-  }
-
-  ul li {
-    width: calc(100% / 7);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
 
-.icons span {
-  height: 38px;
-  width: 38px;
-  margin: 0 1px;
-  color: #878787;
-  font-size: 1.9rem;
-  cursor: pointer;
-  text-align: center;
-  line-height: 38px;
-  border-radius: 50%;
-  background: #f2f2f2;
+.formField {
+  align-items: start;
+  margin: 10px 10px;
 }
 
-.icons span:hover {
-  background: $color-secondary;
-}
-
-.icons span:last-child {
-  margin-right: -10px;
+.buttonContainer {
+  background-color: $color-primary;
 }

@@ -10,7 +10,6 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
   const [transportType, setTransportType] = useState("");
   const [departureLocation, setDepartureLocation] = useState("");
   const [arrivalLocation, setArrivalLocation] = useState("");
-  const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
   const [eventValue, setEventValue] = useState("");
   const [eventExtras, setEventExtras] = useState("");
@@ -29,7 +28,6 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
       transportType,
       departureLocation,
       arrivalLocation,
-      eventDate,
       eventTime,
       eventValue,
       eventExtras,
@@ -44,9 +42,9 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
 
   return (
     <div className={styles.modal}>
-      <div className="modal-content">
+      <div className={styles.modalContent}>
         <h2>Add Event</h2>
-        <div className="form-field">
+        <div className={styles.formField}>
           <label>Tipo de transporte:</label>
           <input
             type="text"
@@ -54,7 +52,7 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
             onChange={(e) => setTransportType(e.target.value)}
           />
         </div>
-        <div className="form-field">
+        <div className={styles.formField}>
           <label>Local de partida e chegada:</label>
           <input
             type="text"
@@ -62,24 +60,20 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
             onChange={(e) => setDepartureLocation(e.target.value)}
           />
         </div>
-        <div className="form-field">
-          <label>Data:</label>
-          <input type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
-        </div>
-        <div className="form-field">
+        <div className={styles.formField}>
           <label>Horário:</label>
           <input type="time" value={eventTime} onChange={(e) => setEventTime(e.target.value)} />
         </div>
-        <div className="form-field">
+        <div className={styles.formField}>
           <label>Valor:</label>
           <input type="text" value={eventValue} onChange={(e) => setEventValue(e.target.value)} />
         </div>
-        <div className="form-field">
+        <div className={styles.formField}>
           <label>Extras:</label>
           <textarea value={eventExtras} onChange={(e) => setEventExtras(e.target.value)} />
           {errorMessage && <p className="error">{errorMessage}</p>}
         </div>
-        <div className="button-container">
+        <div className={styles.buttonContainer}>
           <button onClick={handleSaveEvent}>Save</button>
           <button onClick={closeModal}>Cancel</button>
         </div>

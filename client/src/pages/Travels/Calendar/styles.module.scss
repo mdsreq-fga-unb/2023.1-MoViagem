@@ -82,7 +82,7 @@
         width: 40px;
         top: 50%;
         left: 50%;
-        border-radius: 50%;
+        border-radius: 50px;
         z-index: -1;
         transform: translate(-50%, -50%);
       }
@@ -98,7 +98,7 @@
       content: "";
       color: #97f9f9;
       width: 40px;
-      border-radius: 50%;
+      border-radius: 50px;
     }
 
     li:hover:before {
@@ -128,7 +128,7 @@
   cursor: pointer;
   text-align: center;
   line-height: 38px;
-  border-radius: 50%;
+  border-radius: 10px;
   background: #f2f2f2;
 }
 
