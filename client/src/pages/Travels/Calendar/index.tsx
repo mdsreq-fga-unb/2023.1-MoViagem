@@ -12,18 +12,18 @@ const Calendar: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const currYearRef = useRef<number>(date.getFullYear());
 
+  const handleDayClick = (day: number) => {
+    const selectedDateEvent = new Date(currYearRef.current, currMonth, day);
+    setSelectedDate(selectedDateEvent);
+    setShowModal(true);
+    console.log("Day clicked:", selectedDate);
+  };
+
   const renderCalendar = useCallback(() => {
     const firstDayOfMonth = new Date(date.getFullYear(), currMonth, 1).getDay();
     const lastDateOfMonth = new Date(date.getFullYear(), currMonth + 1, 0).getDate();
     const lastDayOfMonth = new Date(date.getFullYear(), currMonth, lastDateOfMonth).getDay();
     const lastDateOfLastMonth = new Date(date.getFullYear(), currMonth, 0).getDate();
-
-    const handleDayClick = (day: number) => {
-      const selectedDate = new Date(currYearRef.current, currMonth, day);
-      setSelectedDate(selectedDate);
-      setShowModal(true);
-      console.log("Day clicked:", selectedDate);
-    };
 
     const months = [
       "Janeiro",
@@ -66,7 +66,7 @@ const Calendar: React.FC = () => {
 
     for (let i = lastDayOfMonth; i < 6; i++) {
       days.push(
-        <li key={`next-${i}`} className="inactive">
+        <li key={`next-${i}`} className={styles.inactive}>
           {i - lastDayOfMonth + 1}
         </li>
       );
@@ -106,6 +106,9 @@ const Calendar: React.FC = () => {
     <>
       <div className={styles.pageContainer}>
         <div className={styles.boxContainer}>
+          {showModal && (
+            <EventModal selectedDate={selectedDate} closeModal={() => setShowModal(false)} />
+          )}
           <div className={styles.outsideBox}>
             <header>
               <p className={styles.currentDate}>{currentDate}</p>
@@ -122,12 +125,13 @@ const Calendar: React.FC = () => {
           <li>Quinta</li>
           <li>Sexta</li>
           <li>Sábado</li>
-          <ul className={styles.days} dangerouslySetInnerHTML={{ __html: daysTag }} />
+          <ul
+            className={styles.days}
+            dangerouslySetInnerHTML={{ __html: daysTag }}
+            onClick={() => handleDayClick(parseInt(daysTag))}
+          />
         </ul>
       </div>
-      {showModal && (
-        <EventModal selectedDate={selectedDate} closeModal={() => setShowModal(false)} />
-      )}
       <div className={styles.icons}>
         <span className={styles.prev} onClick={() => handleIconClick(-1)}>
           Previous
