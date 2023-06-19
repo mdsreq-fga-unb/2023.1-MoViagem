@@ -1,35 +1,29 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
 
 const Calendar: React.FC = () => {
-  // Use useMemo to create the 'date' object once
   const date = useMemo(() => new Date(), []);
   const [currentDate, setCurrentDate] = useState("");
   const [daysTag, setDaysTag] = useState("");
-  const [prevNextIcon, setPrevNextIcon] = useState<NodeListOf<Element> | null>(null);
   const [currMonth, setCurrMonth] = useState<number>(date.getMonth());
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  const currYearRef = useRef<number>(date.getFullYear());
-
   const renderCalendar = useCallback(() => {
-    // Get the necessary information for rendering the calendar
-    const firstDayOfMonth = new Date(currYearRef.current, currMonth, 1).getDay();
-    const lastDateOfMonth = new Date(currYearRef.current, currMonth + 1, 0).getDate();
-    const lastDayOfMonth = new Date(currYearRef.current, currMonth, lastDateOfMonth).getDay();
-    const lastDateOfLastMonth = new Date(currYearRef.current, currMonth, 0).getDate();
+    const firstDayOfMonth = new Date(date.getFullYear(), currMonth, 1).getDay();
+    const lastDateOfMonth = new Date(date.getFullYear(), currMonth + 1, 0).getDate();
+    const lastDayOfMonth = new Date(date.getFullYear(), currMonth, lastDateOfMonth).getDay();
+    const lastDateOfLastMonth = new Date(date.getFullYear(), currMonth, 0).getDate();
 
     const handleDayClick = (day: number) => {
-      const selectedDate = new Date(currYearRef.current, currMonth, day);
+      const selectedDate = new Date(date.getFullYear(), currMonth, day);
       setSelectedDate(selectedDate);
       setShowModal(true);
-      console.log("Day clicked:");
+      console.log("Day clicked:", selectedDate);
     };
 
-    // Define the array of month names
     const months = [
       "Janeiro",
       "Fevereiro",
@@ -45,11 +39,9 @@ const Calendar: React.FC = () => {
       "Dezembro",
     ];
 
-    // Create an array to hold the JSX elements for each day
     const days: JSX.Element[] = [];
 
     for (let i = firstDayOfMonth; i > 0; i--) {
-      // Creating li elements for the previous month's last days
       days.push(
         <li key={`prev-${i}`} className="inactive">
           {lastDateOfLastMonth - i + 1}
@@ -58,11 +50,10 @@ const Calendar: React.FC = () => {
     }
 
     for (let i = 1; i <= lastDateOfMonth; i++) {
-      // Creating li elements for all days of the current month
       const isToday =
         i === date.getDate() &&
-        currMonth === new Date().getMonth() &&
-        currYearRef.current === new Date().getFullYear()
+        currMonth === date.getMonth() &&
+        date.getFullYear() === date.getFullYear()
           ? "active"
           : "";
       days.push(
@@ -73,7 +64,6 @@ const Calendar: React.FC = () => {
     }
 
     for (let i = lastDayOfMonth; i < 6; i++) {
-      // Creating li elements for the next month's first days
       days.push(
         <li key={`next-${i}`} className="inactive">
           {i - lastDayOfMonth + 1}
@@ -81,66 +71,33 @@ const Calendar: React.FC = () => {
       );
     }
 
-    setCurrentDate(`${months[currMonth]} ${currYearRef.current}`);
-    // Use ReactDOMServer to convert the array of elements into a string
+    setCurrentDate(`${months[currMonth]} ${date.getFullYear()}`);
     setDaysTag(ReactDOMServer.renderToString(<ul>{days}</ul>));
   }, [currMonth, date]);
 
-  // useEffect(() => {
-  //   const currentDateElement = document.querySelector(".current-date");
-  //   const daysElement = document.querySelector(".styles.days");
-  //   const prevNextIcons = document.querySelectorAll(".icons span");
-
-  //   setCurrentDate(currentDateElement?.textContent ?? "");
-  //   setDaysTag(daysElement?.innerHTML ?? "");
-  //   setPrevNextIcon(prevNextIcons);
-
-  //   renderCalendar();
-  // }, [renderCalendar]);
-
   useEffect(() => {
-    const currentDateElement = document.querySelector(".current-date");
-    const daysElement = document.querySelector(".styles.days");
-    const prevNextIcons = document.querySelectorAll(".icons span");
-
-    setCurrentDate(currentDateElement?.textContent ?? "");
-    setDaysTag(daysElement?.innerHTML ?? "");
-    setPrevNextIcon(prevNextIcons);
-
     renderCalendar();
+  }, [renderCalendar]);
 
-    if (prevNextIcon) {
-      prevNextIcon.forEach((icon) => {
-        const handleClick = () => {
-          // Adding click event on both icons
-          // If clicked icon is the previous icon, then decrement the current month; otherwise, increment it by 1
-          setCurrMonth((prevMonth) => {
-            let updatedMonth = icon.id === "prev" ? prevMonth - 1 : prevMonth + 1;
-            let updatedYear = currYearRef.current;
+  const handleIconClick = useCallback(
+    (increment: number) => {
+      setCurrMonth((prevMonth) => {
+        let updatedMonth = prevMonth + increment;
+        let updatedYear = date.getFullYear();
 
-            if (updatedMonth < 0 || updatedMonth > 11) {
-              const updatedDate = new Date(currYearRef.current, updatedMonth);
-              updatedYear = updatedDate.getFullYear();
-              updatedMonth = updatedDate.getMonth();
-            }
+        if (updatedMonth < 0) {
+          updatedMonth = 11;
+          updatedYear--;
+        } else if (updatedMonth > 11) {
+          updatedMonth = 0;
+          updatedYear++;
+        }
 
-            currYearRef.current = updatedYear;
-
-            return updatedMonth;
-          });
-
-          renderCalendar();
-        };
-
-        icon.addEventListener("click", handleClick);
-
-        // Clean up the event listener when the component unmounts
-        return () => {
-          icon.removeEventListener("click", handleClick);
-        };
+        return updatedMonth;
       });
-    }
-  }, [prevNextIcon, renderCalendar]);
+    },
+    [date]
+  );
 
   return (
     <>
@@ -148,7 +105,7 @@ const Calendar: React.FC = () => {
         <div className={styles.boxContainer}>
           <div className={styles.outsideBox}>
             <header>
-              <p className={currentDate}>{currentDate}</p>
+              <p className={styles.currentDate}>{currentDate}</p>
             </header>
           </div>
         </div>
@@ -164,11 +121,18 @@ const Calendar: React.FC = () => {
           <li>Sábado</li>
           <ul className={styles.days} dangerouslySetInnerHTML={{ __html: daysTag }} />
         </ul>
-        {/* <ul className={styles.days} dangerouslySetInnerHTML={{ __html: daysTag }} /> */}
       </div>
       {showModal && (
         <EventModal selectedDate={selectedDate} closeModal={() => setShowModal(false)} />
       )}
+      <div className={styles.icons}>
+        <span className={styles.prev} onClick={() => handleIconClick(-1)}>
+          Previous
+        </span>
+        <span className={styles.next} onClick={() => handleIconClick(1)}>
+          Next
+        </span>
+      </div>
     </>
   );
 };
