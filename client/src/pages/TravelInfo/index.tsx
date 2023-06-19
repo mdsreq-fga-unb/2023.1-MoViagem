@@ -1,12 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { editTravel } from "../../api/requests/travels-requests";
-import useAuth from "../../auth/context/auth-hook";
+// import useAuth from "../../auth/context/auth-hook";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
+import GiteIcon from '@mui/icons-material/Gite';
+import FlightIcon from '@mui/icons-material/Flight';
 
-export default function EditTravel() {
-  const auth = useAuth();
+export default function TravelInfo() {
+  // const auth = useAuth();
+  const navigate = useNavigate();
 
   // async function getTravelsList() {
   //   if (auth.userInfo == null) {
@@ -51,11 +55,18 @@ export default function EditTravel() {
     alert("Viagem editada com sucesso");
   }
 
+  const handleCreateHost = () => {
+    navigate("/create-stay", { replace: false})
+  }
+
+  const handleCreateTransport = () => {
+    navigate("/create-transport", { replace: false})
+  }
+
   return (
-    <Navbar pageName="Editar Viagem">
-      <div className={styles.pageContainer}>
-        {/* <div className={styles.boxContainer}>
-          <div className={styles.outsideBox}> */}
+    <Navbar pageName="Informações da Viagem">
+    <div className={styles.pageContainer}>
+      <div className={styles.outsideBox}>
         <form className={styles.insideBox} onSubmit={handleSubmit}>
           <h2>Dados da Viagem:</h2>
           <div className={styles.inputContainer}>
@@ -146,8 +157,28 @@ export default function EditTravel() {
           </button>
         </form>
       </div>
-      {/* </div>
-      </div> */}
-    </Navbar>
+
+      <div className={styles.verticalLine}></div>
+      
+      <div className={styles.infoBox}>      
+        <button className={styles.createButton} onClick={handleCreateHost}>
+          <GiteIcon />
+          <p>Adicionar</p>
+          <p>Informações de Estadia</p>
+        </button>
+      </div>
+        
+      <div className={styles.verticalLine}></div>
+
+      <div className={styles.infoBox}>      
+        <button className={styles.createButton} onClick={handleCreateTransport}>
+          <FlightIcon />
+          <p>Adicionar</p>
+          <p>Informações de Transporte</p>
+        </button>
+      </div>
+
+    </div>
+  </Navbar>
   );
 }
