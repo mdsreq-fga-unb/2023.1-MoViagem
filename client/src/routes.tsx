@@ -2,7 +2,7 @@ import { Route, createBrowserRouter, createRoutesFromElements } from "react-rout
 import AuthProviderComponent from "./auth/components/auth-context-component";
 import ProtectedComponent from "./auth/components/protected-component";
 import LoginAndRegister from "./pages/LoginAndRegister";
-import Travels from "./pages/Travels";
+import Travels from "./pages/Travels/";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -10,6 +10,7 @@ const router = createBrowserRouter(
       {/* Routes that need to access the auth context need to be inside this route */}
       <Route element={<AuthProviderComponent />}>
         <Route path="/login-and-register" element={<LoginAndRegister />} />
+        <Route path="/travel" element={<Travels />} />
         {/* Routes that need login need to be inside this route */}
         <Route element={<ProtectedComponent />}>
           <Route path="/" element={<Travels />} />

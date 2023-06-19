@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ErrorResponse } from "../../api/api-instance";
 import { getHello } from "../../api/requests/travels-requests";
 import Navbar from "../../components/Navbar";
-import styles from "./styles.module.scss";
+import Calendar from "./Calendar";
 
 export default function Home() {
   const [message, setMessage] = useState<string>("");
@@ -22,10 +22,8 @@ export default function Home() {
   }, []);
 
   return (
-    <Navbar pageName="Viagens" selectedPage="TRAVELS">
-      <h1 id={styles.title}>
-        <p>{message}</p>
-      </h1>
+    <Navbar pageName="Calendário">
+      <Calendar />
     </Navbar>
   );
 }
