@@ -92,7 +92,12 @@
     }
 
     .active {
-      color: #9b59b6;
+      background: $color-secondary;
+      position: relative;
+      content: "";
+      color: #97f9f9;
+      width: 40px;
+      border-radius: 50%;
     }
 
     li:hover:before {
