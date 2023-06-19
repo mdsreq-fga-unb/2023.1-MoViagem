@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
+import EventModal from "./Modal/addEvents";
 import styles from "./styles.module.scss";
 
 const Calendar: React.FC = () => {
@@ -9,8 +10,16 @@ const Calendar: React.FC = () => {
   const [daysTag, setDaysTag] = useState("");
   const [prevNextIcon, setPrevNextIcon] = useState<NodeListOf<Element> | null>(null);
   const [currMonth, setCurrMonth] = useState<number>(date.getMonth());
+  const [showModal, setShowModal] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const currYearRef = useRef<number>(date.getFullYear());
+
+  const handleDayClick = (day: number) => {
+    const selectedDate = new Date(currYearRef.current, currMonth, day);
+    setSelectedDate(selectedDate);
+    setShowModal(true);
+  };
 
   const renderCalendar = useCallback(() => {
     // Get the necessary information for rendering the calendar
@@ -56,12 +65,10 @@ const Calendar: React.FC = () => {
           ? "active"
           : "";
       days.push(
-        <li key={`curr-${i}`} className={styles[isToday]}>
+        <li key={`curr-${i}`} className={styles[isToday]} onClick={() => handleDayClick(i)}>
           {i}
         </li>
-        // Use styles[isToday] to apply the correct CSS class
       );
-      // Adding active class to li if current day, month, and year match
     }
 
     for (let i = lastDayOfMonth; i < 6; i++) {
@@ -141,6 +148,12 @@ const Calendar: React.FC = () => {
         </ul>
         {/* <ul className={styles.days} dangerouslySetInnerHTML={{ __html: daysTag }} /> */}
       </div>
+      {showModal && (
+        <EventModal
+          selectedDate={selectedDate}
+          closeModal={() => setShowModal(false)}
+        />
+      )}
     </>
   );
 };
