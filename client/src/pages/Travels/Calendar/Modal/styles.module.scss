@@ -1,0 +1,23 @@
+@import "../../../../variables.scss";
+
+.modal {
+  position: absolute;
+  content: "";
+  z-index: 999;
+  background: $color-secondary;
+  border-radius: 10px;
+  display: flex;
+}
+
+.modalContent {
+  padding: 20px;
+}
+
+.formField {
+  align-items: start;
+  margin: 10px 10px;
+}
+
+.buttonContainer {
+  background-color: $color-primary;
+}

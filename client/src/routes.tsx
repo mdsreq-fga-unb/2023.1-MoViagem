@@ -18,6 +18,7 @@ const router = createBrowserRouter(
       {/* Routes that need to access the auth context need to be inside this route */}
       <Route element={<AuthProviderComponent />}>
         <Route path="/login-and-register" element={<LoginAndRegister />} />
+        {/* <Route path="/travel" element={<Travels />} /> */}
         {/* Routes that need login need to be inside this route */}
         <Route element={<ProtectedComponent />}>
           <Route path="/" element={<Home />} />
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
           <Route path="/edit-transport/:id" element={<EditTransport />} />
           <Route path="/create-stay/:id" element={<CreateStay />} />
           <Route path="/edit-stay/:id" element={<EditStay />} />
+          <Route path="/calendar/:id" element={<Calendar />} />
         </Route>
       </Route>
     </>
