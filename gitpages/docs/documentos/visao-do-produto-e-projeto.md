@@ -257,13 +257,22 @@ Outras lições abordaram a compreensão das necessidades e desejos dos envolvid
 Para melhorar o planejamento na próxima etapa do projeto, uma possível melhoria seria uma organização mais eficiente do tempo da equipe. Nesta unidade, algumas entregas foram realizadas em cima da hora, comprometendo a qualidade do trabalho. Portanto, é importante que as atividades sejam iniciadas mais cedo nas próximas unidades, a fim de garantir a qualidade e o cumprimento dos prazos.
 
 ## 4.2 Unidade 2
+
 Na unidade 2, foi introduzida as atividades da engenharia de requisitos, abordando todos os seus processos e técnicas as quais são: Elicitação e Descoberta, Análise e Consenso, Declaração, Representação, Verificação e Validação e Organização e Atualização.
 
-Na disciplina foram realizados diversas abordagens para debate do conteudo da unidade 2 como, juris para análise de cenários, avaliações entre os grupos entre outras atividades. 
+Na disciplina foram realizados diversas abordagens para debate do conteudo da unidade 2 como, juris para análise de cenários, avaliações entre os grupos entre outras atividades.
 
-Para o grupo, a unidade 2 foi de extrema importância para a equipe, pois com o cilo de vida escolhido conseguimos nos organizar melhor para nos reunirmos e utilizarmos de todas as atividades da engenharia de requisitos, o que foi muito proveitoso pois evoluimos bastante como equipe na prática dessas atividades.  
+Para o grupo, a unidade 2 foi de extrema importância para a equipe, pois com o cilo de vida escolhido conseguimos nos organizar melhor para nos reunirmos e utilizarmos de todas as atividades da engenharia de requisitos, o que foi muito proveitoso pois evoluimos bastante como equipe na prática dessas atividades.
 
 Algo importante a se destacar é da ferramenta como chatGPT que foi utilizada como auxiliador na prática das atividades de engenharia de requisitos, o que nos concedeu um importante stakeholder aliado aos feedbacks do professor.
+
+## 4.3 Unidade 3
+
+Na unidade 3, foi introduzida os metodos de construção de backlog PBB E BDD que consiste em metodos que auxiliam na construção do Product Backlog. Também foi iniciada o processo de deselvovimento do produto de sotware representado pelo nosso backlog.
+
+Na disciplina foram realizadas aulas de trabalho com o grupo para a construção do Canvas PBB, BDD e Backlog Safe.
+
+Para o grupo, a unidade 3 foi muito proveitosa e trabalhosa na mesma proporção. Lidar com as atividades de Engenharia de requisitos e também lidar com os problemas da implementação foi um grande desafio para todos da equipe. O que nos demandou um trabalho em equipe bem estruturado. O grupo sofreu um pouco com um dos riscos levantados no gerenciamento, que foi a ausencia de alguns integrantes por motivos de problemas de saude que impactou um pouco no ritmo de desenvolvimento, mas que foi sanado com esforço a mais de todos.
 
 # REFERÊNCIAS BIBLIOGRÁFICAS
 
