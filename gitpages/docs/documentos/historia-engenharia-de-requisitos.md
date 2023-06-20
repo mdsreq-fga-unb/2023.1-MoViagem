@@ -1,4 +1,4 @@
-# História da Engenharia de Requisitos
+# Engenharia de Requisitos no Projeto
 
 Apesar de sabermos que o processo de engenheria de requisitos (ER) é flexível, de modo que alguns processos começam antes de outros sem necessariamente seguir um ordem linear. O nosso processo de ER se constitui de maneira linear e essa construção nos possibilitou o retorno do backlog do MVP1 e MVP2 da forma mais concisa possível.
 

@@ -5,17 +5,21 @@ repo_name: MoViagem
 
 nav: 
  - Inicio: index.md
- - Visão do produto e projeto: documentos/visao-do-produto-e-projeto.md
- - Abordagem Gupta: documentos/abordagem-gupta.md
- - Backlog: documentos/backlog.md
- - Pontuação dos requisitos: documentos/pontuacao-requisitos.md
- - História da Engenharia de Requisitos: documentos/historia-engenharia-de-requisitos.md
- - MVPs:
-      - MVP 1: documentos/mvp1.md
-      - MVP 2: documentos/mvp2.md
- - Apresentações:
+ - Visão do produto e projeto: 
+      - Visão do produto e projeto: documentos/visao-do-produto-e-projeto.md
+      - Abordagem Gupta: documentos/abordagem-gupta.md
+ - Entregas Unidade 1:
       - Ciclos de Vida - Scrum: apresentacoes/ciclos-de-vida.md
       - Processos de ER: apresentacoes/processos-de-ER.md
+ - Entregas Unidade 2:
+      - Backlog: documentos/backlog.md
+      - Pontuação dos requisitos: documentos/pontuacao-requisitos.md
+      - História da Engenharia de Requisitos: documentos/historia-engenharia-de-requisitos.md
+      - MVPs:
+            - MVP 1: documentos/mvp1.md
+            - MVP 2: documentos/mvp2.md
+ - Entregas Unidade 3:
+      - PBB e BDD: documentos/pbb-e-bdd.md
 
 extra_css: 
   - css/custom.css
