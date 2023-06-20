@@ -3,36 +3,37 @@ docs_dir: gitpages/docs
 repo_url: https://github.com/mdsreq-fga-unb/2023.1-MoViagem
 repo_name: MoViagem
 
-nav: 
- - Inicio: index.md
- - Visão do produto e projeto: 
+nav:
+  - Inicio: index.md
+  - Visão do produto e projeto:
       - Visão do produto e projeto: documentos/visao-do-produto-e-projeto.md
       - Abordagem Gupta: documentos/abordagem-gupta.md
- - Entregas Unidade 1:
+  - Entregas Unidade 1:
       - Ciclos de Vida - Scrum: apresentacoes/ciclos-de-vida.md
       - Processos de ER: apresentacoes/processos-de-ER.md
- - Entregas Unidade 2:
+  - Entregas Unidade 2:
       - Backlog: documentos/backlog.md
       - Pontuação dos requisitos: documentos/pontuacao-requisitos.md
       - História da Engenharia de Requisitos: documentos/historia-engenharia-de-requisitos.md
       - MVPs:
-            - MVP 1: documentos/mvp1.md
-            - MVP 2: documentos/mvp2.md
- - Entregas Unidade 3:
+          - MVP 1: documentos/mvp1.md
+          - MVP 2: documentos/mvp2.md
+  - Entregas Unidade 3:
       - PBB e BDD: documentos/pbb-e-bdd.md
+      - BACKLOG SAFe: documentos/backlog-SAFe.md
 
-extra_css: 
+extra_css:
   - css/custom.css
 
 theme:
-  name: 'material'
-  language: 'pt'
+  name: "material"
+  language: "pt"
   palette:
-    primary: 'indigo'
-    accent: 'indigo'
+    primary: "indigo"
+    accent: "indigo"
   font:
-    text: 'Roboto'
-    code: 'Roboto Mono'
+    text: "Roboto"
+    code: "Roboto Mono"
   feature:
     - navigation.tabs
     - navigation.expand
@@ -40,4 +41,4 @@ theme:
     - navigation.top
     - toc.numbered
   search: true
-  search_index_only: ['content']
+  search_index_only: ["content"]
