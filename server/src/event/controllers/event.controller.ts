@@ -12,7 +12,6 @@ export class EventController {
 
   @Post("create/:id")
   async create(
-    //
     @Param("id") id: number,
     @Body() createEventRequestDTO: CreateEventRequestDTO
   ): Promise<void> {

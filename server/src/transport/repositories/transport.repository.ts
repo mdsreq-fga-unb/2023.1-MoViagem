@@ -10,8 +10,8 @@ export class TransportRepository {
     const transport = await this.prismaService.transport.create({
       data,
     });
-    console.log(transport)
-    return transport
+
+    return transport;
   }
 
   async getTransport(id: number): Promise<Transport | null> {

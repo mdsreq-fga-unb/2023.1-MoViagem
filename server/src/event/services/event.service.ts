@@ -13,25 +13,33 @@ export class EventService {
           id: id,
         },
       },
-      startTime: createEventRequestDTO.startTime,
-      endTime: createEventRequestDTO.endTime,
-      description: createEventRequestDTO.description,
+      departureLocation: createEventRequestDTO.departureLocation,
+      eventDate: createEventRequestDTO.eventDate,
+      eventTime: createEventRequestDTO.eventTime,
+      eventExtras: createEventRequestDTO.eventExtras,
+      eventValue: createEventRequestDTO.eventValue,
+      transportType: createEventRequestDTO.transportType,
     });
   }
 
   async edit(id: number, dto: CreateEventRequestDTO): Promise<void> {
     await this.eventRepository.updateEvent(id, {
-      endTime: dto.endTime,
-      startTime: dto.startTime,
-      description: dto.description,
+      departureLocation: dto.departureLocation,
+      eventDate: dto.eventDate,
+      eventTime: dto.eventTime,
+      eventExtras: dto.eventExtras,
+      eventValue: dto.eventValue,
+      transportType: dto.transportType,
     });
   }
 
   async getEvent(id: number): Promise<EventResponseDTO> {
     const event = await this.eventRepository.getEvent(id);
+
     if (event == null) {
-      throw new BadRequestException("viagem nao existe");
+      throw new BadRequestException("evento não existe");
     }
+
     return new EventResponseDTO(event);
   }
 }

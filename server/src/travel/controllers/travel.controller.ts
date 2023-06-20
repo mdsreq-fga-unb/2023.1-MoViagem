@@ -20,6 +20,11 @@ export class TravelController {
     return this.travelService.create(loggedInUser.id, createTravelRequestDTO);
   }
 
+  @Get()
+  async getTravelsByUser(@User() loggedInUser: UserInfoDTO): Promise<TravelsResponseDTO[]> {
+    return this.travelService.getTravelsByUser(loggedInUser.id);
+  }
+
   @Get("get-travels/:id")
   async getTravels(@Param("id") id: string): Promise<TravelsResponseDTO> {
     return this.travelService.getTravels(id);

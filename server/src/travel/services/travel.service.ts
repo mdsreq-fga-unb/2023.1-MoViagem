@@ -6,6 +6,11 @@ import { TravelRepository } from "./../repositories/travel.repository";
 export class TravelService {
   constructor(private travelRepository: TravelRepository) {}
 
+  async getTravelsByUser(userId: number): Promise<TravelsResponseDTO[]> {
+    const travels = await this.travelRepository.getTravelsByUser(userId);
+    return travels.map((travel) => new TravelsResponseDTO(travel));
+  }
+
   async create(id: number, createTravelRequestDTO: CreateTravelRequestDTO): Promise<void> {
     await this.travelRepository.createTravel({
       user: {

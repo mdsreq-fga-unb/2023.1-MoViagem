@@ -4,12 +4,12 @@ import ProtectedComponent from "./auth/components/protected-component";
 import CreateStay from "./pages/CreateStay";
 import CreateTransport from "./pages/CreateTransport";
 import CreateTravel from "./pages/CreateTravel";
-import Cronograma from "./pages/Cronograma";
 import EditStay from "./pages/EditStay";
 import EditTransport from "./pages/EditTransport";
 import EditUserInfo from "./pages/EditUserInfo";
 import Home from "./pages/Home";
 import LoginAndRegister from "./pages/LoginAndRegister";
+import Schedule from "./pages/Schedule";
 import TravelInfo from "./pages/TravelInfo";
 import TravelList from "./pages/TravelList";
 
@@ -19,7 +19,6 @@ const router = createBrowserRouter(
       {/* Routes that need to access the auth context need to be inside this route */}
       <Route element={<AuthProviderComponent />}>
         <Route path="/login-and-register" element={<LoginAndRegister />} />
-        {/* <Route path="/travel" element={<Travels />} /> */}
         {/* Routes that need login need to be inside this route */}
         <Route element={<ProtectedComponent />}>
           <Route path="/" element={<Home />} />
@@ -31,7 +30,7 @@ const router = createBrowserRouter(
           <Route path="/edit-transport/:id" element={<EditTransport />} />
           <Route path="/create-stay/:id" element={<CreateStay />} />
           <Route path="/edit-stay/:id" element={<EditStay />} />
-          <Route path="/cronograma/:id" element={<Cronograma />} />
+          <Route path="/schedule/:id" element={<Schedule />} />
         </Route>
       </Route>
     </>

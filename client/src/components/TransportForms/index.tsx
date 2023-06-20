@@ -1,51 +1,61 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import {
   editTransport,
-  getTrasnsport,
+  getTransport,
   requestCreateTransport,
 } from "../../api/requests/travels-requests";
+import {
+  convertDateInputValueToDate,
+  convertDateToDateTimeInputValue,
+} from "../../utils/date-utilities";
 import styles from "./styles.module.scss";
 
 interface TransportFormsProps {
-  whichAction: boolean;
+  isEditing: boolean;
   id?: string;
 }
 
-const TransportForms: React.FC<TransportFormsProps> = ({ whichAction, id }) => {
+const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
   const [tipoTransporte, setTipoTransporte] = useState<string>("");
   const [localIda, setLocalIda] = useState<string>("");
   const [localChegada, setLocalChegada] = useState<string>("");
-  const [horaSaida, setHoraSaida] = useState<string>("");
-  const [horaChegada, setHoraChegada] = useState<string>("");
+  const [horaChegada, setHoraChegada] = useState<Date | null>(null);
+  const [horaSaida, setHoraSaida] = useState<Date | null>(null);
   const [preco, setPreco] = useState<number>(0);
   const [contato, setContato] = useState<string>("");
 
   const navigate = useNavigate();
 
-  const fetchTransport = async () => {
-    if (whichAction === true) {
-      if (id === undefined) {
-        throw "Necessario o id";
-      }
-      const response = await getTrasnsport(id);
-      if (response instanceof ErrorResponse) {
-        console.log(response.message);
-        return;
-      }
-      setContato(response.data.contacts);
-      setHoraChegada(response.data.startTime);
-      setHoraSaida(response.data.endTime);
-      setLocalChegada(response.data.endLocal);
-      setLocalIda(response.data.startLocal);
-      setPreco(response.data.price);
-      setTipoTransporte(response.data.type);
+  const fetchTransport = useCallback(async () => {
+    if (isEditing === false) {
+      return;
     }
-  };
+
+    if (id === undefined) {
+      throw "Necessário o id";
+    }
+
+    const response = await getTransport(id);
+
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
+    }
+
+    setContato(response.data.contacts);
+    setHoraChegada(new Date(response.data.endTime));
+    setHoraSaida(new Date(response.data.startTime));
+    setLocalChegada(response.data.endLocal);
+    setLocalIda(response.data.startLocal);
+    setPreco(response.data.price);
+    setTipoTransporte(response.data.type);
+  }, [id, isEditing]);
+
   useEffect(() => {
     fetchTransport();
-  }, []);
+  }, [fetchTransport]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -56,10 +66,10 @@ const TransportForms: React.FC<TransportFormsProps> = ({ whichAction, id }) => {
     }
 
     if (id === undefined) {
-      return "id null";
+      throw "id is not present";
     }
 
-    if (whichAction === true) {
+    if (isEditing === true) {
       const response = editTransport(
         {
           contacts: contato,
@@ -72,7 +82,6 @@ const TransportForms: React.FC<TransportFormsProps> = ({ whichAction, id }) => {
         },
         parseInt(id)
       );
-      console.log(response);
 
       if (response instanceof ErrorResponse) {
         alert("Erro ao tentar editar o Transporte\n" + response.message);
@@ -80,29 +89,25 @@ const TransportForms: React.FC<TransportFormsProps> = ({ whichAction, id }) => {
       }
 
       alert("Transporte editado com sucesso");
-      navigate(`/travel-info/${id}`, { replace: true });
+      navigate(`/travel-info/${id}`);
     } else {
-      if (id === undefined) {
-        return "id null";
-      }
       const transportCreated = await requestCreateTransport(parseInt(id), {
         contacts: contato,
         endLocal: localChegada,
         startLocal: localIda,
-        endTime: horaSaida,
-        startTime: horaChegada,
+        endTime: horaChegada,
+        startTime: horaSaida,
         price: preco,
         type: tipoTransporte,
       });
-      console.log("transport criado", transportCreated);
 
       if (transportCreated instanceof ErrorResponse) {
         alert("Erro ao criar transporte\n" + transportCreated.message);
         return;
       }
+
       alert("Transporte salvo com sucesso");
-      navigate(`/travel-info/${id}`, { replace: true });
-      
+      navigate(`/travel-info/${id}`);
     }
   }
 
@@ -156,27 +161,21 @@ const TransportForms: React.FC<TransportFormsProps> = ({ whichAction, id }) => {
         <div className="column">
           <label htmlFor="text">Horário de saída:</label>
           <input
-            type="text"
-            placeholder="Ex: 08:00"
+            type="datetime-local"
             className={styles.inputContato}
             required
-            value={horaSaida}
-            onChange={(event) => {
-              setHoraSaida(event.target.value);
-            }}
+            value={convertDateToDateTimeInputValue(horaSaida)}
+            onChange={(event) => setHoraSaida(convertDateInputValueToDate(event.target.value))}
           />
         </div>
         <div className="column">
           <label htmlFor="text">Horário de chegada:</label>
           <input
-            type="text"
-            placeholder="Ex: 16:30"
+            type="datetime-local"
             className={styles.inputContato}
             required
-            value={horaChegada}
-            onChange={(event) => {
-              setHoraChegada(event.target.value);
-            }}
+            value={convertDateToDateTimeInputValue(horaChegada)}
+            onChange={(event) => setHoraChegada(convertDateInputValueToDate(event.target.value))}
           />
         </div>
       </div>

@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { requestCreateTravel } from "../../api/requests/travels-requests";
 import Navbar from "../../components/Navbar";
+import {
+  convertDateInputValueToDate,
+  convertDateToDateInputValue,
+} from "../../utils/date-utilities";
 import styles from "./styles.module.scss";
-import { useNavigate } from "react-router-dom";
 
 export default function CreateTravel() {
   const [local, setLocal] = useState<string>("");
@@ -12,7 +16,7 @@ export default function CreateTravel() {
   const [proposito, setProposito] = useState<string>("");
   const [numDePessoas, setNumDePessoas] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -36,14 +40,12 @@ export default function CreateTravel() {
     }
 
     alert("Viagem criada com sucesso");
-    navigate("/travels", { replace: true });
+    navigate("/travels");
   }
 
   return (
     <Navbar pageName="Criar Viagem">
       <div className={styles.pageContainer}>
-        {/* <div className={styles.boxContainer}>
-          <div className={styles.outsideBox}> */}
         <form className={styles.insideBox} onSubmit={handleSubmit}>
           <h2>Dados da Viagem:</h2>
           <div className={styles.inputContainer}>
@@ -68,15 +70,8 @@ export default function CreateTravel() {
                 placeholder="Data"
                 className={styles.inputDate}
                 required
-                value={dataInicio ? dataInicio.toISOString().split("T")[0] : ""}
-                onChange={(event) => {
-                  const date = Date.parse(event.target.value);
-                  if (isNaN(date)) {
-                    setDataInicio(null);
-                  } else {
-                    setDataInicio(new Date(date));
-                  }
-                }}
+                value={convertDateToDateInputValue(dataInicio)}
+                onChange={(event) => setDataInicio(convertDateInputValueToDate(event.target.value))}
               />
             </div>
             <div className="column">
@@ -86,15 +81,8 @@ export default function CreateTravel() {
                 placeholder="Data"
                 className={styles.inputDate}
                 required
-                value={dataFim ? dataFim.toISOString().split("T")[0] : ""}
-                onChange={(event) => {
-                  const date = Date.parse(event.target.value);
-                  if (isNaN(date)) {
-                    setDataFim(null);
-                  } else {
-                    setDataFim(new Date(date));
-                  }
-                }}
+                value={convertDateToDateInputValue(dataFim)}
+                onChange={(event) => setDataFim(convertDateInputValueToDate(event.target.value))}
               />
             </div>
           </div>
@@ -134,8 +122,6 @@ export default function CreateTravel() {
           </button>
         </form>
       </div>
-      {/* </div>
-      </div> */}
     </Navbar>
   );
 }

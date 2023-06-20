@@ -176,13 +176,6 @@ export default function EditUserInfo() {
                     Edit
                   </button>
                 </form>
-
-                // <div className={styles.formsBox}>
-                //   <div className={styles.infoBox}>** Nome da pessoa **</div>
-                //   <button className={styles.editButton} onClick={handleNameEdit}>
-                //     Edit
-                //   </button>
-                // </div>
               )}
               {isEditingEmail ? (
                 <form className={styles.formsBox} onSubmit={sendNewEmail}>
@@ -214,13 +207,6 @@ export default function EditUserInfo() {
                     Edit
                   </button>
                 </form>
-
-                // <div className={styles.formsBox}>
-                //   <div className={styles.infoBox}>** Email da pessoa **</div>
-                //   <button className={styles.editButton} onClick={handleEmailEdit}>
-                //     Edit
-                //   </button>
-                // </div>
               )}
               {isEditingPassword ? (
                 <form className={styles.passwordFormsBox} onSubmit={sendNewPassword}>

@@ -4,12 +4,11 @@ import StayForms from "../../components/StayForms";
 import styles from "./styles.module.scss";
 
 export default function EditStay() {
-  const whichAction = true;
   const params = useParams();
   return (
     <Navbar pageName="Editar Estadia">
       <div className={styles.pageContainer}>
-        <StayForms whichAction={whichAction} id={params.id} />
+        <StayForms isEditing={true} id={params.id} />
       </div>
     </Navbar>
   );

@@ -11,16 +11,10 @@
   }
 }
 
-// .boxContainer {
-//   display: flex;
-//   justify-content: center;
-// }
-
 .outsideBox {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  height: 50vh;
   width: 75%;
   justify-items: center;
   align-items: center;
@@ -34,7 +28,6 @@
 }
 
 .insideBox {
-  width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -42,11 +35,10 @@
   text-align: left;
   width: 50%;
   padding: 25px;
-  // margin-top: 5%;
+
   margin-bottom: 100px;
   margin: 0px auto;
-  // border: 1px solid rgba(221, 223, 228, 1);
-  // border-radius: 10px;
+
   background: #ffffff;
 
   border: 1px solid #dddfe4;
@@ -94,7 +86,7 @@
   border: 2px solid $color-primary;
   border-radius: 10px;
 
-  background: #E6E6E6;
+  background: #e6e6e6;
   box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
 
   span {
@@ -103,12 +95,6 @@
     font-weight: bold;
     font-size: 1rem;
   }
-}
-
-label {
-  width: 100%;
-  font-weight: bold;
-  display: block;
 }
 
 .column {
@@ -145,6 +131,7 @@ label {
   border-radius: 10px;
   padding: 10px;
   text-align: left;
+  background-color: rgba(79, 119, 45, 0.5);
 }
 
 .inputDate {
@@ -154,7 +141,7 @@ label {
   padding: 10px;
   color: #666;
   border-radius: 10px;
-  // padding: 5px;
+
   font-size: 12pt;
   text-align: left;
 }
@@ -173,24 +160,10 @@ label {
   resize: none;
 }
 
-input,
-select,
-textarea {
-  color: #666;
-  background: rgba(79, 119, 45, 0.5);
-  font-size: 14pt;
-  border: 1px solid #000000;
-  /* Interno */
-
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 9px;
-}
-
 .submitButton {
   margin-top: 2rem;
   width: 200px;
-  // width: 40%;
-  // height: 2.5rem;
+
   padding: 10px;
   margin: 0 auto;
 
@@ -278,4 +251,13 @@ textarea {
     margin: 0px;
     color: #c9ff99;
   }
+}
+
+#schedule_link {
+  text-decoration: none;
+  color: $color-secondary;
+
+  position: absolute;
+  left: 11px;
+  top: 100px;
 }

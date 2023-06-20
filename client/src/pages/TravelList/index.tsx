@@ -1,48 +1,27 @@
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
-import { getTravel } from "../../api/requests/travels-requests";
-// import useAuth from "../../auth/context/auth-hook";
+import { TravelsResponseDTO } from "../../api/dto/travels-dto";
+import { getTravels } from "../../api/requests/travels-requests";
+import FundoViagem from "../../assets/FundoViagem.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import FundoViagem from "../../assets/FundoViagem.png"
 
 export default function TravelList() {
-  // const auth = useAuth();
-  // const params = useParams();
-
-  // async function getTravelsList() {
-  //   if (auth.userInfo == null) {
-  //     throw "userInfo context is null";
-  //   }
-
-  //   const travels = await getTravels(auth.userInfo.id.toString());
-  //   // console.log(travels.data);
-  //   return travels;
-  // }
-
-  // getTravelsList();
-
   // Travel variables
-  const [local, setLocal] = useState<string>("");
-  const [dataInicio, setDataInicio] = useState<Date | null>(null);
-  const [dataFim, setDataFim] = useState<Date | null>(null);
-  const [proposito, setProposito] = useState<string>("");
-  const [numDePessoas, setNumDePessoas] = useState("");
+  const [travels, setTravels] = useState<TravelsResponseDTO[]>([]);
 
   // Travel fetch request
   const fetchTravel = async () => {
-    const response = await getTravel("1");
+    const response = await getTravels();
+
     if (response instanceof ErrorResponse) {
-      console.log(response.message);
+      alert(response.message);
       return;
     }
-    setDataFim(new Date(response.data.endDate));
-    setDataInicio(new Date(response.data.startDate));
-    setLocal(response.data.local);
-    setNumDePessoas(response.data.numParticipants.toString());
-    setProposito(response.data.description);
+
+    setTravels(response.data);
   };
 
   useEffect(() => {
@@ -52,24 +31,29 @@ export default function TravelList() {
   return (
     <Navbar pageName="Viagens" selectedPage="TRAVELS">
       <div className={styles.pageContainer}>
-        <Link to="/create-travel" replace style={{ textDecoration: "none" }}>
+        <Link to="/create-travel" style={{ textDecoration: "none" }}>
           <button id={styles.createTravelButton}>
             <MenuBookIcon fontSize="large" />
             <div id={styles.buttonText}>Criar Viagem</div>
           </button>
         </Link>
         <div className={styles.outsideBox}>
-          <Link to="/travel-info/1" replace style={{ textDecoration: "none" }}>
-            <button className={styles.insideBox}>
-              <div className={styles.infoBox}>
-                <h3>{local}</h3>
-                <img alt="Fundo Viagem" src={FundoViagem}></img>
-                <div className={styles.infoText}>
-                  <p>{dataInicio ? dataInicio.toISOString().split("T")[0] : ""} até {dataFim ? dataFim.toISOString().split("T")[0] : ""}</p>
+          {travels.map((travel) => (
+            <Link to={`/travel-info/${travel.id}`} style={{ textDecoration: "none" }}>
+              <button className={styles.insideBox}>
+                <div className={styles.infoBox}>
+                  <h3>{travel.local}</h3>
+                  <img alt="Fundo Viagem" src={FundoViagem}></img>
+                  <div className={styles.infoText}>
+                    <p>
+                      {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                      {new Date(travel.endDate).toLocaleDateString()}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </button>
-          </Link>
+              </button>
+            </Link>
+          ))}
         </div>
       </div>
     </Navbar>

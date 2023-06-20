@@ -49,8 +49,8 @@ model Transport {
   type       String   @db.VarChar(50)
   startLocal String   @db.VarChar(100)
   endLocal   String   @db.VarChar(100)
-  startTime  String   @db.VarChar(20)
-  endTime    String   @db.VarChar(20)
+  startTime  DateTime @db.DateTime
+  endTime    DateTime @db.DateTime
   price      Decimal  @db.Decimal(10, 2)
   contacts   String   @db.VarChar(50)
   travelId   Int      @db.UnsignedInt
@@ -58,10 +58,13 @@ model Transport {
 }
 
 model Event {
-  id          Int      @id @default(autoincrement()) @db.UnsignedInt
-  startTime   DateTime @db.DateTime
-  endTime     DateTime @db.DateTime
-  description String   @db.Text
-  travelId    Int      @db.UnsignedInt
-  travel      Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
+  id                Int      @id @default(autoincrement()) @db.UnsignedInt
+  transportType     String   @db.VarChar(50)
+  departureLocation String   @db.VarChar(100)
+  eventDate         DateTime @db.Date
+  eventTime         DateTime @db.Time
+  eventValue        Decimal  @db.Decimal(10, 2)
+  eventExtras       String   @db.Text
+  travelId          Int      @db.UnsignedInt
+  travel            Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
 }

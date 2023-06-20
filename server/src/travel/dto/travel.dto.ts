@@ -27,6 +27,7 @@ export class TravelsResponseDTO {
   this: any;
   numParticipants: number;
   description: string;
+
   constructor(travel: Travel) {
     this.id = travel.id;
     this.local = travel.local;
@@ -36,4 +37,3 @@ export class TravelsResponseDTO {
     this.numParticipants = travel.numParticipants;
   }
 }
-// export type ListTravelsResponseDTO = TravelsResponseDTO[];

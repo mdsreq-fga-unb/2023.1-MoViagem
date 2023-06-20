@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { editHost, getHost, requestCreateHost } from "../../api/requests/travels-requests";
+import {
+  convertDateInputValueToDate,
+  convertDateToDateInputValue,
+} from "../../utils/date-utilities";
 import styles from "./styles.module.scss";
 
 interface StayFormsProps {
-  whichAction: boolean;
+  isEditing: boolean;
   id?: string;
 }
 
-const StayForms: React.FC<StayFormsProps> = ({ whichAction, id }) => {
+const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
   const [local, setLocal] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<Date | null>(null);
   const [dataFim, setDataFim] = useState<Date | null>(null);
@@ -19,33 +23,36 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction, id }) => {
 
   const navigate = useNavigate();
 
-  const fetchHost = async () => {
-    if (whichAction === true) {
-      if (id === undefined) {
-        throw "Necessario o id";
-      }
-      const response = await getHost(id);
-      if (response instanceof ErrorResponse) {
-        console.log(response.message);
-        return;
-      }
-      setContato(response.data.contact);
-      setPreco(response.data.price);
-      setDataFim(new Date(response.data.endTime));
-      setDataInicio(new Date(response.data.startTime));
-      setLocal(response.data.local);
-      setTipoEstadia(response.data.type);
+  const fetchHost = useCallback(async () => {
+    if (isEditing === false) {
+      return;
     }
-  };
+
+    if (id === undefined) {
+      throw "Necessário o id";
+    }
+
+    const response = await getHost(id);
+
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
+    }
+
+    setContato(response.data.contact);
+    setPreco(response.data.price);
+    setDataFim(new Date(response.data.endTime));
+    setDataInicio(new Date(response.data.startTime));
+    setLocal(response.data.local);
+    setTipoEstadia(response.data.type);
+  }, [id, isEditing]);
+
   useEffect(() => {
     fetchHost();
-  }, []);
+  }, [fetchHost]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    // console.log("Cliquei patrão");
-    // return;
 
     if (!dataInicio || !dataFim) {
       alert("Data inválida");
@@ -53,9 +60,10 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction, id }) => {
     }
 
     if (id === undefined) {
-      return "id null";
+      throw "id is not present";
     }
-    if (whichAction === true) {
+
+    if (isEditing === true) {
       const response = await editHost(
         {
           contact: contato,
@@ -68,19 +76,14 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction, id }) => {
         parseInt(id)
       );
 
-      console.log(response);
-
       if (response instanceof ErrorResponse) {
         alert("Erro ao tentar editar a estadia\n" + response.message);
         return;
       }
 
       alert("Estadia editada com sucesso");
-      navigate(`/travel-info/${id}`, { replace: true });
+      navigate(`/travel-info/${id}`);
     } else {
-      if (id === undefined) {
-        return "id null";
-      }
       const createdHost = await requestCreateHost(parseInt(id), {
         contact: contato,
         endTime: dataFim,
@@ -90,16 +93,14 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction, id }) => {
         type: tipoEstadia,
       });
 
-      console.log("createdHost", createdHost);
       if (createdHost instanceof ErrorResponse) {
         alert("Erro ao tentar criar a estadia\n" + createdHost.message);
         return;
       }
-      alert("Estadia criada com sucesso");
-      navigate(`/travel-info/${id}`, { replace: true });
-    }
 
-    /* Create is false */
+      alert("Estadia criada com sucesso");
+      navigate(`/travel-info/${id}`);
+    }
   }
 
   return (
@@ -127,15 +128,8 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction, id }) => {
             placeholder="Data"
             className={styles.inputDate}
             required
-            value={dataInicio ? dataInicio.toISOString().split("T")[0] : ""}
-            onChange={(event) => {
-              const date = Date.parse(event.target.value);
-              if (isNaN(date)) {
-                setDataInicio(null);
-              } else {
-                setDataInicio(new Date(date));
-              }
-            }}
+            value={convertDateToDateInputValue(dataInicio)}
+            onChange={(event) => setDataInicio(convertDateInputValueToDate(event.target.value))}
           />
         </div>
         <div className="column">
@@ -145,15 +139,8 @@ const StayForms: React.FC<StayFormsProps> = ({ whichAction, id }) => {
             placeholder="Data"
             className={styles.inputDate}
             required
-            value={dataFim ? dataFim.toISOString().split("T")[0] : ""}
-            onChange={(event) => {
-              const date = Date.parse(event.target.value);
-              if (isNaN(date)) {
-                setDataFim(null);
-              } else {
-                setDataFim(new Date(date));
-              }
-            }}
+            value={convertDateToDateInputValue(dataFim)}
+            onChange={(event) => setDataFim(convertDateInputValueToDate(event.target.value))}
           />
         </div>
       </div>

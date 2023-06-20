@@ -1,27 +1,42 @@
 import { Event } from "@prisma/client";
-import { IsDate, Length } from "class-validator";
+import { IsDate, IsPositive, Length } from "class-validator";
 
 export class CreateEventRequestDTO {
-  @IsDate()
-  startTime: Date;
+  @Length(1, 50)
+  transportType: string;
+
+  @Length(1, 100)
+  departureLocation: string;
 
   @IsDate()
-  endTime: Date;
+  eventDate: Date;
 
-  @Length(4, 500)
-  description: string;
+  @IsDate()
+  eventTime: Date;
+
+  @IsPositive()
+  eventValue: number;
+
+  @Length(1)
+  eventExtras: string;
 }
 
 export class EventResponseDTO {
   id: number;
-  startTime: Date;
-  endTime: Date;
-  description: string;
+  transportType: string;
+  departureLocation: string;
+  eventDate: Date;
+  eventTime: Date;
+  eventValue: number;
+  eventExtras: string;
 
   constructor(event: Event) {
     this.id = event.id;
-    this.startTime = event.startTime;
-    this.endTime = event.endTime;
-    this.description = event.description;
+    this.transportType = event.transportType;
+    this.departureLocation = event.departureLocation;
+    this.eventDate = event.eventDate;
+    this.eventTime = event.eventTime;
+    this.eventValue = event.eventValue.toNumber();
+    this.eventExtras = event.eventExtras;
   }
 }

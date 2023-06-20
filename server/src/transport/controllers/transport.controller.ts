@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { EnableAuth } from 'src/auth/decorators/auth.decorator';
+import { EnableAuth } from "src/auth/decorators/auth.decorator";
 import { CreateTransportRequestDTO, TransportResponseDTO } from "../dto/transport.dto";
 import { TransportService } from "../services/transport.service";
 
@@ -15,7 +15,6 @@ export class TransportController {
     @Param("id") id: number,
     @Body() createTransportRequestDTO: CreateTransportRequestDTO
   ): Promise<void> {
-    console.log("chegou na controller")
     return this.transportService.create(id, createTransportRequestDTO);
   }
 

@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
+import Navbar from "../../components/Navbar/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
 
-const Calendar: React.FC = () => {
+const Schedule: React.FC = () => {
   const date = useMemo(() => new Date(), []);
   const [currentDate, setCurrentDate] = useState("");
   const [currentDateForSidebar, setCurrentDateForSidebar] = useState("");
@@ -116,34 +117,31 @@ const Calendar: React.FC = () => {
   }, [renderCalendar]);
 
   // Handle click on previous/next month icon
-  const handleIconClick = useCallback(
-    (increment: number) => {
-      setCurrMonth((prevMonth) => {
-        let updatedMonth = prevMonth + increment;
-        let updatedYear = date.getFullYear();
+  const handleIconClick = (increment: number) => {
+    setCurrMonth((prevMonth) => {
+      let updatedMonth = prevMonth + increment;
+      let updatedYear = date.getFullYear();
 
-        if (updatedMonth < 0) {
-          updatedMonth = 11;
-          updatedYear--;
-        } else if (updatedMonth > 11) {
-          updatedMonth = 0;
-          updatedYear++;
-        }
+      if (updatedMonth < 0) {
+        updatedMonth = 11;
+        updatedYear--;
+      } else if (updatedMonth > 11) {
+        updatedMonth = 0;
+        updatedYear++;
+      }
 
-        currYearRef.current = updatedYear; // Update year reference
+      currYearRef.current = updatedYear; // Update year reference
 
-        return updatedMonth;
-      });
-    },
-    [date]
-  );
+      return updatedMonth;
+    });
+  };
 
   const handleModalOpen = () => {
     setShowModal(true);
   };
 
   return (
-    <>
+    <Navbar pageName="Calendário" selectedPage="CALENDAR">
       <div className={styles.pageContainer}>
         <div className={styles.boxContainer}>
           {showModal && (
@@ -191,8 +189,8 @@ const Calendar: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </Navbar>
   );
 };
 
-export default Calendar;
+export default Schedule;

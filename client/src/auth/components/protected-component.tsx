@@ -5,8 +5,7 @@ export default function ProtectedComponent() {
   const auth = useAuth();
 
   if (auth.userInfo === null) {
-    console.log("estou te redirecionando");
-    return <Navigate to="/login-and-register" replace />;
+    return <Navigate to="/login-and-register" />;
   }
 
   return <Outlet />;

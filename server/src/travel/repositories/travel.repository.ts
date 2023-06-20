@@ -36,4 +36,12 @@ export class TravelRepository {
       },
     });
   }
+
+  async getTravelsByUser(userId: number): Promise<Travel[]> {
+    return await this.prismaService.travel.findMany({
+      where: {
+        userId: userId,
+      },
+    });
+  }
 }

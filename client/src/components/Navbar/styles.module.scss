@@ -4,6 +4,9 @@
   display: grid;
   grid-template-columns: 100px 1fr;
   grid-template-rows: 100px 1fr;
+
+  position: relative;
+  height: 100vh;
 }
 
 #topBar {
@@ -26,7 +29,7 @@
   display: grid;
   grid-template-rows: 100px 1fr 100px;
 
-  height: 100vh;
+  height: 100%;
 
   background-color: $color-primary;
 }
@@ -61,7 +64,7 @@
   justify-self: center;
 
   cursor: pointer;
-  transition: .4s;
+  transition: 0.4s;
 
   &:hover {
     background: #35521b;

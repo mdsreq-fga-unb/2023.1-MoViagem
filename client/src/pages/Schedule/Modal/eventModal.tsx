@@ -9,7 +9,6 @@ interface EventModalProps {
 const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => {
   const [transportType, setTransportType] = useState("");
   const [departureLocation, setDepartureLocation] = useState("");
-  const [arrivalLocation, setArrivalLocation] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
   const [eventValue, setEventValue] = useState("");
@@ -28,7 +27,6 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
     const eventData = {
       transportType,
       departureLocation,
-      arrivalLocation,
       eventDate,
       eventTime,
       eventValue,

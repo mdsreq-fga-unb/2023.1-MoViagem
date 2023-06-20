@@ -6,30 +6,30 @@ import { TransportRepository } from "../repositories/transport.repository";
 export class TransportService {
   constructor(private transportRepository: TransportRepository) {}
 
-  async create(id: number, createTransportRequestDTO: CreateTransportRequestDTO): Promise<void> {
-    "chamou o service"
+  async create(id: number, dto: CreateTransportRequestDTO): Promise<void> {
     await this.transportRepository.createTransport({
       travel: {
         connect: {
           id: id,
         },
       },
-
-      type: createTransportRequestDTO.type,
-      startLocal: createTransportRequestDTO.startLocal,
-      endLocal: createTransportRequestDTO.endLocal,
-      startTime: createTransportRequestDTO.startTime,
-      endTime: createTransportRequestDTO.endTime,
-      price: createTransportRequestDTO.price,
-      contacts: createTransportRequestDTO.contacts,
+      type: dto.type,
+      startLocal: dto.startLocal,
+      endLocal: dto.endLocal,
+      startTime: dto.startTime,
+      endTime: dto.endTime,
+      price: dto.price,
+      contacts: dto.contacts,
     });
   }
 
   async getTransport(id: number): Promise<TransportResponseDTO> {
     const transport = await this.transportRepository.getTransport(id);
+
     if (transport === null) {
-      throw new BadRequestException("Transporte não Existe");
+      throw new BadRequestException("Transporte não existe");
     }
+
     return new TransportResponseDTO(transport);
   }
 

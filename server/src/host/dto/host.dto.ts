@@ -29,6 +29,7 @@ export class HostResponseDTO {
   local: string;
   price: number;
   contact: string;
+
   constructor(host: Host) {
     this.id = host.id;
     this.local = host.local;
