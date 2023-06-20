@@ -31,4 +31,4 @@ package-lock.json
 yarn.lock
 
 *.env
-!example.env
+!.example.env
