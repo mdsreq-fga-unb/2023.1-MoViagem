@@ -158,7 +158,9 @@ const Calendar: React.FC = () => {
               <li>Activity 2</li>
               <li>Activity 3</li>
             </ul>
-            <button onClick={handleModalOpen}>Open Modal</button>
+            <button className={styles.buttonContainer} onClick={handleModalOpen}>
+              Open Modal
+            </button>
           </div>
           <div className={styles.calendar}>
             <header>
