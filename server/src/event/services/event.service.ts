@@ -14,7 +14,6 @@ export class EventService {
         },
       },
       departureLocation: createEventRequestDTO.departureLocation,
-      eventDate: createEventRequestDTO.eventDate,
       eventTime: createEventRequestDTO.eventTime,
       eventExtras: createEventRequestDTO.eventExtras,
       eventValue: createEventRequestDTO.eventValue,
@@ -25,7 +24,6 @@ export class EventService {
   async edit(id: number, dto: CreateEventRequestDTO): Promise<void> {
     await this.eventRepository.updateEvent(id, {
       departureLocation: dto.departureLocation,
-      eventDate: dto.eventDate,
       eventTime: dto.eventTime,
       eventExtras: dto.eventExtras,
       eventValue: dto.eventValue,

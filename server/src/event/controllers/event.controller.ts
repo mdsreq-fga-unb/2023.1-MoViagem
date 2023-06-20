@@ -4,7 +4,7 @@ import { EnableAuth } from "src/auth/decorators/auth.decorator";
 import { CreateEventRequestDTO, EventResponseDTO } from "../dto/event.dto";
 import { EventService } from "../services/event.service";
 
-@Controller("/api/calendar/event")
+@Controller("/api/event")
 @ApiTags("event")
 @EnableAuth()
 export class EventController {

@@ -43,3 +43,19 @@ export interface CreateHostRequestDTO {
   price: number;
   contact: string;
 }
+
+export interface CreateEventRequestDTO {
+  transportType: string;
+  departureLocation: string;
+  eventTime: Date;
+  eventValue: number;
+  eventExtras: string;
+}
+export interface EventResponseDTO {
+  id: number;
+  transportType: string;
+  departureLocation: string;
+  eventTime: Date;
+  eventValue: number;
+  eventExtras: string;
+}

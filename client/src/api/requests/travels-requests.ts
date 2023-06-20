@@ -1,5 +1,6 @@
 import request from "../api-instance";
 import {
+  CreateEventRequestDTO,
   CreateHostRequestDTO,
   CreateTransportRequestDTO,
   CreateTravelRequestDTO,
@@ -79,6 +80,14 @@ export async function editHost(form: CreateHostRequestDTO, id: number) {
   return request<CreateHostRequestDTO, never>({
     method: "PUT",
     url: `host/editHost/${id}`,
+    body: form,
+  });
+}
+
+export function requestCreateEvent(id: number, form: CreateEventRequestDTO) {
+  return request<CreateEventRequestDTO, never>({
+    method: "POST",
+    url: `event/create/${id}`,
     body: form,
   });
 }

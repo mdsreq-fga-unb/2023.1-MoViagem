@@ -1,21 +1,23 @@
 import React, { useState } from "react";
+import { ErrorResponse } from "../../../api/api-instance";
+import { requestCreateEvent } from "../../../api/requests/travels-requests";
 import styles from "./styles.module.scss";
 
 interface EventModalProps {
-  selectedDate: Date | null;
+  selectedDate: Date;
   closeModal: () => void;
+  travelId:string
 }
 
-const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => {
+const EventModal: React.FC<EventModalProps> = ({travelId: id, selectedDate, closeModal }) => {
   const [transportType, setTransportType] = useState("");
   const [departureLocation, setDepartureLocation] = useState("");
-  const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
-  const [eventValue, setEventValue] = useState("");
+  const [eventValue, setEventValue] = useState(0);
   const [eventExtras, setEventExtras] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSaveEvent = () => {
+  const handleSaveEvent = async () => {
     // Validate and save the event data
     // Perform validation checks and show error message if necessary
     if (eventExtras.length > 250) {
@@ -23,18 +25,29 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
       return;
     }
 
-    // Process the event data and save it
-    const eventData = {
-      transportType,
-      departureLocation,
-      eventDate,
-      eventTime,
-      eventValue,
-      eventExtras,
-    };
+    const mergeTimeDate = selectedDate;
+    const [hours, minutes] = eventTime.split(":");
 
+    mergeTimeDate.setHours(parseInt(hours), parseInt(minutes));
+    
+    // Process the event data and save it
     // Save the event data or perform any other required actions
-    console.log("Event data:", eventData);
+    const response = await requestCreateEvent(parseInt(id), {
+        transportType,
+        departureLocation,
+        eventTime: mergeTimeDate,
+        eventValue,
+        eventExtras,
+    });
+
+    if(response instanceof ErrorResponse) {
+      alert(response.message);
+      return
+    }
+
+    //Success
+
+    alert("Evento criado com sucesso.")
 
     // Close the modal
     closeModal();
@@ -61,16 +74,12 @@ const EventModal: React.FC<EventModalProps> = ({ selectedDate, closeModal }) => 
           />
         </div>
         <div className={styles.formField}>
-          <label>Data:</label>
-          <input type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
-        </div>
-        <div className={styles.formField}>
           <label>Horário:</label>
           <input type="time" value={eventTime} onChange={(e) => setEventTime(e.target.value)} />
         </div>
         <div className={styles.formField}>
           <label>Valor:</label>
-          <input type="text" value={eventValue} onChange={(e) => setEventValue(e.target.value)} />
+          <input type="number" value={eventValue} onChange={(e) => setEventValue(parseInt(e.target.value))} />
         </div>
         <div className={styles.formField}>
           <label>Extras:</label>

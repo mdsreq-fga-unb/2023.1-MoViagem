@@ -9,9 +9,6 @@ export class CreateEventRequestDTO {
   departureLocation: string;
 
   @IsDate()
-  eventDate: Date;
-
-  @IsDate()
   eventTime: Date;
 
   @IsPositive()
@@ -25,7 +22,6 @@ export class EventResponseDTO {
   id: number;
   transportType: string;
   departureLocation: string;
-  eventDate: Date;
   eventTime: Date;
   eventValue: number;
   eventExtras: string;
@@ -34,7 +30,6 @@ export class EventResponseDTO {
     this.id = event.id;
     this.transportType = event.transportType;
     this.departureLocation = event.departureLocation;
-    this.eventDate = event.eventDate;
     this.eventTime = event.eventTime;
     this.eventValue = event.eventValue.toNumber();
     this.eventExtras = event.eventExtras;

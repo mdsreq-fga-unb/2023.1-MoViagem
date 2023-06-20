@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
+import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
 
 const Schedule: React.FC = () => {
+  const params = useParams();
   const date = useMemo(() => new Date(), []);
   const [currentDate, setCurrentDate] = useState("");
   const [currentDateForSidebar, setCurrentDateForSidebar] = useState("");
@@ -140,12 +142,16 @@ const Schedule: React.FC = () => {
     setShowModal(true);
   };
 
+  const handleModalClose = () => {
+    setShowModal(false);
+  }
+
   return (
     <Navbar pageName="Calendário" selectedPage="CALENDAR">
       <div className={styles.pageContainer}>
         <div className={styles.boxContainer}>
-          {showModal && (
-            <EventModal selectedDate={selectedDate} closeModal={() => setShowModal(false)} />
+          {showModal && selectedDate && (
+            <EventModal travelId={params.id!} selectedDate={selectedDate} closeModal={() => handleModalClose()} />
           )}
           <div className={styles.sidebar}>
             {/* Sidebar Content */}
