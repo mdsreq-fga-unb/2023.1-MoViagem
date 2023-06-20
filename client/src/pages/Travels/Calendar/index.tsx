@@ -11,6 +11,7 @@ const Calendar: React.FC = () => {
   const [currMonth, setCurrMonth] = useState<number>(date.getMonth());
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [days, setDays] = useState<JSX.Element[]>([]); // Declare days as a state variable
   const currYearRef = useRef<number>(date.getFullYear());
 
   // Render the calendar
@@ -35,7 +36,7 @@ const Calendar: React.FC = () => {
       "Dezembro",
     ];
 
-    const days: JSX.Element[] = [];
+    const updatedDays: JSX.Element[] = [];
 
     // Handle day click event
     const handleDayClick = (day: number, month: number, year: number) => {
@@ -49,13 +50,13 @@ const Calendar: React.FC = () => {
       });
       setCurrentDateForSidebar(currentDayForSidebar);
 
-      setShowModal(true);
+      // setShowModal(true);
       console.log("Day clicked:", selectedDateEvent);
     };
 
     // Add inactive days from the previous month
     for (let i = firstDayOfMonth; i > 0; i--) {
-      days.push(
+      updatedDays.push(
         <div key={`prev-${i}`} className={styles.inactive}>
           {lastDateOfLastMonth - i + 1}
         </div>
@@ -70,22 +71,20 @@ const Calendar: React.FC = () => {
         date.getFullYear() === date.getFullYear()
           ? styles.active
           : "";
-      days.push(
-        <div>
-          <div
-            key={`curr-${i}`}
-            className={`${isToday} ${styles.day}`}
-            onClick={() => handleDayClick(i, currMonth, currYearRef.current)}
-          >
-            {i}
-          </div>
+      updatedDays.push(
+        <div
+          key={`curr-${i}`}
+          className={`${isToday} ${styles.day}`}
+          onClick={() => handleDayClick(i, currMonth, currYearRef.current)}
+        >
+          {i}
         </div>
       );
     }
 
     // Add inactive days from the next month
     for (let i = lastDayOfMonth; i < 6; i++) {
-      days.push(
+      updatedDays.push(
         <div key={`next-${i}`} className={styles.inactive}>
           {i - lastDayOfMonth + 1}
         </div>
@@ -108,7 +107,8 @@ const Calendar: React.FC = () => {
     console.log("Day clicked:", selectedDateEvent);
 
     setCurrentDate(`${currentDay} ${months[currMonth]} ${currYearRef.current}`);
-    setDaysTag(ReactDOMServer.renderToString(<div>{days}</div>));
+    setDays(updatedDays);
+    setDaysTag(ReactDOMServer.renderToString(<div>{updatedDays}</div>));
   }, [currMonth, date]);
 
   useEffect(() => {
@@ -153,14 +153,22 @@ const Calendar: React.FC = () => {
             {/* Sidebar Content */}
             <h2>{currentDateForSidebar}</h2>
             {/* Fetch and display activities for the selected date */}
-            <ul>
-              <li>Activity 1</li>
-              <li>Activity 2</li>
-              <li>Activity 3</li>
-            </ul>
-            <button className={styles.buttonContainer} onClick={handleModalOpen}>
-              Open Modal
-            </button>
+            <div className={styles.activities}>
+              <div>Activity 1</div>
+              <div>Activity 2</div>
+              <div>Activity 3</div>
+              <button className={styles.buttonContainer} onClick={handleModalOpen}>
+                Open Modal
+              </button>
+            </div>
+            <div className={styles.icons}>
+              <span className={styles.prev} onClick={() => handleIconClick(-1)}>
+                Previous
+              </span>
+              <span className={styles.next} onClick={() => handleIconClick(1)}>
+                Next
+              </span>
+            </div>
           </div>
           <div className={styles.calendar}>
             <header>
@@ -178,22 +186,10 @@ const Calendar: React.FC = () => {
               </div>
             </div>
             <div className={styles.days}>
-              <div
-                className={styles.gridLayout}
-                id="daysOfMonth"
-                dangerouslySetInnerHTML={{ __html: daysTag }}
-              ></div>
+              <div className={styles.gridLayout}>{days}</div>
             </div>
           </div>
         </div>
-      </div>
-      <div className={styles.icons}>
-        <span className={styles.prev} onClick={() => handleIconClick(-1)}>
-          Previous
-        </span>
-        <span className={styles.next} onClick={() => handleIconClick(1)}>
-          Next
-        </span>
       </div>
     </>
   );
