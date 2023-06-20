@@ -4,6 +4,7 @@ import ProtectedComponent from "./auth/components/protected-component";
 import CreateStay from "./pages/CreateStay";
 import CreateTransport from "./pages/CreateTransport";
 import CreateTravel from "./pages/CreateTravel";
+import Cronograma from "./pages/Cronograma";
 import EditStay from "./pages/EditStay";
 import EditTransport from "./pages/EditTransport";
 import EditUserInfo from "./pages/EditUserInfo";
@@ -30,7 +31,7 @@ const router = createBrowserRouter(
           <Route path="/edit-transport/:id" element={<EditTransport />} />
           <Route path="/create-stay/:id" element={<CreateStay />} />
           <Route path="/edit-stay/:id" element={<EditStay />} />
-          <Route path="/calendar/:id" element={<Calendar />} />
+          <Route path="/cronograma/:id" element={<Cronograma />} />
         </Route>
       </Route>
     </>
