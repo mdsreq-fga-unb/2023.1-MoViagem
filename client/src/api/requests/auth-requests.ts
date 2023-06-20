@@ -11,7 +11,7 @@ import {
 } from "../dto/auth-dtos";
 
 const authApi = axios.create({
-  baseURL: "http://localhost:8000/auth",
+  baseURL: `${import.meta.env.VITE_API_URL || "http://localhost:8000"}/auth`,
   headers: {
     "Content-Type": "application/json",
   },

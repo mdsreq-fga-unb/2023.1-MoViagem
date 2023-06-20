@@ -20,7 +20,7 @@ export default function Login() {
 
   // If user is already logged in, redirect to home page
   if (userInfo !== null) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" />;
   }
 
   async function handleSubmitLogin(event: React.FormEvent<HTMLFormElement>) {
@@ -41,7 +41,7 @@ export default function Login() {
     });
 
     // After login, redirect to home page
-    navigate("/", { replace: true });
+    navigate("/");
   }
 
   async function handleSubmitRegister(event: React.FormEvent<HTMLFormElement>) {
@@ -78,7 +78,7 @@ export default function Login() {
     });
 
     // After register, redirect to home page
-    navigate("/", { replace: true });
+    navigate("/");
   }
 
   return (

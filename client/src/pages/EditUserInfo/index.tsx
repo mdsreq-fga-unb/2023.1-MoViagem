@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { deleteAccount, editEmail, editName, editPassword } from "../../api/requests/auth-requests";
 import useAuth from "../../auth/context/auth-hook";
@@ -6,6 +7,7 @@ import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
 
 export default function EditUserInfo() {
+  const navigate = useNavigate();
   const auth = useAuth();
   const [isEditingName, setIsEditingName] = useState(false);
   const [isEditingEmail, setIsEditingEmail] = useState(false);
@@ -68,17 +70,18 @@ export default function EditUserInfo() {
     setIsEditingEmail(false);
     return response;
   };
+
   const sendDeleteAccount = async () => {
     if (auth.userInfo == null) {
       throw "userInfo context is null";
     }
     const response = await deleteAccount(auth.userInfo?.id.toString());
     if (response instanceof ErrorResponse) {
-      alert(response.status === 400 ? "não foi possivel editar o email" : "");
+      alert(response.status === 400 ? "Este usuário possui viagens" : "");
       return;
     }
     auth.eraseTokens();
-    window.location.href = "/login-and-register";
+    navigate("/login-and-register");
   };
 
   const sendNewPassword = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -176,13 +179,6 @@ export default function EditUserInfo() {
                     Edit
                   </button>
                 </form>
-
-                // <div className={styles.formsBox}>
-                //   <div className={styles.infoBox}>** Nome da pessoa **</div>
-                //   <button className={styles.editButton} onClick={handleNameEdit}>
-                //     Edit
-                //   </button>
-                // </div>
               )}
               {isEditingEmail ? (
                 <form className={styles.formsBox} onSubmit={sendNewEmail}>
@@ -214,13 +210,6 @@ export default function EditUserInfo() {
                     Edit
                   </button>
                 </form>
-
-                // <div className={styles.formsBox}>
-                //   <div className={styles.infoBox}>** Email da pessoa **</div>
-                //   <button className={styles.editButton} onClick={handleEmailEdit}>
-                //     Edit
-                //   </button>
-                // </div>
               )}
               {isEditingPassword ? (
                 <form className={styles.passwordFormsBox} onSubmit={sendNewPassword}>

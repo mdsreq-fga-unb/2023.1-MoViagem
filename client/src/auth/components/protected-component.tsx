@@ -5,7 +5,7 @@ export default function ProtectedComponent() {
   const auth = useAuth();
 
   if (auth.userInfo === null) {
-    return <Navigate to="/login-and-register" replace />;
+    return <Navigate to="/login-and-register" />;
   }
 
   return <Outlet />;

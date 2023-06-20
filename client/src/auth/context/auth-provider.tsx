@@ -73,5 +73,8 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
     return <div>loading...</div>;
   }
 
+  if (loading) {
+    return null;
+  }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
