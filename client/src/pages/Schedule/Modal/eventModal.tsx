@@ -6,10 +6,10 @@ import styles from "./styles.module.scss";
 interface EventModalProps {
   selectedDate: Date;
   closeModal: () => void;
-  travelId:string
+  travelId: string;
 }
 
-const EventModal: React.FC<EventModalProps> = ({travelId: id, selectedDate, closeModal }) => {
+const EventModal: React.FC<EventModalProps> = ({ travelId: id, selectedDate, closeModal }) => {
   const [transportType, setTransportType] = useState("");
   const [departureLocation, setDepartureLocation] = useState("");
   const [eventTime, setEventTime] = useState("");
@@ -29,25 +29,25 @@ const EventModal: React.FC<EventModalProps> = ({travelId: id, selectedDate, clos
     const [hours, minutes] = eventTime.split(":");
 
     mergeTimeDate.setHours(parseInt(hours), parseInt(minutes));
-    
+
     // Process the event data and save it
     // Save the event data or perform any other required actions
     const response = await requestCreateEvent(parseInt(id), {
-        transportType,
-        departureLocation,
-        eventTime: mergeTimeDate,
-        eventValue,
-        eventExtras,
+      transportType,
+      departureLocation,
+      eventTime: mergeTimeDate,
+      eventValue,
+      eventExtras,
     });
 
-    if(response instanceof ErrorResponse) {
+    if (response instanceof ErrorResponse) {
       alert(response.message);
-      return
+      return;
     }
 
     //Success
 
-    alert("Evento criado com sucesso.")
+    alert("Evento criado com sucesso.");
 
     // Close the modal
     closeModal();
@@ -79,7 +79,11 @@ const EventModal: React.FC<EventModalProps> = ({travelId: id, selectedDate, clos
         </div>
         <div className={styles.formField}>
           <label>Valor:</label>
-          <input type="number" value={eventValue} onChange={(e) => setEventValue(parseInt(e.target.value))} />
+          <input
+            type="number"
+            value={eventValue}
+            onChange={(e) => setEventValue(parseInt(e.target.value))}
+          />
         </div>
         <div className={styles.formField}>
           <label>Extras:</label>

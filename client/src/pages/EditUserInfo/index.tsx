@@ -71,7 +71,6 @@ export default function EditUserInfo() {
     return response;
   };
 
-
   const sendDeleteAccount = async () => {
     if (auth.userInfo == null) {
       throw "userInfo context is null";
@@ -82,7 +81,7 @@ export default function EditUserInfo() {
       return;
     }
     auth.eraseTokens();
-    navigate( "/login-and-register");
+    navigate("/login-and-register");
   };
 
   const sendNewPassword = async (event: React.FormEvent<HTMLFormElement>) => {
