@@ -39,8 +39,13 @@ export class TransportResponseDTO {
     this.contacts = transport.contacts;
     this.endLocal = transport.endLocal;
     this.startLocal = transport.startLocal;
-    this.endTime = transport.endTime;
-    this.startTime = transport.startTime;
+    //Adicionei para tipo data mas deu erro pois front
+    // envia string e não date
+    // TODO: fazer o parse da string para date pois base recebe date
+    // this.endTime = transport.endTime.toISOString();
+    // this.startTime = transport.startTime.toISOString();
+    this.endTime = transport.endTime.toISOString();
+    this.startTime = transport.startTime.toISOString();
     this.type = transport.type;
     this.price = transport.price.toNumber();
   }
