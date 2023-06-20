@@ -89,8 +89,8 @@ export default function TravelInfo() {
     }
 
     setContatoTransport(response.data.contacts);
-    setHoraChegadaTransport(new Date(response.data.startTime));
-    setHoraSaidaTransport(new Date(response.data.endTime));
+    setHoraChegadaTransport(new Date(response.data.endTime));
+    setHoraSaidaTransport(new Date(response.data.startTime));
     setLocalChegadaTransport(response.data.endLocal);
     setLocalIdaTransport(response.data.startLocal);
     setPrecoTransport(response.data.price);
