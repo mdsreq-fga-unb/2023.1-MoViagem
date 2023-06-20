@@ -1,25 +1,19 @@
 import AccountIcon from "@mui/icons-material/AccountCircle";
-import CalendarIcon from "@mui/icons-material/CalendarToday";
 import CancelIcon from "@mui/icons-material/CancelOutlined";
-import FamilyIcon from "@mui/icons-material/FamilyRestroom";
 import PlaneIcon from "@mui/icons-material/Flight";
-import ListIcon from "@mui/icons-material/ViewList";
 import { IconButton } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import LogoMoViagem from "../../assets/LogoMoViagem.png";
 import { AuthContext } from "../../auth/context/auth-provider";
 import styles from "./styles.module.scss";
 
 const NavbarPages = {
-  CREATETRAVEL: PlaneIcon,
   TRAVELS: PlaneIcon,
-  GROUPS: FamilyIcon,
-  CALENDAR: CalendarIcon,
-  TASKS: ListIcon,
 };
 export interface NavbarProps {
   pageName: string;
-  selectedPage?: "CREATETRAVEL" | "TRAVELS" | "GROUPS" | "CALENDAR" | "TASKS";
+  selectedPage?: "TRAVELS" | "GROUPS" | "CALENDAR";
 }
 
 export default function Navbar({
@@ -36,20 +30,28 @@ export default function Navbar({
     }
 
     auth.eraseTokens();
-    navigate("/login-and-register", { replace: true });
+    navigate("/login-and-register");
   }
 
   const navigateToUserInfo = () => {
-    navigate("/user-info", { replace: true });
+    navigate("/user-info");
   };
 
   const navigateToHome = () => {
-    navigate("/", { replace: true });
+    navigate("/");
   };
 
-  // function handleCreateTravel() {
-  //   navigate("/login-and-register", { replace: true });
-  // }
+  const navigateToTravels = () => {
+    navigate("/travels");
+  };
+
+  function navigateToPage(page: "TRAVELS" | "GROUPS" | "CALENDAR") {
+    switch (page) {
+      case "TRAVELS":
+        navigateToTravels();
+        break;
+    }
+  }
 
   return (
     <div id={styles.container}>
@@ -64,7 +66,9 @@ export default function Navbar({
       </div>
 
       <div id={styles.sideBar}>
-        <div id={styles.sideBarIcon} onClick={navigateToHome}></div>
+        <div id={styles.sideBarIcon} onClick={navigateToHome}>
+          <img alt="MoViagem" src={LogoMoViagem}></img>
+        </div>
         <div id={styles.sideBarLinksContainer}>
           {Object.entries(NavbarPages).map(([page, Icon]) => (
             <div
@@ -74,9 +78,12 @@ export default function Navbar({
                   ? styles.sideBarLinkContainerActive
                   : styles.sideBarLinkContainer
               }
-              // Botar href neste link
             >
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  navigateToPage(page as "TRAVELS" | "GROUPS" | "CALENDAR");
+                }}
+              >
                 <Icon
                   className={
                     page === selectedPage ? styles.sideBarLinksActive : styles.sideBarLinks

@@ -4,6 +4,9 @@
   display: grid;
   grid-template-columns: 100px 1fr;
   grid-template-rows: 100px 1fr;
+
+  position: relative;
+  height: 100vh;
 }
 
 #topBar {
@@ -26,7 +29,7 @@
   display: grid;
   grid-template-rows: 100px 1fr 100px;
 
-  height: 100vh;
+  height: 100%;
 
   background-color: $color-primary;
 }
@@ -49,13 +52,23 @@
   height: 50px;
 
   border-radius: 50%;
+  padding: 10px;
 
-  background-color: black;
+  background-color: inherit;
+  border: 2px solid $color-secondary;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   align-self: center;
   justify-self: center;
 
   cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    background: #35521b;
+  }
 }
 
 #sideBarLinksContainer {

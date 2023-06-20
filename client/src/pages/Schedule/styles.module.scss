@@ -1,0 +1,111 @@
+@import "../../variables.scss";
+
+.pageContainer {
+  display: grid;
+
+  h2 {
+    margin-bottom: 2rem;
+  }
+}
+
+.boxContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar {
+  padding: 20px;
+  background-color: #4f772d;
+  border-radius: 10px;
+
+  width: 25vw;
+  height: 60vh;
+
+  .activities {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    text-align: center;
+    height: 75%;
+  }
+
+  .current-date {
+    font-size: 1.45rem;
+    font-weight: 500;
+  }
+
+  .buttonContainer {
+    margin: auto;
+    height: 30px;
+    border-radius: 10px;
+    width: 250px;
+    align-items: bottom;
+    background-color: $color-primary;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $color-secondary;
+    }
+  }
+
+  .icons span {
+    height: 38px;
+    width: 38px;
+    margin: 0 1px;
+    color: #878787;
+    font-size: 1.9rem;
+    cursor: pointer;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 10px;
+    background: #f2f2f2;
+
+    &:hover {
+      background: $color-secondary;
+    }
+
+    &:last-child {
+      margin-right: -10px;
+    }
+  }
+}
+
+.calendar {
+  padding: 20px;
+  background-color: #ecf39e;
+  width: 60%;
+  height: 60vh;
+  border-radius: 10px;
+  display: grid;
+
+  .current-date {
+    font-size: 1.45rem;
+    font-weight: 500;
+  }
+
+  .days {
+    .gridLayout {
+      list-style-type: none;
+      z-index: 1;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 130px 130px 130px 130px 130px 130px 130px;
+
+      text-align: center;
+      row-gap: 60px;
+    }
+
+    .gridLayout div {
+      &:hover {
+        background: $color-secondary;
+        border-radius: 50%;
+        padding: 5px;
+      }
+    }
+
+    .inactive {
+      color: #aaa;
+    }
+  }
+}

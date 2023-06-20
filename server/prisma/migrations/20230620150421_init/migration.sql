@@ -54,9 +54,11 @@ CREATE TABLE `Transport` (
 -- CreateTable
 CREATE TABLE `Event` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    `startTime` DATETIME NOT NULL,
-    `endTime` DATETIME NOT NULL,
-    `description` TEXT NOT NULL,
+    `transportType` VARCHAR(50) NOT NULL,
+    `departureLocation` VARCHAR(100) NOT NULL,
+    `eventTime` DATETIME NOT NULL,
+    `eventValue` DECIMAL(10, 2) NOT NULL,
+    `eventExtras` TEXT NOT NULL,
     `travelId` INTEGER UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`)
