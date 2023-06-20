@@ -50,15 +50,15 @@ const Calendar: React.FC = () => {
       setCurrentDateForSidebar(currentDayForSidebar);
 
       setShowModal(true);
-      console.log("Day clicked:", selectedDate);
+      console.log("Day clicked:", selectedDateEvent);
     };
 
     // Add inactive days from the previous month
     for (let i = firstDayOfMonth; i > 0; i--) {
       days.push(
-        <li key={`prev-${i}`} className={styles.inactive}>
+        <div key={`prev-${i}`} className={styles.inactive}>
           {lastDateOfLastMonth - i + 1}
-        </li>
+        </div>
       );
     }
 
@@ -71,24 +71,24 @@ const Calendar: React.FC = () => {
           ? styles.active
           : "";
       days.push(
-        <li
-          key={`curr-${i}`}
-          className={styles.days + " " + isToday}
-          onClick={() => {
-            handleDayClick(i, currMonth, currYearRef.current);
-          }}
-        >
-          {i}
-        </li>
+        <div>
+          <div
+            key={`curr-${i}`}
+            className={`${isToday} ${styles.day}`}
+            onClick={() => handleDayClick(i, currMonth, currYearRef.current)}
+          >
+            {i}
+          </div>
+        </div>
       );
     }
 
     // Add inactive days from the next month
     for (let i = lastDayOfMonth; i < 6; i++) {
       days.push(
-        <li key={`next-${i}`} className={styles.inactive}>
+        <div key={`next-${i}`} className={styles.inactive}>
           {i - lastDayOfMonth + 1}
-        </li>
+        </div>
       );
     }
 
@@ -105,10 +105,10 @@ const Calendar: React.FC = () => {
     setSelectedDate(selectedDateEvent);
     setCurrentDateForSidebar(`${currentDayForSidebar} ${months[currMonth]} ${currYearRef.current}`);
 
-    console.log("Day clicked:", selectedDate);
+    console.log("Day clicked:", selectedDateEvent);
 
     setCurrentDate(`${currentDay} ${months[currMonth]} ${currYearRef.current}`);
-    setDaysTag(ReactDOMServer.renderToString(<ul>{days}</ul>));
+    setDaysTag(ReactDOMServer.renderToString(<div>{days}</div>));
   }, [currMonth, date]);
 
   useEffect(() => {
@@ -166,16 +166,24 @@ const Calendar: React.FC = () => {
             <header>
               <p className={styles.currentDate}>{currentDate}</p>
             </header>
-            <ul className={styles.weeks}>
-              <li>Domingo</li>
-              <li>Segunda</li>
-              <li>Terça</li>
-              <li>Quarta</li>
-              <li>Quinta</li>
-              <li>Sexta</li>
-              <li>Sábado</li>
-            </ul>
-            <div className={styles.days} dangerouslySetInnerHTML={{ __html: daysTag }} />
+            <div className={styles.days}>
+              <div className={styles.gridLayout}>
+                <div>Domingo</div>
+                <div>Segunda</div>
+                <div>Terça</div>
+                <div>Quarta</div>
+                <div>Quinta</div>
+                <div>Sexta</div>
+                <div>Sábado</div>
+              </div>
+            </div>
+            <div className={styles.days}>
+              <div
+                className={styles.gridLayout}
+                id="daysOfMonth"
+                dangerouslySetInnerHTML={{ __html: daysTag }}
+              ></div>
+            </div>
           </div>
         </div>
       </div>

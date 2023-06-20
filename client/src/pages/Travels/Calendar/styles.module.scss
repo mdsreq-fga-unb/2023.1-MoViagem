@@ -32,7 +32,8 @@
 }
 
 .insideBox {
-  display: flex;
+  display: grid;
+  background-color: red;
   flex-direction: column;
   row-gap: 1.5rem;
   align-items: center;
@@ -68,7 +69,10 @@
 .calendar {
   padding: 20px;
   background-color: #ecf39e;
+  width: 60%;
+
   border-radius: 10px;
+  display: grid;
 
   ul {
     display: flex;
@@ -83,50 +87,56 @@
   }
 
   .days {
-    li {
+    .gridLayout {
+      // width: 50px;
+      list-style-type: none;
       z-index: 1;
       cursor: pointer;
-      margin-top: 30px;
-
-      &::before {
-        position: relative;
-        content: "";
-        height: 40px;
-        width: 40px;
-        top: 50%;
-        left: 50%;
-        border-radius: 50px;
-        z-index: -1;
-        transform: translate(-50%, -50%);
-      }
-
-      &:hover:before {
-        background: $color-secondary;
-      }
+      // margin-top: 30px;
+      display: grid;
+      grid-template-columns: auto auto auto auto auto auto auto;
     }
+
+    // &::before {
+    //   position: relative;
+    //   content: "";
+    //   height: 40px;
+    //   width: 40px;
+    //   top: 50%;
+    //   left: 50%;
+    //   border-radius: 50px;
+    //   z-index: -1;
+    //   transform: translate(-50%, -50%);
+    // }
+
+    // &:hover:before {
+    //   background: $color-secondary;
+    // }
 
     .inactive {
       color: #aaa;
     }
 
-    .active {
-      background: $color-secondary;
-      color: #97f9f9;
-      width: 40px;
-      border-radius: 50px;
-    }
+    // .active {
+    //   background: $color-secondary;
+    //   color: #97f9f9;
+    //   width: 40px;
+    //   border-radius: 50px;
+    // }
   }
 
-  .weeks li {
-    font-weight: 500;
-  }
+  // .weeks div {
+  //   font-weight: 500;
+  //   display: grid;
+  //   // grid-template-columns: auto auto auto auto auto auto auto;
+  // }
 
-  ul li {
-    width: calc(100% / 7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  // ul li {
+  //   width: calc(100% / 7);
+  //   display: grid;
+  //   align-items: center;
+  //   justify-content: center;
+  // }
 }
 
 .icons span {
