@@ -1,16 +1,15 @@
 ## Link para as apresentações das unidades
+
 <a href="https://youtu.be/pDSMaeipmTE"> Link para a apresentação da unidade 1.</a>
 
 <a href="https://youtu.be/hxYFbL8RVpI"> Link para a apresentação da unidade 2.</a>
+
+[Link da gravação da reunião da entrega do Mvp 1](https://youtu.be/M7iDWWLVH5U)
 <br>
 
-
-
-
-
 ## Sobre
-Este repositório contém a documentação do planejamento e execução, além de demais artefatos gerados ao longo da avaliação de Requisitos de software. Este projeto tem como intuito promover uma solução integrada para o gerenciamento de viagens. Desde a criação de um itinerário até recomendações sobre destinos turísticos!
 
+Este repositório contém a documentação do planejamento e execução, além de demais artefatos gerados ao longo da avaliação de Requisitos de software. Este projeto tem como intuito promover uma solução integrada para o gerenciamento de viagens. Desde a criação de um itinerário até recomendações sobre destinos turísticos!
 
 ## Equipe
 
@@ -57,7 +56,7 @@ Este repositório contém a documentação do planejamento e execução, além d
 
 ## Histórico de revisão
 
-| Versão     | Data        | Descrição            | Autor(es)                           | Revisores  |
-| :--------: | :---------: | -------------------- | ----------------------------------  | ---------- |
-| `0.0`      |  09/04/2023 | Criação do arquivo   |Gabriel de Souza                     | -          |
-| `0.1`      |  22/04/2023 | Adição da introdução e sobre | Gabriel de Souza            | -          |
+| Versão |    Data    | Descrição                    | Autor(es)        | Revisores |
+| :----: | :--------: | ---------------------------- | ---------------- | --------- |
+| `0.0`  | 09/04/2023 | Criação do arquivo           | Gabriel de Souza | -         |
+| `0.1`  | 22/04/2023 | Adição da introdução e sobre | Gabriel de Souza | -         |
