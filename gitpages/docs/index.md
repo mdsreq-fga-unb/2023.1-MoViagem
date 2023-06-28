@@ -11,6 +11,11 @@
 
 Este repositório contém a documentação do planejamento e execução, além de demais artefatos gerados ao longo da avaliação de Requisitos de software. Este projeto tem como intuito promover uma solução integrada para o gerenciamento de viagens. Desde a criação de um itinerário até recomendações sobre destinos turísticos!
 
+## Link do Mural e do Figma
+
+<a href="https://app.mural.co/t/unb9171/m/unb9171/1683643223760/8c24a764192b34855b7c5ad855dacdc7e5f25e13?sender=ueeaf0301241260f6a07d2699"> Link para o Mural </a>
+<a href="https://www.figma.com/file/TOP3NQNDvj0HffJIbydFP6/M%C3%B3Viagem-(Copy)?type=design&node-id=0%3A1&mode=design&t=dkE1zCgJIY4lxcuK-1"> Link para o Figma </a>
+
 ## Equipe
 
 <div class="card">
