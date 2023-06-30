@@ -8,6 +8,7 @@
 | 26/04/23 | 0.1    | Início do documento               | Equipe Mochileiros |
 | 27/04/23 | 1.0    | Documento pronto para a Entrega 1 | Equipe Mochileiros |
 | 24/05/23 | 2.0pre | Documento pronto para a Entrega 2 | Equipe Mochileiros |
+| 29/06/23 | 2.1    | Documento revisado após entrega 3 | Equipe Mochileiros |
 <br></br>
 
 ## Sumário
@@ -135,10 +136,11 @@ Por fim, embora o aspecto diferencial do projeto seja a capacidade de realizar c
 
 | Fase               | Produto (entrega)                                             | Data Início | Data Fim |
 | ------------------ | ------------------------------------------------------------- | ----------- | -------- |
-| Fase de concepção  | Documento de visão do produto, planejamento inicial de riscos | 10/04/23    | 27/04/23 |
-| Fase de elaboração | Arquitetura do projeto e Backlog                              | 28/04/23    | 25/05/23 |
-| Fase de construção | Implementação das funcionalidades do produto                  | 26/05/23    | 22/07/23 |
-| Fase de transição  | Produto em produção                                           | 23/07/23    | 20/07/23 |
+| Fase de concepção  | Documento de Visão de Produto e Projeto, GitPages | 10/04/23    | 27/04/23 |
+| Fase de elaboração | Visão de Produto e Projeto, Backlog do Produto e Definição dos MVPs                             | 28/04/23    | 25/05/23 |
+| Fase de construção 1 | Visão de Produto e Projeto e Backlog atualizados, funcionalidades do MVP1  | 26/05/23    | 22/07/23 |
+| Fase de construção 2 | Visão de Produto e Projeto e Backlog atualizados, funcionalidades do MVP2  | 23/07/23    | 20/07/23 |
+
 <br></br>
 
 ### 2.3 Matriz de Comunicação
@@ -146,9 +148,10 @@ Por fim, embora o aspecto diferencial do projeto seja a capacidade de realizar c
 
 | Descrição                           | Área/Envolvidos          | Periodicidade                     | Produtos Gerados                                                                                           |
 | ----------------------------------- | ------------------------ | --------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Reunião de planejamento de iteração | Toda equipe, Stakeholder | Uma vez por semana                | Plano de iteração, backlog atualizado.                                                                     |
+| Reunião de planejamento de iteração | Toda equipe, Stakeholder, Monitor | Uma vez por semana                | Plano de iteração, backlog atualizado.                                                                     |
 | Alinhamento individual              | Toda equipe              | Duas vezes por semana no WhatsApp | Nenhum artefato, mas a equipe deve estar mais alinhada sobre o status das tarefas de cada pessoa do grupo. |
-| Revisão de iteração                 | Toda equipe              | Uma vez por semana                | Backlog atualizado, lista de riscos atualizada.                                                            |
+| Revisão de iteração                 | Toda equipe, Monitor              | Uma vez por semana                | Backlog atualizado, lista de riscos atualizada.                                                            |
+
 <br></br>
 
 ### 2.4 Gerenciamento de Riscos
@@ -162,6 +165,7 @@ Por fim, embora o aspecto diferencial do projeto seja a capacidade de realizar c
 | Mudança no escopo             | Atraso nas entregas ou alterações no backlog a pedido do cliente.                                                                 | Média             | Replanejamento do escopo existente.                                |
 | Inviabilidade de um requisito | Requisitos que não podem ser implementados por questões técnicas ou de negócio.                                                   | Baixa             | Replanejamento do escopo existente.                                |
 | Equipamento danificado        | Danos físicos ou virtuais nos equipamentos utilizados para o desenvolvimento do projeto.                                          | Baixa             | Redistribuição do trabalho entre os integrantes restantes.         |
+
 <br></br>
 
 ### 2.5 Critérios de Replanejamento
