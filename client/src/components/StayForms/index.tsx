@@ -72,7 +72,7 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
         {
           contact: contato,
           endTime: dataFim,
-          local: local,
+          local,
           price: preco,
           startTime: dataInicio,
           type: tipoEstadia,
@@ -91,7 +91,7 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
       const createdHost = await requestCreateHost(parseInt(id), {
         contact: contato,
         endTime: dataFim,
-        local: local,
+        local,
         price: preco,
         startTime: dataInicio,
         type: tipoEstadia,

@@ -11,5 +11,7 @@ module.exports = {
   rules: {
     "react-refresh/only-export-components": "warn",
     "@typescript-eslint/no-non-null-assertion": "off",
+    "no-console": "warn",
+    "object-shorthand": "warn",
   },
 };

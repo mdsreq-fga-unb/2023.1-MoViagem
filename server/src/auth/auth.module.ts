@@ -5,6 +5,7 @@ import { EnvironmentModule } from "../environment/environment.module";
 import { EnvironmentService } from "../environment/services/environment.service";
 import { PrismaModule } from "../prisma/prisma.module";
 import { AuthController } from "./controllers/auth.controller";
+import { UserController } from "./controllers/user.controller";
 import { UserRepository } from "./repositories/user.repository";
 import { AuthService } from "./services/auth.service";
 import { JwtService } from "./services/jwt.service";
@@ -29,7 +30,7 @@ import { LocalStrategy } from "./strategies/local.strategy";
     EnvironmentModule,
   ],
   providers: [UserService, AuthService, LocalStrategy, JwtStrategy, JwtService, UserRepository],
-  controllers: [AuthController],
+  controllers: [AuthController, UserController],
   exports: [UserRepository],
 })
 export class AuthModule {}

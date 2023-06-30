@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
-import { deleteAccount, editEmail, editName, editPassword } from "../../api/requests/auth-requests";
+import {
+  requestDeleteAccount,
+  requestEditPassword,
+  requestEditUser,
+} from "../../api/requests/user-requests";
 import useAuth from "../../auth/context/auth-hook";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
@@ -23,7 +27,7 @@ export default function EditUserInfo() {
   const [tryingDeleteAccount, setTryingDeleteAccount] = useState(false);
 
   // Opens the input field for a new name
-  const handleNameEdit = () => {
+  function handleNameEdit() {
     setIsEditingName(!isEditingName);
     setIsEditingEmail(false);
     setIsEditingPassword(false);
@@ -33,79 +37,10 @@ export default function EditUserInfo() {
     setNewPassword("");
     setNewPasswordConfirmation("");
     setCurrentPasswordConfirmation("");
-  };
+  }
 
-  const sendNewName = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (auth.userInfo == null) {
-      throw "userInfo context is null";
-    }
-    const response = await editName({ name: newName }, auth.userInfo.id.toString());
-
-    if (response instanceof ErrorResponse) {
-      alert(response.status === 400 ? "não foi possivel editar o nome" : "");
-      return;
-    }
-    auth.updateUserInfo({ name: newName });
-    setNewName("");
-    setIsEditingName(false);
-    return response;
-  };
-
-  const sendNewEmail = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (auth.userInfo == null) {
-      throw "userInfo context is null";
-    }
-    const response = await editEmail({ email: newEmail }, auth.userInfo.id.toString());
-
-    if (response instanceof ErrorResponse) {
-      alert(response.status === 400 ? "não foi possivel editar o email" : "");
-      return;
-    }
-    auth.updateUserInfo({ email: newEmail });
-    setNewEmail("");
-    setIsEditingEmail(false);
-    return response;
-  };
-
-  const sendDeleteAccount = async () => {
-    if (auth.userInfo == null) {
-      throw "userInfo context is null";
-    }
-    const response = await deleteAccount(auth.userInfo?.id.toString());
-    if (response instanceof ErrorResponse) {
-      alert(response.status === 400 ? "Este usuário possui viagens" : "");
-      return;
-    }
-    auth.eraseTokens();
-    navigate("/login-and-register");
-  };
-
-  const sendNewPassword = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    let response: any;
-
-    if (auth.userInfo == null) {
-      throw "userInfo context is null";
-    }
-    if (newPassword === newPasswordConfirmation) {
-      response = await editPassword(
-        { newPassword: newPasswordConfirmation, currentPassword: currentPasswordConfirmation },
-        auth.userInfo.id.toString()
-      );
-    }
-    if (response instanceof ErrorResponse) {
-      alert(response.status === 400 ? "não foi possivel editar a senha" : "");
-      return;
-    }
-    setIsEditingPassword(false);
-    return response;
-  };
   // Opens the input field for a new email
-  const handleEmailEdit = () => {
+  function handleEmailEdit() {
     setIsEditingName(false);
     setIsEditingEmail(!isEditingEmail);
     setIsEditingPassword(false);
@@ -115,10 +50,10 @@ export default function EditUserInfo() {
     setNewPassword("");
     setNewPasswordConfirmation("");
     setCurrentPasswordConfirmation("");
-  };
+  }
 
   // Opens the input field for a new password
-  const handlePasswordEdit = () => {
+  function handlePasswordEdit() {
     setIsEditingName(false);
     setIsEditingEmail(false);
     setIsEditingPassword(!isEditingPassword);
@@ -128,19 +63,98 @@ export default function EditUserInfo() {
     setNewPassword("");
     setNewPasswordConfirmation("");
     setCurrentPasswordConfirmation("");
-  };
+  }
 
   // Closes the input field for all user information
-  const handleExitEdition = () => {
+  function handleExitEdition() {
     setIsEditingName(false);
     setIsEditingEmail(false);
     setIsEditingPassword(false);
-  };
+  }
 
   // Verify if the user really wants to delete their account
-  const handleDeleteAccount = () => {
+  function handleDeleteAccount() {
     setTryingDeleteAccount(!tryingDeleteAccount);
-  };
+  }
+
+  async function sendNewName(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (auth.userInfo == null) {
+      throw "user is not logged in, this should not happen";
+    }
+
+    const response = await requestEditUser({ name: newName, email: auth.userInfo.email });
+
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
+    }
+
+    auth.updateUserInfo({ name: newName });
+    setNewName("");
+    setIsEditingName(false);
+  }
+
+  async function sendNewEmail(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (auth.userInfo == null) {
+      throw "user is not logged in, this should not happen";
+    }
+
+    const response = await requestEditUser({ email: newEmail, name: auth.userInfo.name });
+
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
+    }
+
+    auth.updateUserInfo({ email: newEmail });
+    setNewEmail("");
+    setIsEditingEmail(false);
+  }
+
+  async function sendDeleteAccount() {
+    if (auth.userInfo == null) {
+      throw "user is not logged in, this should not happen";
+    }
+
+    const response = await requestDeleteAccount();
+
+    if (response instanceof ErrorResponse) {
+      alert(response.status === 400 ? "Este usuário possui viagens" : "");
+      return;
+    }
+
+    auth.eraseTokens();
+    navigate("/login-and-register");
+  }
+
+  async function sendNewPassword(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (auth.userInfo == null) {
+      throw "user is not logged in, this should not happen";
+    }
+
+    if (newPassword !== newPasswordConfirmation) {
+      alert("As senhas não conferem");
+      return;
+    }
+
+    const response = await requestEditPassword({
+      newPassword,
+      currentPassword: currentPasswordConfirmation,
+    });
+
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
+    }
+
+    setIsEditingPassword(false);
+  }
 
   return (
     <Navbar pageName="Minha Conta">

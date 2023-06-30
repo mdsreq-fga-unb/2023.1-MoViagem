@@ -1,23 +1,23 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { UserInfo } from "../../api/dto/auth-dtos";
+import { UserInTokenDTO } from "../../api/dto/auth-dtos";
 
 interface LoginParams {
   accessToken: string;
   refreshToken: string;
-  userInfo: UserInfo;
+  userInfo: UserInTokenDTO;
 }
 
 interface AuthContextInterface {
-  userInfo: UserInfo | null;
+  userInfo: UserInTokenDTO | null;
   saveTokens: (data: LoginParams) => void;
   eraseTokens: () => void;
-  updateUserInfo: (data: Partial<UserInfo>) => void;
+  updateUserInfo: (data: Partial<UserInTokenDTO>) => void;
 }
 
 export const AuthContext = React.createContext<AuthContextInterface | undefined>(undefined);
 
 export default function AuthProvider({ children }: React.PropsWithChildren) {
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [userInfo, setUserInfo] = useState<UserInTokenDTO | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
   }, []);
 
   const updateUserInfo = useCallback(
-    (newUserInfo: Partial<UserInfo>) => {
+    (newUserInfo: Partial<UserInTokenDTO>) => {
       if (userInfo === null) {
         throw "erro inesperado";
       }

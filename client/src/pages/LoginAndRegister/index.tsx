@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
-import { register, requestLogin } from "../../api/requests/auth-requests";
+import { requestLogin, requestRegister } from "../../api/requests/auth-requests";
 import useAuth from "../../auth/context/auth-hook";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
@@ -60,7 +60,7 @@ export default function Login() {
     }
 
     // Try to register
-    const response = await register({
+    const response = await requestRegister({
       name: registerName,
       email: registerEmail,
       password: registerPassword,

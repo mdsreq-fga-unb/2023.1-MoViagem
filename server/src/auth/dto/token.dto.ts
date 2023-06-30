@@ -1,15 +1,10 @@
 import { IsJWT } from "class-validator";
-
-export class UserInfoDTO {
-  id: number;
-  email: string;
-  name: string;
-}
+import { UserInTokenDTO } from "./user.dto";
 
 export class LoginResponseDTO {
   accessToken: string;
   refreshToken: string;
-  user: UserInfoDTO;
+  user: UserInTokenDTO;
 }
 
 export class RefreshTokenRequestDTO {
@@ -23,7 +18,7 @@ export class TokenPayload {
 }
 
 export class AccessTokenPayload extends TokenPayload {
-  user: UserInfoDTO;
+  user: UserInTokenDTO;
 }
 
 export class RefreshTokenPayload extends TokenPayload {

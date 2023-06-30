@@ -6,14 +6,14 @@ import {
   LoginResponseDTO,
   RefreshTokenPayload,
   TokenPayload,
-  UserInfoDTO,
 } from "../dto/token.dto";
+import { UserInTokenDTO } from "../dto/user.dto";
 
 @Injectable()
 export class JwtService {
   constructor(private env: EnvironmentService, private nestJwtService: NestJwtService) {}
 
-  createAccessToken(user: UserInfoDTO): string {
+  createAccessToken(user: UserInTokenDTO): string {
     const payload: Omit<AccessTokenPayload, "iat" | "exp"> = {
       user: {
         email: user.email,
@@ -37,7 +37,7 @@ export class JwtService {
     return this.nestJwtService.verify<T>(token);
   }
 
-  createTokens(user: UserInfoDTO): LoginResponseDTO {
+  createTokens(user: UserInTokenDTO): LoginResponseDTO {
     const accessToken = this.createAccessToken(user);
     const refreshToken = this.createRefreshToken(user.id);
 

@@ -4,6 +4,8 @@ import {
   CreateHostRequestDTO,
   CreateTransportRequestDTO,
   CreateTravelRequestDTO,
+  EventResponseDTO,
+  HostResponseDTO,
   TransportResponseDTO,
   TravelsResponseDTO,
 } from "../dto/travels-dto";
@@ -70,7 +72,7 @@ export function requestCreateHost(id: number, form: CreateHostRequestDTO) {
 }
 
 export async function requestGetHost(id: string) {
-  return request<never, CreateHostRequestDTO>({
+  return request<never, HostResponseDTO>({
     method: "GET",
     url: `host/${id}`,
   });
@@ -87,6 +89,21 @@ export async function requestEditHost(form: CreateHostRequestDTO, id: number) {
 export function requestCreateEvent(id: number, form: CreateEventRequestDTO) {
   return request<CreateEventRequestDTO, never>({
     method: "POST",
+    url: `event/${id}`,
+    body: form,
+  });
+}
+
+export async function requestGetEvent(id: string) {
+  return request<never, EventResponseDTO>({
+    method: "GET",
+    url: `event/${id}`,
+  });
+}
+
+export async function requestEditEvent(form: CreateEventRequestDTO, id: number) {
+  return request<CreateEventRequestDTO, never>({
+    method: "PUT",
     url: `event/${id}`,
     body: form,
   });

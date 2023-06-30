@@ -117,7 +117,7 @@ export default function TravelInfo() {
     }
 
     const response = await requestEditTravel(parseInt(params.id!), {
-      local: local,
+      local,
       startDate: dataInicio,
       endDate: dataFim,
       description: proposito,

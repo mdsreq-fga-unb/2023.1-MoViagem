@@ -1,7 +1,6 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import bcrypt from "bcrypt";
-import { LoginResponseDTO } from "../dto/token.dto";
-import { UserCreateDTO, UserEditDTO, UserEditNameDTO, UserEditPasswordDTO } from "../dto/user.dto";
+import { EditPasswordRequestDTO, EditUserRequestDTO } from "../dto/user.dto";
 import { UserRepository } from "../repositories/user.repository";
 import { JwtService } from "./jwt.service";
 
@@ -9,56 +8,39 @@ import { JwtService } from "./jwt.service";
 export class UserService {
   constructor(private userRepository: UserRepository, private jwtService: JwtService) {}
 
-  async register(user: UserCreateDTO): Promise<LoginResponseDTO> {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(user.password, salt);
-
-    const userAlreadyExist = await this.userRepository.findUserByEmail(user.email);
-
-    if (userAlreadyExist !== null) {
-      throw new BadRequestException("Usuário já existe");
-    }
-
-    const createdUser = await this.userRepository.createUser({
-      email: user.email,
-      name: user.name,
-      password: hashedPassword,
+  async update(id: number, dto: EditUserRequestDTO): Promise<void> {
+    return this.userRepository.update(id, {
+      email: dto.email,
+      name: dto.name,
     });
-
-    return this.jwtService.createTokens(createdUser);
-  }
-
-  async editUser(paramater: UserEditDTO, id: string): Promise<void> {
-    return this.userRepository.UpdateUser(paramater, id);
-  }
-
-  async editName(params: UserEditNameDTO, id: string): Promise<void> {
-    return this.userRepository.UpdateName(params, id);
   }
 
   async comparePassword(plainPassword: string, hashedPassword: string): Promise<boolean> {
     return bcrypt.compare(plainPassword, hashedPassword);
   }
 
-  async deleteUser(id: string): Promise<void> {
-    return this.userRepository.deleteUser(id);
+  async delete(id: number): Promise<void> {
+    return this.userRepository.deleteById(id);
   }
 
-  async editPassword(params: UserEditPasswordDTO, id: string): Promise<void> {
-    const user = await this.userRepository.findUserById(parseInt(id));
+  async updatePassword(id: number, dto: EditPasswordRequestDTO): Promise<void> {
+    const user = await this.userRepository.findById(id);
 
     if (!user) {
       throw new BadRequestException("Usuário não existe");
     }
-    const isPasswordValid = await this.comparePassword(params.currentPassword, user.password);
+
+    const isPasswordValid = await this.comparePassword(dto.currentPassword, user.password);
 
     if (!isPasswordValid) {
       throw new BadRequestException("Senha Atual inválida");
-    } else {
-      const salt = await bcrypt.genSalt();
-      const hashedPassword = await bcrypt.hash(params.newPassword, salt);
-
-      return this.userRepository.updatePassword(hashedPassword, id);
     }
+
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(dto.newPassword, salt);
+
+    return this.userRepository.update(id, {
+      password: hashedPassword,
+    });
   }
 }

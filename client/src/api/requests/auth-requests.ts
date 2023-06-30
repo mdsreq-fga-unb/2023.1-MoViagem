@@ -1,13 +1,10 @@
 import axios from "axios";
 import request from "../api-instance";
 import {
+  CreateUserRequestDTO,
+  LoginRequestDTO,
   LoginResponseDTO,
   RefreshTokenRequestDTO,
-  UserCreateDTO,
-  UserEditEmailDTO,
-  UserEditNameDTO,
-  UserEditPasswordDTO,
-  UserLoginDTO,
 } from "../dto/auth-dtos";
 
 const authApi = axios.create({
@@ -17,8 +14,8 @@ const authApi = axios.create({
   },
 });
 
-export function requestLogin(body: UserLoginDTO) {
-  return request<UserLoginDTO, LoginResponseDTO>({
+export function requestLogin(body: LoginRequestDTO) {
+  return request<LoginRequestDTO, LoginResponseDTO>({
     method: "POST",
     url: "login",
     body,
@@ -35,43 +32,11 @@ export function requestTokenRefresh(body: RefreshTokenRequestDTO) {
   });
 }
 
-export function register(body: UserCreateDTO) {
-  return request<UserCreateDTO, LoginResponseDTO>({
+export function requestRegister(body: CreateUserRequestDTO) {
+  return request<CreateUserRequestDTO, LoginResponseDTO>({
     method: "POST",
     url: "register",
     body,
-    alternativeInstance: authApi,
-  });
-}
-
-export function editName(body: UserEditNameDTO, id: string) {
-  return request<UserEditNameDTO, void>({
-    method: "PUT",
-    url: `editName/${id}`,
-    body,
-    alternativeInstance: authApi,
-  });
-}
-export function editEmail(body: UserEditEmailDTO, id: string) {
-  return request<UserEditEmailDTO, void>({
-    method: "PUT",
-    url: `editEmail/${id}`,
-    body,
-    alternativeInstance: authApi,
-  });
-}
-export function editPassword(body: UserEditPasswordDTO, id: string) {
-  return request<UserEditPasswordDTO, void>({
-    method: "PUT",
-    url: `editPassword/${id}`,
-    body,
-    alternativeInstance: authApi,
-  });
-}
-export function deleteAccount(id: string) {
-  return request<never, never>({
-    method: "DELETE",
-    url: `deleteUser/${id}`,
     alternativeInstance: authApi,
   });
 }

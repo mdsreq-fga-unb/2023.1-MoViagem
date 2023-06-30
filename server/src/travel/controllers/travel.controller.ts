@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
 import { User } from "src/auth/decorators/user.decorator";
-import { UserInfoDTO } from "src/auth/dto/token.dto";
+import { UserInTokenDTO } from "src/auth/dto/user.dto";
 import { CreateTravelRequestDTO, TravelsResponseDTO } from "../dto/travel.dto";
 import { TravelService } from "./../services/travel.service";
 
@@ -13,12 +13,12 @@ export class TravelController {
   constructor(private travelService: TravelService) {}
 
   @Post()
-  async create(@User() user: UserInfoDTO, @Body() dto: CreateTravelRequestDTO): Promise<void> {
+  async create(@User() user: UserInTokenDTO, @Body() dto: CreateTravelRequestDTO): Promise<void> {
     return this.travelService.create(user.id, dto);
   }
 
   @Get()
-  async listByUser(@User() user: UserInfoDTO): Promise<TravelsResponseDTO[]> {
+  async listByUser(@User() user: UserInTokenDTO): Promise<TravelsResponseDTO[]> {
     return this.travelService.getTravelsByUser(user.id);
   }
 

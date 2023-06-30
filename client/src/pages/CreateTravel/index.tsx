@@ -27,7 +27,7 @@ export default function CreateTravel() {
     }
 
     const response = await requestCreateTravel({
-      local: local,
+      local,
       startDate: dataInicio,
       endDate: dataFim,
       description: proposito,

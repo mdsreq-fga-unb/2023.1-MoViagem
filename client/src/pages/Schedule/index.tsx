@@ -52,7 +52,6 @@ const Schedule: React.FC = () => {
       setCurrentDateForSidebar(currentDayForSidebar);
 
       // setShowModal(true);
-      console.log("Day clicked:", selectedDateEvent);
     };
 
     // Add inactive days from the previous month
@@ -104,8 +103,6 @@ const Schedule: React.FC = () => {
     setCurrentDateForSidebar(currentDayForSidebar);
     setSelectedDate(selectedDateEvent);
     setCurrentDateForSidebar(`${currentDayForSidebar} ${months[currMonth]} ${currYearRef.current}`);
-
-    console.log("Day clicked:", selectedDateEvent);
 
     setCurrentDate(`${currentDay} ${months[currMonth]} ${currYearRef.current}`);
     setDays(updatedDays);

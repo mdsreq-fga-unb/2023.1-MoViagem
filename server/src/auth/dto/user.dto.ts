@@ -1,6 +1,12 @@
 import { IsEmail, Length } from "class-validator";
 
-export class UserLoginDTO {
+export class UserInTokenDTO {
+  id: number;
+  email: string;
+  name: string;
+}
+
+export class LoginRequestDTO {
   @IsEmail()
   @Length(4, 50)
   email: string;
@@ -9,7 +15,7 @@ export class UserLoginDTO {
   password: string;
 }
 
-export class UserCreateDTO {
+export class CreateUserRequestDTO {
   @IsEmail()
   @Length(4, 50)
   email: string;
@@ -21,18 +27,16 @@ export class UserCreateDTO {
   password: string;
 }
 
-export class UserEditDTO {
+export class EditUserRequestDTO {
   @IsEmail()
   @Length(4, 50)
   email: string;
-}
 
-export class UserEditNameDTO {
   @Length(4, 100)
   name: string;
 }
 
-export class UserEditPasswordDTO {
+export class EditPasswordRequestDTO {
   @Length(8, 100)
   newPassword: string;
 

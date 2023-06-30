@@ -1,39 +1,30 @@
-export interface UserInfo {
+export interface UserInTokenDTO {
   id: number;
   email: string;
   name: string;
 }
 
-export interface LoginResponseDTO {
-  accessToken: string;
-  refreshToken: string;
-  user: UserInfo;
-}
+// Request DTOs
 
 export interface RefreshTokenRequestDTO {
   refreshToken: string;
 }
 
-export interface UserLoginDTO {
+export interface LoginRequestDTO {
   email: string;
   password: string;
 }
 
-export interface UserCreateDTO {
+export interface CreateUserRequestDTO {
   email: string;
   name: string;
   password: string;
 }
 
-export interface UserEditNameDTO {
-  name: string;
-}
+// Response DTOs
 
-export interface UserEditEmailDTO {
-  email: string;
-}
-
-export interface UserEditPasswordDTO {
-  currentPassword: string;
-  newPassword: string;
+export interface LoginResponseDTO {
+  accessToken: string;
+  refreshToken: string;
+  user: UserInTokenDTO;
 }
