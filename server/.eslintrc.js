@@ -19,5 +19,7 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": "off",
+    "no-console": "warn",
+    "object-shorthand": "warn",
   },
 };

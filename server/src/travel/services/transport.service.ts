@@ -7,10 +7,10 @@ export class TransportService {
   constructor(private transportRepository: TransportRepository) {}
 
   async create(id: number, dto: CreateTransportRequestDTO): Promise<void> {
-    await this.transportRepository.createTransport({
+    await this.transportRepository.create({
       travel: {
         connect: {
-          id: id,
+          id,
         },
       },
       type: dto.type,
@@ -24,7 +24,7 @@ export class TransportService {
   }
 
   async getTransport(id: number): Promise<TransportResponseDTO> {
-    const transport = await this.transportRepository.getTransport(id);
+    const transport = await this.transportRepository.findById(id);
 
     if (transport === null) {
       throw new BadRequestException("Transporte não existe");
@@ -34,7 +34,7 @@ export class TransportService {
   }
 
   async editTransport(id: number, dto: CreateTransportRequestDTO): Promise<void> {
-    await this.transportRepository.updateTransport(id, {
+    await this.transportRepository.update(id, {
       contacts: dto.contacts,
       endLocal: dto.endLocal,
       endTime: dto.endTime,

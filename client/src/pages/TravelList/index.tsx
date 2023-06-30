@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { TravelsResponseDTO } from "../../api/dto/travels-dto";
-import { getTravels } from "../../api/requests/travels-requests";
+import { requestGetTravels } from "../../api/requests/travels-requests";
 import FundoViagem from "../../assets/FundoViagem.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
@@ -14,7 +14,7 @@ export default function TravelList() {
 
   // Travel fetch request
   const fetchTravel = async () => {
-    const response = await getTravels();
+    const response = await requestGetTravels();
 
     if (response instanceof ErrorResponse) {
       alert(response.message);
@@ -39,7 +39,11 @@ export default function TravelList() {
         </Link>
         <div className={styles.outsideBox}>
           {travels.map((travel) => (
-            <Link to={`/travel-info/${travel.id}`} style={{ textDecoration: "none" }}>
+            <Link
+              key={travel.id}
+              to={`/travel-info/${travel.id}`}
+              style={{ textDecoration: "none" }}
+            >
               <button className={styles.insideBox}>
                 <div className={styles.infoBox}>
                   <h3>{travel.local}</h3>

@@ -13,25 +13,22 @@ export class TravelController {
   constructor(private travelService: TravelService) {}
 
   @Post()
-  async create(
-    @User() loggedInUser: UserInfoDTO,
-    @Body() createTravelRequestDTO: CreateTravelRequestDTO
-  ): Promise<void> {
-    return this.travelService.create(loggedInUser.id, createTravelRequestDTO);
+  async create(@User() user: UserInfoDTO, @Body() dto: CreateTravelRequestDTO): Promise<void> {
+    return this.travelService.create(user.id, dto);
   }
 
   @Get()
-  async getTravelsByUser(@User() loggedInUser: UserInfoDTO): Promise<TravelsResponseDTO[]> {
-    return this.travelService.getTravelsByUser(loggedInUser.id);
+  async listByUser(@User() user: UserInfoDTO): Promise<TravelsResponseDTO[]> {
+    return this.travelService.getTravelsByUser(user.id);
   }
 
-  @Get("get-travels/:id")
-  async getTravels(@Param("id") id: string): Promise<TravelsResponseDTO> {
+  @Get("/:id")
+  async get(@Param("id") id: number): Promise<TravelsResponseDTO> {
     return this.travelService.getTravels(id);
   }
 
-  @Put("edit-travel/:id")
-  async editTravel(@Param("id") id: string, @Body() dto: CreateTravelRequestDTO): Promise<void> {
-    return this.travelService.edit_Travel(dto, id);
+  @Put("/:id")
+  async edit(@Param("id") id: number, @Body() dto: CreateTravelRequestDTO): Promise<void> {
+    return this.travelService.edit_Travel(id, dto);
   }
 }

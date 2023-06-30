@@ -5,7 +5,12 @@ import { IconButton } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
-import { editTravel, getHost, getTransport, getTravel } from "../../api/requests/travels-requests";
+import {
+  requestEditTravel,
+  requestGetHost,
+  requestGetTransport,
+  requestGetTravel,
+} from "../../api/requests/travels-requests";
 import Navbar from "../../components/Navbar";
 import {
   convertDateInputValueToDate,
@@ -44,7 +49,7 @@ export default function TravelInfo() {
 
   // Travel fetch request
   const fetchTravel = useCallback(async () => {
-    const response = await getTravel(params.id!);
+    const response = await requestGetTravel(params.id!);
 
     if (response instanceof ErrorResponse) {
       alert(response.message);
@@ -60,7 +65,7 @@ export default function TravelInfo() {
 
   // Host fetch request
   const fetchHost = useCallback(async () => {
-    const response = await getHost(params.id!);
+    const response = await requestGetHost(params.id!);
 
     if (response instanceof ErrorResponse) {
       if (response.status !== 400) {
@@ -79,7 +84,7 @@ export default function TravelInfo() {
 
   // Transport fetch request
   const fetchTransport = useCallback(async () => {
-    const response = await getTransport(params.id!);
+    const response = await requestGetTransport(params.id!);
 
     if (response instanceof ErrorResponse) {
       if (response.status !== 400) {
@@ -111,7 +116,7 @@ export default function TravelInfo() {
       return;
     }
 
-    const response = await editTravel(parseInt(params.id!), {
+    const response = await requestEditTravel(parseInt(params.id!), {
       local: local,
       startDate: dataInicio,
       endDate: dataFim,

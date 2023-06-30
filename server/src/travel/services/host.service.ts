@@ -7,24 +7,24 @@ import { HostResponseDTO } from "./../dto/host.dto";
 export class HostService {
   constructor(private hostRepository: HostRepository) {}
 
-  async create(id: number, createHostRequestDTO: CreateHostRequestDTO): Promise<void> {
-    await this.hostRepository.createHost({
+  async create(id: number, dto: CreateHostRequestDTO): Promise<void> {
+    await this.hostRepository.create({
       travel: {
         connect: {
-          id: id,
+          id,
         },
       },
-      type: createHostRequestDTO.type,
-      startTime: createHostRequestDTO.startTime,
-      endTime: createHostRequestDTO.endTime,
-      local: createHostRequestDTO.local,
-      price: createHostRequestDTO.price,
-      contact: createHostRequestDTO.contact,
+      type: dto.type,
+      startTime: dto.startTime,
+      endTime: dto.endTime,
+      local: dto.local,
+      price: dto.price,
+      contact: dto.contact,
     });
   }
 
   async edit(id: number, dto: CreateHostRequestDTO): Promise<void> {
-    await this.hostRepository.updateHost(id, {
+    await this.hostRepository.update(id, {
       contact: dto.contact,
       endTime: dto.endTime,
       local: dto.local,
@@ -35,10 +35,12 @@ export class HostService {
   }
 
   async getHost(id: number): Promise<HostResponseDTO> {
-    const host = await this.hostRepository.getHost(id);
+    const host = await this.hostRepository.findById(id);
+
     if (host == null) {
       throw new BadRequestException("viagem nao existe");
     }
+
     return new HostResponseDTO(host);
   }
 }

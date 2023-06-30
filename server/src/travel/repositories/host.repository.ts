@@ -6,13 +6,13 @@ import { PrismaService } from "src/prisma/services/prisma.service";
 export class HostRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async createHost(data: Prisma.HostCreateInput): Promise<Host> {
+  async create(data: Prisma.HostCreateInput): Promise<Host> {
     return await this.prismaService.host.create({
       data,
     });
   }
 
-  async updateHost(id: number, data: Prisma.HostUpdateInput): Promise<Host> {
+  async update(id: number, data: Prisma.HostUpdateInput): Promise<Host> {
     return await this.prismaService.host.update({
       where: {
         id,
@@ -21,12 +21,11 @@ export class HostRepository {
     });
   }
 
-  async getHost(id: number): Promise<Host | null> {
-    const host = await this.prismaService.host.findUnique({
+  async findById(id: number): Promise<Host | null> {
+    return await this.prismaService.host.findUnique({
       where: {
-        id: id,
+        id,
       },
     });
-    return host;
   }
 }

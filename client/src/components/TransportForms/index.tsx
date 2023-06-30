@@ -2,9 +2,9 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import {
-  editTransport,
-  getTransport,
   requestCreateTransport,
+  requestEditTransport,
+  requestGetTransport,
 } from "../../api/requests/travels-requests";
 import {
   convertDateInputValueToDate,
@@ -37,7 +37,7 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
       throw "Necessário o id";
     }
 
-    const response = await getTransport(id);
+    const response = await requestGetTransport(id);
 
     if (response instanceof ErrorResponse) {
       alert(response.message);
@@ -70,7 +70,7 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
     }
 
     if (isEditing === true) {
-      const response = editTransport(
+      const response = requestEditTransport(
         {
           contacts: contato,
           endLocal: localChegada,

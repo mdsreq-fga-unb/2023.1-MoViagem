@@ -10,24 +10,18 @@ import { HostService } from "../services/host.service";
 export class HostController {
   constructor(private hostService: HostService) {}
 
-  @Post("create/:id")
-  async create(
-    @Param("id") id: number,
-    @Body() createHostRequestDTO: CreateHostRequestDTO
-  ): Promise<void> {
-    return this.hostService.create(id, createHostRequestDTO);
+  @Post("/:id")
+  async create(@Param("id") id: number, @Body() dto: CreateHostRequestDTO): Promise<void> {
+    return this.hostService.create(id, dto);
   }
 
-  @Put("editHost/:id")
-  async editName(
-    @Param("id") id: number,
-    @Body() editHostRequestDTO: CreateHostRequestDTO
-  ): Promise<void> {
-    return this.hostService.edit(id, editHostRequestDTO);
+  @Put("/:id")
+  async edit(@Param("id") id: number, @Body() dto: CreateHostRequestDTO): Promise<void> {
+    return this.hostService.edit(id, dto);
   }
 
-  @Get("get-host/:id")
-  async getHost(@Param("id") id: number): Promise<HostResponseDTO> {
+  @Get("/:id")
+  async get(@Param("id") id: number): Promise<HostResponseDTO> {
     return this.hostService.getHost(id);
   }
 }

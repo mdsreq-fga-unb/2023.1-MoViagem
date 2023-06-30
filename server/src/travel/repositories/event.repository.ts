@@ -6,13 +6,13 @@ import { PrismaService } from "src/prisma/services/prisma.service";
 export class EventRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async createEvent(data: Prisma.EventCreateInput): Promise<Event> {
+  async create(data: Prisma.EventCreateInput): Promise<Event> {
     return await this.prismaService.event.create({
       data,
     });
   }
 
-  async updateEvent(id: number, data: Prisma.EventUpdateInput): Promise<Event> {
+  async update(id: number, data: Prisma.EventUpdateInput): Promise<Event> {
     return await this.prismaService.event.update({
       where: {
         id,
@@ -21,12 +21,11 @@ export class EventRepository {
     });
   }
 
-  async getEvent(id: number): Promise<Event | null> {
-    const event = await this.prismaService.event.findUnique({
+  async findById(id: number): Promise<Event | null> {
+    return await this.prismaService.event.findUnique({
       where: {
-        id: id,
+        id,
       },
     });
-    return event;
   }
 }

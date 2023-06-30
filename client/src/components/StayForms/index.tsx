@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
-import { editHost, getHost, requestCreateHost } from "../../api/requests/travels-requests";
+import {
+  requestCreateHost,
+  requestEditHost,
+  requestGetHost,
+} from "../../api/requests/travels-requests";
 import {
   convertDateInputValueToDate,
   convertDateToDateInputValue,
@@ -32,7 +36,7 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
       throw "Necessário o id";
     }
 
-    const response = await getHost(id);
+    const response = await requestGetHost(id);
 
     if (response instanceof ErrorResponse) {
       alert(response.message);
@@ -64,7 +68,7 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
     }
 
     if (isEditing === true) {
-      const response = await editHost(
+      const response = await requestEditHost(
         {
           contact: contato,
           endTime: dataFim,

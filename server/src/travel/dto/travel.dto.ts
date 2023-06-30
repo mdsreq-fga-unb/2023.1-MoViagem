@@ -11,7 +11,7 @@ export class CreateTravelRequestDTO {
   @IsDate()
   endDate: Date;
 
-  @Length(4)
+  @Length(4, 100)
   description: string;
 
   @IsPositive()
@@ -24,7 +24,6 @@ export class TravelsResponseDTO {
   local: string;
   startDate: Date;
   endDate: Date;
-  this: any;
   numParticipants: number;
   description: string;
 

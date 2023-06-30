@@ -2,7 +2,7 @@ import { Host } from "@prisma/client";
 import { IsDate, IsPositive, Length } from "class-validator";
 
 export class CreateHostRequestDTO {
-  @Length(4, 100)
+  @Length(4, 50)
   type: string;
 
   @IsDate()
@@ -17,7 +17,7 @@ export class CreateHostRequestDTO {
   @IsPositive()
   price: number;
 
-  @Length(4, 100)
+  @Length(4, 50)
   contact: string;
 }
 

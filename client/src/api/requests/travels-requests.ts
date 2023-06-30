@@ -19,42 +19,42 @@ export function requestCreateTravel(form: CreateTravelRequestDTO) {
 export function requestCreateTransport(id: number, form: CreateTransportRequestDTO) {
   return request<CreateTransportRequestDTO, never>({
     method: "POST",
-    url: `transport/create/${id}`,
+    url: `transport/${id}`,
     body: form,
   });
 }
 
-export function getTransport(id: string) {
+export function requestGetTransport(id: string) {
   return request<never, TransportResponseDTO>({
     method: "GET",
-    url: `transport/get-transport/${id}`,
+    url: `transport/${id}`,
   });
 }
 
-export function editTransport(form: CreateTransportRequestDTO, id: number) {
+export function requestEditTransport(form: CreateTransportRequestDTO, id: number) {
   return request<CreateTransportRequestDTO, never>({
     method: "PUT",
-    url: `transport/edit-transport/${id}`,
+    url: `transport/${id}`,
     body: form,
   });
 }
 
-export function editTravel(id: number, form: CreateTravelRequestDTO) {
+export function requestEditTravel(id: number, form: CreateTravelRequestDTO) {
   return request<CreateTravelRequestDTO, never>({
     method: "PUT",
-    url: `travel/edit-travel/${id}`,
+    url: `travel/${id}`,
     body: form,
   });
 }
 
-export async function getTravel(id: string) {
+export async function requestGetTravel(id: string) {
   return request<never, TravelsResponseDTO>({
     method: "GET",
-    url: `travel/get-travels/${id}`,
+    url: `travel/${id}`,
   });
 }
 
-export async function getTravels() {
+export async function requestGetTravels() {
   return request<never, TravelsResponseDTO[]>({
     method: "GET",
     url: "travel",
@@ -64,22 +64,22 @@ export async function getTravels() {
 export function requestCreateHost(id: number, form: CreateHostRequestDTO) {
   return request<CreateHostRequestDTO, never>({
     method: "POST",
-    url: `host/create/${id}`,
+    url: `host/${id}`,
     body: form,
   });
 }
 
-export async function getHost(id: string) {
+export async function requestGetHost(id: string) {
   return request<never, CreateHostRequestDTO>({
     method: "GET",
-    url: `host/get-host/${id}`,
+    url: `host/${id}`,
   });
 }
 
-export async function editHost(form: CreateHostRequestDTO, id: number) {
+export async function requestEditHost(form: CreateHostRequestDTO, id: number) {
   return request<CreateHostRequestDTO, never>({
     method: "PUT",
-    url: `host/editHost/${id}`,
+    url: `host/${id}`,
     body: form,
   });
 }
@@ -87,7 +87,7 @@ export async function editHost(form: CreateHostRequestDTO, id: number) {
 export function requestCreateEvent(id: number, form: CreateEventRequestDTO) {
   return request<CreateEventRequestDTO, never>({
     method: "POST",
-    url: `event/create/${id}`,
+    url: `event/${id}`,
     body: form,
   });
 }
