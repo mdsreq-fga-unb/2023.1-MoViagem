@@ -54,45 +54,67 @@ const EventModal: React.FC<EventModalProps> = ({ travelId: id, selectedDate, clo
   };
 
   return (
-    <div className={styles.modal}>
-      <div className={styles.modalContent}>
-        <h2>Add Event</h2>
-        <div className={styles.formField}>
-          <label>Tipo de transporte:</label>
-          <input
-            type="text"
-            value={transportType}
-            onChange={(e) => setTransportType(e.target.value)}
-          />
-        </div>
-        <div className={styles.formField}>
-          <label>Local de partida e chegada:</label>
-          <input
-            type="text"
-            value={departureLocation}
-            onChange={(e) => setDepartureLocation(e.target.value)}
-          />
-        </div>
-        <div className={styles.formField}>
-          <label>Horário:</label>
-          <input type="time" value={eventTime} onChange={(e) => setEventTime(e.target.value)} />
-        </div>
-        <div className={styles.formField}>
-          <label>Valor:</label>
-          <input
-            type="number"
-            value={eventValue}
-            onChange={(e) => setEventValue(parseInt(e.target.value))}
-          />
-        </div>
-        <div className={styles.formField}>
-          <label>Extras:</label>
-          <textarea value={eventExtras} onChange={(e) => setEventExtras(e.target.value)} />
-          {errorMessage && <p className="error">{errorMessage}</p>}
-        </div>
-        <div className={styles.buttonContainer}>
-          <button onClick={handleSaveEvent}>Save</button>
-          <button onClick={closeModal}>Cancel</button>
+    <div className={styles.container}>
+      <div className={styles.outsideModal} onClick={closeModal}></div>
+      <div className={styles.modal}>
+        <div className={styles.modalContent}>
+          <h2 className={styles.modalTitle}>Adicionar Evento</h2>
+          <div className={styles.formField}>
+            <label>Transporte ao local:</label>
+            <input
+              type="text"
+              className={styles.inputBox}
+              value={transportType}
+              onChange={(e) => setTransportType(e.target.value)}
+            />
+          </div>
+          <div className={styles.formField}>
+            <label>Local do evento:</label>
+            <input
+              type="text"
+              required
+              className={styles.inputBox}
+              value={departureLocation}
+              onChange={(e) => setDepartureLocation(e.target.value)}
+            />
+          </div>
+          <div className={styles.formField}>
+            <label>Horário:</label>
+            <input
+              type="time"
+              className={styles.inputBox}
+              value={eventTime}
+              required
+              onChange={(e) => setEventTime(e.target.value)}
+            />
+          </div>
+          <div className={styles.formField}>
+            <label>Preço (se tiver):</label>
+            <input
+              type="number"
+              className={styles.inputBox}
+              value={eventValue}
+              onChange={(e) => setEventValue(parseInt(e.target.value))}
+            />
+          </div>
+          <div className={styles.formField}>
+            <label>Observações:</label>
+            <textarea
+              className={styles.textAreaBox}
+              rows={2}
+              value={eventExtras}
+              onChange={(e) => setEventExtras(e.target.value)}
+            />
+            {errorMessage && <p className="error">{errorMessage}</p>}
+          </div>
+          <div className={styles.buttonContainer}>
+            <button className={styles.submitButton} onClick={handleSaveEvent}>
+              Salvar
+            </button>
+            <button className={styles.submitButton} onClick={closeModal}>
+              Cancelar
+            </button>
+          </div>
         </div>
       </div>
     </div>
