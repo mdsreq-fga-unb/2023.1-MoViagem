@@ -14,15 +14,15 @@ const Schedule: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [days, setDays] = useState<JSX.Element[]>([]); // Declare days as a state variable
   const [allMonths, setAllMonths] = useState<string[]>([]);
-  const [diffYears, setDiffYears] = useState<number>(0)
+  const [diffYears, setDiffYears] = useState<number>(0); // Keeps track of the difference between the current year in rl and the year of the calendar
   const currYearRef = useRef<number>(date.getFullYear());
 
   // Render the calendar
   const renderCalendar = useCallback(() => {
-    const firstDayOfMonth = new Date(date.getFullYear(), currMonth, 1).getDay();
-    const lastDateOfMonth = new Date(date.getFullYear(), currMonth + 1, 0).getDate();
-    const lastDayOfMonth = new Date(date.getFullYear(), currMonth, lastDateOfMonth).getDay();
-    const lastDateOfLastMonth = new Date(date.getFullYear(), currMonth, 0).getDate();
+    const firstDayOfMonth = new Date(currYearRef.current, currMonth, 1).getDay();
+    const lastDateOfMonth = new Date(currYearRef.current, currMonth + 1, 0).getDate();
+    const lastDayOfMonth = new Date(currYearRef.current, currMonth, lastDateOfMonth).getDay();
+    const lastDateOfLastMonth = new Date(currYearRef.current, currMonth, 0).getDate();
 
     const months = [
       "Janeiro",
@@ -132,11 +132,11 @@ const Schedule: React.FC = () => {
       if (updatedMonth < 0) {
         updatedMonth = 11;
         updatedYear--;
-        setDiffYears(diffYears - 1)
+        setDiffYears(diffYears - 1);
       } else if (updatedMonth > 11) {
         updatedMonth = 0;
         updatedYear++;
-        setDiffYears(diffYears + 1)
+        setDiffYears(diffYears + 1);
       }
 
       currYearRef.current = updatedYear; // Update year reference
