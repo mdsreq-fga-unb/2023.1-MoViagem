@@ -66,18 +66,18 @@
   resize: none;
 
   &::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+    width: 12px; /* width of the entire scrollbar */
   }
 
   &::-webkit-scrollbar-track {
     background: $color-secondary;
-    border-radius: 10px;         /* color of the tracking area */
+    border-radius: 10px; /* color of the tracking area */
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $color-primary;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid $color-secondary;  /* creates padding around scroll thumb */
+    background-color: $color-primary; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 3px solid $color-secondary; /* creates padding around scroll thumb */
   }
 }
 

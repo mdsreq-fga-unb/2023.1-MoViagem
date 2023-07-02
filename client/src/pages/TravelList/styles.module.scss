@@ -9,6 +9,98 @@
   }
 }
 
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterList {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgb(221, 255, 217);
+  box-shadow: 5px 5px 5px rgb(175, 175, 175);
+  
+  border: 2px solid $color-primary;
+  border-radius: 20px;
+  
+  margin-right: 2rem;
+  margin-top: 2rem;
+  padding: 5px;
+
+  h2 {
+    margin-left: 3rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: $color-primary;
+  }
+}
+
+.filterButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 34px;
+  width: 20%;
+  
+  background: rgba(0, 0, 0, 0);
+  color: $color-primary;
+  font-weight: bold;
+  font-size: 1.3rem;
+  
+  margin-right: 2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  
+  transition: .4s;
+  border-radius: 20px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  box-shadow: 1px 1px 5px gray;
+
+  &:hover {
+    background: $color-primary;
+    color: rgba(201, 255, 153, 1);
+    transform: translateX(-10px);
+    border: 2px solid rgba(201, 255, 153, 1);
+  }
+}
+
+.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 34px;
+  background: rgba(0, 0, 0, 0);
+  
+  color: $color-primary;
+  font-weight: bold;
+  font-size: 1.3rem;
+  
+  margin-right: 2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  
+  border-radius: 20px;
+  border: 2px double $color-primary;
+
+  transition: .4s;
+  box-shadow: 3px 3px 5px gray;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-style: double;
+
+  &:hover {
+    background: $color-primary;
+    color: rgba(201, 255, 153, 1);
+    transform: translateX(-10px);
+    border: 2px solid rgba(201, 255, 153, 1);
+  }
+}
+
 .outsideBox {
   list-style: none;
   display: flex;
@@ -62,7 +154,7 @@
 }
 
 #createTravelButton {
-  width: 20%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +163,7 @@
   color: rgba(201, 255, 153, 1);
   box-shadow: 5px 5px 5px rgb(175, 175, 175);
 
-  margin-top: 3rem;
+  margin-top: 2.5rem;
   margin-left: 5rem;
   padding: 10px;
   border-radius: 15px;

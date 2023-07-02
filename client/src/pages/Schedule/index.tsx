@@ -39,7 +39,7 @@ const Schedule: React.FC = () => {
       "Dezembro",
     ];
 
-    setAllMonths(months)
+    setAllMonths(months);
     const updatedDays: JSX.Element[] = [];
 
     // Handle day click event
@@ -65,7 +65,9 @@ const Schedule: React.FC = () => {
         <div
           key={`prev-${i}`}
           className={styles.inactive}
-          onClick={() => handleDayClick(lastDateOfLastMonth - i + 1, currMonth - 1, currYearRef.current)}
+          onClick={() =>
+            handleDayClick(lastDateOfLastMonth - i + 1, currMonth - 1, currYearRef.current)
+          }
         >
           {lastDateOfLastMonth - i + 1}
         </div>
@@ -174,7 +176,7 @@ const Schedule: React.FC = () => {
               <div>Activity 3</div>
             </div>
             <div className={styles.buttonOutsideContainer}>
-              <button className={styles.buttonContainer} onClick={handleModalOpen}> 
+              <button className={styles.buttonContainer} onClick={handleModalOpen}>
                 Criar atividade
               </button>
             </div>
@@ -183,23 +185,17 @@ const Schedule: React.FC = () => {
             <header>
               <div className={styles.monthIcons}>
                 <button className={styles.prev} onClick={() => handleIconClick(-1)}>
-                  {
-                    allMonths[currMonth - 1]
-                      ? allMonths[currMonth - 1] + " " + (currYearRef.current)
-                      : allMonths[currMonth + 11] + " " + (currYearRef.current - 1)
-                  }
+                  {allMonths[currMonth - 1]
+                    ? allMonths[currMonth - 1] + " " + currYearRef.current
+                    : allMonths[currMonth + 11] + " " + (currYearRef.current - 1)}
                 </button>
                 <button className={styles.current}>
-                  {
-                    allMonths[currMonth] + " " + (currYearRef.current)
-                  }
+                  {allMonths[currMonth] + " " + currYearRef.current}
                 </button>
                 <button className={styles.next} onClick={() => handleIconClick(1)}>
-                  {
-                    allMonths[currMonth + 1]
-                      ? allMonths[currMonth + 1] + " " + (currYearRef.current)
-                      : allMonths[currMonth - 11] + " " + (currYearRef.current + 1)
-                  }
+                  {allMonths[currMonth + 1]
+                    ? allMonths[currMonth + 1] + " " + currYearRef.current
+                    : allMonths[currMonth - 11] + " " + (currYearRef.current + 1)}
                 </button>
               </div>
             </header>
