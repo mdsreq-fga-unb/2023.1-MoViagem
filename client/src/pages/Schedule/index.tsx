@@ -7,12 +7,14 @@ import styles from "./styles.module.scss";
 const Schedule: React.FC = () => {
   const params = useParams();
   const date = useMemo(() => new Date(), []);
-  const [currentDate, setCurrentDate] = useState("");
+  // const [currentDate, setCurrentDate] = useState("");
   const [currentDateForSidebar, setCurrentDateForSidebar] = useState("");
   const [currMonth, setCurrMonth] = useState<number>(date.getMonth());
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [days, setDays] = useState<JSX.Element[]>([]); // Declare days as a state variable
+  const [allMonths, setAllMonths] = useState<string[]>([]);
+  const [diffYears, setDiffYears] = useState<number>(0)
   const currYearRef = useRef<number>(date.getFullYear());
 
   // Render the calendar
@@ -25,7 +27,7 @@ const Schedule: React.FC = () => {
     const months = [
       "Janeiro",
       "Fevereiro",
-      "Marco",
+      "Março",
       "Abril",
       "Maio",
       "Junho",
@@ -37,6 +39,7 @@ const Schedule: React.FC = () => {
       "Dezembro",
     ];
 
+    setAllMonths(months)
     const updatedDays: JSX.Element[] = [];
 
     // Handle day click event
@@ -54,10 +57,16 @@ const Schedule: React.FC = () => {
       // setShowModal(true);
     };
 
+    const selectedDateEvent = new Date(currYearRef.current, currMonth);
+
     // Add inactive days from the previous month
     for (let i = firstDayOfMonth; i > 0; i--) {
       updatedDays.push(
-        <div key={`prev-${i}`} className={styles.inactive}>
+        <div
+          key={`prev-${i}`}
+          className={styles.inactive}
+          onClick={() => handleDayClick(lastDateOfLastMonth - i + 1, currMonth - 1, currYearRef.current)}
+        >
           {lastDateOfLastMonth - i + 1}
         </div>
       );
@@ -74,7 +83,7 @@ const Schedule: React.FC = () => {
       updatedDays.push(
         <div
           key={`curr-${i}`}
-          className={`${isToday} ${styles.day}`}
+          className={`${isToday} ${styles.days}`}
           onClick={() => handleDayClick(i, currMonth, currYearRef.current)}
         >
           {i}
@@ -85,26 +94,28 @@ const Schedule: React.FC = () => {
     // Add inactive days from the next month
     for (let i = lastDayOfMonth; i < 6; i++) {
       updatedDays.push(
-        <div key={`next-${i}`} className={styles.inactive}>
+        <div
+          key={`next-${i}`}
+          className={styles.inactive}
+          onClick={() => handleDayClick(i - lastDayOfMonth + 1, currMonth + 1, currYearRef.current)}
+        >
           {i - lastDayOfMonth + 1}
         </div>
       );
     }
 
-    const currentDay = date.getDate();
+    // const currentDay = date.getDate();
 
-    const selectedDateEvent = new Date(currYearRef.current, currMonth);
     const currentDayForSidebar = selectedDateEvent.toLocaleDateString(undefined, {
       day: "numeric",
       month: "long",
       year: "numeric",
     });
 
-    setCurrentDateForSidebar(currentDayForSidebar);
     setSelectedDate(selectedDateEvent);
-    setCurrentDateForSidebar(`${currentDayForSidebar} ${months[currMonth]} ${currYearRef.current}`);
+    setCurrentDateForSidebar(`${currentDayForSidebar}`);
 
-    setCurrentDate(`${currentDay} ${months[currMonth]} ${currYearRef.current}`);
+    // setCurrentDate(`${currentDay} ${months[currMonth]} ${currYearRef.current}`);
     setDays(updatedDays);
   }, [currMonth, date]);
 
@@ -116,14 +127,16 @@ const Schedule: React.FC = () => {
   const handleIconClick = (increment: number) => {
     setCurrMonth((prevMonth) => {
       let updatedMonth = prevMonth + increment;
-      let updatedYear = date.getFullYear();
+      let updatedYear = date.getFullYear() + diffYears;
 
       if (updatedMonth < 0) {
         updatedMonth = 11;
         updatedYear--;
+        setDiffYears(diffYears - 1)
       } else if (updatedMonth > 11) {
         updatedMonth = 0;
         updatedYear++;
+        setDiffYears(diffYears + 1)
       }
 
       currYearRef.current = updatedYear; // Update year reference
@@ -153,31 +166,45 @@ const Schedule: React.FC = () => {
           )}
           <div className={styles.sidebar}>
             {/* Sidebar Content */}
-            <h2>{currentDateForSidebar}</h2>
+            <h2>[ {currentDateForSidebar} ]</h2>
             {/* Fetch and display activities for the selected date */}
             <div className={styles.activities}>
               <div>Activity 1</div>
               <div>Activity 2</div>
               <div>Activity 3</div>
-              <button className={styles.buttonContainer} onClick={handleModalOpen}>
-                Open Modal
-              </button>
             </div>
-            <div className={styles.icons}>
-              <span className={styles.prev} onClick={() => handleIconClick(-1)}>
-                Previous
-              </span>
-              <span className={styles.next} onClick={() => handleIconClick(1)}>
-                Next
-              </span>
+            <div className={styles.buttonOutsideContainer}>
+              <button className={styles.buttonContainer} onClick={handleModalOpen}> 
+                Criar atividade
+              </button>
             </div>
           </div>
           <div className={styles.calendar}>
             <header>
-              <p className={styles.currentDate}>{currentDate}</p>
+              <div className={styles.monthIcons}>
+                <button className={styles.prev} onClick={() => handleIconClick(-1)}>
+                  {
+                    allMonths[currMonth - 1]
+                      ? allMonths[currMonth - 1] + " " + (currYearRef.current)
+                      : allMonths[currMonth + 11] + " " + (currYearRef.current - 1)
+                  }
+                </button>
+                <button className={styles.current}>
+                  {
+                    allMonths[currMonth] + " " + (currYearRef.current)
+                  }
+                </button>
+                <button className={styles.next} onClick={() => handleIconClick(1)}>
+                  {
+                    allMonths[currMonth + 1]
+                      ? allMonths[currMonth + 1] + " " + (currYearRef.current)
+                      : allMonths[currMonth - 11] + " " + (currYearRef.current + 1)
+                  }
+                </button>
+              </div>
             </header>
-            <div className={styles.days}>
-              <div className={styles.gridLayout}>
+            <div className={styles.weekDays}>
+              <div className={styles.weekDaysGridLayout}>
                 <div>Domingo</div>
                 <div>Segunda</div>
                 <div>Terça</div>

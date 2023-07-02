@@ -2,6 +2,9 @@
 
 .pageContainer {
   display: grid;
+  height: 80%;
+  justify-content: center;
+  align-items: center;
 
   h2 {
     margin-bottom: 2rem;
@@ -11,15 +14,24 @@
 .boxContainer {
   display: flex;
   justify-content: center;
+  border-radius: 20px;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.25);
 }
 
 .sidebar {
   padding: 20px;
   background-color: #4f772d;
-  border-radius: 10px;
+  border-radius: 20px 0px 0px 20px;
+  text-align: center;
 
   width: 25vw;
   height: 60vh;
+
+  h2 {
+    font-size: 1.7rem;
+    font-style: bold;
+    text-shadow: 1px 1px $color-secondary;
+  }
 
   .activities {
     display: flex;
@@ -34,39 +46,92 @@
     font-weight: 500;
   }
 
+  .buttonOutsideContainer {
+    display: flex;
+    justify-content: center;
+  }
+
   .buttonContainer {
     margin: auto;
-    height: 30px;
+    height: 34px;
     border-radius: 10px;
+    border: 5px double $input-primary;
     width: 250px;
     align-items: bottom;
-    background-color: $color-primary;
+    background-color: #ecf39e;
+    color: $color-primary;
+    font-weight: bolder;
+    font-size: 1.1rem;
+    padding: 2px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: 0.3s;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
 
     &:hover {
-      background-color: $color-secondary;
+      transform: scale(1.1);
+      translate: 0 -3px;
+    }
+  }
+}
+
+.monthIcons {
+  display: flex;
+
+  .prev {
+    margin: auto;
+    height: 34px;
+    border-radius: 10px;
+    border: 5px double $input-primary;
+    width: 25%;
+    align-items: bottom;
+    background-color: #ecf39e;
+    color: $color-primary;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2px;
+    cursor: pointer;
+    transition: translate 0.3s;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+      translate: 10px;
     }
   }
 
-  .icons span {
-    height: 38px;
-    width: 38px;
-    margin: 0 1px;
-    color: #878787;
-    font-size: 1.9rem;
-    cursor: pointer;
-    text-align: center;
-    line-height: 38px;
+  .current {
+    margin: auto;
+    height: 34px;
     border-radius: 10px;
-    background: #f2f2f2;
+    border: none;
+    background-color: inherit;
+    width: 25%;
+    align-items: bottom;
+    color: $color-primary;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    font-weight: bold;
+    font-size: 1.3rem;
+    padding: 2px;
+  }
+
+  .next {
+    margin: auto;
+    height: 34px;
+    border-radius: 10px;
+    border: 5px double $input-primary;
+    width: 25%;
+    align-items: bottom;
+    background-color: #ecf39e;
+    color: $color-primary;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2px;
+    cursor: pointer;
+    transition: translate 0.3s;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
 
     &:hover {
-      background: $color-secondary;
-    }
-
-    &:last-child {
-      margin-right: -10px;
+      translate: -10px;
     }
   }
 }
@@ -74,14 +139,32 @@
 .calendar {
   padding: 20px;
   background-color: #ecf39e;
-  width: 60%;
+  width: fit-content;
   height: 60vh;
-  border-radius: 10px;
+  border-radius: 0px 20px 20px 0px;
   display: grid;
+  justify-content: center;
 
   .current-date {
     font-size: 1.45rem;
     font-weight: 500;
+  }
+
+  .weekDays {
+    .weekDaysGridLayout {
+      list-style-type: none;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 130px 130px 130px 130px 130px 130px 130px;
+
+      text-align: center;
+      row-gap: 40px;
+    }
+
+    .weekDaysGridLayout div {
+      transition: .4s;
+      padding: 5px;
+    }
   }
 
   .days {
@@ -93,19 +176,30 @@
       grid-template-columns: 130px 130px 130px 130px 130px 130px 130px;
 
       text-align: center;
-      row-gap: 60px;
+      row-gap: 40px;
     }
 
     .gridLayout div {
+      transition: .4s;
+      padding: 5px;
+
       &:hover {
         background: $color-secondary;
-        border-radius: 50%;
-        padding: 5px;
+        border-radius: 50px;
       }
     }
 
     .inactive {
       color: #aaa;
+    }
+
+    .active {
+      color: blue;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-decoration-style: double;
+      font-weight: 800;
+      border-radius: 50px;
     }
   }
 }
