@@ -1,11 +1,13 @@
+import { parse } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ErrorResponse } from "../../api/api-instance.ts";
+import { EventResponseDTO } from "../../api/dto/travels-dto.ts";
+import { requestGetEvents } from "../../api/requests/travels-requests.ts";
 import Navbar from "../../components/Navbar/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
-import { EventResponseDTO } from "../../api/dto/travels-dto.ts";
-import { requestGetEvents } from "../../api/requests/travels-requests.ts";
-import { ErrorResponse } from "../../api/api-instance.ts";
 
 const Schedule: React.FC = () => {
   const params = useParams();
@@ -19,8 +21,8 @@ const Schedule: React.FC = () => {
   const [allMonths, setAllMonths] = useState<string[]>([]);
   const [diffYears, setDiffYears] = useState<number>(0); // Keeps track of the difference between the current year in rl and the year of the calendar
   const currYearRef = useRef<number>(date.getFullYear());
-  const [events, setEvents] = useState<EventResponseDTO[]>([])
-  const [dayEvents, setDayEvents] = useState<EventResponseDTO[]>([])
+  const [events, setEvents] = useState<EventResponseDTO[]>([]);
+  const [dayEvents, setDayEvents] = useState<EventResponseDTO[]>([]);
 
   // Render the calendar
   const renderCalendar = useCallback(() => {
@@ -140,14 +142,17 @@ const Schedule: React.FC = () => {
 
     response.data.forEach((event) => {
       const eventDate = new Date(event.eventTime);
-      const currentDate = new Date(currentDateForSidebar);
-      if (eventDate === currentDate) {
+      const currentDate = parse(currentDateForSidebar, "d 'de' MMMM 'de' yyyy", new Date(), {
+        locale: ptBR,
+      });
+
+      if (eventDate.getDate() === currentDate.getDate()) {
         dayEvents.push(event);
       }
-    })
+    });
 
     setDayEvents(dayEvents);
-  }
+  };
 
   useEffect(() => {
     renderCalendar();
@@ -208,9 +213,7 @@ const Schedule: React.FC = () => {
                   <div className={styles.infoBox}>
                     <h3>{event.departureLocation}</h3>
                     <div className={styles.infoText}>
-                      <p>
-                        {new Date(event.eventTime).toLocaleTimeString()}
-                      </p>
+                      <p>{new Date(event.eventTime).toLocaleTimeString()}</p>
                     </div>
                   </div>
                 </button>
