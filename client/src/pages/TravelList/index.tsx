@@ -103,7 +103,7 @@ export default function TravelList() {
             </button>
           </section>
         </header>
-        <div className={styles.outsideBox}>
+        <section className={styles.outsideBox}>
           {!pastTravelsFilter && !currTravelsFilter && !futureTravelsFilter ? (
             travels.map((travel) => (
               <Link
@@ -200,7 +200,7 @@ export default function TravelList() {
           ) : (
             <></>
           )}
-        </div>
+        </section>
       </div>
     </Navbar>
   );
