@@ -103,6 +103,7 @@ export default function TravelList() {
             </button>
           </section>
         </header>
+        <div className={styles.bodyContainer}>
         <section className={styles.outsideBox}>
           {!pastTravelsFilter && !currTravelsFilter && !futureTravelsFilter ? (
             travels.map((travel) => (
@@ -201,6 +202,7 @@ export default function TravelList() {
             <></>
           )}
         </section>
+        </div>
       </div>
     </Navbar>
   );
