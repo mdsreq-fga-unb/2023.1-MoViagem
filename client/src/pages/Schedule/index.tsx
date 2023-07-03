@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
 import { EventResponseDTO } from "../../api/dto/travels-dto.ts";
-import { requestGetEvent, requestGetEvents } from "../../api/requests/travels-requests.ts";
+import { requestGetEvents } from "../../api/requests/travels-requests.ts";
 import { ErrorResponse } from "../../api/api-instance.ts";
 
 const Schedule: React.FC = () => {
