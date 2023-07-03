@@ -22,10 +22,10 @@
 
   background: rgb(221, 255, 217);
   box-shadow: 5px 5px 5px rgb(175, 175, 175);
-  
+
   border: 2px solid $color-primary;
   border-radius: 20px;
-  
+
   margin-right: 2rem;
   margin-top: 2rem;
   padding: 5px;
@@ -45,20 +45,21 @@
   align-items: center;
   height: 34px;
   width: 20%;
-  
+
   background: rgba(0, 0, 0, 0);
   color: $color-primary;
   font-weight: bold;
   font-size: 1.3rem;
-  
+
   margin-right: 2rem;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  
-  transition: .4s;
+
+  transition: 0.4s;
   border-radius: 20px;
   border: 2px solid rgba(0, 0, 0, 0);
   box-shadow: 1px 1px 5px gray;
+  cursor: pointer;
 
   &:hover {
     background: $color-primary;
@@ -75,29 +76,35 @@
   width: 20%;
   height: 34px;
   background: rgba(0, 0, 0, 0);
-  
+
   color: $color-primary;
   font-weight: bold;
   font-size: 1.3rem;
-  
+
   margin-right: 2rem;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  
+
   border-radius: 20px;
   border: 2px double $color-primary;
 
-  transition: .4s;
+  transition: 0.4s;
   box-shadow: 3px 3px 5px gray;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-decoration-style: double;
 
+  background: $color-primary;
+  color: rgba(201, 255, 153, 1);
+  transform: translateX(-10px);
+  border: 2px solid rgba(201, 255, 153, 1);
+  cursor: pointer;
+
   &:hover {
     background: $color-primary;
-    color: rgba(201, 255, 153, 1);
+    color: rgb(245, 106, 106);
     transform: translateX(-10px);
-    border: 2px solid rgba(201, 255, 153, 1);
+    border: 2px solid rgb(245, 106, 106);
   }
 }
 

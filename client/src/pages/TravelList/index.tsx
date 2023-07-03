@@ -30,36 +30,42 @@ export default function TravelList() {
 
     setTravels(response.data);
 
-    travels.map((travel) => {
+    const futureTravels: TravelsResponseDTO[] = [];
+    const pastTravels: TravelsResponseDTO[] = [];
+    const currTravels: TravelsResponseDTO[] = [];
+
+    response.data.forEach((travel) => {
       const travelStart = new Date(travel.startDate);
       const travelEnd = new Date(travel.endDate);
       if (travelStart > currentDate) {
-        setFutureTravels([...futureTravels, travel]);
-      }
-      else if (travelEnd < currentDate) {
-        setPastTravels([...pastTravels, travel]);
-      }
-      else if (travelStart < currentDate && travelEnd > currentDate) {
-        setCurrTravels([...currTravels, travel]);
+        futureTravels.push(travel);
+      } else if (travelEnd < currentDate) {
+        pastTravels.push(travel);
+      } else if (travelStart < currentDate && travelEnd > currentDate) {
+        currTravels.push(travel);
       }
     });
+
+    setFutureTravels(futureTravels);
+    setPastTravels(pastTravels);
+    setCurrTravels(currTravels);
   };
 
   const handleFilter = (filter: number) => {
     if (filter === 1) {
-      setPastTravelsFilter(!pastTravelsFilter)
-      setCurrTravelsFilter(false)
-      setFutureTravelsFilter(false)
+      setPastTravelsFilter(!pastTravelsFilter);
+      setCurrTravelsFilter(false);
+      setFutureTravelsFilter(false);
     } else if (filter === 2) {
-      setPastTravelsFilter(false)
-      setCurrTravelsFilter(!currTravelsFilter)
-      setFutureTravelsFilter(false)
+      setPastTravelsFilter(false);
+      setCurrTravelsFilter(!currTravelsFilter);
+      setFutureTravelsFilter(false);
     } else if (filter === 3) {
-      setPastTravelsFilter(false)
-      setCurrTravelsFilter(false)
-      setFutureTravelsFilter(!futureTravelsFilter)
+      setPastTravelsFilter(false);
+      setCurrTravelsFilter(false);
+      setFutureTravelsFilter(!futureTravelsFilter);
     }
-  }
+  };
 
   useEffect(() => {
     fetchTravel();
@@ -77,118 +83,123 @@ export default function TravelList() {
           </Link>
           <section className={styles.filterList}>
             <h2>Filtrar Viagens:</h2>
-            <button className={pastTravelsFilter ? styles.active : styles.filterButton} onClick={() => handleFilter(1)}>
+            <button
+              className={pastTravelsFilter ? styles.active : styles.filterButton}
+              onClick={() => handleFilter(1)}
+            >
               Viagens Passadas
             </button>
-            <button className={currTravelsFilter ? styles.active : styles.filterButton} onClick={() => handleFilter(2)}>
+            <button
+              className={currTravelsFilter ? styles.active : styles.filterButton}
+              onClick={() => handleFilter(2)}
+            >
               Viagens Atuais
             </button>
-            <button className={futureTravelsFilter ? styles.active : styles.filterButton} onClick={() => handleFilter(3)}>
+            <button
+              className={futureTravelsFilter ? styles.active : styles.filterButton}
+              onClick={() => handleFilter(3)}
+            >
               Viagens Futuras
             </button>
           </section>
         </header>
         <div className={styles.outsideBox}>
-          {!pastTravelsFilter && !currTravelsFilter && !futureTravelsFilter
-            ?
+          {!pastTravelsFilter && !currTravelsFilter && !futureTravelsFilter ? (
             travels.map((travel) => (
-            <Link
-              key={travel.id}
-              to={`/travel-info/${travel.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <button className={styles.insideBox}>
-                <div className={styles.infoBox}>
-                  <h3>{travel.local}</h3>
-                  <img alt="Fundo Viagem" src={FundoViagem}></img>
-                  <div className={styles.infoText}>
-                    <p>
-                      {new Date(travel.startDate).toLocaleDateString()} até{" "}
-                      {new Date(travel.endDate).toLocaleDateString()}
-                    </p>
+              <Link
+                key={travel.id}
+                to={`/travel-info/${travel.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <button className={styles.insideBox}>
+                  <div className={styles.infoBox}>
+                    <h3>{travel.local}</h3>
+                    <img alt="Fundo Viagem" src={FundoViagem}></img>
+                    <div className={styles.infoText}>
+                      <p>
+                        {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                        {new Date(travel.endDate).toLocaleDateString()}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </button>
-            </Link>
+                </button>
+              </Link>
             ))
-            :
+          ) : (
             <></>
-          }
-          {pastTravelsFilter && !currTravelsFilter && !futureTravelsFilter
-            ?
+          )}
+          {pastTravelsFilter && !currTravelsFilter && !futureTravelsFilter ? (
             pastTravels.map((travel) => (
-            <Link
-              key={travel.id}
-              to={`/travel-info/${travel.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <button className={styles.insideBox}>
-                <div className={styles.infoBox}>
-                  <h3>{travel.local}</h3>
-                  <img alt="Fundo Viagem" src={FundoViagem}></img>
-                  <div className={styles.infoText}>
-                    <p>
-                      {new Date(travel.startDate).toLocaleDateString()} até{" "}
-                      {new Date(travel.endDate).toLocaleDateString()}
-                    </p>
+              <Link
+                key={travel.id}
+                to={`/travel-info/${travel.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <button className={styles.insideBox}>
+                  <div className={styles.infoBox}>
+                    <h3>{travel.local}</h3>
+                    <img alt="Fundo Viagem" src={FundoViagem}></img>
+                    <div className={styles.infoText}>
+                      <p>
+                        {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                        {new Date(travel.endDate).toLocaleDateString()}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </button>
-            </Link>
+                </button>
+              </Link>
             ))
-            :
+          ) : (
             <></>
-          }
-          {!pastTravelsFilter && currTravelsFilter && !futureTravelsFilter
-            ?
+          )}
+          {!pastTravelsFilter && currTravelsFilter && !futureTravelsFilter ? (
             currTravels.map((travel) => (
-            <Link
-              key={travel.id}
-              to={`/travel-info/${travel.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <button className={styles.insideBox}>
-                <div className={styles.infoBox}>
-                  <h3>{travel.local}</h3>
-                  <img alt="Fundo Viagem" src={FundoViagem}></img>
-                  <div className={styles.infoText}>
-                    <p>
-                      {new Date(travel.startDate).toLocaleDateString()} até{" "}
-                      {new Date(travel.endDate).toLocaleDateString()}
-                    </p>
+              <Link
+                key={travel.id}
+                to={`/travel-info/${travel.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <button className={styles.insideBox}>
+                  <div className={styles.infoBox}>
+                    <h3>{travel.local}</h3>
+                    <img alt="Fundo Viagem" src={FundoViagem}></img>
+                    <div className={styles.infoText}>
+                      <p>
+                        {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                        {new Date(travel.endDate).toLocaleDateString()}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </button>
-            </Link>
+                </button>
+              </Link>
             ))
-            :
+          ) : (
             <></>
-          }
-          {!pastTravelsFilter && !currTravelsFilter && futureTravelsFilter
-            ?
+          )}
+          {!pastTravelsFilter && !currTravelsFilter && futureTravelsFilter ? (
             futureTravels.map((travel) => (
-            <Link
-              key={travel.id}
-              to={`/travel-info/${travel.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <button className={styles.insideBox}>
-                <div className={styles.infoBox}>
-                  <h3>{travel.local}</h3>
-                  <img alt="Fundo Viagem" src={FundoViagem}></img>
-                  <div className={styles.infoText}>
-                    <p>
-                      {new Date(travel.startDate).toLocaleDateString()} até{" "}
-                      {new Date(travel.endDate).toLocaleDateString()}
-                    </p>
+              <Link
+                key={travel.id}
+                to={`/travel-info/${travel.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <button className={styles.insideBox}>
+                  <div className={styles.infoBox}>
+                    <h3>{travel.local}</h3>
+                    <img alt="Fundo Viagem" src={FundoViagem}></img>
+                    <div className={styles.infoText}>
+                      <p>
+                        {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                        {new Date(travel.endDate).toLocaleDateString()}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </button>
-            </Link>
+                </button>
+              </Link>
             ))
-            :
+          ) : (
             <></>
-          }
+          )}
         </div>
       </div>
     </Navbar>
