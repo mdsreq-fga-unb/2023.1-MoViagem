@@ -101,6 +101,13 @@ export async function requestGetEvent(id: string) {
   });
 }
 
+export async function requestGetEvents(travelId: string) {
+  return request<never, EventResponseDTO[]>({
+    method: "GET",
+    url: `event/${travelId}`,
+  });
+}
+
 export async function requestEditEvent(form: CreateEventRequestDTO, id: number) {
   return request<CreateEventRequestDTO, never>({
     method: "PUT",

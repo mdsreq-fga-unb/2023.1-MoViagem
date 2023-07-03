@@ -20,6 +20,11 @@ export class EventController {
     return this.eventService.edit(id, dto);
   }
 
+  @Get("/:travelId")
+  async listByUser(@Param("travelId") travelId: number): Promise<EventResponseDTO[]> {
+    return this.eventService.getEventsByTravel(travelId);
+  }
+
   @Get("/:id")
   async get(@Param("id") id: number): Promise<EventResponseDTO> {
     return this.eventService.getEvent(id);

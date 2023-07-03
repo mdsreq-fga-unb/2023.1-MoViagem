@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
+import { EventResponseDTO } from "../../api/dto/travels-dto.ts";
+import { requestGetEvent, requestGetEvents } from "../../api/requests/travels-requests.ts";
+import { ErrorResponse } from "../../api/api-instance.ts";
 
 const Schedule: React.FC = () => {
   const params = useParams();
@@ -16,6 +19,8 @@ const Schedule: React.FC = () => {
   const [allMonths, setAllMonths] = useState<string[]>([]);
   const [diffYears, setDiffYears] = useState<number>(0); // Keeps track of the difference between the current year in rl and the year of the calendar
   const currYearRef = useRef<number>(date.getFullYear());
+  const [events, setEvents] = useState<EventResponseDTO[]>([])
+  const [dayEvents, setDayEvents] = useState<EventResponseDTO[]>([])
 
   // Render the calendar
   const renderCalendar = useCallback(() => {
@@ -121,9 +126,36 @@ const Schedule: React.FC = () => {
     setDays(updatedDays);
   }, [currMonth, date]);
 
+  const fetchEvents = async () => {
+    const response = await requestGetEvents(params.id!);
+
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
+    }
+
+    setEvents(response.data);
+
+    const dayEvents: EventResponseDTO[] = [];
+
+    response.data.forEach((event) => {
+      const eventDate = new Date(event.eventTime);
+      const currentDate = new Date(currentDateForSidebar);
+      if (eventDate === currentDate) {
+        dayEvents.push(event);
+      }
+    })
+
+    setDayEvents(dayEvents);
+  }
+
   useEffect(() => {
     renderCalendar();
   }, [renderCalendar]);
+
+  useEffect(() => {
+    fetchEvents();
+  }, [currentDateForSidebar]);
 
   // Handle click on previous/next month icon
   const handleIconClick = (increment: number) => {
@@ -171,9 +203,18 @@ const Schedule: React.FC = () => {
             <h2>[ {currentDateForSidebar} ]</h2>
             {/* Fetch and display activities for the selected date */}
             <div className={styles.activities}>
-              <div>Activity 1</div>
-              <div>Activity 2</div>
-              <div>Activity 3</div>
+              {dayEvents.map((event) => (
+                <button className={styles.insideBox}>
+                  <div className={styles.infoBox}>
+                    <h3>{event.departureLocation}</h3>
+                    <div className={styles.infoText}>
+                      <p>
+                        {new Date(event.eventTime).toLocaleTimeString()}
+                      </p>
+                    </div>
+                  </div>
+                </button>
+              ))}
             </div>
             <div className={styles.buttonOutsideContainer}>
               <button className={styles.buttonContainer} onClick={handleModalOpen}>
