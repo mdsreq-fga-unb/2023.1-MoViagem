@@ -5,12 +5,7 @@ import { IconButton } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
-import {
-  requestEditTravel,
-  requestGetHost,
-  requestGetTransport,
-  requestGetTravel,
-} from "../../api/requests/travels-requests";
+import { requestEditTravel, requestGetTravelWithInfo } from "../../api/requests/travels-requests";
 import Navbar from "../../components/Navbar";
 import {
   convertDateInputValueToDate,
@@ -31,6 +26,7 @@ export default function TravelInfo() {
   const [wasEdited, setWasEdited] = useState<boolean>(false);
 
   // Host variables
+  const [hostId, setHostId] = useState<number>(0);
   const [localHost, setLocalHost] = useState<string>("");
   const [dataInicioHost, setDataInicioHost] = useState<Date | null>(null);
   const [dataFimHost, setDataFimHost] = useState<Date | null>(null);
@@ -39,6 +35,7 @@ export default function TravelInfo() {
   const [contatoHost, setContatoHost] = useState<string>("");
 
   // Transport variables
+  const [transportId, setTransportId] = useState<number>(0);
   const [tipoTransporteTransport, setTipoTransporteTransport] = useState<string>("");
   const [localIdaTransport, setLocalIdaTransport] = useState<string>("");
   const [localChegadaTransport, setLocalChegadaTransport] = useState<string>("");
@@ -49,64 +46,66 @@ export default function TravelInfo() {
 
   // Travel fetch request
   const fetchTravel = useCallback(async () => {
-    const response = await requestGetTravel(params.id!);
+    const response = await requestGetTravelWithInfo(params.id!);
 
     if (response instanceof ErrorResponse) {
       alert(response.message);
       return;
     }
 
+    // Set travel variables
     setDataFim(new Date(response.data.endDate));
     setDataInicio(new Date(response.data.startDate));
     setLocal(response.data.local);
     setNumDePessoas(response.data.numParticipants.toString());
     setProposito(response.data.description);
-  }, [params.id]);
 
-  // Host fetch request
-  const fetchHost = useCallback(async () => {
-    const response = await requestGetHost(params.id!);
+    // Set host variables
+    if (response.data.host) {
+      const host = response.data.host;
 
-    if (response instanceof ErrorResponse) {
-      if (response.status !== 400) {
-        alert(response.message);
-      }
-      return;
+      setHostId(host.id);
+      setContatoHost(host.contact);
+      setPrecoHost(host.price);
+      setDataFimHost(new Date(host.endTime));
+      setDataInicioHost(new Date(host.startTime));
+      setLocalHost(host.local);
+      setTipoEstadiaHost(host.type);
+    } else {
+      setContatoHost("");
+      setPrecoHost(0);
+      setDataFimHost(null);
+      setDataInicioHost(null);
+      setLocalHost("");
+      setTipoEstadiaHost("");
     }
 
-    setContatoHost(response.data.contact);
-    setPrecoHost(response.data.price);
-    setDataFimHost(new Date(response.data.endTime));
-    setDataInicioHost(new Date(response.data.startTime));
-    setLocalHost(response.data.local);
-    setTipoEstadiaHost(response.data.type);
-  }, [params.id]);
+    // Set transport variables
+    if (response.data.transport) {
+      const transport = response.data.transport;
 
-  // Transport fetch request
-  const fetchTransport = useCallback(async () => {
-    const response = await requestGetTransport(params.id!);
-
-    if (response instanceof ErrorResponse) {
-      if (response.status !== 400) {
-        alert(response.message);
-      }
-      return;
+      setTransportId(transport.id);
+      setContatoTransport(transport.contacts);
+      setHoraChegadaTransport(new Date(transport.endTime));
+      setHoraSaidaTransport(new Date(transport.startTime));
+      setLocalChegadaTransport(transport.endLocal);
+      setLocalIdaTransport(transport.startLocal);
+      setPrecoTransport(transport.price);
+      setTipoTransporteTransport(transport.type);
+    } else {
+      setContatoTransport("");
+      setHoraChegadaTransport(null);
+      setHoraSaidaTransport(null);
+      setLocalChegadaTransport("");
+      setLocalIdaTransport("");
+      setPrecoTransport(0);
+      setTipoTransporteTransport("");
     }
-
-    setContatoTransport(response.data.contacts);
-    setHoraChegadaTransport(new Date(response.data.endTime));
-    setHoraSaidaTransport(new Date(response.data.startTime));
-    setLocalChegadaTransport(response.data.endLocal);
-    setLocalIdaTransport(response.data.startLocal);
-    setPrecoTransport(response.data.price);
-    setTipoTransporteTransport(response.data.type);
   }, [params.id]);
 
   useEffect(() => {
     fetchTravel();
-    fetchHost();
-    fetchTransport();
-  }, [fetchHost, fetchTransport, fetchTravel]);
+  }, [fetchTravel]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -129,7 +128,6 @@ export default function TravelInfo() {
       return;
     }
 
-    // TODO: Redirecionar para a página de lista de viagens
     alert("Viagem editada com sucesso");
     setWasEdited(!wasEdited);
     navigate("/travels");
@@ -140,7 +138,7 @@ export default function TravelInfo() {
   };
 
   const handleEditHost = () => {
-    navigate(`/edit-stay/${params.id}`);
+    navigate(`/edit-stay/${hostId}`);
   };
 
   const handleCreateTransport = () => {
@@ -148,7 +146,7 @@ export default function TravelInfo() {
   };
 
   const handleEditTransport = () => {
-    navigate(`/edit-transport/${params.id}`);
+    navigate(`/edit-transport/${transportId}`);
   };
 
   return (

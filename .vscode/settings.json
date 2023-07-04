@@ -41,5 +41,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.inlineSuggest.enabled": true,
-  "cSpell.language": "en,pt-BR"
+  "cSpell.language": "en,pt-BR",
+
+  "files.eol": "\n"
 }

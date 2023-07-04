@@ -76,3 +76,8 @@ export interface TransportResponseDTO {
   price: number;
   contacts: string;
 }
+
+export interface TravelsWithInfoResponseDTO extends TravelsResponseDTO {
+  host: HostResponseDTO | null;
+  transport: TransportResponseDTO | null;
+}

@@ -7,6 +7,10 @@ export class TransportService {
   constructor(private transportRepository: TransportRepository) {}
 
   async create(id: number, dto: CreateTransportRequestDTO): Promise<void> {
+    if (dto.startTime > dto.endTime) {
+      throw new BadRequestException("data de inicio não pode ser depois da data de fim");
+    }
+
     await this.transportRepository.create({
       travel: {
         connect: {
@@ -34,6 +38,10 @@ export class TransportService {
   }
 
   async editTransport(id: number, dto: CreateTransportRequestDTO): Promise<void> {
+    if (dto.startTime > dto.endTime) {
+      throw new BadRequestException("data de inicio não pode ser depois da data de fim");
+    }
+
     await this.transportRepository.update(id, {
       contacts: dto.contacts,
       endLocal: dto.endLocal,

@@ -8,6 +8,10 @@ export class HostService {
   constructor(private hostRepository: HostRepository) {}
 
   async create(id: number, dto: CreateHostRequestDTO): Promise<void> {
+    if (dto.startTime > dto.endTime) {
+      throw new BadRequestException("data de inicio não pode ser depois da data de fim");
+    }
+
     await this.hostRepository.create({
       travel: {
         connect: {
@@ -24,6 +28,10 @@ export class HostService {
   }
 
   async edit(id: number, dto: CreateHostRequestDTO): Promise<void> {
+    if (dto.startTime > dto.endTime) {
+      throw new BadRequestException("data de inicio não pode ser depois da data de fim");
+    }
+
     await this.hostRepository.update(id, {
       contact: dto.contact,
       endTime: dto.endTime,

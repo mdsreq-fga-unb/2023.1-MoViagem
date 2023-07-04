@@ -8,6 +8,7 @@ import {
   HostResponseDTO,
   TransportResponseDTO,
   TravelsResponseDTO,
+  TravelsWithInfoResponseDTO,
 } from "../dto/travels-dto";
 
 export function requestCreateTravel(form: CreateTravelRequestDTO) {
@@ -49,10 +50,10 @@ export function requestEditTravel(id: number, form: CreateTravelRequestDTO) {
   });
 }
 
-export async function requestGetTravel(id: string) {
-  return request<never, TravelsResponseDTO>({
+export function requestGetTravelWithInfo(id: string) {
+  return request<never, TravelsWithInfoResponseDTO>({
     method: "GET",
-    url: `travel/${id}`,
+    url: `travel/with-info/${id}`,
   });
 }
 

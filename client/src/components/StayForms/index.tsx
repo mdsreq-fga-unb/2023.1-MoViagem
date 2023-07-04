@@ -63,6 +63,11 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
       return;
     }
 
+    if (dataInicio > dataFim) {
+      alert("Data de início não pode ser maior que a data de fim");
+      return;
+    }
+
     if (id === undefined) {
       throw "id is not present";
     }

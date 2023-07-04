@@ -65,6 +65,11 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
       return;
     }
 
+    if (horaSaida > horaChegada) {
+      alert("Hora de saída não pode ser maior que a hora de chegada");
+      return;
+    }
+
     if (id === undefined) {
       throw "id is not present";
     }

@@ -26,6 +26,16 @@ export default function CreateTravel() {
       return;
     }
 
+    if (dataInicio > dataFim) {
+      alert("Data de início não pode ser maior que a data de fim");
+      return;
+    }
+
+    if (numDePessoas === "") {
+      alert("Número de pessoas inválido");
+      return;
+    }
+
     const response = await requestCreateTravel({
       local,
       startDate: dataInicio,
