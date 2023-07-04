@@ -2,7 +2,7 @@
 
 .pageContainer {
   display: grid;
-  zoom: .85;
+  zoom: 0.85;
 
   h2 {
     text-align: center;
@@ -113,21 +113,23 @@
 
 .outsideBox {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  justify-items: center;
-  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  column-gap: 2rem;
   row-gap: 2rem;
-
   max-width: 100%;
   max-height: 100%;
   margin-left: 5rem;
   margin-top: 3rem;
   height: 70vh;
-  width: 90%;
+  width: 85%;
 
   background: rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 2rem;
+  padding-right: 0px;
   border-radius: 20px 15px 15px 20px;
   box-shadow: 0px 0px 10px inset rgba(0, 0, 0, 0.25);
 
@@ -135,23 +137,22 @@
   scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
-    width: 15px;               /* width of the entire scrollbar */
+    width: 15px; /* width of the entire scrollbar */
   }
-  
+
   &::-webkit-scrollbar-track {
-    background: $color-primary;        /* color of the tracking area */
+    background: $color-primary; /* color of the tracking area */
     border-radius: 0px 20px 20px 0px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(201, 255, 153, 1);    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 4px solid $color-primary;  /* creates padding around scroll thumb */
+    background-color: rgba(201, 255, 153, 1); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 4px solid $color-primary; /* creates padding around scroll thumb */
   }
 }
 
 .insideBox {
-  max-width: 82%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -201,7 +202,7 @@
   color: rgba(201, 255, 153, 1);
   box-shadow: 5px 5px 5px rgb(175, 175, 175);
 
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   margin-left: 5rem;
   padding: 10px;
   border-radius: 15px;

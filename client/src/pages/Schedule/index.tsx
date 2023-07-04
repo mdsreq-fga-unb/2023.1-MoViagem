@@ -146,9 +146,18 @@ const Schedule: React.FC = () => {
         locale: ptBR,
       });
 
-      if (eventDate.getDate() === currentDate.getDate()) {
+      if (
+        eventDate.getMonth() === currentDate.getMonth() &&
+        eventDate.getDate() === currentDate.getDate() &&
+        eventDate.getFullYear() === currentDate.getFullYear()
+      ) {
         dayEvents.push(event);
       }
+    });
+    dayEvents.sort((a, b) => {
+      const timeA = new Date(a.eventTime).getTime();
+      const timeB = new Date(b.eventTime).getTime();
+      return timeA - timeB;
     });
 
     setDayEvents(dayEvents);
