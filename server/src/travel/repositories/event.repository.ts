@@ -36,4 +36,12 @@ export class EventRepository {
       },
     });
   }
+
+  async deleteById(id: number): Promise<void> {
+    await this.prismaService.event.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

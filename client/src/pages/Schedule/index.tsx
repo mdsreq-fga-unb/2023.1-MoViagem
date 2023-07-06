@@ -8,6 +8,7 @@ import { requestGetEvents } from "../../api/requests/travels-requests.ts";
 import Navbar from "../../components/Navbar/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
+import EventInfoModal from "./EventInfoModal/index.tsx";
 
 const Schedule: React.FC = () => {
   const params = useParams();
@@ -23,6 +24,8 @@ const Schedule: React.FC = () => {
   const currYearRef = useRef<number>(date.getFullYear());
   const [events, setEvents] = useState<EventResponseDTO[]>([]);
   const [dayEvents, setDayEvents] = useState<EventResponseDTO[]>([]);
+  const [showEventModal, setShowEventModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<EventResponseDTO>();
 
   // Render the calendar
   const renderCalendar = useCallback(() => {
@@ -64,7 +67,7 @@ const Schedule: React.FC = () => {
       // setShowModal(true);
     };
 
-    const selectedDateEvent = new Date(currYearRef.current, currMonth);
+    const selectedDateEvent = new Date(currYearRef.current, currMonth, date.getDate());
 
     // Add inactive days from the previous month
     for (let i = firstDayOfMonth; i > 0; i--) {
@@ -193,6 +196,15 @@ const Schedule: React.FC = () => {
     });
   };
 
+  const handleEventInfoModalOpen = (event: EventResponseDTO) => {
+    setSelectedEvent(event)
+    setShowEventModal(true);
+  };
+
+  const handleEventInfoModalClose = () => {
+    setShowEventModal(false);
+  };
+
   const handleModalOpen = () => {
     setShowModal(true);
   };
@@ -212,13 +224,20 @@ const Schedule: React.FC = () => {
               closeModal={() => handleModalClose()}
             />
           )}
+          {showEventModal && selectedDate && selectedEvent && (
+            <EventInfoModal
+              selectedEvent={selectedEvent}
+              selectedDate={selectedDate}
+              closeModal={() => handleEventInfoModalClose()}
+            />
+          )}
           <div className={styles.sidebar}>
             {/* Sidebar Content */}
             <h2>[ {currentDateForSidebar} ]</h2>
             {/* Fetch and display activities for the selected date */}
             <div className={styles.activities}>
               {dayEvents.map((event) => (
-                <button className={styles.insideBox}>
+                <button className={styles.insideBox} onClick={() => handleEventInfoModalOpen(event)}>
                   <div className={styles.infoBox}>
                     <h3>{event.departureLocation}</h3>
                     <div className={styles.infoText}>

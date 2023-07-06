@@ -27,6 +27,10 @@ export class EventService {
     });
   }
 
+  async delete(id: number): Promise<void> {
+    return this.eventRepository.deleteById(id);
+  }
+
   async edit(id: number, dto: CreateEventRequestDTO): Promise<void> {
     await this.eventRepository.update(id, {
       departureLocation: dto.departureLocation,

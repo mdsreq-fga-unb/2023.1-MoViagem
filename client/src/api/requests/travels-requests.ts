@@ -115,3 +115,10 @@ export async function requestEditEvent(form: CreateEventRequestDTO, id: number) 
     body: form,
   });
 }
+
+export function requestDeleteEvent(id: string) {
+  return request<never, never>({
+    method: "DELETE",
+    url: `event/${id}`,
+  });
+}
