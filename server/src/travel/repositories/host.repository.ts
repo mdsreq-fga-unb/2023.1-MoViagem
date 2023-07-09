@@ -28,4 +28,12 @@ export class HostRepository {
       },
     });
   }
+
+  // async findAllHosts(travelId: number): Promise<Host[]> {
+  //   return await this.prismaService.host.findMany({
+  //     where: {
+  //       travelId,
+  //     },
+  //   });
+  // }
 }

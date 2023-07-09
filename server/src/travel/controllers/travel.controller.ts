@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
 import { User } from "src/auth/decorators/user.decorator";
@@ -17,6 +17,11 @@ export class TravelController {
     return this.travelService.create(user.id, dto);
   }
 
+  @Put("/:id")
+  async edit(@Param("id") id: number, @Body() dto: CreateTravelRequestDTO): Promise<void> {
+    return this.travelService.edit_Travel(id, dto);
+  }
+
   @Get()
   async listByUser(@User() user: UserInTokenDTO): Promise<TravelsResponseDTO[]> {
     return this.travelService.getTravelsByUser(user.id);
@@ -27,8 +32,8 @@ export class TravelController {
     return this.travelService.getTravels(id);
   }
 
-  @Put("/:id")
-  async edit(@Param("id") id: number, @Body() dto: CreateTravelRequestDTO): Promise<void> {
-    return this.travelService.edit_Travel(id, dto);
+  @Delete("/:id")
+  async delete(@Param("id") id: number): Promise<void> {
+    return this.travelService.delete(id);
   }
 }

@@ -12,10 +12,10 @@ export class TravelRepository {
     });
   }
 
-  async findById(userId: number): Promise<Travel | null> {
+  async findById(id: number): Promise<Travel | null> {
     return await this.prismaService.travel.findUnique({
       where: {
-        id: userId,
+        id,
       },
     });
   }
@@ -33,6 +33,14 @@ export class TravelRepository {
     return await this.prismaService.travel.findMany({
       where: {
         userId,
+      },
+    });
+  }
+
+  async deleteById(id: number): Promise<void> {
+    await this.prismaService.travel.delete({
+      where: {
+        id,
       },
     });
   }

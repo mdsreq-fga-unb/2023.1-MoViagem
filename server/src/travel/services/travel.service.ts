@@ -46,4 +46,8 @@ export class TravelService {
       numParticipants: dto.numParticipants,
     });
   }
+
+  async delete(id: number): Promise<void> {
+    return this.travelRepository.deleteById(id);
+  }
 }

@@ -90,7 +90,7 @@ export default function CreateTravel() {
           <div className={styles.inputContainer}>
             <label htmlFor="proposito">Proposito:</label>
             <textarea
-              placeholder=""
+              placeholder="Proposito"
               name="proposito"
               rows={3}
               className={styles.textAreaBox}

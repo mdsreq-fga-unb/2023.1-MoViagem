@@ -41,6 +41,13 @@ export function requestEditTransport(form: CreateTransportRequestDTO, id: number
   });
 }
 
+export async function requestDeleteTravel(id: number) {
+  return request<never, TravelsResponseDTO[]>({
+    method: "DELETE",
+    url: `travel/${id}`,
+  });
+}
+
 export function requestEditTravel(id: number, form: CreateTravelRequestDTO) {
   return request<CreateTravelRequestDTO, never>({
     method: "PUT",

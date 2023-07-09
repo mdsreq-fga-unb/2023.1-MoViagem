@@ -20,6 +20,12 @@ export class HostController {
     return this.hostService.edit(id, dto);
   }
 
+  // // Pega a lista de hopedagens ou estadias a partir do id da viagem
+  // @Get("/:travelId")
+  // async listByUser(@Param("travelId") travelId: number): Promise<HostResponseDTO[]> {
+  //   return this.hostService.getHostsByTravel(travelId);
+  // }
+
   @Get("/:id")
   async get(@Param("id") id: number): Promise<HostResponseDTO> {
     return this.hostService.getHost(id);

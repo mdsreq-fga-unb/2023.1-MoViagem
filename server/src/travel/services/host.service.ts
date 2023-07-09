@@ -34,11 +34,21 @@ export class HostService {
     });
   }
 
+  // async getHostsByTravel(travelId: number): Promise<HostResponseDTO[]> {
+  //   const hosts = await this.hostRepository.findAllHosts(travelId);
+
+  //   if (hosts == null) {
+  //     throw new BadRequestException("Estadia não existe");
+  //   }
+
+  //   return hosts.map((host) => new HostResponseDTO(host));
+  // }
+
   async getHost(id: number): Promise<HostResponseDTO> {
     const host = await this.hostRepository.findById(id);
 
     if (host == null) {
-      throw new BadRequestException("viagem nao existe");
+      throw new BadRequestException("Estadias não encontradas.");
     }
 
     return new HostResponseDTO(host);

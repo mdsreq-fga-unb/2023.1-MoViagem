@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import {
+  requestDeleteTravel,
   requestEditTravel,
   requestGetHost,
   requestGetTransport,
@@ -135,6 +136,22 @@ export default function TravelInfo() {
     navigate("/travels");
   }
 
+  async function handleDeleteTravel() {
+    if (!confirm("Quer realmente deletar este item?")) {
+      return;
+    } else {
+      // console.log("Era pra deletar");
+      const response = await requestDeleteTravel(parseInt(params.id!));
+      if (response instanceof ErrorResponse) {
+        alert("Erro ao deletar viagem\n" + response.message);
+        return;
+      }
+    }
+    alert("Viagem deletada com sucesso");
+    setWasEdited(!wasEdited);
+    navigate("/travels");
+  }
+
   const handleCreateHost = () => {
     navigate(`/create-stay/${params.id}`);
   };
@@ -201,7 +218,7 @@ export default function TravelInfo() {
             <div className={styles.inputContainer}>
               <label htmlFor="proposito">Proposito:</label>
               <textarea
-                placeholder=""
+                placeholder="Proposito"
                 name="proposito"
                 rows={3}
                 className={styles.textAreaBox}
@@ -232,6 +249,10 @@ export default function TravelInfo() {
               SALVAR DADOS
             </button>
           </form>
+
+          <button className={styles.deleteButton} onClick={handleDeleteTravel}>
+            <p>Deletar</p>
+          </button>
         </div>
 
         <div className={styles.verticalLine}></div>
