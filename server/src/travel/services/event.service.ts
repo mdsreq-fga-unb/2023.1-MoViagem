@@ -13,6 +13,10 @@ export class EventService {
   }
 
   async create(id: number, dto: CreateEventRequestDTO): Promise<void> {
+    if (dto.eventTime < new Date()) {
+      throw new BadRequestException("data de evento não pode ser no passado");
+    }
+
     await this.eventRepository.create({
       travel: {
         connect: {

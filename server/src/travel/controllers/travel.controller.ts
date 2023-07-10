@@ -3,7 +3,11 @@ import { ApiTags } from "@nestjs/swagger";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
 import { User } from "src/auth/decorators/user.decorator";
 import { UserInTokenDTO } from "src/auth/dto/user.dto";
-import { CreateTravelRequestDTO, TravelsResponseDTO } from "../dto/travel.dto";
+import {
+  CreateTravelRequestDTO,
+  TravelsResponseDTO,
+  TravelsWithInfoResponseDTO,
+} from "../dto/travel.dto";
 import { TravelService } from "./../services/travel.service";
 
 @Controller("/api/travel")
@@ -27,9 +31,9 @@ export class TravelController {
     return this.travelService.getTravelsByUser(user.id);
   }
 
-  @Get("/:id")
-  async get(@Param("id") id: number): Promise<TravelsResponseDTO> {
-    return this.travelService.getTravels(id);
+  @Get("/with-info/:id")
+  async getWithInfo(@Param("id") id: number): Promise<TravelsWithInfoResponseDTO> {
+    return this.travelService.getTravelsWithInfo(id);
   }
 
   @Delete("/:id")

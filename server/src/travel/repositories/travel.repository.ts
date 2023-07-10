@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Prisma, Travel } from "@prisma/client";
 import { PrismaService } from "src/prisma/services/prisma.service";
+import { TravelWithInfo } from "../dto/travel.dto";
 
 @Injectable()
 export class TravelRepository {
@@ -41,6 +42,18 @@ export class TravelRepository {
     await this.prismaService.travel.delete({
       where: {
         id,
+      },
+    });
+  }
+
+  async findByIdIncludingHostAndTransport(id: number): Promise<TravelWithInfo | null> {
+    return await this.prismaService.travel.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        host: true,
+        transport: true,
       },
     });
   }

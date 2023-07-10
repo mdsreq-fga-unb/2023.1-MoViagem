@@ -77,6 +77,11 @@ export interface TransportResponseDTO {
   contacts: string;
 }
 
+export interface TravelsWithInfoResponseDTO extends TravelsResponseDTO {
+  host: HostResponseDTO | null;
+  transport: TransportResponseDTO | null;
+}
+
 export interface Guests {
   id: number;
   userId: number;

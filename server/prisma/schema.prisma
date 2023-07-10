@@ -20,16 +20,16 @@ model User {
 }
 
 model Travel {
-  id              Int         @id @default(autoincrement()) @db.UnsignedInt
-  userId          Int         @db.UnsignedInt
-  user            User        @relation(fields: [userId], references: [id], onDelete: Restrict)
-  local           String      @db.VarChar(100)
-  startDate       DateTime    @db.Date
-  endDate         DateTime    @db.Date
-  description     String      @db.VarChar(100)
-  numParticipants Int         @db.UnsignedInt
-  hosts           Host[]
-  transports      Transport[]
+  id              Int        @id @default(autoincrement()) @db.UnsignedInt
+  userId          Int        @db.UnsignedInt
+  user            User       @relation(fields: [userId], references: [id], onDelete: Restrict)
+  local           String     @db.VarChar(100)
+  startDate       DateTime   @db.Date
+  endDate         DateTime   @db.Date
+  description     String     @db.VarChar(100)
+  numParticipants Int        @db.UnsignedInt
+  host            Host?
+  transport       Transport?
   events          Event[]
   // Guests          Guests[]
 }
@@ -42,7 +42,7 @@ model Host {
   local     String   @db.VarChar(100)
   price     Decimal  @db.Decimal(10, 2)
   contact   String   @db.VarChar(50)
-  travelId  Int      @db.UnsignedInt
+  travelId  Int      @unique @db.UnsignedInt
   travel    Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
 }
 
@@ -55,7 +55,7 @@ model Transport {
   endTime    DateTime @db.DateTime
   price      Decimal  @db.Decimal(10, 2)
   contacts   String   @db.VarChar(50)
-  travelId   Int      @db.UnsignedInt
+  travelId   Int      @unique @db.UnsignedInt
   travel     Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
 }
 
