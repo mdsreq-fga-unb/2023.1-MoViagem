@@ -32,7 +32,7 @@ async function bootstrap() {
 
   if (env.isDevelopment) {
     const config = new DocumentBuilder()
-      .setTitle("Modelo API EngNet")
+      .setTitle("API MoViagem")
       .setVersion("1.0")
       .addBearerAuth()
       .build();

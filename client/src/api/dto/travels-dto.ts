@@ -76,3 +76,15 @@ export interface TransportResponseDTO {
   price: number;
   contacts: string;
 }
+
+export interface Guests {
+  id: number;
+  userId: number;
+  travelId: number;
+}
+
+export interface EventGuests {
+  id: number;
+  eventId: number;
+  idGuest: number;
+}
