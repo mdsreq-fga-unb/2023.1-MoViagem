@@ -12,6 +12,7 @@ import LoginAndRegister from "./pages/LoginAndRegister";
 import Schedule from "./pages/Schedule";
 import TravelInfo from "./pages/TravelInfo";
 import TravelList from "./pages/TravelList";
+import ParticipantList from "./pages/ParticipantList";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
           <Route path="/create-stay/:id" element={<CreateStay />} />
           <Route path="/edit-stay/:id" element={<EditStay />} />
           <Route path="/schedule/:id" element={<Schedule />} />
+          <Route path="/participants-list" element={<ParticipantList />} />
         </Route>
       </Route>
     </>
