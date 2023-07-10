@@ -10,13 +10,18 @@ interface EventInfoModalProps {
   selectedEvent: EventResponseDTO;
 }
 
-const EventInfoModal: React.FC<EventInfoModalProps> = ({ selectedEvent: event, selectedDate, closeModal }) => {
+const EventInfoModal: React.FC<EventInfoModalProps> = ({
+  selectedEvent: event,
+  selectedDate,
+  closeModal,
+}) => {
   const [transportType, setTransportType] = useState(event.transportType);
   const [departureLocation, setDepartureLocation] = useState(event.departureLocation);
   const [eventTime, setEventTime] = useState(new Date(event.eventTime).toLocaleTimeString());
   const [eventValue, setEventValue] = useState(event.eventValue);
   const [eventExtras, setEventExtras] = useState(event.eventExtras);
   const [errorMessage, setErrorMessage] = useState("");
+  const [tryingDeleteEvent, setTryingDeleteEvent] = useState(false);
 
   const handleSaveEvent = async () => {
     // Validate and save the event data
@@ -33,13 +38,16 @@ const EventInfoModal: React.FC<EventInfoModalProps> = ({ selectedEvent: event, s
 
     // Process the event data and save it
     // Save the event data or perform any other required actions
-    const response = await requestEditEvent({
-      transportType,
-      departureLocation,
-      eventTime: mergeTimeDate,
-      eventValue,
-      eventExtras,
-    }, event.id);
+    const response = await requestEditEvent(
+      {
+        transportType,
+        departureLocation,
+        eventTime: mergeTimeDate,
+        eventValue,
+        eventExtras,
+      },
+      event.id
+    );
 
     if (response instanceof ErrorResponse) {
       alert(response.message);
@@ -54,6 +62,10 @@ const EventInfoModal: React.FC<EventInfoModalProps> = ({ selectedEvent: event, s
     closeModal();
   };
 
+  function handleDeleteEvent() {
+    setTryingDeleteEvent(!tryingDeleteEvent);
+  }
+
   const sendDeleteEvent = async () => {
     const response = await requestDeleteEvent(event.id.toString());
 
@@ -62,77 +74,88 @@ const EventInfoModal: React.FC<EventInfoModalProps> = ({ selectedEvent: event, s
       return;
     }
 
-    alert("Evento deletado com sucesso");
+    location.reload();
     closeModal();
-  }
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.outsideModal} onClick={closeModal}></div>
-      
-        <div className={styles.modal}>
-          <form className={styles.modalContent} onSubmit={handleSaveEvent}>
-            <h2 className={styles.modalTitle}>Dados do Evento</h2>
-            <div className={styles.formField}>
-              <label>Transporte ao local:</label>
-              <input
-                type="text"
-                className={styles.inputBox}
-                value={transportType}
-                onChange={(e) => setTransportType(e.target.value)}
-              />
-            </div>
-            <div className={styles.formField}>
-              <label>Local do evento:</label>
-              <input
-                type="text"
-                required
-                className={styles.inputBox}
-                value={departureLocation}
-                onChange={(e) => setDepartureLocation(e.target.value)}
-              />
-            </div>
-            <div className={styles.formField}>
-              <label>Horário:</label>
-              <input
-                type="time"
-                className={styles.inputBox}
-                value={eventTime}
-                required
-                onChange={(e) => setEventTime(e.target.value)}
-              />
-            </div>
-            <div className={styles.formField}>
-              <label>Preço (se tiver):</label>
-              <input
-                type="number"
-                className={styles.inputBox}
-                value={eventValue}
-                onChange={(e) => setEventValue(parseInt(e.target.value))}
-              />
-            </div>
-            <div className={styles.formField}>
-              <label>Observações:</label>
-              <textarea
-                className={styles.textAreaBox}
-                rows={2}
-                value={eventExtras}
-                onChange={(e) => setEventExtras(e.target.value)}
-              />
-              {errorMessage && <p className="error">{errorMessage}</p>}
-            </div>
-            <div className={styles.buttonContainer}>
-              <button className={styles.submitButton} type="submit">
-                Salvar Dados
-              </button>
-              <button className={styles.deleteButton} onClick={sendDeleteEvent}>
-                Excluir Evento
-              </button>
-            </div>
-          </form>
+
+      <div className={styles.modal}>
+        <form className={styles.modalContent} onSubmit={handleSaveEvent}>
+          <h2 className={styles.modalTitle}>Dados do Evento</h2>
+          <div className={styles.formField}>
+            <label>Transporte ao local:</label>
+            <input
+              type="text"
+              className={styles.inputBox}
+              value={transportType}
+              onChange={(e) => setTransportType(e.target.value)}
+            />
+          </div>
+          <div className={styles.formField}>
+            <label>Local do evento:</label>
+            <input
+              type="text"
+              required
+              className={styles.inputBox}
+              value={departureLocation}
+              onChange={(e) => setDepartureLocation(e.target.value)}
+            />
+          </div>
+          <div className={styles.formField}>
+            <label>Horário:</label>
+            <input
+              type="time"
+              className={styles.inputBox}
+              value={eventTime}
+              required
+              onChange={(e) => setEventTime(e.target.value)}
+            />
+          </div>
+          <div className={styles.formField}>
+            <label>Preço (se tiver):</label>
+            <input
+              type="number"
+              className={styles.inputBox}
+              value={eventValue}
+              onChange={(e) => setEventValue(parseInt(e.target.value))}
+            />
+          </div>
+          <div className={styles.formField}>
+            <label>Observações:</label>
+            <textarea
+              className={styles.textAreaBox}
+              rows={2}
+              value={eventExtras}
+              onChange={(e) => setEventExtras(e.target.value)}
+            />
+            {errorMessage && <p className="error">{errorMessage}</p>}
+          </div>
+          <div className={styles.buttonContainer}>
+            <button className={styles.submitButton} type="submit">
+              Salvar Dados
+            </button>
+            <button className={styles.deleteButton} onClick={handleDeleteEvent} type="reset">
+              Excluir Evento
+            </button>
+          </div>
+        </form>
+      </div>
+      {tryingDeleteEvent ? (
+        <div className={styles.confirmBox}>
+          <button className={styles.exitDeleteButton} onClick={handleDeleteEvent}>
+            X
+          </button>
+          <div className={styles.infoBox}>Você tem certeza que deseja excluir este evento?</div>
+          <button className={styles.confirmDeleteButton} onClick={sendDeleteEvent}>
+            Excluir
+          </button>
         </div>
-        
-       
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

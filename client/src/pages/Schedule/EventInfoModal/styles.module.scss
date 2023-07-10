@@ -158,3 +158,64 @@
     border: 2px solid rgba(198, 204, 133, 1);
   }
 }
+
+.confirmBox {
+  height: 30%;
+  width: 30%;
+  position: absolute;
+
+  display: grid;
+  justify-items: center;
+
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  border: 5px double $color-primary;
+  z-index: 999;
+}
+
+.exitDeleteButton {
+  margin-left: 90%;
+  height: 3rem;
+  width: 9%;
+  border: 2px solid black;
+  border-radius: 100%;
+  color: black;
+  font-size: 1.5rem;
+  transition: 0.4s;
+
+  &:hover {
+    border: 2px solid rgba(198, 40, 40, 0.54);
+    color: rgba(198, 40, 40, 0.54);
+  }
+}
+
+.infoBox {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.confirmDeleteButton {
+  margin-top: 2rem;
+  width: 40%;
+  height: 2.5rem;
+
+  border-radius: 10px;
+
+  background: rgba(198, 40, 40, 0.54);
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 24px;
+
+  border: 2px solid rgba(198, 40, 40, 0);
+  transition: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    translate: 0px -10px;
+    border: 2px solid rgba(198, 40, 40, 1);
+  }
+}

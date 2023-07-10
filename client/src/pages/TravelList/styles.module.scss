@@ -175,6 +175,7 @@
 
 .infoBox {
   width: 50%;
+  max-width: 12.5rem;
   display: grid;
   justify-items: center;
   color: $color-primary;
@@ -182,13 +183,15 @@
   font-weight: bold;
 
   h3 {
-    font-size: 1.5rem;
+    height: 3rem;
+    width: 100%;
+    overflow: hidden;
+    font-size: 1.3rem;
     text-decoration: underline;
   }
 }
 
 .infoText {
-  width: auto;
   font-style: italic;
 }
 

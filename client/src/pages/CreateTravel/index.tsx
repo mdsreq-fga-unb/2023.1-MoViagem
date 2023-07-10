@@ -57,6 +57,7 @@ export default function CreateTravel() {
               className={styles.inputBox}
               required
               value={local}
+              maxLength={30}
               onChange={(event) => {
                 setLocal(event.target.value);
               }}

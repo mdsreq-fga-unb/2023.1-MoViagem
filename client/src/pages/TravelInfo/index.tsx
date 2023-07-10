@@ -48,6 +48,8 @@ export default function TravelInfo() {
   const [precoTransport, setPrecoTransport] = useState<number>(0);
   const [contatoTransport, setContatoTransport] = useState<string>("");
 
+  const [tryingDeleteTravel, setTryingDeleteTravel] = useState<boolean>(false);
+
   // Travel fetch request
   const fetchTravel = useCallback(async () => {
     const response = await requestGetTravel(params.id!);
@@ -136,17 +138,18 @@ export default function TravelInfo() {
     navigate("/travels");
   }
 
-  async function handleDeleteTravel() {
-    if (!confirm("Quer realmente deletar este item?")) {
+  const handleDeleteTravel = () => {
+    setTryingDeleteTravel(!tryingDeleteTravel);
+  };
+
+  async function sendDeleteTravel() {
+    const response = await requestDeleteTravel(parseInt(params.id!));
+    
+    if (response instanceof ErrorResponse) {
+      alert("Erro ao deletar viagem\n" + response.message);
       return;
-    } else {
-      // console.log("Era pra deletar");
-      const response = await requestDeleteTravel(parseInt(params.id!));
-      if (response instanceof ErrorResponse) {
-        alert("Erro ao deletar viagem\n" + response.message);
-        return;
-      }
     }
+
     alert("Viagem deletada com sucesso");
     setWasEdited(!wasEdited);
     navigate("/travels");
@@ -183,6 +186,7 @@ export default function TravelInfo() {
                 className={styles.inputBox}
                 required
                 value={local}
+                maxLength={30}
                 onChange={(event) => {
                   setLocal(event.target.value);
                 }}
@@ -244,15 +248,16 @@ export default function TravelInfo() {
                 }}
               />
             </div>
+            <div className={styles.buttonContainer}>
+              <button className={styles.submitButton} type="submit">
+                SALVAR DADOS
+              </button>
 
-            <button className={styles.submitButton} type="submit">
-              SALVAR DADOS
-            </button>
+              <button className={styles.deleteButton} onClick={handleDeleteTravel} type="reset">
+                <p>DELETAR VIAGEM</p>
+              </button>
+            </div>
           </form>
-
-          <button className={styles.deleteButton} onClick={handleDeleteTravel}>
-            <p>Deletar</p>
-          </button>
         </div>
 
         <div className={styles.verticalLine}></div>
@@ -343,6 +348,21 @@ export default function TravelInfo() {
             </div>
           )}
         </div>
+        {tryingDeleteTravel ? (
+          <div className={styles.confirmBox}>
+            <button className={styles.exitDeleteButton} onClick={handleDeleteTravel}>
+              X
+            </button>
+            <div className={styles.confirmInfoBox}>
+              Você tem certeza que deseja excluir esta viagem?
+            </div>
+            <button className={styles.confirmDeleteButton} onClick={sendDeleteTravel}>
+              Excluir
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       {/* TODO: Arrumar uma solução melhor */}
       <Link to={`/schedule/${params.id}`} id={styles.schedule_link}>

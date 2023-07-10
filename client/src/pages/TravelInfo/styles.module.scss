@@ -17,7 +17,6 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   width: 75%;
   justify-items: center;
-  align-items: center;
 }
 
 .verticalLine {
@@ -28,20 +27,13 @@
 }
 
 .insideBox {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  text-align: left;
-  width: 50%;
+  width: 70%;
+  height: fit-content;
   padding: 25px;
-
-  margin-bottom: 100px;
-  margin: 0px auto;
 
   background: #ffffff;
 
-  border: 1px solid #dddfe4;
+  border: 2px solid #dddfe4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
 }
@@ -103,11 +95,12 @@
 
 .inputContainer {
   padding: 10px;
+  width: 92%;
 }
 
 .inputGroup {
+  width: 95%;
   display: flex;
-  flex-flow: row wrap;
   justify-content: space-between;
   align-items: flex-start;
   padding: 10px;
@@ -126,7 +119,7 @@
 
 .inputNum {
   width: 50px;
-  height: 2rem;
+  margin-left: 10px;
   border: none;
   border-radius: 10px;
   padding: 10px;
@@ -135,10 +128,12 @@
 }
 
 .inputDate {
-  max-width: 100%;
+  max-width: 90%;
+  width: 90%;
   background: rgba(79, 119, 45, 0.5);
   border: none;
   padding: 10px;
+  margin-left: 5px;
   color: #666;
   border-radius: 10px;
 
@@ -160,17 +155,21 @@
   resize: none;
 }
 
-.submitButton {
-  margin-top: 2rem;
-  width: 200px;
+.buttonContainer {
+  padding-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 
-  padding: 10px;
+.submitButton {
+  width: 45%;
+  height: 4rem;
+
   margin: 0 auto;
 
   border-radius: 10px;
   background: rgba(198, 204, 133, 1);
-  font-size: 1rem;
-  font-weight: bold;
 
   background: #4f772d;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -193,18 +192,26 @@
 }
 
 .deleteButton {
-  margin-top: 2rem;
-  width: 40%;
-  height: 2.5rem;
+  width: 45%;
+  height: 4rem;
 
-  border: 2px solid rgba(198, 40, 40, 0);
-  border-radius: 10px;
+  margin: 0 auto;
 
   background: rgba(198, 40, 40, 0.54);
-  font-size: 1.5rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #c9ff99;
+  border: 2px solid rgba(198, 40, 40, 0);
+
   transition: 0.4s;
   cursor: pointer;
-
   &:hover {
     border: 2px solid rgba(198, 40, 40, 0.54);
   }
@@ -278,4 +285,66 @@
   position: absolute;
   left: 11px;
   top: 100px;
+}
+
+.confirmBox {
+  height: 30%;
+  width: 30%;
+  position: absolute;
+
+  display: grid;
+  justify-items: center;
+
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  border: 5px double $color-primary;
+  z-index: 999;
+}
+
+.exitDeleteButton {
+  margin-left: 90%;
+  height: 3rem;
+  width: 9%;
+  border: 2px solid black;
+  border-radius: 100%;
+  color: black;
+  font-size: 1.5rem;
+  transition: 0.4s;
+
+  &:hover {
+    border: 2px solid rgba(198, 40, 40, 0.54);
+    color: rgba(198, 40, 40, 0.54);
+  }
+}
+
+.confirmInfoBox {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.confirmDeleteButton {
+  margin-top: 2rem;
+  width: 40%;
+  height: 2.5rem;
+
+  border-radius: 10px;
+
+  background: rgba(198, 40, 40, 0.54);
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 24px;
+
+  color: #c9ff99;
+  border: 2px solid rgba(198, 40, 40, 0);
+  transition: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    translate: 0px -10px;
+    border: 2px solid rgba(198, 40, 40, 1);
+  }
 }
