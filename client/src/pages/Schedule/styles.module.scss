@@ -260,3 +260,28 @@
     }
   }
 }
+
+.eventBox {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkBox {
+  width: 4rem;
+  height: 4rem;
+  background: inherit;
+  margin-left: 5px;
+  border-radius: 20px;
+  color: #c9ff99;
+  border: 4px double $color-secondary;
+  cursor: pointer;
+  transition: .4s;
+
+  &:hover {
+    border: 4px double #c9ff99;
+    translate: -4px 0px;
+  }
+}

@@ -82,6 +82,23 @@ const EventInfoModal: React.FC<EventInfoModalProps> = ({
     <div className={styles.container}>
       <div className={styles.outsideModal} onClick={closeModal}></div>
 
+      <div className={styles.disponibilityBox}>
+        <div className={styles.formField}>
+          <label>Número de participantes:</label>
+          <div className={styles.disponibilityNumber}>
+            {/* Acrescentar o .length do array de usuários que vão participar */}
+            356 pessoas
+          </div>
+        </div>
+        <div className={styles.formField}>
+          <label>Participantes:</label>
+          <div className={styles.disponibilityNames}>
+            {/* Acrescentar os elementos do array de usuários (nome) que vão participar */}
+            Usuário tal, usuário fulano, ciclano, beltrano, cumpadre, consagrado, guerreiro ...
+          </div>
+        </div>
+      </div>
+
       <div className={styles.modal}>
         <form className={styles.modalContent} onSubmit={handleSaveEvent}>
           <h2 className={styles.modalTitle}>Dados do Evento</h2>

@@ -183,6 +183,7 @@
   color: black;
   font-size: 1.5rem;
   transition: 0.4s;
+  cursor: pointer;
 
   &:hover {
     border: 2px solid rgba(198, 40, 40, 0.54);
@@ -217,5 +218,54 @@
   &:hover {
     translate: 0px -10px;
     border: 2px solid rgba(198, 40, 40, 1);
+  }
+}
+
+.disponibilityBox {
+  left: 65%;
+  position: absolute;
+  content: "";
+  z-index: 999;
+  background: $color-primary;
+
+  border: 2px solid $color-secondary;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  display: grid;
+
+  label {
+    font-weight: 600;
+  }
+
+  .disponibilityNumber {
+    border-radius: 10px;
+    padding: 10px;
+    background: #c9ff99;
+  }
+
+  .disponibilityNames {
+    height: 4rem;
+    width: 20rem;
+
+    border-radius: 10px;
+    padding: 10px;
+    background: #c9ff99;
+
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 10px; /* width of the entire scrollbar */
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #c9ff99; /* color of the tracking area */
+      border-radius: 10px 10px 10px 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-primary; /* color of the scroll thumb */
+      border-radius: 20px; /* roundness of the scroll thumb */
+      border: 2px solid #c9ff99; /* creates padding around scroll thumb */
+    }
   }
 }

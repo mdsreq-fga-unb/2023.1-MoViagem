@@ -8,6 +8,7 @@ import { requestGetEvents } from "../../api/requests/travels-requests.ts";
 import Navbar from "../../components/Navbar/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
+import CheckIcon from '@mui/icons-material/Check';
 import EventInfoModal from "./EventInfoModal/index.tsx";
 
 const Schedule: React.FC = () => {
@@ -26,6 +27,7 @@ const Schedule: React.FC = () => {
   const [dayEvents, setDayEvents] = useState<EventResponseDTO[]>([]);
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventResponseDTO>();
+  const [isDisponible, setIsDisponible] = useState<boolean>();
 
   // Render the calendar
   const renderCalendar = useCallback(() => {
@@ -201,6 +203,10 @@ const Schedule: React.FC = () => {
     setShowEventModal(true);
   };
 
+  const handleDisponibility = () => {
+    setIsDisponible(!isDisponible);
+  }
+
   const handleEventInfoModalClose = () => {
     setShowEventModal(false);
   };
@@ -237,14 +243,21 @@ const Schedule: React.FC = () => {
             {/* Fetch and display activities for the selected date */}
             <div className={styles.activities}>
               {dayEvents.map((event) => (
-                <button className={styles.insideBox} onClick={() => handleEventInfoModalOpen(event)}>
-                  <div className={styles.infoBox}>
-                    <h3>{event.departureLocation}</h3>
-                    <div className={styles.infoText}>
-                      <p>{new Date(event.eventTime).toLocaleTimeString()}</p>
+                <div className={styles.eventBox}>
+                  <button className={styles.insideBox} onClick={() => handleEventInfoModalOpen(event)}>
+                    <div className={styles.infoBox}>
+                      <h3>{event.departureLocation}</h3>
+                      <div className={styles.infoText}>
+                        <p>{new Date(event.eventTime).toLocaleTimeString()}</p>
+                      </div>
                     </div>
-                  </div>
-                </button>
+                  </button>
+                  <button className={styles.checkBox} onClick={handleDisponibility}>
+                    {/* Mudar isso aqui para o dado que o dayEvents vai trazer, algo como 'event.isDisponible*/}
+                    {isDisponible && <CheckIcon fontSize="large" />}
+                    {!isDisponible && <p>Não vou ir</p>}
+                  </button>
+                </div>
               ))}
             </div>
             <div className={styles.buttonOutsideContainer}>
