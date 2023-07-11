@@ -28,4 +28,20 @@ export class EventRepository {
       },
     });
   }
+
+  async findAllByTravel(travelId: number): Promise<Event[]> {
+    return await this.prismaService.event.findMany({
+      where: {
+        travelId,
+      },
+    });
+  }
+
+  async deleteById(id: number): Promise<void> {
+    await this.prismaService.event.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

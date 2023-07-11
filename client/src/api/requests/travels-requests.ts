@@ -5,6 +5,7 @@ import {
   CreateTransportRequestDTO,
   CreateTravelRequestDTO,
   EventResponseDTO,
+  GuestResponseDTO,
   HostResponseDTO,
   TransportResponseDTO,
   TravelsResponseDTO,
@@ -42,6 +43,13 @@ export function requestEditTransport(form: CreateTransportRequestDTO, id: number
   });
 }
 
+export async function requestDeleteTravel(id: number) {
+  return request<never, TravelsResponseDTO[]>({
+    method: "DELETE",
+    url: `travel/${id}`,
+  });
+}
+
 export function requestEditTravel(id: number, form: CreateTravelRequestDTO) {
   return request<CreateTravelRequestDTO, never>({
     method: "PUT",
@@ -61,6 +69,13 @@ export async function requestGetTravels() {
   return request<never, TravelsResponseDTO[]>({
     method: "GET",
     url: "travel",
+  });
+}
+
+export async function requestGetTravelsBeingGuest() {
+  return request<never, TravelsResponseDTO[]>({
+    method: "GET",
+    url: "travel/being-guest",
   });
 }
 
@@ -102,10 +117,38 @@ export async function requestGetEvent(id: string) {
   });
 }
 
+export async function requestGetEvents(travelId: string) {
+  return request<never, EventResponseDTO[]>({
+    method: "GET",
+    url: `event/${travelId}`,
+  });
+}
+
 export async function requestEditEvent(form: CreateEventRequestDTO, id: number) {
   return request<CreateEventRequestDTO, never>({
     method: "PUT",
     url: `event/${id}`,
     body: form,
+  });
+}
+
+export function requestDeleteEvent(id: string) {
+  return request<never, never>({
+    method: "DELETE",
+    url: `event/${id}`,
+  });
+}
+
+export function requestGetGuests(travelId: string) {
+  return request<never, GuestResponseDTO[]>({
+    method: "GET",
+    url: `guest/${travelId}`,
+  });
+}
+
+export function requestAddGuestToTravel(guestEmail: string, travelId: string) {
+  return request<never, never>({
+    method: "PATCH",
+    url: `/guest/${guestEmail}/add-to-travel/${travelId}`,
   });
 }

@@ -3,9 +3,13 @@ import FlightIcon from "@mui/icons-material/Flight";
 import GiteIcon from "@mui/icons-material/Gite";
 import { IconButton } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
-import { requestEditTravel, requestGetTravelWithInfo } from "../../api/requests/travels-requests";
+import {
+  requestDeleteTravel,
+  requestEditTravel,
+  requestGetTravelWithInfo,
+} from "../../api/requests/travels-requests";
 import Navbar from "../../components/Navbar";
 import {
   convertDateInputValueToDate,
@@ -15,6 +19,7 @@ import styles from "./styles.module.scss";
 
 export default function TravelInfo() {
   const params = useParams();
+  const searchParams = useSearchParams()[0];
   const navigate = useNavigate();
 
   // Travel variables
@@ -43,6 +48,8 @@ export default function TravelInfo() {
   const [horaChegadaTransport, setHoraChegadaTransport] = useState<Date | null>(null);
   const [precoTransport, setPrecoTransport] = useState<number>(0);
   const [contatoTransport, setContatoTransport] = useState<string>("");
+
+  const [tryingDeleteTravel, setTryingDeleteTravel] = useState<boolean>(false);
 
   // Travel fetch request
   const fetchTravel = useCallback(async () => {
@@ -133,6 +140,23 @@ export default function TravelInfo() {
     navigate("/travels");
   }
 
+  const handleDeleteTravel = () => {
+    setTryingDeleteTravel(!tryingDeleteTravel);
+  };
+
+  async function sendDeleteTravel() {
+    const response = await requestDeleteTravel(parseInt(params.id!));
+
+    if (response instanceof ErrorResponse) {
+      alert("Erro ao deletar viagem\n" + response.message);
+      return;
+    }
+
+    alert("Viagem deletada com sucesso");
+    setWasEdited(!wasEdited);
+    navigate("/travels");
+  }
+
   const handleCreateHost = () => {
     navigate(`/create-stay/${params.id}`);
   };
@@ -164,6 +188,7 @@ export default function TravelInfo() {
                 className={styles.inputBox}
                 required
                 value={local}
+                maxLength={30}
                 onChange={(event) => {
                   setLocal(event.target.value);
                 }}
@@ -199,7 +224,7 @@ export default function TravelInfo() {
             <div className={styles.inputContainer}>
               <label htmlFor="proposito">Proposito:</label>
               <textarea
-                placeholder=""
+                placeholder="Proposito"
                 name="proposito"
                 rows={3}
                 className={styles.textAreaBox}
@@ -225,10 +250,20 @@ export default function TravelInfo() {
                 }}
               />
             </div>
+            {searchParams.get("guest") != "true" && (
+              <div id={styles.link}>
+                <Link to={`/participants-list/${params.id}`}>Participantes</Link>
+              </div>
+            )}
+            <div className={styles.buttonContainer}>
+              <button className={styles.submitButton} type="submit">
+                SALVAR DADOS
+              </button>
 
-            <button className={styles.submitButton} type="submit">
-              SALVAR DADOS
-            </button>
+              <button className={styles.deleteButton} onClick={handleDeleteTravel} type="reset">
+                <p>DELETAR VIAGEM</p>
+              </button>
+            </div>
           </form>
         </div>
 
@@ -320,6 +355,21 @@ export default function TravelInfo() {
             </div>
           )}
         </div>
+        {tryingDeleteTravel ? (
+          <div className={styles.confirmBox}>
+            <button className={styles.exitDeleteButton} onClick={handleDeleteTravel}>
+              X
+            </button>
+            <div className={styles.confirmInfoBox}>
+              Você tem certeza que deseja excluir esta viagem?
+            </div>
+            <button className={styles.confirmDeleteButton} onClick={sendDeleteTravel}>
+              Excluir
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       {/* TODO: Arrumar uma solução melhor */}
       <Link to={`/schedule/${params.id}`} id={styles.schedule_link}>

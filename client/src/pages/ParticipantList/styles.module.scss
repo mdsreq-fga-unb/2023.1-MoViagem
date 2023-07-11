@@ -10,101 +10,6 @@
   }
 }
 
-.listHeader {
-  display: flex;
-  justify-content: space-between;
-}
-
-.filterList {
-  width: 65%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  background: rgb(221, 255, 217);
-  box-shadow: 5px 5px 5px rgb(175, 175, 175);
-
-  border: 2px solid $color-primary;
-  border-radius: 20px;
-
-  margin-right: 2rem;
-  padding: 5px;
-
-  h2 {
-    margin-left: 3rem;
-    margin-right: 2rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    color: $color-primary;
-  }
-}
-
-.filterButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 34px;
-  width: 20%;
-
-  background: rgba(0, 0, 0, 0);
-  color: $color-primary;
-  font-weight: bold;
-  font-size: 1.3rem;
-
-  margin-right: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-
-  transition: 0.4s;
-  border-radius: 20px;
-  border: 2px solid rgba(0, 0, 0, 0);
-  box-shadow: 1px 1px 5px gray;
-  cursor: pointer;
-
-  &:hover {
-    background: $color-primary;
-    color: rgba(201, 255, 153, 1);
-    transform: translateX(-10px);
-    border: 2px solid rgba(201, 255, 153, 1);
-  }
-}
-
-.active {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 20%;
-  height: 34px;
-  background: $color-primary;
-
-  color: rgba(201, 255, 153, 1);
-  font-weight: bold;
-  font-size: 1.3rem;
-
-  margin-right: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-
-  border-radius: 20px;
-  border: 2px solid rgba(201, 255, 153, 1);
-
-  transition: 0.4s;
-  box-shadow: 3px 3px 5px gray;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-decoration-style: double;
-
-  transform: translateX(-10px);
-  cursor: pointer;
-
-  &:hover {
-    transform: translateX(0px);
-    color: rgb(170, 76, 76);
-    text-shadow: 1px 1px 1px black;
-    border: 2px solid rgb(170, 76, 76);
-  }
-}
-
 .bodyContainer {
   display: flex;
   justify-content: center;
@@ -155,10 +60,12 @@
 .insideBox {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
+  justify-items: center;
+  align-items: center;
   padding: 25px;
-  width: 100%;
+  width: 20rem;
+  height: 20rem;
   background: #ffffff;
 
   border: 3px solid #dddfe4;
@@ -174,8 +81,8 @@
 }
 
 .infoBox {
-  width: 50%;
-  max-width: 12.5rem;
+  width: 100%;
+  max-width: 15rem;
   display: grid;
   justify-items: center;
   color: $color-primary;
@@ -191,12 +98,19 @@
   }
 }
 
+.personImage {
+  width: 8rem;
+  height: 8rem;
+}
+
 .infoText {
   font-style: italic;
+  max-height: 4.4rem;
+  overflow: hidden;
 }
 
 #createTravelButton {
-  width: 100%;
+  width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;

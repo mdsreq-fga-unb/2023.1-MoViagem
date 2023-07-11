@@ -1,0 +1,271 @@
+@import "../../../variables.scss";
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outsideModal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  position: absolute;
+  content: "";
+  z-index: 999;
+  background: $color-primary;
+
+  border: 2px solid $color-secondary;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  display: flex;
+}
+
+.modalContent {
+  padding: 20px;
+}
+
+.modalTitle {
+  text-align: center;
+}
+
+.inputBox {
+  width: 95%;
+  height: 2rem;
+  background: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: #666;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.textAreaBox {
+  width: 95%;
+  height: 5rem;
+  background: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: #666;
+  font-size: 1.2rem;
+  text-align: left;
+  resize: none;
+
+  &::-webkit-scrollbar {
+    width: 12px; /* width of the entire scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-secondary;
+    border-radius: 10px; /* color of the tracking area */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-primary; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 3px solid $color-secondary; /* creates padding around scroll thumb */
+  }
+}
+
+.formField {
+  align-items: center;
+  margin: 10px;
+  font-size: 1.2rem;
+}
+
+.buttonContainer {
+  padding-top: 2rem;
+  margin-left: 2.5%;
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.submitButton {
+  margin-top: 2rem;
+  width: 200px;
+
+  padding: 10px;
+  margin: 0 auto;
+
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+
+  background: #6b9e3e;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #c9ff99;
+  border: 2px solid $color-secondary;
+
+  transition: 0.4s;
+  cursor: pointer;
+  &:hover {
+    translate: 0px -10px;
+    border: 2px solid rgba(198, 204, 133, 1);
+  }
+}
+
+.deleteButton {
+  margin-top: 2rem;
+  width: 200px;
+
+  padding: 10px;
+  margin: 0 auto;
+
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+
+  background: rgba(198, 40, 40, 0.6);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #c9ff99;
+  border: 2px solid $color-secondary;
+
+  transition: 0.4s;
+  cursor: pointer;
+  &:hover {
+    translate: 0px -10px;
+    border: 2px solid rgba(198, 204, 133, 1);
+  }
+}
+
+.confirmBox {
+  height: 30%;
+  width: 30%;
+  position: absolute;
+
+  display: grid;
+  justify-items: center;
+
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  border: 5px double $color-primary;
+  z-index: 999;
+}
+
+.exitDeleteButton {
+  margin-left: 90%;
+  height: 3rem;
+  width: 9%;
+  border: 2px solid black;
+  border-radius: 100%;
+  color: black;
+  font-size: 1.5rem;
+  transition: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid rgba(198, 40, 40, 0.54);
+    color: rgba(198, 40, 40, 0.54);
+  }
+}
+
+.infoBox {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.confirmDeleteButton {
+  margin-top: 2rem;
+  width: 40%;
+  height: 2.5rem;
+
+  border-radius: 10px;
+
+  background: rgba(198, 40, 40, 0.54);
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 24px;
+
+  border: 2px solid rgba(198, 40, 40, 0);
+  transition: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    translate: 0px -10px;
+    border: 2px solid rgba(198, 40, 40, 1);
+  }
+}
+
+.disponibilityBox {
+  left: 65%;
+  position: absolute;
+  content: "";
+  z-index: 999;
+  background: $color-primary;
+
+  border: 2px solid $color-secondary;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  display: grid;
+
+  label {
+    font-weight: 600;
+  }
+
+  .disponibilityNumber {
+    border-radius: 10px;
+    padding: 10px;
+    background: #c9ff99;
+  }
+
+  .disponibilityNames {
+    height: 4rem;
+    width: 20rem;
+
+    border-radius: 10px;
+    padding: 10px;
+    background: #c9ff99;
+
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 10px; /* width of the entire scrollbar */
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #c9ff99; /* color of the tracking area */
+      border-radius: 10px 10px 10px 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-primary; /* color of the scroll thumb */
+      border-radius: 20px; /* roundness of the scroll thumb */
+      border: 2px solid #c9ff99; /* creates padding around scroll thumb */
+    }
+  }
+}

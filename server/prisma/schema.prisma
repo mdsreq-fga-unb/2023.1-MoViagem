@@ -16,6 +16,7 @@ model User {
   name     String   @db.VarChar(100)
   password String   @db.VarChar(100)
   travels  Travel[]
+  guests   Guests[]
 }
 
 model Travel {
@@ -30,6 +31,7 @@ model Travel {
   host            Host?
   transport       Transport?
   events          Event[]
+  guests          Guests[]
 }
 
 model Host {
@@ -66,4 +68,13 @@ model Event {
   eventExtras       String   @db.Text
   travelId          Int      @db.UnsignedInt
   travel            Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
+}
+
+model Guests {
+  userId   Int    @db.UnsignedInt
+  travelId Int    @db.UnsignedInt
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  travel   Travel @relation(fields: [travelId], references: [id], onDelete: Cascade)
+
+  @@id([userId, travelId])
 }

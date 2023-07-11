@@ -9,6 +9,7 @@ import EditTransport from "./pages/EditTransport";
 import EditUserInfo from "./pages/EditUserInfo";
 import Home from "./pages/Home";
 import LoginAndRegister from "./pages/LoginAndRegister";
+import ParticipantList from "./pages/ParticipantList";
 import Schedule from "./pages/Schedule";
 import TravelInfo from "./pages/TravelInfo";
 import TravelList from "./pages/TravelList";
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
           <Route path="/create-stay/:id" element={<CreateStay />} />
           <Route path="/edit-stay/:id" element={<EditStay />} />
           <Route path="/schedule/:id" element={<Schedule />} />
+          <Route path="/participants-list/:id" element={<ParticipantList />} />
         </Route>
       </Route>
     </>

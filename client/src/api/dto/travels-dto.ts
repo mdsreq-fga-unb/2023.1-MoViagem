@@ -81,3 +81,8 @@ export interface TravelsWithInfoResponseDTO extends TravelsResponseDTO {
   host: HostResponseDTO | null;
   transport: TransportResponseDTO | null;
 }
+
+export interface GuestResponseDTO {
+  id: number;
+  name: string;
+}

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, Delete } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
 import { CreateEventRequestDTO, EventResponseDTO } from "../../travel/dto/event.dto";
@@ -20,8 +20,18 @@ export class EventController {
     return this.eventService.edit(id, dto);
   }
 
+  @Get("/:travelId")
+  async listByUser(@Param("travelId") travelId: number): Promise<EventResponseDTO[]> {
+    return this.eventService.getEventsByTravel(travelId);
+  }
+
   @Get("/:id")
   async get(@Param("id") id: number): Promise<EventResponseDTO> {
     return this.eventService.getEvent(id);
+  }
+
+  @Delete("/:id")
+  async delete(@Param("id") id: number): Promise<void> {
+    return this.eventService.delete(id);
   }
 }

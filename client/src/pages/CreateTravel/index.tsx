@@ -67,6 +67,7 @@ export default function CreateTravel() {
               className={styles.inputBox}
               required
               value={local}
+              maxLength={30}
               onChange={(event) => {
                 setLocal(event.target.value);
               }}
@@ -100,7 +101,7 @@ export default function CreateTravel() {
           <div className={styles.inputContainer}>
             <label htmlFor="proposito">Proposito:</label>
             <textarea
-              placeholder=""
+              placeholder="Proposito"
               name="proposito"
               rows={3}
               className={styles.textAreaBox}
