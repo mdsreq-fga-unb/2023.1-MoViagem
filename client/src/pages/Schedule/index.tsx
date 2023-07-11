@@ -167,6 +167,7 @@ const Schedule: React.FC = () => {
 
   useEffect(() => {
     renderCalendar();
+    fetchEvents()
   }, [renderCalendar]);
 
   useEffect(() => {
@@ -225,6 +226,7 @@ const Schedule: React.FC = () => {
               travelId={params.id!}
               selectedDate={selectedDate}
               closeModal={() => handleModalClose()}
+              fetchDayEvents={() => fetchEvents()}
             />
           )}
           {showEventModal && selectedDate && selectedEvent && (

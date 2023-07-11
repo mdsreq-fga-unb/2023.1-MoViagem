@@ -7,9 +7,10 @@ interface EventModalProps {
   selectedDate: Date;
   closeModal: () => void;
   travelId: string;
+  fetchDayEvents: () => void;
 }
 
-const EventModal: React.FC<EventModalProps> = ({ travelId: id, selectedDate, closeModal }) => {
+const EventModal: React.FC<EventModalProps> = ({ travelId: id, selectedDate, closeModal, fetchDayEvents }) => {
   const [transportType, setTransportType] = useState("");
   const [departureLocation, setDepartureLocation] = useState("");
   const [eventTime, setEventTime] = useState("");
@@ -51,6 +52,7 @@ const EventModal: React.FC<EventModalProps> = ({ travelId: id, selectedDate, clo
 
     // Close the modal
     closeModal();
+    fetchDayEvents();
   };
 
   return (
