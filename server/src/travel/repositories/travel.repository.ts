@@ -38,6 +38,18 @@ export class TravelRepository {
     });
   }
 
+  async findAllBeingGuest(userId: number): Promise<Travel[]> {
+    return await this.prismaService.travel.findMany({
+      where: {
+        guests: {
+          some: {
+            userId,
+          },
+        },
+      },
+    });
+  }
+
   async deleteById(id: number): Promise<void> {
     await this.prismaService.travel.delete({
       where: {

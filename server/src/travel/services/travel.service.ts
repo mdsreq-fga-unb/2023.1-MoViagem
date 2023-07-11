@@ -18,6 +18,12 @@ export class TravelService {
     return travels.map((travel) => new TravelsResponseDTO(travel));
   }
 
+  async getTravelsBeingGuest(userId: number): Promise<TravelsResponseDTO[]> {
+    const travels = await this.travelRepository.findAllBeingGuest(userId);
+
+    return travels.map((travel) => new TravelsResponseDTO(travel));
+  }
+
   async create(id: number, dto: CreateTravelRequestDTO): Promise<void> {
     if (dto.startDate > dto.endDate) {
       throw new BadRequestException("data de inicio não pode ser depois da data de fim");

@@ -5,6 +5,7 @@ import {
   CreateTransportRequestDTO,
   CreateTravelRequestDTO,
   EventResponseDTO,
+  GuestResponseDTO,
   HostResponseDTO,
   TransportResponseDTO,
   TravelsResponseDTO,
@@ -71,6 +72,13 @@ export async function requestGetTravels() {
   });
 }
 
+export async function requestGetTravelsBeingGuest() {
+  return request<never, TravelsResponseDTO[]>({
+    method: "GET",
+    url: "travel/being-guest",
+  });
+}
+
 export function requestCreateHost(id: number, form: CreateHostRequestDTO) {
   return request<CreateHostRequestDTO, never>({
     method: "POST",
@@ -128,5 +136,19 @@ export function requestDeleteEvent(id: string) {
   return request<never, never>({
     method: "DELETE",
     url: `event/${id}`,
+  });
+}
+
+export function requestGetGuests(travelId: string) {
+  return request<never, GuestResponseDTO[]>({
+    method: "GET",
+    url: `guest/${travelId}`,
+  });
+}
+
+export function requestAddGuestToTravel(guestEmail: string, travelId: string) {
+  return request<never, never>({
+    method: "PATCH",
+    url: `/guest/${guestEmail}/add-to-travel/${travelId}`,
   });
 }

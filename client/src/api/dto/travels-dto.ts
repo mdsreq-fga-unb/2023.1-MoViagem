@@ -82,14 +82,7 @@ export interface TravelsWithInfoResponseDTO extends TravelsResponseDTO {
   transport: TransportResponseDTO | null;
 }
 
-export interface Guests {
+export interface GuestResponseDTO {
   id: number;
-  userId: number;
-  travelId: number;
-}
-
-export interface EventGuests {
-  id: number;
-  eventId: number;
-  idGuest: number;
+  name: string;
 }

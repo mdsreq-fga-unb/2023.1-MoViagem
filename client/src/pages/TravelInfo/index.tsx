@@ -3,7 +3,7 @@ import FlightIcon from "@mui/icons-material/Flight";
 import GiteIcon from "@mui/icons-material/Gite";
 import { IconButton } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import {
   requestDeleteTravel,
@@ -19,6 +19,7 @@ import styles from "./styles.module.scss";
 
 export default function TravelInfo() {
   const params = useParams();
+  const searchParams = useSearchParams()[0];
   const navigate = useNavigate();
 
   // Travel variables
@@ -145,7 +146,7 @@ export default function TravelInfo() {
 
   async function sendDeleteTravel() {
     const response = await requestDeleteTravel(parseInt(params.id!));
-    
+
     if (response instanceof ErrorResponse) {
       alert("Erro ao deletar viagem\n" + response.message);
       return;
@@ -249,6 +250,11 @@ export default function TravelInfo() {
                 }}
               />
             </div>
+            {searchParams.get("guest") != "true" && (
+              <div id={styles.link}>
+                <Link to={`/participants-list/${params.id}`}>Participantes</Link>
+              </div>
+            )}
             <div className={styles.buttonContainer}>
               <button className={styles.submitButton} type="submit">
                 SALVAR DADOS

@@ -1,58 +1,120 @@
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import { useEffect, useState } from "react";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ErrorResponse } from "../../api/api-instance";
+import { GuestResponseDTO } from "../../api/dto/travels-dto";
+import { requestAddGuestToTravel, requestGetGuests } from "../../api/requests/travels-requests";
+import PersonIcon from "../../assets/PessoaIndoViajar.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
-import PersonIcon from "../../assets/PessoaIndoViajar.png"
-import { ErrorResponse } from "../../api/api-instance";
 
 export default function ParticipantList() {
+  const travelId = useParams().id!;
+
   // Participant variables
-  const [participants, setParticipants] = useState<string[]>([])
+  const [participants, setParticipants] = useState<GuestResponseDTO[]>([]);
+
+  // Modal variables
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
 
   // Participant fetch request
-  // const fetchTravel = async () => {
-  //   const response = await requestGetParticipants();
+  const fetchGuests = useCallback(async () => {
+    const response = await requestGetGuests(travelId);
 
-  //   if (response instanceof ErrorResponse) {
-  //     alert(response.message);
-  //     return;
-  //   }
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
+    }
 
-  //   setParticipants(response.data);
-  // };
+    setParticipants(response.data);
+  }, [travelId]);
 
   useEffect(() => {
-    // fetchTravel();
-    setParticipants(["teste 1", "teste 2"])
-  }, []);
+    fetchGuests();
+  }, [fetchGuests]);
+
+  // Modal functions
+  async function toggleModal() {
+    setEmail("");
+    setOpen(!open);
+  }
+
+  async function handleAddGuestSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const response = await requestAddGuestToTravel(email, travelId);
+
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
+    }
+
+    alert("Adicionado com sucesso!");
+
+    fetchGuests();
+    toggleModal();
+  }
 
   return (
-    <Navbar pageName="Lista de participantes da viagem" selectedPage="GROUPS">
-      <div className={styles.pageContainer}>
-        <header>
-          <button id={styles.createTravelButton}>
-            <PersonAddAlt1Icon fontSize="large" />
-            <div id={styles.buttonText}>Adicionar Participante</div>
-          </button>
-        </header>
-        <div className={styles.bodyContainer}>
-          <section className={styles.outsideBox}>
-            {participants.map((participant) => (
-              <button className={styles.insideBox}>
-                <div className={styles.infoBox}>
-                  <h3>{/* participant.userName */}</h3>
-                  <img className={styles.personImage} alt="Fundo Pessoa" src={PersonIcon}></img>
-                  <div className={styles.infoText}>
-                    <p>
-                      {/* participant.canEdit */}
-                    </p>
+    <>
+      <Navbar pageName="Lista de participantes da viagem">
+        <div className={styles.pageContainer}>
+          <header>
+            <button id={styles.createTravelButton} onClick={toggleModal}>
+              <PersonAddAlt1Icon fontSize="large" />
+              <div id={styles.buttonText}>Adicionar Participante</div>
+            </button>
+          </header>
+          <div className={styles.bodyContainer}>
+            <section className={styles.outsideBox}>
+              {participants.map((participant) => (
+                <button className={styles.insideBox} key={participant.id}>
+                  <div className={styles.infoBox}>
+                    <h3>{participant.name}</h3>
+                    <img className={styles.personImage} alt="Fundo Pessoa" src={PersonIcon}></img>
+                    <div className={styles.infoText}>
+                      <p>{/* participant.canEdit */}</p>
+                    </div>
                   </div>
-                </div>
-              </button>
-            ))}
-          </section>
+                </button>
+              ))}
+            </section>
+          </div>
         </div>
-      </div>
-    </Navbar>
+      </Navbar>
+      <Dialog open={open} onClose={toggleModal} fullWidth>
+        <DialogTitle>Adicionar Participante</DialogTitle>
+        <form onSubmit={handleAddGuestSubmit} onReset={toggleModal}>
+          <DialogContent>
+            <DialogContentText>
+              Para adicionar um participante, digite o email do mesmo no campo abaixo e clique em
+              adicionar. Se o email for válido, o participante será adicionado à viagem.
+            </DialogContentText>
+            <div className={styles.inputContainer}>
+              <label htmlFor="email-modal">Email do participante</label>
+              <input
+                type="email"
+                id="email-modal"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <button type="reset">Cancelar</button>
+            <button type="submit">Adicionar</button>
+          </DialogActions>
+        </form>
+      </Dialog>
+    </>
   );
 }

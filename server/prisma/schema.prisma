@@ -16,7 +16,7 @@ model User {
   name     String   @db.VarChar(100)
   password String   @db.VarChar(100)
   travels  Travel[]
-  // Guests   Guests[]
+  guests   Guests[]
 }
 
 model Travel {
@@ -31,7 +31,7 @@ model Travel {
   host            Host?
   transport       Transport?
   events          Event[]
-  // Guests          Guests[]
+  guests          Guests[]
 }
 
 model Host {
@@ -68,29 +68,13 @@ model Event {
   eventExtras       String   @db.Text
   travelId          Int      @db.UnsignedInt
   travel            Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
-  // EventGuests       EventGuests[]
 }
 
 model Guests {
-  id       Int @id @default(autoincrement()) @db.UnsignedInt
-  userId   Int @db.UnsignedInt
-  travelId Int @db.UnsignedInt
+  userId   Int    @db.UnsignedInt
+  travelId Int    @db.UnsignedInt
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  travel   Travel @relation(fields: [travelId], references: [id], onDelete: Cascade)
 
-  // TODO: Descomentar para fazer o relacionamento dos convidados
-  // Tabela com o usuario e qual viagem ele vai participar
-  // user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  // travel   Travel @relation(fields: [travelId], references: [id], onDelete: Cascade)
-  // EventGuests EventGuests[]
-}
-
-model EventGuests {
-  id      Int @id @default(autoincrement()) @db.UnsignedInt
-  eventId Int @db.UnsignedInt
-
-  // Id do convidado
-  idGuest Int @db.UnsignedInt
-
-  // TODO: Descomentar para fazer o relacionamento
-  // event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  // guests  Guests @relation(fields: [idGuest], references: [id], onDelete: Cascade)
+  @@id([userId, travelId])
 }

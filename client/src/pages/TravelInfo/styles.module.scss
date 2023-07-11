@@ -349,3 +349,24 @@
     border: 2px solid rgba(198, 40, 40, 1);
   }
 }
+
+#link {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  a {
+    text-decoration: underline;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    color: #4f772d;
+
+    transition: 0.4s;
+
+    &:hover {
+      color: lighten($color: #4f772d, $amount: 15%);
+    }
+  }
+}

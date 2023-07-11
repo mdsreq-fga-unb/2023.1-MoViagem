@@ -1,9 +1,12 @@
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { TravelsResponseDTO } from "../../api/dto/travels-dto";
-import { requestGetTravels } from "../../api/requests/travels-requests";
+import {
+  requestGetTravels,
+  requestGetTravelsBeingGuest,
+} from "../../api/requests/travels-requests";
 import FundoViagem from "../../assets/FundoViagem.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
@@ -11,16 +14,20 @@ import styles from "./styles.module.scss";
 export default function TravelList() {
   // Travel variables
   const [travels, setTravels] = useState<TravelsResponseDTO[]>([]);
+  const [guestTravels, setGuestTravels] = useState<TravelsResponseDTO[]>([]);
   const [pastTravels, setPastTravels] = useState<TravelsResponseDTO[]>([]);
   const [currTravels, setCurrTravels] = useState<TravelsResponseDTO[]>([]);
   const [futureTravels, setFutureTravels] = useState<TravelsResponseDTO[]>([]);
+
   const [currTravelsFilter, setCurrTravelsFilter] = useState<boolean>(false);
   const [pastTravelsFilter, setPastTravelsFilter] = useState<boolean>(false);
   const [futureTravelsFilter, setFutureTravelsFilter] = useState<boolean>(false);
-  const currentDate = new Date();
+  const [guestTravelsFilter, setGuestTravelsFilter] = useState<boolean>(false);
+
+  const currentDate = useMemo(() => new Date(), []);
 
   // Travel fetch request
-  const fetchTravel = async () => {
+  const fetchTravel = useCallback(async () => {
     const response = await requestGetTravels();
 
     if (response instanceof ErrorResponse) {
@@ -49,27 +56,44 @@ export default function TravelList() {
     setFutureTravels(futureTravels);
     setPastTravels(pastTravels);
     setCurrTravels(currTravels);
-  };
+
+    const responseGuest = await requestGetTravelsBeingGuest();
+
+    if (responseGuest instanceof ErrorResponse) {
+      alert(responseGuest.message);
+      return;
+    }
+
+    setGuestTravels(responseGuest.data);
+  }, [currentDate]);
 
   const handleFilter = (filter: number) => {
     if (filter === 1) {
       setPastTravelsFilter(!pastTravelsFilter);
       setCurrTravelsFilter(false);
       setFutureTravelsFilter(false);
+      setGuestTravelsFilter(false);
     } else if (filter === 2) {
       setPastTravelsFilter(false);
       setCurrTravelsFilter(!currTravelsFilter);
       setFutureTravelsFilter(false);
+      setGuestTravelsFilter(false);
     } else if (filter === 3) {
       setPastTravelsFilter(false);
       setCurrTravelsFilter(false);
       setFutureTravelsFilter(!futureTravelsFilter);
+      setGuestTravelsFilter(false);
+    } else if (filter === 4) {
+      setPastTravelsFilter(false);
+      setCurrTravelsFilter(false);
+      setFutureTravelsFilter(false);
+      setGuestTravelsFilter(!guestTravelsFilter);
     }
   };
 
   useEffect(() => {
     fetchTravel();
-  }, []);
+  }, [fetchTravel]);
 
   return (
     <Navbar pageName="Viagens" selectedPage="TRAVELS">
@@ -101,107 +125,175 @@ export default function TravelList() {
             >
               Viagens Futuras
             </button>
+            <button
+              className={guestTravelsFilter ? styles.active : styles.filterButton}
+              onClick={() => handleFilter(4)}
+            >
+              Viagens como Convidado
+            </button>
           </section>
         </header>
         <div className={styles.bodyContainer}>
-        <section className={styles.outsideBox}>
-          {!pastTravelsFilter && !currTravelsFilter && !futureTravelsFilter ? (
-            travels.map((travel) => (
-              <Link
-                key={travel.id}
-                to={`/travel-info/${travel.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <button className={styles.insideBox}>
-                  <div className={styles.infoBox}>
-                    <h3>{travel.local}</h3>
-                    <img alt="Fundo Viagem" src={FundoViagem}></img>
-                    <div className={styles.infoText}>
-                      <p>
-                        {new Date(travel.startDate).toLocaleDateString()} até{" "}
-                        {new Date(travel.endDate).toLocaleDateString()}
-                      </p>
+          <section className={styles.outsideBox}>
+            {!pastTravelsFilter &&
+            !currTravelsFilter &&
+            !futureTravelsFilter &&
+            !guestTravelsFilter ? (
+              travels
+                .map((travel) => (
+                  <Link
+                    key={travel.id}
+                    to={`/travel-info/${travel.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <button className={styles.insideBox}>
+                      <div className={styles.infoBox}>
+                        <h3>{travel.local}</h3>
+                        <img alt="Fundo Viagem" src={FundoViagem}></img>
+                        <div className={styles.infoText}>
+                          <p>
+                            {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                            {new Date(travel.endDate).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  </Link>
+                ))
+                .concat(
+                  guestTravels.map((travel) => (
+                    <Link
+                      key={travel.id}
+                      to={`/travel-info/${travel.id}?guest=true`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <button className={styles.insideBox}>
+                        <div className={styles.infoBox}>
+                          <h3>{travel.local}</h3>
+                          <img alt="Fundo Viagem" src={FundoViagem}></img>
+                          <div className={styles.infoText}>
+                            <p>
+                              {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                              {new Date(travel.endDate).toLocaleDateString()}
+                            </p>
+                          </div>
+                        </div>
+                      </button>
+                    </Link>
+                  ))
+                )
+            ) : (
+              <></>
+            )}
+            {pastTravelsFilter &&
+            !currTravelsFilter &&
+            !futureTravelsFilter &&
+            !guestTravelsFilter ? (
+              pastTravels.map((travel) => (
+                <Link
+                  key={travel.id}
+                  to={`/travel-info/${travel.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <button className={styles.insideBox}>
+                    <div className={styles.infoBox}>
+                      <h3>{travel.local}</h3>
+                      <img alt="Fundo Viagem" src={FundoViagem}></img>
+                      <div className={styles.infoText}>
+                        <p>
+                          {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                          {new Date(travel.endDate).toLocaleDateString()}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </button>
-              </Link>
-            ))
-          ) : (
-            <></>
-          )}
-          {pastTravelsFilter && !currTravelsFilter && !futureTravelsFilter ? (
-            pastTravels.map((travel) => (
-              <Link
-                key={travel.id}
-                to={`/travel-info/${travel.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <button className={styles.insideBox}>
-                  <div className={styles.infoBox}>
-                    <h3>{travel.local}</h3>
-                    <img alt="Fundo Viagem" src={FundoViagem}></img>
-                    <div className={styles.infoText}>
-                      <p>
-                        {new Date(travel.startDate).toLocaleDateString()} até{" "}
-                        {new Date(travel.endDate).toLocaleDateString()}
-                      </p>
+                  </button>
+                </Link>
+              ))
+            ) : (
+              <></>
+            )}
+            {!pastTravelsFilter &&
+            currTravelsFilter &&
+            !futureTravelsFilter &&
+            !guestTravelsFilter ? (
+              currTravels.map((travel) => (
+                <Link
+                  key={travel.id}
+                  to={`/travel-info/${travel.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <button className={styles.insideBox}>
+                    <div className={styles.infoBox}>
+                      <h3>{travel.local}</h3>
+                      <img alt="Fundo Viagem" src={FundoViagem}></img>
+                      <div className={styles.infoText}>
+                        <p>
+                          {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                          {new Date(travel.endDate).toLocaleDateString()}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </button>
-              </Link>
-            ))
-          ) : (
-            <></>
-          )}
-          {!pastTravelsFilter && currTravelsFilter && !futureTravelsFilter ? (
-            currTravels.map((travel) => (
-              <Link
-                key={travel.id}
-                to={`/travel-info/${travel.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <button className={styles.insideBox}>
-                  <div className={styles.infoBox}>
-                    <h3>{travel.local}</h3>
-                    <img alt="Fundo Viagem" src={FundoViagem}></img>
-                    <div className={styles.infoText}>
-                      <p>
-                        {new Date(travel.startDate).toLocaleDateString()} até{" "}
-                        {new Date(travel.endDate).toLocaleDateString()}
-                      </p>
+                  </button>
+                </Link>
+              ))
+            ) : (
+              <></>
+            )}
+            {!pastTravelsFilter &&
+            !currTravelsFilter &&
+            futureTravelsFilter &&
+            !guestTravelsFilter ? (
+              futureTravels.map((travel) => (
+                <Link
+                  key={travel.id}
+                  to={`/travel-info/${travel.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <button className={styles.insideBox}>
+                    <div className={styles.infoBox}>
+                      <h3>{travel.local}</h3>
+                      <img alt="Fundo Viagem" src={FundoViagem}></img>
+                      <div className={styles.infoText}>
+                        <p>
+                          {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                          {new Date(travel.endDate).toLocaleDateString()}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </button>
-              </Link>
-            ))
-          ) : (
-            <></>
-          )}
-          {!pastTravelsFilter && !currTravelsFilter && futureTravelsFilter ? (
-            futureTravels.map((travel) => (
-              <Link
-                key={travel.id}
-                to={`/travel-info/${travel.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <button className={styles.insideBox}>
-                  <div className={styles.infoBox}>
-                    <h3>{travel.local}</h3>
-                    <img alt="Fundo Viagem" src={FundoViagem}></img>
-                    <div className={styles.infoText}>
-                      <p>
-                        {new Date(travel.startDate).toLocaleDateString()} até{" "}
-                        {new Date(travel.endDate).toLocaleDateString()}
-                      </p>
+                  </button>
+                </Link>
+              ))
+            ) : (
+              <></>
+            )}
+            {!pastTravelsFilter &&
+            !currTravelsFilter &&
+            !futureTravelsFilter &&
+            guestTravelsFilter ? (
+              guestTravels.map((travel) => (
+                <Link
+                  key={travel.id}
+                  to={`/travel-info/${travel.id}?guest=true`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <button className={styles.insideBox}>
+                    <div className={styles.infoBox}>
+                      <h3>{travel.local}</h3>
+                      <img alt="Fundo Viagem" src={FundoViagem}></img>
+                      <div className={styles.infoText}>
+                        <p>
+                          {new Date(travel.startDate).toLocaleDateString()} até{" "}
+                          {new Date(travel.endDate).toLocaleDateString()}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </button>
-              </Link>
-            ))
-          ) : (
-            <></>
-          )}
-        </section>
+                  </button>
+                </Link>
+              ))
+            ) : (
+              <></>
+            )}
+          </section>
         </div>
       </div>
     </Navbar>

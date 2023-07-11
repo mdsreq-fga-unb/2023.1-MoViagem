@@ -31,6 +31,11 @@ export class TravelController {
     return this.travelService.getTravelsByUser(user.id);
   }
 
+  @Get("/being-guest")
+  async listBeingGuest(@User() user: UserInTokenDTO): Promise<TravelsResponseDTO[]> {
+    return this.travelService.getTravelsBeingGuest(user.id);
+  }
+
   @Get("/with-info/:id")
   async getWithInfo(@Param("id") id: number): Promise<TravelsWithInfoResponseDTO> {
     return this.travelService.getTravelsWithInfo(id);
