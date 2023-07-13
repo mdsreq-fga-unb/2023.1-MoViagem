@@ -261,7 +261,7 @@ export default function TravelInfo() {
               </button>
 
               <button className={styles.deleteButton} onClick={handleDeleteTravel} type="reset">
-                <p>DELETAR VIAGEM</p>
+                <span>DELETAR VIAGEM</span>
               </button>
             </div>
           </form>

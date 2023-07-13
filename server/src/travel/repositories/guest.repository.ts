@@ -30,4 +30,15 @@ export class GuestRepository {
       },
     });
   }
+
+  async removeGuestFromTravel(userId: number, travelId: number): Promise<void> {
+    await this.prismaService.guests.delete({
+      where: {
+        userId_travelId: {
+          userId,
+          travelId,
+        },
+      },
+    });
+  }
 }

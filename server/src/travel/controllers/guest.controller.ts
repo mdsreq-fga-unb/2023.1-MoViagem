@@ -22,4 +22,14 @@ export class GuestController {
   ): Promise<void> {
     return this.guestService.addGuestToTravel(guestEmail, travelId);
   }
+
+  // userId: number, travelId: number
+
+  @Patch("/:userId/remove-from-travel/:travelId")
+  async removeGuestToTravel(
+    @Param("userId") userId: number,
+    @Param("travelId") travelId: number
+  ): Promise<void> {
+    return this.guestService.delete(userId, travelId);
+  }
 }

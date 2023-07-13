@@ -1,3 +1,4 @@
+import CheckIcon from "@mui/icons-material/Check";
 import { parse } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -6,10 +7,9 @@ import { ErrorResponse } from "../../api/api-instance.ts";
 import { EventResponseDTO } from "../../api/dto/travels-dto.ts";
 import { requestGetEvents } from "../../api/requests/travels-requests.ts";
 import Navbar from "../../components/Navbar/index.tsx";
+import EventInfoModal from "./EventInfoModal/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
-import CheckIcon from '@mui/icons-material/Check';
-import EventInfoModal from "./EventInfoModal/index.tsx";
 
 const Schedule: React.FC = () => {
   const params = useParams();
@@ -199,13 +199,13 @@ const Schedule: React.FC = () => {
   };
 
   const handleEventInfoModalOpen = (event: EventResponseDTO) => {
-    setSelectedEvent(event)
+    setSelectedEvent(event);
     setShowEventModal(true);
   };
 
   const handleDisponibility = () => {
     setIsDisponible(!isDisponible);
-  }
+  };
 
   const handleEventInfoModalClose = () => {
     setShowEventModal(false);
@@ -244,7 +244,10 @@ const Schedule: React.FC = () => {
             <div className={styles.activities}>
               {dayEvents.map((event) => (
                 <div className={styles.eventBox}>
-                  <button className={styles.insideBox} onClick={() => handleEventInfoModalOpen(event)}>
+                  <button
+                    className={styles.insideBox}
+                    onClick={() => handleEventInfoModalOpen(event)}
+                  >
                     <div className={styles.infoBox}>
                       <h3>{event.departureLocation}</h3>
                       <div className={styles.infoText}>

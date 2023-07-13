@@ -32,4 +32,8 @@ export class GuestService {
 
     await this.guestRepository.addGuestToTravel(user.id, travel.id);
   }
+
+  async delete(userId: number, travelId: number): Promise<void> {
+    return this.guestRepository.removeGuestFromTravel(userId, travelId);
+  }
 }

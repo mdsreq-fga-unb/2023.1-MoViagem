@@ -78,3 +78,13 @@ model Guests {
 
   @@id([userId, travelId])
 }
+
+model EventGuests {
+  id      Int @id @default(autoincrement()) @db.UnsignedInt
+  eventId Int @db.UnsignedInt
+  // Id do convidado
+  idGuest Int @db.UnsignedInt
+  // TODO: Descomentar para fazer o relacionamento
+  // event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  // guests  Guests @relation(fields: [idGuest], references: [id], onDelete: Cascade)
+}

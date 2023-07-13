@@ -152,3 +152,10 @@ export function requestAddGuestToTravel(guestEmail: string, travelId: string) {
     url: `/guest/${guestEmail}/add-to-travel/${travelId}`,
   });
 }
+
+export function requestRemoveGuestFromTravel(guestId: number, travelId: number) {
+  return request<never, never>({
+    method: "PATCH",
+    url: `/guest/${guestId}/remove-from-travel/${travelId}`,
+  });
+}

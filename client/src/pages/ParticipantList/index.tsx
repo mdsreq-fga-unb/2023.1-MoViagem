@@ -10,7 +10,11 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { GuestResponseDTO } from "../../api/dto/travels-dto";
-import { requestAddGuestToTravel, requestGetGuests } from "../../api/requests/travels-requests";
+import {
+  requestAddGuestToTravel,
+  requestGetGuests,
+  requestRemoveGuestFromTravel,
+} from "../../api/requests/travels-requests";
 import PersonIcon from "../../assets/PessoaIndoViajar.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
@@ -63,6 +67,28 @@ export default function ParticipantList() {
     toggleModal();
   }
 
+  async function handleRemoveGuest(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    // Nao e a melhor solucao, mas funciona
+    // console.log(event.target[0].id);
+
+    // TODO: Implementar o modal
+    if (confirm("Tem certeza que deseja remover este participante?")) {
+      try {
+        const response = await requestRemoveGuestFromTravel(
+          parseInt(event.target[0].id),
+          parseInt(travelId)
+        );
+        alert("Removido com sucesso! " + response);
+        fetchGuests();
+        // toggleModal();
+      } catch (error) {
+        alert(error);
+      }
+    }
+  }
+
   return (
     <>
       <Navbar pageName="Lista de participantes da viagem">
@@ -76,15 +102,21 @@ export default function ParticipantList() {
           <div className={styles.bodyContainer}>
             <section className={styles.outsideBox}>
               {participants.map((participant) => (
-                <button className={styles.insideBox} key={participant.id}>
+                <div className={styles.insideBox} key={participant.id}>
                   <div className={styles.infoBox}>
                     <h3>{participant.name}</h3>
                     <img className={styles.personImage} alt="Fundo Pessoa" src={PersonIcon}></img>
                     <div className={styles.infoText}>
                       <p>{/* participant.canEdit */}</p>
                     </div>
+                    <div className={styles.infoText}>Info</div>
+                    <div className={styles.sideBarLinkContainer}>
+                      <form onSubmit={handleRemoveGuest}>
+                        <input id={participant.id} type="submit" value="Deletar" />
+                      </form>
+                    </div>
                   </div>
-                </button>
+                </div>
               ))}
             </section>
           </div>

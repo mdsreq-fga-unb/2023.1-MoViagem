@@ -86,3 +86,8 @@ export interface GuestResponseDTO {
   id: number;
   name: string;
 }
+
+export interface EventGuestResponseDTO {
+  idGuests: number;
+  eventId: string;
+}
