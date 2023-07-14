@@ -1,7 +1,6 @@
-import { Body, Controller, Delete, Param, Post } from "@nestjs/common";
+import { Controller, Param, Patch } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
-import { CreateEventGuestsRequestDTO } from "../dto/eventguests.dto";
 import { EventGuestsService } from "../services/eventguests.service";
 
 @Controller("/api/event/eventguests")
@@ -10,12 +9,12 @@ import { EventGuestsService } from "../services/eventguests.service";
 export class EventGuestsController {
   constructor(private eventGuestsService: EventGuestsService) {}
 
-  // id da viagem
-  // So pode se adionar num evento o usuario
-  // que foi convidado na viagem de outro usuario (no caso o admin)
-  @Post()
-  async create(@Param("id") id: number, @Body() dto: CreateEventGuestsRequestDTO): Promise<void> {
-    return this.eventGuestsService.create(id, dto);
+  @Patch("/:userId/add-to-event/:eventId")
+  async addGuestToTravel(
+    @Param("userId") userId: number,
+    @Param("eventId") eventId: number
+  ): Promise<void> {
+    return this.eventGuestsService.addGuestToEvent(userId, eventId);
   }
 
   // @Get("/:id")
@@ -23,8 +22,11 @@ export class EventGuestsController {
   //   return this.eventService.getEvent(id);
   // }
 
-  @Delete("/:id")
-  async delete(@Param("id") id: number): Promise<void> {
-    return this.eventGuestsService.delete(id);
+  @Patch("/:userId/remove-from-event/:eventId")
+  async removeGuestFromEvent(
+    @Param("userId") userId: number,
+    @Param("eventId") eventId: number
+  ): Promise<void> {
+    return this.eventGuestsService.delete(userId, eventId);
   }
 }

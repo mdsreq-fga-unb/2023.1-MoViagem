@@ -11,12 +11,13 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement()) @db.UnsignedInt
-  email    String   @unique @db.VarChar(50)
-  name     String   @db.VarChar(100)
-  password String   @db.VarChar(100)
-  travels  Travel[]
-  guests   Guests[]
+  id          Int           @id @default(autoincrement()) @db.UnsignedInt
+  email       String        @unique @db.VarChar(50)
+  name        String        @db.VarChar(100)
+  password    String        @db.VarChar(100)
+  travels     Travel[]
+  guests      Guests[]
+  EventGuests EventGuests[]
 }
 
 model Travel {
@@ -60,14 +61,15 @@ model Transport {
 }
 
 model Event {
-  id                Int      @id @default(autoincrement()) @db.UnsignedInt
-  transportType     String   @db.VarChar(50)
-  departureLocation String   @db.VarChar(100)
-  eventTime         DateTime @db.DateTime
-  eventValue        Decimal  @db.Decimal(10, 2)
-  eventExtras       String   @db.Text
-  travelId          Int      @db.UnsignedInt
-  travel            Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
+  id                Int           @id @default(autoincrement()) @db.UnsignedInt
+  transportType     String        @db.VarChar(50)
+  departureLocation String        @db.VarChar(100)
+  eventTime         DateTime      @db.DateTime
+  eventValue        Decimal       @db.Decimal(10, 2)
+  eventExtras       String        @db.Text
+  travelId          Int           @db.UnsignedInt
+  travel            Travel        @relation(fields: [travelId], references: [id], onDelete: Cascade)
+  guests            EventGuests[]
 }
 
 model Guests {
@@ -80,11 +82,10 @@ model Guests {
 }
 
 model EventGuests {
-  id      Int @id @default(autoincrement()) @db.UnsignedInt
-  eventId Int @db.UnsignedInt
-  // Id do convidado
-  idGuest Int @db.UnsignedInt
-  // TODO: Descomentar para fazer o relacionamento
-  // event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  // guests  Guests @relation(fields: [idGuest], references: [id], onDelete: Cascade)
+  userId  Int   @db.UnsignedInt
+  eventId Int   @db.UnsignedInt
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@id([userId, eventId])
 }

@@ -1,22 +1,23 @@
-import { EventGuests } from "@prisma/client";
-import { IsPositive } from "class-validator";
+import { Prisma } from "@prisma/client";
 
-export class CreateEventGuestsRequestDTO {
-  @IsPositive()
-  eventId: number;
+const guestInfo = Prisma.validator<Prisma.GuestsArgs>()({
+  select: {
+    user: {
+      select: {
+        id: true,
+        name: true,
+      },
+    },
+  },
+});
 
-  @IsPositive()
-  idGuest: number;
-}
-
-export class EventGuestsResponseDTO {
+export type GuestInfo = Prisma.GuestsGetPayload<typeof guestInfo>;
+export class GuestResponseDTO {
   id: number;
-  eventId: number;
-  idGuest: number;
+  name: string;
 
-  constructor(eventguests: EventGuests) {
-    this.id = eventguests.id;
-    this.eventId = eventguests.eventId;
-    this.idGuest = eventguests.idGuest;
+  constructor(guestInfo: GuestInfo) {
+    this.id = guestInfo.user.id;
+    this.name = guestInfo.user.name;
   }
 }
