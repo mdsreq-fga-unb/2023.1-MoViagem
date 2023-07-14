@@ -1,11 +1,16 @@
-import CheckIcon from "@mui/icons-material/Check";
+import { default as CheckIcon } from "@mui/icons-material/Check";
 import { parse } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance.ts";
 import { EventResponseDTO } from "../../api/dto/travels-dto.ts";
-import { requestGetEvents } from "../../api/requests/travels-requests.ts";
+import {
+  requestAddGuestToEvent,
+  requestGetEvents,
+  requestRemoveGuestFromEvent,
+} from "../../api/requests/travels-requests.ts";
+import { AuthContext } from "../../auth/context/auth-provider.tsx";
 import Navbar from "../../components/Navbar/index.tsx";
 import EventInfoModal from "./EventInfoModal/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
@@ -28,6 +33,8 @@ const Schedule: React.FC = () => {
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventResponseDTO>();
   const [isDisponible, setIsDisponible] = useState<boolean>();
+
+  const auth = useContext(AuthContext);
 
   // Render the calendar
   const renderCalendar = useCallback(() => {
@@ -198,14 +205,41 @@ const Schedule: React.FC = () => {
     });
   };
 
+  /**
+   * TODO: Fazer com que Disponibility
+   * Já venha setado defatult com o valor true
+   * caso já tenha uma cadastro daquele usuario na quele evento
+   * ou falso caso contrario
+   *
+   * TODO: Adicionar icone ao botao de exclusao estilizacao as botoes
+   * @param event
+   */
   const handleEventInfoModalOpen = (event: EventResponseDTO) => {
+    console.log(event);
+
     setSelectedEvent(event);
     setShowEventModal(true);
   };
 
-  const handleDisponibility = () => {
-    setIsDisponible(!isDisponible);
-  };
+  async function handleDisponibilityAsTrue(event: EventResponseDTO) {
+    setIsDisponible(true);
+    try {
+      await requestAddGuestToEvent(auth?.userInfo?.id, event.id);
+      alert("Adicionado com sucesso");
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  async function handleDisponibilityAsFalse(event: EventResponseDTO) {
+    setIsDisponible(false);
+    try {
+      await requestRemoveGuestFromEvent(auth?.userInfo?.id, event.id);
+      alert("Removido com sucesso");
+    } catch (error) {
+      alert(error);
+    }
+  }
 
   const handleEventInfoModalClose = () => {
     setShowEventModal(false);
@@ -255,10 +289,22 @@ const Schedule: React.FC = () => {
                       </div>
                     </div>
                   </button>
-                  <button className={styles.checkBox} onClick={handleDisponibility}>
-                    {/* Mudar isso aqui para o dado que o dayEvents vai trazer, algo como 'event.isDisponible*/}
-                    {isDisponible && <CheckIcon fontSize="large" />}
-                    {!isDisponible && <p>Não vou ir</p>}
+                  <label>
+                    {
+                      //Adicionar cores ao texto
+                    }
+                    {isDisponible ? "Irá participar :)" : "Não ira participar :("}
+                  </label>
+                  <button onClick={() => handleDisponibilityAsTrue(event)}>
+                    {/* Mudar isso aqui para o dado que o dayEvents vai trazer, algo como */}
+                    {/* 'event.isDisponible */}
+                    <CheckIcon fontSize="large" />
+                  </button>
+                  <button onClick={() => handleDisponibilityAsFalse(event)} fontSize="large">
+                    X{" "}
+                    {
+                      // Adionar um icone de exclusao aqui
+                    }
                   </button>
                 </div>
               ))}

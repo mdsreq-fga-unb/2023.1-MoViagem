@@ -11,6 +11,14 @@
   }
 }
 
+.color-false {
+  color: red;
+}
+
+.color-true {
+  color: #4f772d;
+}
+
 .boxContainer {
   display: flex;
   justify-content: center;
@@ -278,7 +286,7 @@
   color: #c9ff99;
   border: 4px double $color-secondary;
   cursor: pointer;
-  transition: .4s;
+  transition: 0.4s;
 
   &:hover {
     border: 4px double #c9ff99;

@@ -159,3 +159,17 @@ export function requestRemoveGuestFromTravel(guestId: number, travelId: number) 
     url: `/guest/${guestId}/remove-from-travel/${travelId}`,
   });
 }
+
+export function requestAddGuestToEvent(userId: number, eventId: number) {
+  return request<never, never>({
+    method: "PATCH",
+    url: `/eventguests/${userId}/add-to-event/${eventId}`,
+  });
+}
+
+export function requestRemoveGuestFromEvent(userId: number, eventId: number) {
+  return request<never, never>({
+    method: "PATCH",
+    url: `/eventguests/${userId}/remove-from-event/${eventId}`,
+  });
+}

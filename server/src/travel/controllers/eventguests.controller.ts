@@ -3,7 +3,7 @@ import { ApiTags } from "@nestjs/swagger";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
 import { EventGuestsService } from "../services/eventguests.service";
 
-@Controller("/api/event/eventguests")
+@Controller("/api/eventguests")
 @ApiTags("eventguests")
 @EnableAuth()
 export class EventGuestsController {

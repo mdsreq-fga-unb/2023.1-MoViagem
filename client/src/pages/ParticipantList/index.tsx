@@ -76,13 +76,9 @@ export default function ParticipantList() {
     // TODO: Implementar o modal
     if (confirm("Tem certeza que deseja remover este participante?")) {
       try {
-        const response = await requestRemoveGuestFromTravel(
-          parseInt(event.target[0].id),
-          parseInt(travelId)
-        );
-        alert("Removido com sucesso! " + response);
+        await requestRemoveGuestFromTravel(parseInt(event.target[0].id), parseInt(travelId));
+        alert("Removido com sucesso! ");
         fetchGuests();
-        // toggleModal();
       } catch (error) {
         alert(error);
       }
@@ -112,7 +108,7 @@ export default function ParticipantList() {
                     <div className={styles.infoText}>Info</div>
                     <div className={styles.sideBarLinkContainer}>
                       <form onSubmit={handleRemoveGuest}>
-                        <input id={participant.id} type="submit" value="Deletar" />
+                        <input id={participant.id.toString()} type="submit" value="Deletar" />
                       </form>
                     </div>
                   </div>
