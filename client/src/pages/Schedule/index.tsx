@@ -224,7 +224,7 @@ const Schedule: React.FC = () => {
   async function handleDisponibilityAsTrue(event: EventResponseDTO) {
     setIsDisponible(true);
     try {
-      await requestAddGuestToEvent(auth?.userInfo?.id, event.id);
+      await requestAddGuestToEvent(auth?.userInfo?.id!, event.id);
       alert("Adicionado com sucesso");
     } catch (error) {
       alert(error);
@@ -234,7 +234,7 @@ const Schedule: React.FC = () => {
   async function handleDisponibilityAsFalse(event: EventResponseDTO) {
     setIsDisponible(false);
     try {
-      await requestRemoveGuestFromEvent(auth?.userInfo?.id, event.id);
+      await requestRemoveGuestFromEvent(auth?.userInfo?.id!, event.id);
       alert("Removido com sucesso");
     } catch (error) {
       alert(error);
@@ -300,7 +300,7 @@ const Schedule: React.FC = () => {
                     {/* 'event.isDisponible */}
                     <CheckIcon fontSize="large" />
                   </button>
-                  <button onClick={() => handleDisponibilityAsFalse(event)} fontSize="large">
+                  <button onClick={() => handleDisponibilityAsFalse(event)}>
                     X{" "}
                     {
                       // Adionar um icone de exclusao aqui

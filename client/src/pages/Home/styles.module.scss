@@ -1,16 +1,18 @@
 #outsideBox {
-  height: 90%;
+  height: 80vh;
   display: flex;
   align-items: center;
 }
 
 #insideBox {
   width: 40%;
+  zoom: 0.9;
   margin-left: 5%;
 }
 
 #imageBox {
   width: 40%;
+  zoom: 0.9;
   margin-left: 5%;
   text-align: center;
 }
