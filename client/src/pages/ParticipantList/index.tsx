@@ -1,3 +1,5 @@
+import CalendarIcon from "@mui/icons-material/CalendarToday";
+import CardTravelIcon from "@mui/icons-material/CardTravel";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import {
   Dialog,
@@ -5,6 +7,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  IconButton,
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -18,9 +21,6 @@ import {
 import PersonIcon from "../../assets/PessoaIndoViajar.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
-import CalendarIcon from "@mui/icons-material/CalendarToday";
-import CardTravelIcon from '@mui/icons-material/CardTravel';
-import { IconButton } from "@mui/material";
 
 export default function ParticipantList() {
   const travelId = useParams().id!;
@@ -104,7 +104,12 @@ export default function ParticipantList() {
                     </div>
                     <div className={styles.infoText}>Info</div>
                     <div className={styles.sideBarLinkContainer}>
-                      <button onClick={() => handleRemoveGuest(participant.id)}>Deletar</button>
+                      <button
+                        className={styles.deleteButton}
+                        onClick={() => handleRemoveGuest(participant.id)}
+                      >
+                        Deletar
+                      </button>
                     </div>
                   </div>
                 </div>
