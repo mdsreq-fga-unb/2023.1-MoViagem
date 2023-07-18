@@ -67,16 +67,10 @@ export default function ParticipantList() {
     toggleModal();
   }
 
-  async function handleRemoveGuest(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    // Nao e a melhor solucao, mas funciona
-    // console.log(event.target[0].id);
-
-    // TODO: Implementar o modal
+  async function handleRemoveGuest(participantId: number) {
     if (confirm("Tem certeza que deseja remover este participante?")) {
       try {
-        await requestRemoveGuestFromTravel(parseInt(event.target[0].id), parseInt(travelId));
+        await requestRemoveGuestFromTravel(participantId, parseInt(travelId));
         alert("Removido com sucesso! ");
         fetchGuests();
       } catch (error) {
@@ -107,9 +101,7 @@ export default function ParticipantList() {
                     </div>
                     <div className={styles.infoText}>Info</div>
                     <div className={styles.sideBarLinkContainer}>
-                      <form onSubmit={handleRemoveGuest}>
-                        <input id={participant.id.toString()} type="submit" value="Deletar" />
-                      </form>
+                      <button onClick={() => handleRemoveGuest(participant.id)}>Deletar</button>
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,3 @@
-import { default as CheckIcon } from "@mui/icons-material/Check";
 import { parse } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
@@ -224,7 +223,7 @@ const Schedule: React.FC = () => {
   async function handleDisponibilityAsTrue(event: EventResponseDTO) {
     setIsDisponible(true);
     try {
-      await requestAddGuestToEvent(auth?.userInfo?.id!, event.id);
+      await requestAddGuestToEvent(auth.userInfo.id, event.id);
       alert("Adicionado com sucesso");
     } catch (error) {
       alert(error);
@@ -234,7 +233,7 @@ const Schedule: React.FC = () => {
   async function handleDisponibilityAsFalse(event: EventResponseDTO) {
     setIsDisponible(false);
     try {
-      await requestRemoveGuestFromEvent(auth?.userInfo?.id!, event.id);
+      await requestRemoveGuestFromEvent(auth.userInfo.id, event.id);
       alert("Removido com sucesso");
     } catch (error) {
       alert(error);
@@ -273,41 +272,45 @@ const Schedule: React.FC = () => {
           )}
           <div className={styles.sidebar}>
             {/* Sidebar Content */}
-            <h2>[ {currentDateForSidebar} ]</h2>
             {/* Fetch and display activities for the selected date */}
-            <div className={styles.activities}>
-              {dayEvents.map((event) => (
-                <div className={styles.eventBox}>
-                  <button
-                    className={styles.insideBox}
-                    onClick={() => handleEventInfoModalOpen(event)}
-                  >
+            <div className={styles.outBox}>
+              <h2>{currentDateForSidebar}</h2>
+              <div className={styles.insideBox}>
+                {dayEvents.map((event) => (
+                  <div className={styles.eventBox}>
                     <div className={styles.infoBox}>
-                      <h3>{event.departureLocation}</h3>
-                      <div className={styles.infoText}>
-                        <p>{new Date(event.eventTime).toLocaleTimeString()}</p>
+                      <button
+                        className={styles.buttonEvent}
+                        onClick={() => handleEventInfoModalOpen(event)}
+                      >
+                        <div>
+                          <label>{event.departureLocation}</label>
+                          <p className={isDisponible ? styles.true : styles.false}>
+                            {isDisponible ? "Irá participar :)" : "Não ira participar :("}
+                          </p>
+                        </div>
+                        <div>
+                          <p>{new Date(event.eventTime).toLocaleTimeString()}</p>
+                        </div>
+                      </button>
+                      <label htmlFor="">Vai participar?</label>
+                      <div className={styles.particip}>
+                        <button onClick={() => handleDisponibilityAsTrue(event)}>
+                          {/* Mudar isso aqui para o dado que o dayEvents vai trazer, algo como */}
+                          {/* 'event.isDisponible */}
+                          Sim
+                        </button>
+                        <button
+                          className={styles.cancel}
+                          onClick={() => handleDisponibilityAsFalse(event)}
+                        >
+                          Não
+                        </button>
                       </div>
                     </div>
-                  </button>
-                  <label>
-                    {
-                      //Adicionar cores ao texto
-                    }
-                    {isDisponible ? "Irá participar :)" : "Não ira participar :("}
-                  </label>
-                  <button onClick={() => handleDisponibilityAsTrue(event)}>
-                    {/* Mudar isso aqui para o dado que o dayEvents vai trazer, algo como */}
-                    {/* 'event.isDisponible */}
-                    <CheckIcon fontSize="large" />
-                  </button>
-                  <button onClick={() => handleDisponibilityAsFalse(event)}>
-                    X{" "}
-                    {
-                      // Adionar um icone de exclusao aqui
-                    }
-                  </button>
-                </div>
-              ))}
+                  </div>
+                ))}
+              </div>
             </div>
             <div className={styles.buttonOutsideContainer}>
               <button className={styles.buttonContainer} onClick={handleModalOpen}>
