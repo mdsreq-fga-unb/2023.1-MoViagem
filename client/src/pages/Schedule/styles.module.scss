@@ -360,3 +360,21 @@
     translate: -4px 0px;
   }
 }
+
+#schedule_link {
+  text-decoration: none;
+  color: $color-secondary;
+
+  position: absolute;
+  left: 11px;
+  top: 100px;
+}
+
+#participants_link {
+  text-decoration: none;
+  color: $color-secondary;
+
+  position: absolute;
+  left: 11px;
+  top: 145px;
+}

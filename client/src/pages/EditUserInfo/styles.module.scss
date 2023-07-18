@@ -4,7 +4,7 @@
   display: grid;
 
   h2 {
-    margin-bottom: 2rem;
+    margin-bottom: 2vh;
   }
 }
 
@@ -34,12 +34,11 @@
   justify-content: center;
   text-align: center;
 
-  width: 70%;
-  height: 90%;
+  width: 50vw;
+  height: 50vh;
 
   padding: 3rem;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  box-shadow: 0px 0px 4px black;
 
   border: 1px solid rgba(221, 223, 228, 1);
   border-radius: 10px;
@@ -63,7 +62,7 @@
   width: 70%;
   height: 2rem;
 
-  background: rgba(230, 230, 230, 1);
+  background: rgba(79, 119, 45, 0.5);
 
   display: flex;
 
@@ -90,7 +89,7 @@
   width: 100%;
   height: 2rem;
 
-  background: rgba(230, 230, 230, 1);
+  background: rgba(79, 119, 45, 0.5);
 
   border: none;
   border-radius: 10px 10px 10px 10px;
@@ -104,7 +103,7 @@
   width: 100%;
   height: 2rem;
 
-  background: rgba(230, 230, 230, 1);
+  background: rgba(79, 119, 45, 0);
 
   border: none;
   border-radius: 10px 0px 0px 10px;
@@ -123,16 +122,18 @@
 }
 
 .editButton {
-  width: 10%;
+  width: 15%;
   height: 100%;
 
   background: rgba(230, 230, 230, 1);
 
-  border: none;
+  border: 2px solid  rgba(79, 119, 45, 0.5);
   border-radius: 10px 10px 10px 10px;
 
   padding-top: 5px;
-  padding-bottom: 2rem;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 1.8rem;
 
   font-size: 1.5rem;
   text-align: center;
@@ -142,7 +143,8 @@
   transition: 0.4s;
 
   &:hover {
-    background: rgba(79, 119, 45, 0.5);
+    background: $color-primary;
+    color: #c9ff99;
   }
 }
 
@@ -153,7 +155,7 @@
   background: rgba(230, 230, 230, 1);
   margin-left: 5px;
 
-  border: none;
+  border: 2px solid rgba(79, 119, 45, 0.5);
   border-radius: 10px 0px 0px 10px;
   border: 2px solid $color-secondary;
 
@@ -167,7 +169,8 @@
   transition: 0.4s;
 
   &:hover {
-    background: rgba(79, 119, 45, 0.5);
+    background: $color-primary;
+    color: #c9ff99;
   }
 }
 
@@ -222,16 +225,19 @@
   width: 40%;
   height: 2.5rem;
 
-  border: 2px solid rgba(198, 40, 40, 0);
+  border: 5px solid rgba(198, 40, 40, 0);
   border-radius: 10px;
 
-  background: rgba(198, 40, 40, 0.54);
+  background: $button-danger;
+  color: rgba(132, 27, 27, 0.7);
+  font-weight: bold;
   font-size: 1.5rem;
   transition: 0.4s;
   cursor: pointer;
 
   &:hover {
-    border: 2px solid rgba(198, 40, 40, 0.54);
+    translate: 0px -5px;
+    border: 4px double rgba(198, 40, 40, 0.54);
   }
 }
 
@@ -256,9 +262,9 @@
 .exitDeleteButton {
   margin-left: 90%;
   height: 3rem;
-  width: 9%;
+  width: 3rem;
   border: 2px solid black;
-  border-radius: 100%;
+  border-radius: 50%;
   color: black;
   font-size: 1.5rem;
   transition: 0.4s;

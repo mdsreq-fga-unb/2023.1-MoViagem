@@ -1,8 +1,9 @@
 import { parse } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance.ts";
+import { IconButton } from "@mui/material";
 import { EventResponseDTO } from "../../api/dto/travels-dto.ts";
 import {
   requestAddGuestToEvent,
@@ -11,12 +12,15 @@ import {
 } from "../../api/requests/travels-requests.ts";
 import { AuthContext } from "../../auth/context/auth-provider.tsx";
 import Navbar from "../../components/Navbar/index.tsx";
+import GroupsIcon from '@mui/icons-material/Groups';
+import CardTravelIcon from '@mui/icons-material/CardTravel';
 import EventInfoModal from "./EventInfoModal/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
 
 const Schedule: React.FC = () => {
   const params = useParams();
+  const searchParams = useSearchParams()[0];
   const date = useMemo(() => new Date(), []);
   // const [currentDate, setCurrentDate] = useState("");
   const [currentDateForSidebar, setCurrentDateForSidebar] = useState("");
@@ -353,6 +357,18 @@ const Schedule: React.FC = () => {
           </div>
         </div>
       </div>
+      <Link to={`/travel-info/${params.id}`} id={styles.schedule_link}>
+        <IconButton id={styles.schedule_link}>
+          <CardTravelIcon fontSize="large" />
+        </IconButton>
+      </Link>
+      {searchParams.get("guest") != "true" && (
+        <Link to={`/participants-list/${params.id}`} id={styles.participants_link}>
+          <IconButton id={styles.participants_link}>
+            <GroupsIcon fontSize="large" />
+          </IconButton>
+        </Link>
+      )}
     </Navbar>
   );
 };

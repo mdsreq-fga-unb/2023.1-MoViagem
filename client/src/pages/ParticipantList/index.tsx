@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { GuestResponseDTO } from "../../api/dto/travels-dto";
 import {
@@ -18,6 +18,9 @@ import {
 import PersonIcon from "../../assets/PessoaIndoViajar.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
+import CalendarIcon from "@mui/icons-material/CalendarToday";
+import CardTravelIcon from '@mui/icons-material/CardTravel';
+import { IconButton } from "@mui/material";
 
 export default function ParticipantList() {
   const travelId = useParams().id!;
@@ -109,6 +112,16 @@ export default function ParticipantList() {
             </section>
           </div>
         </div>
+        <Link to={`/travel-info/${travelId}`} id={styles.schedule_link}>
+          <IconButton id={styles.schedule_link}>
+            <CardTravelIcon fontSize="large" />
+          </IconButton>
+        </Link>
+        <Link to={`/schedule/${travelId}`} id={styles.participants_link}>
+          <IconButton id={styles.participants_link}>
+            <CalendarIcon fontSize="large" />
+          </IconButton>
+        </Link>
       </Navbar>
       <Dialog open={open} onClose={toggleModal} fullWidth>
         <DialogTitle>Adicionar Participante</DialogTitle>
