@@ -21,6 +21,8 @@ nav:
   - Entregas Unidade 3:
       - PBB e BDD: documentos/pbb-e-bdd.md
       - BACKLOG SAFe: documentos/backlog-SAFe.md
+  - Sprints:
+      - Sprints: documentos/relato-sprints.md 
 
 extra_css:
   - css/custom.css
