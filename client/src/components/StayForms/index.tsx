@@ -170,7 +170,7 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
       </div>
 
       <div className={styles.inputGroup}>
-        <div className={styles.inputContainer}>
+        <div className={styles.column}>
           <label htmlFor="preco">Preço:</label>
           <input
             type="Number"
@@ -184,7 +184,7 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
             }}
           />
         </div>
-        <div className={styles.inputContainer}>
+        <div className={styles.column}>
           <label htmlFor="contato">Contato:</label>
           <input
             type="text"

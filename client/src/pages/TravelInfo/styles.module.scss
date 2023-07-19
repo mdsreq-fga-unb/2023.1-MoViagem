@@ -1,13 +1,13 @@
 @import "../../variables.scss";
 
 .pageContainer {
-  margin-top: 5%;
+  margin-top: 2vh;
   display: flex;
   justify-content: center;
 
   h2 {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2vh;
   }
 }
 
@@ -20,7 +20,7 @@
 }
 
 .verticalLine {
-  height: 40rem;
+  height: 78vh;
   min-width: 0.1rem;
   background: rgba(49, 87, 44, 1);
   border-radius: 5px;
@@ -28,7 +28,10 @@
 
 .insideBox {
   width: 70%;
-  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70vh;
   padding: 25px;
 
   background: #ffffff;
@@ -72,11 +75,13 @@
   width: 100%;
   text-align: center;
 
-  padding: 10px;
+  padding: 7px;
   margin-bottom: 5px;
 
   border: 2px solid $color-primary;
   border-radius: 10px;
+  display: grid;
+  align-items: center;
 
   background: #e6e6e6;
   box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
@@ -99,11 +104,11 @@
 }
 
 .inputGroup {
-  width: 95%;
+  width: 100%;
+  margin-left: 12px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 10px;
+  align-items: space-between;
 }
 
 .inputBox {
@@ -129,11 +134,10 @@
 
 .inputDate {
   max-width: 90%;
-  width: 90%;
+  width: 80%;
   background: rgba(79, 119, 45, 0.5);
   border: none;
   padding: 10px;
-  margin-left: 5px;
   color: #666;
   border-radius: 10px;
 
@@ -164,7 +168,7 @@
 
 .submitButton {
   width: 45%;
-  height: 4rem;
+  height: 3.5rem;
 
   margin: 0 auto;
 
@@ -186,14 +190,16 @@
 
   transition: 0.4s;
   cursor: pointer;
+
   &:hover {
+    translate: 0px -5px;
     border: 2px solid rgba(198, 204, 133, 1);
   }
 }
 
 .deleteButton {
   width: 45%;
-  height: 4rem;
+  height: 3.5rem;
 
   margin: 0 auto;
 
@@ -207,12 +213,15 @@
   font-size: 16px;
   line-height: 24px;
 
-  color: #c9ff99;
+  color: rgb(104, 21, 21);
+  font-weight: bold;
   border: 2px solid rgba(198, 40, 40, 0);
 
   transition: 0.4s;
   cursor: pointer;
+
   &:hover {
+    translate: 0px -5px;
     border: 2px solid rgba(198, 40, 40, 0.54);
   }
 }
@@ -247,7 +256,7 @@
 
 .editButton {
   background: inherit;
-  width: 80%;
+  width: 100%;
   height: 4rem;
 
   border-radius: 10px;
@@ -266,7 +275,9 @@
 
   transition: 0.4s;
   cursor: pointer;
+
   &:hover {
+    translate: 0px -5px;
     border: 2px solid rgba(198, 204, 133, 1);
     color: #c9ff99;
   }
@@ -285,6 +296,15 @@
   position: absolute;
   left: 11px;
   top: 100px;
+}
+
+#participants_link {
+  text-decoration: none;
+  color: $color-secondary;
+
+  position: absolute;
+  left: 11px;
+  top: 145px;
 }
 
 .confirmBox {

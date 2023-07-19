@@ -2,6 +2,7 @@
 
 .pageContainer {
   display: grid;
+  height: 75vh;
 
   h2 {
     margin-bottom: 2rem;
@@ -18,16 +19,15 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
-  height: 80%;
-  width: 75%;
-  margin-top: 3%;
+  height: 80vh;
+  width: 75vw;
 
   justify-items: center;
   align-items: center;
 }
 
 .verticalLine {
-  min-height: 110%;
+  min-height: 80vh;
   width: 0.4rem;
   background: rgba(49, 87, 44, 1);
   border-radius: 20px;
@@ -42,11 +42,9 @@
   text-align: center;
 
   width: 125%;
-  height: 90%;
+  height: 60vh;
 
   padding: 3rem;
-  margin-top: 5%;
-  margin-bottom: 5%;
 
   border: 1px solid rgba(221, 223, 228, 1);
   border-radius: 10px;

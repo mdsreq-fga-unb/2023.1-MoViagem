@@ -134,12 +134,12 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
         />
       </div>
       <div className={styles.inputGroup}>
-        <div className="column">
+        <div className={styles.column}>
           <label htmlFor="text">Local de saída:</label>
           <input
             type="text"
             placeholder="Local de saída"
-            className={styles.inputContato}
+            className={styles.inputText}
             required
             value={localIda}
             onChange={(event) => {
@@ -147,12 +147,27 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
             }}
           />
         </div>
-        <div className="column">
+        <div className={styles.column}>
+          <label htmlFor="data" className={styles.labelStyle}>
+            Horário de saída:
+          </label>
+          <input
+            type="datetime-local"
+            className={styles.inputDate}
+            required
+            value={convertDateToDateTimeInputValue(horaSaida)}
+            onChange={(event) => setHoraSaida(convertDateInputValueToDate(event.target.value))}
+          />
+        </div>
+      </div>
+
+      <div className={styles.inputGroup}>
+        <div className={styles.column}>
           <label htmlFor="text">Local de chegada:</label>
           <input
             type="text"
             placeholder="Local de chegada"
-            className={styles.inputContato}
+            className={styles.inputText}
             required
             value={localChegada}
             onChange={(event) => {
@@ -160,24 +175,13 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
             }}
           />
         </div>
-      </div>
-
-      <div className={styles.inputGroup}>
-        <div className="column">
-          <label htmlFor="text">Horário de saída:</label>
+        <div className={styles.column}>
+          <label htmlFor="data" className={styles.labelStyle}>
+            Horário de chegada:
+          </label>
           <input
             type="datetime-local"
-            className={styles.inputContato}
-            required
-            value={convertDateToDateTimeInputValue(horaSaida)}
-            onChange={(event) => setHoraSaida(convertDateInputValueToDate(event.target.value))}
-          />
-        </div>
-        <div className="column">
-          <label htmlFor="text">Horário de chegada:</label>
-          <input
-            type="datetime-local"
-            className={styles.inputContato}
+            className={styles.inputDate}
             required
             value={convertDateToDateTimeInputValue(horaChegada)}
             onChange={(event) => setHoraChegada(convertDateInputValueToDate(event.target.value))}
@@ -186,7 +190,7 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
       </div>
 
       <div className={styles.inputGroup}>
-        <div className={styles.inputContainer}>
+        <div className={styles.column}>
           <label htmlFor="preco">Preço:</label>
           <input
             type="Number"
@@ -200,7 +204,7 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
             }}
           />
         </div>
-        <div className={styles.inputContainer}>
+        <div className={styles.column}>
           <label htmlFor="contato">Contato:</label>
           <input
             type="text"

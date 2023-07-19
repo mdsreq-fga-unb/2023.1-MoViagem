@@ -1,3 +1,5 @@
+import CalendarIcon from "@mui/icons-material/CalendarToday";
+import CardTravelIcon from "@mui/icons-material/CardTravel";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import {
   Dialog,
@@ -5,18 +7,25 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  IconButton,
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { GuestResponseDTO } from "../../api/dto/travels-dto";
-import { requestAddGuestToTravel, requestGetGuests } from "../../api/requests/travels-requests";
+import {
+  requestAddGuestToTravel,
+  requestGetGuests,
+  requestRemoveGuestFromTravel,
+} from "../../api/requests/travels-requests";
 import PersonIcon from "../../assets/PessoaIndoViajar.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
+import useAuth from "../../auth/context/auth-hook";
 
 export default function ParticipantList() {
   const travelId = useParams().id!;
+  const auth = useAuth();
 
   // Participant variables
   const [participants, setParticipants] = useState<GuestResponseDTO[]>([]);
@@ -50,6 +59,11 @@ export default function ParticipantList() {
   async function handleAddGuestSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    if (email === auth.userInfo?.email) {
+      alert("Você não pode adicionar a si mesmo");
+      return;
+    }
+
     const response = await requestAddGuestToTravel(email, travelId);
 
     if (response instanceof ErrorResponse) {
@@ -61,6 +75,18 @@ export default function ParticipantList() {
 
     fetchGuests();
     toggleModal();
+  }
+
+  async function handleRemoveGuest(participantId: number) {
+    if (confirm("Tem certeza que deseja remover este participante?")) {
+      try {
+        await requestRemoveGuestFromTravel(participantId, parseInt(travelId));
+        alert("Removido com sucesso! ");
+        fetchGuests();
+      } catch (error) {
+        alert(error);
+      }
+    }
   }
 
   return (
@@ -76,19 +102,38 @@ export default function ParticipantList() {
           <div className={styles.bodyContainer}>
             <section className={styles.outsideBox}>
               {participants.map((participant) => (
-                <button className={styles.insideBox} key={participant.id}>
+                <div className={styles.insideBox} key={participant.id}>
                   <div className={styles.infoBox}>
                     <h3>{participant.name}</h3>
                     <img className={styles.personImage} alt="Fundo Pessoa" src={PersonIcon}></img>
                     <div className={styles.infoText}>
                       <p>{/* participant.canEdit */}</p>
                     </div>
+                    <div className={styles.infoText}>Info</div>
+                    <div className={styles.sideBarLinkContainer}>
+                      <button
+                        className={styles.deleteButton}
+                        onClick={() => handleRemoveGuest(participant.id)}
+                      >
+                        Deletar
+                      </button>
+                    </div>
                   </div>
-                </button>
+                </div>
               ))}
             </section>
           </div>
         </div>
+        <Link to={`/travel-info/${travelId}`} id={styles.schedule_link}>
+          <IconButton id={styles.schedule_link}>
+            <CardTravelIcon fontSize="large" />
+          </IconButton>
+        </Link>
+        <Link to={`/schedule/${travelId}`} id={styles.participants_link}>
+          <IconButton id={styles.participants_link}>
+            <CalendarIcon fontSize="large" />
+          </IconButton>
+        </Link>
       </Navbar>
       <Dialog open={open} onClose={toggleModal} fullWidth>
         <DialogTitle>Adicionar Participante</DialogTitle>

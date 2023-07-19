@@ -1,4 +1,5 @@
 import CalendarIcon from "@mui/icons-material/CalendarToday";
+import GroupsIcon from "@mui/icons-material/Groups";
 import FlightIcon from "@mui/icons-material/Flight";
 import GiteIcon from "@mui/icons-material/Gite";
 import { IconButton } from "@mui/material";
@@ -250,18 +251,13 @@ export default function TravelInfo() {
                 }}
               />
             </div>
-            {searchParams.get("guest") != "true" && (
-              <div id={styles.link}>
-                <Link to={`/participants-list/${params.id}`}>Participantes</Link>
-              </div>
-            )}
             <div className={styles.buttonContainer}>
               <button className={styles.submitButton} type="submit">
                 SALVAR DADOS
               </button>
 
               <button className={styles.deleteButton} onClick={handleDeleteTravel} type="reset">
-                <p>DELETAR VIAGEM</p>
+                <span>DELETAR VIAGEM</span>
               </button>
             </div>
           </form>
@@ -377,6 +373,13 @@ export default function TravelInfo() {
           <CalendarIcon fontSize="large" />
         </IconButton>
       </Link>
+      {searchParams.get("guest") != "true" && (
+        <Link to={`/participants-list/${params.id}`} id={styles.participants_link}>
+          <IconButton id={styles.participants_link}>
+            <GroupsIcon fontSize="large" />
+          </IconButton>
+        </Link>
+      )}
     </Navbar>
   );
 }
