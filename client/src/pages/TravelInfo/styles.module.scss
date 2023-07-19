@@ -28,6 +28,9 @@
 
 .insideBox {
   width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 70vh;
   padding: 25px;
 
@@ -77,6 +80,8 @@
 
   border: 2px solid $color-primary;
   border-radius: 10px;
+  display: grid;
+  align-items: center;
 
   background: #e6e6e6;
   box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);

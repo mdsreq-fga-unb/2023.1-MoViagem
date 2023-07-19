@@ -21,9 +21,11 @@ import {
 import PersonIcon from "../../assets/PessoaIndoViajar.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
+import useAuth from "../../auth/context/auth-hook";
 
 export default function ParticipantList() {
   const travelId = useParams().id!;
+  const auth = useAuth();
 
   // Participant variables
   const [participants, setParticipants] = useState<GuestResponseDTO[]>([]);
@@ -56,6 +58,11 @@ export default function ParticipantList() {
 
   async function handleAddGuestSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (email === auth.userInfo?.email) {
+      alert("Você não pode adicionar a si mesmo")
+      return;
+    }
 
     const response = await requestAddGuestToTravel(email, travelId);
 
