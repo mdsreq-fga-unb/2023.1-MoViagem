@@ -138,7 +138,7 @@ export default function TravelInfo() {
 
     alert("Viagem editada com sucesso");
     setWasEdited(!wasEdited);
-    navigate("/travels");
+    location.reload();
   }
 
   const handleDeleteTravel = () => {
@@ -230,6 +230,7 @@ export default function TravelInfo() {
                 rows={3}
                 className={styles.textAreaBox}
                 required
+                maxLength={100}
                 value={proposito}
                 onChange={(event) => {
                   setProposito(event.target.value);
@@ -238,7 +239,7 @@ export default function TravelInfo() {
             </div>
 
             <div className={styles.inputContainer}>
-              <label htmlFor="numDePessoas">Numero de Pessoas:</label>
+              <label htmlFor="numDePessoas">Número de Pessoas (Esperado):</label>
               <input
                 type="Number"
                 name="numDePessoas"

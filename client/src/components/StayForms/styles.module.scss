@@ -135,3 +135,12 @@
     border: 2px solid rgba(198, 204, 133, 1);
   }
 }
+
+#schedule_link {
+  text-decoration: none;
+  color: $color-secondary;
+
+  position: absolute;
+  left: 11px;
+  top: 100px;
+}

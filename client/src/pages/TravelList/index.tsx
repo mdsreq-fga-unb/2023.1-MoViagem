@@ -184,7 +184,7 @@ export default function TravelList() {
                         </div>
                       </button>
                     </Link>
-                  )),
+                  ))
                 )
             ) : (
               <></>
