@@ -82,7 +82,7 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
           startTime: dataInicio,
           type: tipoEstadia,
         },
-        parseInt(id)
+        parseInt(id),
       );
 
       if (response instanceof ErrorResponse) {

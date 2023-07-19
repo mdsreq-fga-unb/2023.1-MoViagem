@@ -85,7 +85,7 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
           startTime: horaSaida,
           type: tipoTransporte,
         },
-        parseInt(id)
+        parseInt(id),
       );
 
       if (response instanceof ErrorResponse) {

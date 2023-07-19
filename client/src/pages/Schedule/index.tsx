@@ -93,7 +93,7 @@ const Schedule: React.FC = () => {
           }
         >
           {lastDateOfLastMonth - i + 1}
-        </div>
+        </div>,
       );
     }
 
@@ -112,7 +112,7 @@ const Schedule: React.FC = () => {
           onClick={() => handleDayClick(i, currMonth, currYearRef.current)}
         >
           {i}
-        </div>
+        </div>,
       );
     }
 
@@ -125,7 +125,7 @@ const Schedule: React.FC = () => {
           onClick={() => handleDayClick(i - lastDayOfMonth + 1, currMonth + 1, currYearRef.current)}
         >
           {i - lastDayOfMonth + 1}
-        </div>
+        </div>,
       );
     }
 

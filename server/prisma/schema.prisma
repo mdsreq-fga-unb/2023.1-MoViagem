@@ -38,8 +38,8 @@ model Travel {
 model Host {
   id        Int      @id @default(autoincrement()) @db.UnsignedInt
   type      String   @db.VarChar(50)
-  startTime DateTime @db.DateTime
-  endTime   DateTime @db.DateTime
+  startTime DateTime @db.DateTime(0)
+  endTime   DateTime @db.DateTime(0)
   local     String   @db.VarChar(100)
   price     Decimal  @db.Decimal(10, 2)
   contact   String   @db.VarChar(50)
@@ -52,8 +52,8 @@ model Transport {
   type       String   @db.VarChar(50)
   startLocal String   @db.VarChar(100)
   endLocal   String   @db.VarChar(100)
-  startTime  DateTime @db.DateTime
-  endTime    DateTime @db.DateTime
+  startTime  DateTime @db.DateTime(0)
+  endTime    DateTime @db.DateTime(0)
   price      Decimal  @db.Decimal(10, 2)
   contacts   String   @db.VarChar(50)
   travelId   Int      @unique @db.UnsignedInt
@@ -64,7 +64,7 @@ model Event {
   id                Int           @id @default(autoincrement()) @db.UnsignedInt
   transportType     String        @db.VarChar(50)
   departureLocation String        @db.VarChar(100)
-  eventTime         DateTime      @db.DateTime
+  eventTime         DateTime      @db.DateTime(0)
   eventValue        Decimal       @db.Decimal(10, 2)
   eventExtras       String        @db.Text
   travelId          Int           @db.UnsignedInt

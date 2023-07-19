@@ -6,7 +6,10 @@ import { JwtService } from "./jwt.service";
 
 @Injectable()
 export class UserService {
-  constructor(private userRepository: UserRepository, private jwtService: JwtService) {}
+  constructor(
+    private userRepository: UserRepository,
+    private jwtService: JwtService,
+  ) {}
 
   async update(id: number, dto: EditUserRequestDTO): Promise<void> {
     return this.userRepository.update(id, {

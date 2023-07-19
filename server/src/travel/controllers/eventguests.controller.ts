@@ -13,14 +13,14 @@ export class EventGuestsController {
   @Patch("/:userId/add-to-event/:eventId")
   async addGuestToTravel(
     @Param("userId") userId: number,
-    @Param("eventId") eventId: number
+    @Param("eventId") eventId: number,
   ): Promise<void> {
     return this.eventGuestsService.addGuestToEvent(userId, eventId);
   }
 
   @Get("/:eventId")
   async findAllGuestsFromTravel(
-    @Param("eventId") eventId: number
+    @Param("eventId") eventId: number,
   ): Promise<EventGuestResponseDTO[]> {
     return this.eventGuestsService.findAllGuestsFromEvent(eventId);
   }
@@ -28,7 +28,7 @@ export class EventGuestsController {
   @Patch("/:userId/remove-from-event/:eventId")
   async removeGuestFromEvent(
     @Param("userId") userId: number,
-    @Param("eventId") eventId: number
+    @Param("eventId") eventId: number,
   ): Promise<void> {
     return this.eventGuestsService.delete(userId, eventId);
   }

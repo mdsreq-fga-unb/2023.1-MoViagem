@@ -12,7 +12,7 @@ export class PrismaExceptionFilter implements ExceptionFilter {
       | PrismaClientKnownRequestError
       | PrismaClientUnknownRequestError
       | PrismaClientValidationError,
-    host: ArgumentsHost
+    host: ArgumentsHost,
   ) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();

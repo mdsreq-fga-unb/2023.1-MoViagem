@@ -18,7 +18,7 @@ export class GuestController {
   @Patch("/:guestEmail/add-to-travel/:travelId")
   async addGuestToTravel(
     @Param("guestEmail") guestEmail: string,
-    @Param("travelId") travelId: number
+    @Param("travelId") travelId: number,
   ): Promise<void> {
     return this.guestService.addGuestToTravel(guestEmail, travelId);
   }
@@ -28,7 +28,7 @@ export class GuestController {
   @Patch("/:userId/remove-from-travel/:travelId")
   async removeGuestToTravel(
     @Param("userId") userId: number,
-    @Param("travelId") travelId: number
+    @Param("travelId") travelId: number,
   ): Promise<void> {
     return this.guestService.delete(userId, travelId);
   }

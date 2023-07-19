@@ -47,7 +47,7 @@ const EventInfoModal: React.FC<EventInfoModalProps> = ({
         eventValue,
         eventExtras,
       },
-      event.id
+      event.id,
     );
 
     if (response instanceof ErrorResponse) {
