@@ -8,10 +8,10 @@ import {
   requestGetTravelsBeingGuest,
 } from "../../api/requests/travels-requests";
 import FundoViagem from "../../assets/FundoViagem.png";
-import ViagemPassada from "../../assets/PessoaVoltandoDeViagem.png"
-import ViagemAtual from "../../assets/PessoaNaViagem.png"
-import ViagemFutura from "../../assets/PessoaArrumandoMalas.png"
-import ViagemEmGrupo from "../../assets/GrupoIndoViajar.png"
+import ViagemPassada from "../../assets/PessoaVoltandoDeViagem.png";
+import ViagemAtual from "../../assets/PessoaNaViagem.png";
+import ViagemFutura from "../../assets/PessoaArrumandoMalas.png";
+import ViagemEmGrupo from "../../assets/GrupoIndoViajar.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
 

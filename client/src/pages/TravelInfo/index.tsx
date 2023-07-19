@@ -1,5 +1,5 @@
 import CalendarIcon from "@mui/icons-material/CalendarToday";
-import GroupsIcon from '@mui/icons-material/Groups';
+import GroupsIcon from "@mui/icons-material/Groups";
 import FlightIcon from "@mui/icons-material/Flight";
 import GiteIcon from "@mui/icons-material/Gite";
 import { IconButton } from "@mui/material";

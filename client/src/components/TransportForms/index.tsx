@@ -148,7 +148,9 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
           />
         </div>
         <div className={styles.column}>
-          <label htmlFor="data" className={styles.labelStyle}>Horário de saída:</label>
+          <label htmlFor="data" className={styles.labelStyle}>
+            Horário de saída:
+          </label>
           <input
             type="datetime-local"
             className={styles.inputDate}
@@ -174,7 +176,9 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
           />
         </div>
         <div className={styles.column}>
-          <label htmlFor="data" className={styles.labelStyle}>Horário de chegada:</label>
+          <label htmlFor="data" className={styles.labelStyle}>
+            Horário de chegada:
+          </label>
           <input
             type="datetime-local"
             className={styles.inputDate}

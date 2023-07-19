@@ -3,7 +3,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import { IconButton } from "@mui/material";
 import { parse } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance.ts";
 import { EventGuestResponseDTO, EventResponseDTO } from "../../api/dto/travels-dto.ts";
@@ -13,7 +13,7 @@ import {
   requestGetEvents,
   requestRemoveGuestFromEvent,
 } from "../../api/requests/travels-requests.ts";
-import { AuthContext } from "../../auth/context/auth-provider.tsx";
+import useAuth from "../../auth/context/auth-hook.tsx";
 import Navbar from "../../components/Navbar/index.tsx";
 import EventInfoModal from "./EventInfoModal/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
@@ -32,14 +32,13 @@ const Schedule: React.FC = () => {
   const [allMonths, setAllMonths] = useState<string[]>([]);
   const [diffYears, setDiffYears] = useState<number>(0); // Keeps track of the difference between the current year in rl and the year of the calendar
   const currYearRef = useRef<number>(date.getFullYear());
-  const [events, setEvents] = useState<EventResponseDTO[]>([]);
   const [eventsGuests, setEventGuests] = useState<EventGuestResponseDTO[]>([]);
   const [dayEvents, setDayEvents] = useState<EventResponseDTO[]>([]);
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventResponseDTO>();
   const [isDisponible, setIsDisponible] = useState<boolean>();
 
-  const auth = useContext(AuthContext);
+  const auth = useAuth();
 
   // Render the calendar
   const renderCalendar = useCallback(() => {
@@ -145,8 +144,7 @@ const Schedule: React.FC = () => {
     setDays(updatedDays);
   }, [currMonth, date]);
 
-  const fetchEvents = async () => {
-    console.log(params.id!);
+  const fetchEvents = useCallback(async () => {
     const response = await requestGetEvents(params.id!);
 
     if (response instanceof ErrorResponse) {
@@ -160,9 +158,6 @@ const Schedule: React.FC = () => {
       alert("Erro nos convidados do evento " + response2.message);
       return;
     }
-
-    console.log(response2.data);
-    console.log(response.data);
 
     const dayEvents: EventResponseDTO[] = [];
 
@@ -186,10 +181,9 @@ const Schedule: React.FC = () => {
       return timeA - timeB;
     });
 
-    setEvents(response.data);
     setEventGuests(response2.data);
     setDayEvents(dayEvents);
-  };
+  }, [currentDateForSidebar, params.id]);
 
   useEffect(() => {
     renderCalendar();
@@ -197,7 +191,7 @@ const Schedule: React.FC = () => {
 
   useEffect(() => {
     fetchEvents();
-  }, [currentDateForSidebar]);
+  }, [fetchEvents]);
 
   // Handle click on previous/next month icon
   const handleIconClick = (increment: number) => {
@@ -238,6 +232,10 @@ const Schedule: React.FC = () => {
   async function handleDisponibilityAsTrue(event: EventResponseDTO) {
     setIsDisponible(true);
     try {
+      if (auth.userInfo == null) {
+        throw new Error("Usuário não logado");
+      }
+
       await requestAddGuestToEvent(auth.userInfo.id, event.id);
       alert("Adicionado com sucesso");
     } catch (error) {
@@ -248,6 +246,10 @@ const Schedule: React.FC = () => {
   async function handleDisponibilityAsFalse(event: EventResponseDTO) {
     setIsDisponible(false);
     try {
+      if (auth.userInfo == null) {
+        throw new Error("Usuário não logado");
+      }
+
       await requestRemoveGuestFromEvent(auth.userInfo.id, event.id);
       alert("Removido com sucesso");
     } catch (error) {
@@ -276,6 +278,7 @@ const Schedule: React.FC = () => {
               travelId={params.id!}
               selectedDate={selectedDate}
               closeModal={() => handleModalClose()}
+              fetchDayEvents={() => fetchEvents()}
             />
           )}
           {showEventModal && selectedDate && selectedEvent && (

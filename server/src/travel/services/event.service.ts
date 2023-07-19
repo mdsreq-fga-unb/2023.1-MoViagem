@@ -4,8 +4,8 @@ import { EventRepository } from "../repositories/event.repository";
 
 @Injectable()
 export class EventService {
-  constructor(private eventRepository: EventRepository) { }
-  
+  constructor(private eventRepository: EventRepository) {}
+
   async getEventsByTravel(travelId: number): Promise<EventResponseDTO[]> {
     const events = await this.eventRepository.findAllByTravel(travelId);
 

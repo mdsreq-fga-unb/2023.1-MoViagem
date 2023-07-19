@@ -60,7 +60,7 @@ export default function ParticipantList() {
     event.preventDefault();
 
     if (email === auth.userInfo?.email) {
-      alert("Você não pode adicionar a si mesmo")
+      alert("Você não pode adicionar a si mesmo");
       return;
     }
 
