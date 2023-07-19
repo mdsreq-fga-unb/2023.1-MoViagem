@@ -1,19 +1,20 @@
+import CardTravelIcon from "@mui/icons-material/CardTravel";
+import GroupsIcon from "@mui/icons-material/Groups";
+import { IconButton } from "@mui/material";
 import { parse } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance.ts";
-import { IconButton } from "@mui/material";
-import { EventResponseDTO } from "../../api/dto/travels-dto.ts";
+import { EventGuestResponseDTO, EventResponseDTO } from "../../api/dto/travels-dto.ts";
 import {
   requestAddGuestToEvent,
+  requestGetEventGuests,
   requestGetEvents,
   requestRemoveGuestFromEvent,
 } from "../../api/requests/travels-requests.ts";
 import { AuthContext } from "../../auth/context/auth-provider.tsx";
 import Navbar from "../../components/Navbar/index.tsx";
-import GroupsIcon from '@mui/icons-material/Groups';
-import CardTravelIcon from '@mui/icons-material/CardTravel';
 import EventInfoModal from "./EventInfoModal/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
 import styles from "./styles.module.scss";
@@ -32,6 +33,7 @@ const Schedule: React.FC = () => {
   const [diffYears, setDiffYears] = useState<number>(0); // Keeps track of the difference between the current year in rl and the year of the calendar
   const currYearRef = useRef<number>(date.getFullYear());
   const [events, setEvents] = useState<EventResponseDTO[]>([]);
+  const [eventsGuests, setEventGuests] = useState<EventGuestResponseDTO[]>([]);
   const [dayEvents, setDayEvents] = useState<EventResponseDTO[]>([]);
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventResponseDTO>();
@@ -144,6 +146,7 @@ const Schedule: React.FC = () => {
   }, [currMonth, date]);
 
   const fetchEvents = async () => {
+    console.log(params.id!);
     const response = await requestGetEvents(params.id!);
 
     if (response instanceof ErrorResponse) {
@@ -151,7 +154,15 @@ const Schedule: React.FC = () => {
       return;
     }
 
-    setEvents(response.data);
+    const response2 = await requestGetEventGuests(params.id!);
+
+    if (response2 instanceof ErrorResponse) {
+      alert("Erro nos convidados do evento " + response2.message);
+      return;
+    }
+
+    console.log(response2.data);
+    console.log(response.data);
 
     const dayEvents: EventResponseDTO[] = [];
 
@@ -175,6 +186,8 @@ const Schedule: React.FC = () => {
       return timeA - timeB;
     });
 
+    setEvents(response.data);
+    setEventGuests(response2.data);
     setDayEvents(dayEvents);
   };
 
@@ -218,8 +231,6 @@ const Schedule: React.FC = () => {
    * @param event
    */
   const handleEventInfoModalOpen = (event: EventResponseDTO) => {
-    console.log(event);
-
     setSelectedEvent(event);
     setShowEventModal(true);
   };
@@ -269,6 +280,7 @@ const Schedule: React.FC = () => {
           )}
           {showEventModal && selectedDate && selectedEvent && (
             <EventInfoModal
+              eventGuests={eventsGuests}
               selectedEvent={selectedEvent}
               selectedDate={selectedDate}
               closeModal={() => handleEventInfoModalClose()}
@@ -277,8 +289,8 @@ const Schedule: React.FC = () => {
           <div className={styles.sidebar}>
             {/* Sidebar Content */}
             {/* Fetch and display activities for the selected date */}
+            <h2>{currentDateForSidebar}</h2>
             <div className={styles.outBox}>
-              <h2>{currentDateForSidebar}</h2>
               <div className={styles.insideBox}>
                 {dayEvents.map((event) => (
                   <div className={styles.eventBox}>

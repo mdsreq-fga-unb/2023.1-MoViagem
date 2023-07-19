@@ -1,5 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { UserRepository } from "src/auth/repositories/user.repository";
+import { EventGuestResponseDTO } from "../dto/eventguests.dto";
+import { GuestResponseDTO } from "../dto/guest.dto";
 import { EventRepository } from "../repositories/event.repository";
 import { EventGuestsRepository } from "../repositories/eventguests.repository";
 
@@ -11,24 +13,10 @@ export class EventGuestsService {
     private userRepository: UserRepository
   ) {}
 
-  // async create(id: number, dto: CreateEventGuestsRequestDTO): Promise<void> {
-  //   await this.eventGuestsRepository.create({
-  //     // criar a partir do relacionamento - relacionar o convidado com aquele evento
-  //     // event: {
-  //     //   connect: {
-  //     //     id,
-  //     //   },
-  //     // },
-  //     // guests: {
-  //     //   connect: {
-  //     //     id,
-  //     //   },
-  //     // },
-  //     // id,
-  //     eventId: dto.eventId,
-  //     idGuest: dto.idGuest,
-  //   });
-  // }
+  async findAllGuestsFromEvent(eventId: number): Promise<EventGuestResponseDTO[]> {
+    const guest = await this.eventGuestsRepository.findAllFromEvent(eventId);
+    return guest.map((guest) => new GuestResponseDTO(guest));
+  }
 
   async addGuestToEvent(userId: number, eventId: number): Promise<void> {
     const user = await this.userRepository.findById(userId);

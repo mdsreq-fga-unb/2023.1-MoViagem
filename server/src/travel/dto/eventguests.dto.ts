@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 
-const guestInfo = Prisma.validator<Prisma.GuestsArgs>()({
+const eventGuestInfo = Prisma.validator<Prisma.EventGuestsArgs>()({
   select: {
     user: {
       select: {
@@ -11,13 +11,13 @@ const guestInfo = Prisma.validator<Prisma.GuestsArgs>()({
   },
 });
 
-export type GuestInfo = Prisma.GuestsGetPayload<typeof guestInfo>;
-export class GuestResponseDTO {
+export type EventGuestInfo = Prisma.EventGuestsGetPayload<typeof eventGuestInfo>;
+export class EventGuestResponseDTO {
   id: number;
   name: string;
 
-  constructor(guestInfo: GuestInfo) {
-    this.id = guestInfo.user.id;
-    this.name = guestInfo.user.name;
+  constructor(eventGuestInfo: EventGuestInfo) {
+    this.id = eventGuestInfo.user.id;
+    this.name = eventGuestInfo.user.name;
   }
 }

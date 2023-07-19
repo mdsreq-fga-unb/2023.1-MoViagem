@@ -4,6 +4,7 @@ import {
   CreateHostRequestDTO,
   CreateTransportRequestDTO,
   CreateTravelRequestDTO,
+  EventGuestResponseDTO,
   EventResponseDTO,
   GuestResponseDTO,
   HostResponseDTO,
@@ -143,6 +144,13 @@ export function requestGetGuests(travelId: string) {
   return request<never, GuestResponseDTO[]>({
     method: "GET",
     url: `guest/${travelId}`,
+  });
+}
+
+export function requestGetEventGuests(eventId: string) {
+  return request<never, EventGuestResponseDTO[]>({
+    method: "GET",
+    url: `eventguests/${eventId}`,
   });
 }
 

@@ -88,6 +88,6 @@ export interface GuestResponseDTO {
 }
 
 export interface EventGuestResponseDTO {
-  idGuests: number;
-  eventId: string;
+  id: number;
+  name: string;
 }

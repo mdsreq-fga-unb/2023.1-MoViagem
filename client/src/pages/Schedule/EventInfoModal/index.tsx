@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { ErrorResponse } from "../../../api/api-instance";
+import { EventGuestResponseDTO, EventResponseDTO } from "../../../api/dto/travels-dto";
 import { requestDeleteEvent, requestEditEvent } from "../../../api/requests/travels-requests";
 import styles from "./styles.module.scss";
-import { EventResponseDTO } from "../../../api/dto/travels-dto";
-
 interface EventInfoModalProps {
   selectedDate: Date;
   closeModal: () => void;
   selectedEvent: EventResponseDTO;
+  eventGuests: EventGuestResponseDTO[];
 }
 
 const EventInfoModal: React.FC<EventInfoModalProps> = ({
   selectedEvent: event,
   selectedDate,
   closeModal,
+  eventGuests,
 }) => {
   const [transportType, setTransportType] = useState(event.transportType);
   const [departureLocation, setDepartureLocation] = useState(event.departureLocation);
@@ -85,16 +86,12 @@ const EventInfoModal: React.FC<EventInfoModalProps> = ({
       <div className={styles.disponibilityBox}>
         <div className={styles.formField}>
           <label>Número de participantes:</label>
-          <div className={styles.disponibilityNumber}>
-            {/* Acrescentar o .length do array de usuários que vão participar */}
-            356 pessoas
-          </div>
+          <div className={styles.disponibilityNumber}>{eventGuests.length}</div>
         </div>
         <div className={styles.formField}>
           <label>Participantes:</label>
           <div className={styles.disponibilityNames}>
-            {/* Acrescentar os elementos do array de usuários (nome) que vão participar */}
-            Usuário tal, usuário fulano, ciclano, beltrano, cumpadre, consagrado, guerreiro ...
+            {eventGuests.map((guest) => guest.name).join(", ")}
           </div>
         </div>
       </div>

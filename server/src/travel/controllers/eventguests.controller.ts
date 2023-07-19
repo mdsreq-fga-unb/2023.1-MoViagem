@@ -1,6 +1,7 @@
-import { Controller, Param, Patch } from "@nestjs/common";
+import { Controller, Get, Param, Patch } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
+import { EventGuestResponseDTO } from "../dto/eventguests.dto";
 import { EventGuestsService } from "../services/eventguests.service";
 
 @Controller("/api/eventguests")
@@ -17,10 +18,12 @@ export class EventGuestsController {
     return this.eventGuestsService.addGuestToEvent(userId, eventId);
   }
 
-  // @Get("/:id")
-  // async get(@Param("id") id: number): Promise<EventResponseDTO> {
-  //   return this.eventService.getEvent(id);
-  // }
+  @Get("/:eventId")
+  async findAllGuestsFromTravel(
+    @Param("eventId") eventId: number
+  ): Promise<EventGuestResponseDTO[]> {
+    return this.eventGuestsService.findAllGuestsFromEvent(eventId);
+  }
 
   @Patch("/:userId/remove-from-event/:eventId")
   async removeGuestFromEvent(
