@@ -1,5 +1,7 @@
+import CardTravelIcon from "@mui/icons-material/CardTravel";
+import { IconButton } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import {
   requestCreateHost,
@@ -11,8 +13,6 @@ import {
   convertDateToDateInputValue,
 } from "../../utils/date-utilities";
 import styles from "./styles.module.scss";
-import { IconButton } from "@mui/material";
-import CardTravelIcon from "@mui/icons-material/CardTravel";
 
 interface StayFormsProps {
   isEditing: boolean;

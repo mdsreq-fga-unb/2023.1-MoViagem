@@ -6,10 +6,9 @@ import { ptBR } from "date-fns/locale";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance.ts";
-import { EventGuestResponseDTO, EventResponseDTO } from "../../api/dto/travels-dto.ts";
+import { EventResponseDTO } from "../../api/dto/travels-dto.ts";
 import {
   requestAddGuestToEvent,
-  requestGetEventGuests,
   requestGetEvents,
   requestRemoveGuestFromEvent,
 } from "../../api/requests/travels-requests.ts";
@@ -35,7 +34,6 @@ const Schedule: React.FC = () => {
   const [dayEvents, setDayEvents] = useState<EventResponseDTO[]>([]);
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventResponseDTO>();
-  const [isDisponible, setIsDisponible] = useState<boolean>();
 
   const auth = useAuth();
 
@@ -221,7 +219,6 @@ const Schedule: React.FC = () => {
   };
 
   async function handleDisponibilityAsTrue(event: EventResponseDTO) {
-    setIsDisponible(true);
     try {
       if (auth.userInfo == null) {
         throw new Error("Usuário não logado");
@@ -235,7 +232,6 @@ const Schedule: React.FC = () => {
   }
 
   async function handleDisponibilityAsFalse(event: EventResponseDTO) {
-    setIsDisponible(false);
     try {
       if (auth.userInfo == null) {
         throw new Error("Usuário não logado");
