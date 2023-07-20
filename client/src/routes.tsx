@@ -35,8 +35,8 @@ const router = createBrowserRouter(
           <Route path="/participants-list/:id" element={<ParticipantList />} />
         </Route>
       </Route>
-    </>,
-  ),
+    </>
+  )
 );
 
 export default router;

@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ErrorResponse } from "../../../api/api-instance";
 import { EventGuestResponseDTO, EventResponseDTO } from "../../../api/dto/travels-dto";
-import { requestDeleteEvent, requestEditEvent } from "../../../api/requests/travels-requests";
+import {
+  requestDeleteEvent,
+  requestEditEvent,
+  requestGetEventGuests,
+} from "../../../api/requests/travels-requests";
 import styles from "./styles.module.scss";
 interface EventInfoModalProps {
   selectedDate: Date;
   closeModal: () => void;
   selectedEvent: EventResponseDTO;
-  eventGuests: EventGuestResponseDTO[];
 }
 
 const EventInfoModal: React.FC<EventInfoModalProps> = ({
   selectedEvent: event,
   selectedDate,
   closeModal,
-  eventGuests,
 }) => {
   const [transportType, setTransportType] = useState(event.transportType);
   const [departureLocation, setDepartureLocation] = useState(event.departureLocation);
@@ -23,6 +25,7 @@ const EventInfoModal: React.FC<EventInfoModalProps> = ({
   const [eventExtras, setEventExtras] = useState(event.eventExtras);
   const [errorMessage, setErrorMessage] = useState("");
   const [tryingDeleteEvent, setTryingDeleteEvent] = useState(false);
+  const [eventGuests, setEventGuests] = useState<EventGuestResponseDTO[]>([]);
 
   const handleSaveEvent = async () => {
     // Validate and save the event data
@@ -47,7 +50,7 @@ const EventInfoModal: React.FC<EventInfoModalProps> = ({
         eventValue,
         eventExtras,
       },
-      event.id,
+      event.id
     );
 
     if (response instanceof ErrorResponse) {
@@ -78,6 +81,21 @@ const EventInfoModal: React.FC<EventInfoModalProps> = ({
     location.reload();
     closeModal();
   };
+
+  const fetchEventGuests = async () => {
+    const response2 = await requestGetEventGuests(event.id.toString());
+
+    if (response2 instanceof ErrorResponse) {
+      alert("Erro nos convidados do evento " + response2.message);
+      return;
+    }
+
+    setEventGuests(response2.data);
+  };
+
+  useEffect(() => {
+    fetchEventGuests();
+  }, []);
 
   return (
     <div className={styles.container}>

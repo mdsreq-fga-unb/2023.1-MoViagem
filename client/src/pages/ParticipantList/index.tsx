@@ -34,6 +34,10 @@ export default function ParticipantList() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
 
+  // Delete modal variables
+  const [currentId, setCurrentId] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
   // Participant fetch request
   const fetchGuests = useCallback(async () => {
     const response = await requestGetGuests(travelId);
@@ -54,6 +58,11 @@ export default function ParticipantList() {
   async function toggleModal() {
     setEmail("");
     setOpen(!open);
+  }
+
+  // Delete modal functions
+  async function toggleDelete() {
+    setDeleting(!deleting);
   }
 
   async function handleAddGuestSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -77,15 +86,13 @@ export default function ParticipantList() {
     toggleModal();
   }
 
-  async function handleRemoveGuest(participantId: number) {
-    if (confirm("Tem certeza que deseja remover este participante?")) {
-      try {
-        await requestRemoveGuestFromTravel(participantId, parseInt(travelId));
-        alert("Removido com sucesso! ");
-        fetchGuests();
-      } catch (error) {
-        alert(error);
-      }
+  async function handleRemoveGuest() {
+    try {
+      await requestRemoveGuestFromTravel(currentId, parseInt(travelId));
+      alert("Removido com sucesso! ");
+      fetchGuests();
+    } catch (error) {
+      alert(error);
     }
   }
 
@@ -94,7 +101,7 @@ export default function ParticipantList() {
       <Navbar pageName="Lista de participantes da viagem">
         <div className={styles.pageContainer}>
           <header>
-            <button id={styles.createTravelButton} onClick={toggleModal}>
+            <button id={styles.addParticipantButton} onClick={toggleModal}>
               <PersonAddAlt1Icon fontSize="large" />
               <div id={styles.buttonText}>Adicionar Participante</div>
             </button>
@@ -106,16 +113,16 @@ export default function ParticipantList() {
                   <div className={styles.infoBox}>
                     <h3>{participant.name}</h3>
                     <img className={styles.personImage} alt="Fundo Pessoa" src={PersonIcon}></img>
-                    <div className={styles.infoText}>
-                      <p>{/* participant.canEdit */}</p>
-                    </div>
-                    <div className={styles.infoText}>Info</div>
+                    <div className={styles.infoText}>Não pode editar a viagem</div>
                     <div className={styles.sideBarLinkContainer}>
                       <button
                         className={styles.deleteButton}
-                        onClick={() => handleRemoveGuest(participant.id)}
+                        onClick={() => {
+                          setCurrentId(participant.id);
+                          toggleDelete();
+                        }}
                       >
-                        Deletar
+                        Excluir
                       </button>
                     </div>
                   </div>
@@ -136,27 +143,54 @@ export default function ParticipantList() {
         </Link>
       </Navbar>
       <Dialog open={open} onClose={toggleModal} fullWidth>
-        <DialogTitle>Adicionar Participante</DialogTitle>
+        <DialogTitle className={styles.dialogTitle}>
+          <h3>Adicionar Participante</h3>
+        </DialogTitle>
         <form onSubmit={handleAddGuestSubmit} onReset={toggleModal}>
-          <DialogContent>
-            <DialogContentText>
+          <DialogContent className={styles.dialogContent}>
+            <DialogContentText className={styles.dialogContentText}>
               Para adicionar um participante, digite o email do mesmo no campo abaixo e clique em
               adicionar. Se o email for válido, o participante será adicionado à viagem.
             </DialogContentText>
             <div className={styles.inputContainer}>
-              <label htmlFor="email-modal">Email do participante</label>
               <input
                 type="email"
                 id="email-modal"
                 required
+                className={styles.inputBox}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </DialogContent>
-          <DialogActions>
-            <button type="reset">Cancelar</button>
-            <button type="submit">Adicionar</button>
+          <DialogActions className={styles.dialogActions}>
+            <button type="reset" className={styles.cancelButton}>
+              Cancelar
+            </button>
+            <button type="submit" className={styles.confirmButton}>
+              Adicionar
+            </button>
+          </DialogActions>
+        </form>
+      </Dialog>
+
+      <Dialog open={deleting} onClose={toggleDelete} fullWidth>
+        <DialogTitle className={styles.dialogTitle}>
+          <h3>Excluir Participante</h3>
+        </DialogTitle>
+        <form onSubmit={handleRemoveGuest} onReset={toggleDelete}>
+          <DialogContent className={styles.dialogContent}>
+            <DialogContentText className={styles.dialogContentText}>
+              Tem certeza que deseja excluir este participante da viagem?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions className={styles.dialogActions}>
+            <button type="reset" className={styles.cancelButton}>
+              Cancelar
+            </button>
+            <button type="submit" className={styles.confirmButton}>
+              Excluir
+            </button>
           </DialogActions>
         </form>
       </Dialog>

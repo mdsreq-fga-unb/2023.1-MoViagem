@@ -83,7 +83,9 @@
 
 .textAreaBox {
   width: 97%;
-  height: 5rem;
+  resize: none;
+  font-size: 1rem;
+  height: 3rem;
   background: rgba(79, 119, 45, 0.5);
   border: #111;
   border-radius: 10px;

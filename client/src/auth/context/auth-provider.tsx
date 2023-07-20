@@ -61,12 +61,12 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
 
       setUserInfo(userInfo);
     },
-    [userInfo],
+    [userInfo]
   );
 
   const value = useMemo(
     () => ({ userInfo, saveTokens, eraseTokens, updateUserInfo }),
-    [eraseTokens, saveTokens, userInfo, updateUserInfo],
+    [eraseTokens, saveTokens, userInfo, updateUserInfo]
   );
 
   if (loading) {
