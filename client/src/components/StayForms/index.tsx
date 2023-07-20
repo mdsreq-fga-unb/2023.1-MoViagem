@@ -1,5 +1,6 @@
 import CardTravelIcon from "@mui/icons-material/CardTravel";
 import { IconButton } from "@mui/material";
+import moment from "moment";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
@@ -148,7 +149,7 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
               placeholder="Data"
               className={styles.inputDate}
               required
-              value={dataInicio}
+              value={moment(dataInicio).format("YYYY-MM-DD")}
               onChange={(event) => setDataInicio(event.target.value)}
             />
           </div>
@@ -159,7 +160,7 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
               placeholder="Data"
               className={styles.inputDate}
               required
-              value={dataFim}
+              value={moment(dataFim).format("YYYY-MM-DD")}
               onChange={(event) => setDataFim(event.target.value)}
             />
           </div>
