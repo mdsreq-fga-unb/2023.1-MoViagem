@@ -53,7 +53,7 @@ export class TravelsWithInfoResponseDTO extends TravelsResponseDTO {
   transport: TransportResponseDTO | null;
 
   constructor(
-    travel: Travel & { host: HostResponseDTO | null; transport: TransportResponseDTO | null },
+    travel: Travel & { host: HostResponseDTO | null; transport: TransportResponseDTO | null }
   ) {
     super(travel);
     this.host = travel.host;

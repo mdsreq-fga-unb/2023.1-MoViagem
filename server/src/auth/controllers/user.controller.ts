@@ -19,7 +19,7 @@ export class UserController {
   @Patch("/update-password")
   async editPassword(
     @User() user: UserInTokenDTO,
-    @Body() dto: EditPasswordRequestDTO,
+    @Body() dto: EditPasswordRequestDTO
   ): Promise<void> {
     return this.userService.updatePassword(user.id, dto);
   }

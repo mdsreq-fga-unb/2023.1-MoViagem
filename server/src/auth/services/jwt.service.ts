@@ -11,10 +11,7 @@ import { UserInTokenDTO } from "../dto/user.dto";
 
 @Injectable()
 export class JwtService {
-  constructor(
-    private env: EnvironmentService,
-    private nestJwtService: NestJwtService,
-  ) {}
+  constructor(private env: EnvironmentService, private nestJwtService: NestJwtService) {}
 
   createAccessToken(user: UserInTokenDTO): string {
     const payload: Omit<AccessTokenPayload, "iat" | "exp"> = {

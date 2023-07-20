@@ -9,7 +9,7 @@ export class GuestService {
   constructor(
     private guestRepository: GuestRepository,
     private travelRepository: TravelRepository,
-    private userRepository: UserRepository,
+    private userRepository: UserRepository
   ) {}
 
   async findAllGuestsFromTravel(travelId: number): Promise<GuestResponseDTO[]> {

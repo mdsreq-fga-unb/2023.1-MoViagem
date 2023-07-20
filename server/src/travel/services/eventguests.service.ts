@@ -10,7 +10,7 @@ export class EventGuestsService {
   constructor(
     private eventGuestsRepository: EventGuestsRepository,
     private eventRepository: EventRepository,
-    private userRepository: UserRepository,
+    private userRepository: UserRepository
   ) {}
 
   async findAllGuestsFromEvent(eventId: number): Promise<EventGuestResponseDTO[]> {
