@@ -12,7 +12,7 @@ export class AuthService {
   constructor(
     private userRepository: UserRepository,
     private userService: UserService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
   async validateCredentialsAndGetUser(email: string, password: string): Promise<User | null> {

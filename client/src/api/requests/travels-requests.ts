@@ -162,6 +162,13 @@ export function requestAddGuestToTravel(guestEmail: string, travelId: string) {
   });
 }
 
+export function requestToggleEditGuest(guestId: number, travelId: string) {
+  return request<never, never>({
+    method: "PATCH",
+    url: `/guest/${guestId}/enable-editing/${travelId}`,
+  });
+}
+
 export function requestRemoveGuestFromTravel(guestId: number, travelId: number) {
   return request<never, never>({
     method: "PATCH",

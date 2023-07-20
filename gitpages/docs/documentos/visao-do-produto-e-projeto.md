@@ -8,8 +8,9 @@
 | -------- | ------ | --------------------------------- | ------------------ |
 | 26/04/23 | 0.1    | Início do documento               | Equipe Mochileiros |
 | 27/04/23 | 1.0    | Documento pronto para a Entrega 1 | Equipe Mochileiros |
-| 24/05/23 | 2.0pre | Documento pronto para a Entrega 2 | Equipe Mochileiros |
+| 24/05/23 | 2.0    | Documento pronto para a Entrega 2 | Equipe Mochileiros |
 | 29/06/23 | 2.1    | Documento revisado após entrega 3 | Equipe Mochileiros |
+| 19/07/23 | 2.2    | Ultimas atualizações              | Equipe Mochileiros |
 
 <br></br>
 
@@ -148,14 +149,14 @@ Por fim, embora o aspecto diferencial do projeto seja a capacidade de realizar c
 
 <br>
 
-| Fase                 | Produto (entrega)                                                         | Data Início | Data Fim |
-| -------------------- | ------------------------------------------------------------------------- | ----------- | -------- |
-| Fase de concepção    | Documento de Visão de Produto e Projeto, GitPages                         | 10/04/23    | 27/04/23 |
-| Fase de elaboração   | Visão de Produto e Projeto, Backlog do Produto e Definição dos MVPs       | 28/04/23    | 25/05/23 |
-| Fase de construção 1 | Visão de Produto e Projeto e Backlog atualizados, funcionalidades do MVP1 | 26/05/23    | 22/07/23 |
-| Fase de construção 2 | Visão de Produto e Projeto e Backlog atualizados, funcionalidades do MVP2 | 23/07/23    | 20/07/23 |
+| Fase                 | Produto (entrega)                                                                                                | Data Início | Data Fim |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------- | -------- |
+| Fase de concepção    | Documento de Visão de Produto e Projeto, GitPages                                                                | 10/04/23    | 27/04/23 |
+| Fase de elaboração   | Visão de Produto e Projeto, Backlog do Produto e Definição dos MVPs                                              | 28/04/23    | 25/05/23 |
+| Fase de construção 1 | Visão de Produto e Projeto e Backlog atualizados, funcionalidades do MVP1 <br> Iterações desenvolvidas: 1, 2 e 3 | 26/05/23    | 20/06/23 |
+| Fase de construção 2 | Visão de Produto e Projeto e Backlog atualizados, funcionalidades do MVP2 <br> Iterações desenvolvidas 4, 5 e 6  | 23/06/23    | 20/07/23 |
 
-<br></br>
+[Relato que contém as iterações do projeto](./relato-iteracoes.md)
 
 ### 2.3 Matriz de Comunicação
 
@@ -336,11 +337,21 @@ Algo importante a se destacar é da ferramenta como chatGPT que foi utilizada co
 
 <br>
 
-Na unidade 3, foi introduzida os metodos de construção de backlog PBB E BDD que consiste em metodos que auxiliam na construção do Product Backlog. Também foi iniciada o processo de deselvovimento do produto de sotware representado pelo nosso backlog.
+Na unidade 3, foram introduzidos os métodos de construção de backlog PBB E BDD que consiste em metodos que auxiliam na construção do Product Backlog. Também foi iniciada o processo de desenvolvimento do produto de sotware representado pelo nosso backlog.
 
 Na disciplina foram realizadas aulas de trabalho com o grupo para a construção do Canvas PBB, BDD e Backlog Safe.
 
 Para o grupo, a unidade 3 foi muito proveitosa e trabalhosa na mesma proporção. Lidar com as atividades de Engenharia de requisitos e também lidar com os problemas da implementação foi um grande desafio para todos da equipe. O que nos demandou um trabalho em equipe bem estruturado. O grupo sofreu um pouco com um dos riscos levantados no gerenciamento, que foi a ausencia de alguns integrantes por motivos de problemas de saude que impactou um pouco no ritmo de desenvolvimento, mas que foi sanado com esforço a mais de todos.
+
+<br></br>
+
+### 4.4 Unidade 4
+
+<br>
+
+Na unidade 4, foram introduzidos os métodos de User Stories Mapping, que consiste em representar visualmente o backlog do produto, Diagrama Casos de Uso, que consiste em apresentar uma visão externa das funções e serviços que o sistema deverá oferecer aos usuários, e por fim as Declarações de Casos de Uso, que consistem em Descreve uma sequência de interações entre um sistema e um ator externo que resulta em algum resultado que agrega valor ao ator. Também teve o continuamento do processo de desenvolvimento do produto de sotware representado pelo nosso backlog.
+
+Para o grupo, a unidade 4 foi, por um lado, muito trabalhosa, e por outro, bem produtiva. Um dos melhores pontos desta unidade foi a equipe ter aprendido com os erros de planejamento da Unidade 3 e, consequentemente, melhorado o nosso planejamento. Em relação aos riscos apontados na seção 2.4, a equipe sofreu com a inviabilidade de um de nossos requisitos, o que foi resolvido ao retirá-lo do nosso escopo com antecedência, portanto, não gerando maiores problemas. No quesito do relacionamento entre a equipe, a comunicação falhou em alguns momentos, mas o resto foi uma ótima experiência.
 
 <br></br>
 

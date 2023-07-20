@@ -1,5 +1,5 @@
 import { WeatherForecastResponseDTO } from "../../../api/dto/notification.dto";
-import styles from "./styles.module.scss"
+import styles from "./styles.module.scss";
 
 interface NotificationProps {
   data: WeatherForecastResponseDTO;
@@ -18,7 +18,11 @@ export default function Notification({ data }: NotificationProps) {
       </div>
 
       <div className={styles.infoBox}>
-        <img src={`https://openweathermap.org/img/wn/${data.weatherIcon}.png`} alt="icon" className={styles.notificationImage}/>
+        <img
+          src={`https://openweathermap.org/img/wn/${data.weatherIcon}.png`}
+          alt="icon"
+          className={styles.notificationImage}
+        />
         <p className={styles.notificationDescription}>{data.weatherDesc}</p>
       </div>
     </div>

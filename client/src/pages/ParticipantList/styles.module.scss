@@ -6,7 +6,6 @@
 
   h2 {
     text-align: center;
-    margin-bottom: 2rem;
   }
 }
 
@@ -27,10 +26,10 @@
   row-gap: 2rem;
   max-width: 100%;
   max-height: 100%;
-  margin-left: 5rem;
-  margin-top: 3rem;
+  margin-left: 2rem;
+  margin-top: 5vh;
   height: 70vh;
-  width: 85%;
+  width: 76vw;
 
   background: rgba(0, 0, 0, 0.1);
   padding: 2rem;
@@ -64,20 +63,13 @@
   justify-items: center;
   align-items: center;
   padding: 25px;
-  width: 20rem;
-  height: 20rem;
+  width: 19vw;
+  height: 19vw;
   background: #ffffff;
 
   border: 3px solid #dddfe4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
-
-  transition: 0.4s;
-  cursor: pointer;
-  &:hover {
-    transform: translateX(-5px);
-    border: 3px solid $color-primary;
-  }
 }
 
 .infoBox {
@@ -88,6 +80,7 @@
   color: $color-primary;
   font-size: 1rem;
   font-weight: bold;
+  text-align: center;
 
   h3 {
     height: 3rem;
@@ -110,10 +103,11 @@
 }
 
 .deleteButton {
-  // width: 45%;
-  height: 3.5rem;
+  width: 10vw;
+  height: 6vh;
 
   margin: 0 auto;
+  margin-top: 2vh;
 
   background: rgba(198, 40, 40, 0.54);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -138,8 +132,8 @@
   }
 }
 
-#createTravelButton {
-  width: 20%;
+#addParticipantButton {
+  width: 30vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -168,6 +162,18 @@
   margin-left: 10%;
 }
 
+#editButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  cursor: pointer;
+  &:hover {
+    text-decoration: solid underline rgba(79, 119, 45, 1);
+  }
+}
+
 #schedule_link {
   text-decoration: none;
   color: $color-secondary;
@@ -184,4 +190,138 @@
   position: absolute;
   left: 11px;
   top: 145px;
+}
+
+.dialogTitle {
+  text-align: center;
+  background: $color-primary;
+  border: 2px solid rgba(201, 255, 153, 1);
+  border-bottom: none;
+
+  h3 {
+    margin: 0;
+    margin-top: 2vh;
+    color: rgba(201, 255, 153, 1);
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
+
+.dialogContent {
+  text-align: center;
+  background: $color-primary;
+  color: rgba(201, 255, 153, 1);
+  padding-bottom: 5vh;
+  border: 2px solid rgba(201, 255, 153, 1);
+  border-top: none;
+  border-bottom: none;
+
+  .dialogContentText {
+    color: rgba(201, 255, 153, 1);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+}
+
+.inputContainer {
+  z-index: 999;
+  margin-top: 4vh;
+}
+
+.inputBox {
+  width: 80%;
+  height: 2rem;
+  background-color: $color-secondary;
+  border: 2px solid rgba(201, 255, 153, 1);
+  border-radius: 10px;
+  padding: 10px;
+  color: black;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.dialogActions {
+  text-align: center;
+  background: $color-primary;
+  color: rgba(201, 255, 153, 1);
+  border: 2px solid rgba(201, 255, 153, 1);
+  border-top: none;
+
+  .confirmButton {
+    width: 35%;
+    height: 3.5rem;
+
+    margin: 0 auto;
+
+    border-radius: 10px;
+    background: rgba(198, 204, 133, 1);
+
+    background: #4f772d;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 1);
+    border-radius: 9px;
+
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+
+    color: #c9ff99;
+    border: 2px solid $color-secondary;
+
+    transition: 0.4s;
+    cursor: pointer;
+
+    &:hover {
+      translate: 0px -5px;
+      border: 2px solid rgba(198, 204, 133, 1);
+    }
+  }
+
+  .cancelButton {
+    width: 35%;
+    height: 3.5rem;
+
+    margin: 0 auto;
+
+    background: $button-danger;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 1);
+    border-radius: 9px;
+
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+
+    color: rgba(198, 204, 133, 1);
+    font-weight: bold;
+    border: 2px solid rgba(198, 40, 40, 0);
+
+    transition: 0.4s;
+    cursor: pointer;
+
+    &:hover {
+      translate: 0px -5px;
+      border: 2px solid rgba(198, 204, 133, 1);
+    }
+  }
+}
+
+#permission_button {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+
+  color: $color-primary;
+  font-weight: bold;
+
+  transition: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    translate: 0px -5px;
+  }
 }

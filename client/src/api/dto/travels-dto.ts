@@ -102,6 +102,7 @@ export interface TravelsWithInfoResponseDTO extends TravelsResponseDTO {
 export interface GuestResponseDTO {
   id: number;
   name: string;
+  canEdit: boolean;
 }
 
 export interface EventGuestResponseDTO {

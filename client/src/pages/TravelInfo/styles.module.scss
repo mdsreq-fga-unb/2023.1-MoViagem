@@ -74,7 +74,7 @@
   background: #ffffff;
 
   border: 2px solid #dddfe4;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 4px black;
   border-radius: 12px;
 }
 
@@ -90,6 +90,7 @@
 
   display: grid;
   justify-items: center;
+  align-items: center;
 
   border: 2px solid #dddfe4;
   border-radius: 10px;
@@ -98,7 +99,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
 
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 4px black;
 
   p {
     color: $color-primary;
@@ -154,6 +155,7 @@
   background: rgba(79, 119, 45, 0.5);
   border: none;
   border-radius: 10px;
+  font-size: 1rem;
   padding: 10px;
   color: #666;
   text-align: left;
@@ -166,6 +168,8 @@
   border-radius: 10px;
   padding: 10px;
   text-align: left;
+  color: #666;
+  font-size: 1rem;
   background-color: rgba(79, 119, 45, 0.5);
 }
 
@@ -186,12 +190,13 @@
   width: 100%;
   height: 5rem;
   max-width: 100%;
-  max-height: 5rem;
+  max-height: 4rem;
   background: rgba(79, 119, 45, 0.5);
   border: #111;
   border-radius: 10px;
   padding: 10px;
   color: #666;
+  font-size: 1rem;
   text-align: left;
   resize: none;
 }
@@ -299,16 +304,19 @@
   font-weight: bold;
   color: #4f772d;
   text-decoration: underline;
-  border: 2px solid #666;
+  border: 3px solid #666;
 
   font-family: "Poppins";
   font-style: normal;
 
   transition: 0.4s;
   cursor: pointer;
+
   &:hover {
-    border: 2px solid $color-secondary;
-    background: #eeeeee;
+    translate: 0px -8px;
+    border: 3px solid #c9ff99;
+    color: #c9ff99;
+    background: $color-primary;
   }
 
   p {

@@ -23,8 +23,12 @@ export class TravelController {
   }
 
   @Put("/:id")
-  async edit(@Param("id") id: number, @Body() dto: UpdateTravelRequestDTO): Promise<void> {
-    return this.travelService.edit_Travel(id, dto);
+  async edit(
+    @User() user: UserInTokenDTO,
+    @Param("id") id: number,
+    @Body() dto: UpdateTravelRequestDTO
+  ): Promise<void> {
+    return this.travelService.edit_Travel(user.id, id, dto);
   }
 
   @Get()
@@ -43,7 +47,7 @@ export class TravelController {
   }
 
   @Delete("/:id")
-  async delete(@Param("id") id: number): Promise<void> {
-    return this.travelService.delete(id);
+  async delete(@User() user: UserInTokenDTO, @Param("id") id: number): Promise<void> {
+    return this.travelService.delete(user.id, id);
   }
 }

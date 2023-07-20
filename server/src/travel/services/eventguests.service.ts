@@ -1,7 +1,6 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { UserRepository } from "src/auth/repositories/user.repository";
 import { EventGuestResponseDTO } from "../dto/eventguests.dto";
-import { GuestResponseDTO } from "../dto/guest.dto";
 import { EventRepository } from "../repositories/event.repository";
 import { EventGuestsRepository } from "../repositories/eventguests.repository";
 
@@ -10,12 +9,12 @@ export class EventGuestsService {
   constructor(
     private eventGuestsRepository: EventGuestsRepository,
     private eventRepository: EventRepository,
-    private userRepository: UserRepository,
+    private userRepository: UserRepository
   ) {}
 
   async findAllGuestsFromEvent(eventId: number): Promise<EventGuestResponseDTO[]> {
     const guest = await this.eventGuestsRepository.findAllFromEvent(eventId);
-    return guest.map((guest) => new GuestResponseDTO(guest));
+    return guest.map((guest) => new EventGuestResponseDTO(guest));
   }
 
   async addGuestToEvent(userId: number, eventId: number): Promise<void> {

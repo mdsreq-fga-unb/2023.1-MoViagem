@@ -1,6 +1,8 @@
 import { Controller, Get, Param, Patch } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
+import { User } from "src/auth/decorators/user.decorator";
+import { UserInTokenDTO } from "src/auth/dto/user.dto";
 import { GuestResponseDTO } from "../dto/guest.dto";
 import { GuestService } from "../services/guest.service";
 
@@ -17,10 +19,20 @@ export class GuestController {
 
   @Patch("/:guestEmail/add-to-travel/:travelId")
   async addGuestToTravel(
+    @User() user: UserInTokenDTO,
     @Param("guestEmail") guestEmail: string,
-    @Param("travelId") travelId: number,
+    @Param("travelId") travelId: number
   ): Promise<void> {
-    return this.guestService.addGuestToTravel(guestEmail, travelId);
+    return this.guestService.addGuestToTravel(user.id, guestEmail, travelId);
+  }
+
+  @Patch("/:guestId/enable-editing/:travelId")
+  async toggleGuestEditing(
+    @User() user: UserInTokenDTO,
+    @Param("guestId") guestId: number,
+    @Param("travelId") travelId: number
+  ): Promise<void> {
+    return this.guestService.toggleGuestEditing(user.id, guestId, travelId);
   }
 
   // userId: number, travelId: number
@@ -28,7 +40,7 @@ export class GuestController {
   @Patch("/:userId/remove-from-travel/:travelId")
   async removeGuestToTravel(
     @Param("userId") userId: number,
-    @Param("travelId") travelId: number,
+    @Param("travelId") travelId: number
   ): Promise<void> {
     return this.guestService.delete(userId, travelId);
   }

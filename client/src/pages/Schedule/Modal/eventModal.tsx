@@ -118,7 +118,7 @@ const EventModal: React.FC<EventModalProps> = ({
             <button className={styles.submitButton} onClick={handleSaveEvent}>
               Salvar
             </button>
-            <button className={styles.submitButton} onClick={closeModal}>
+            <button className={styles.cancelButton} onClick={closeModal}>
               Cancelar
             </button>
           </div>

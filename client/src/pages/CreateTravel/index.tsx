@@ -105,6 +105,7 @@ export default function CreateTravel() {
               name="proposito"
               rows={3}
               className={styles.textAreaBox}
+              maxLength={100}
               required
               value={proposito}
               onChange={(event) => {
@@ -114,7 +115,7 @@ export default function CreateTravel() {
           </div>
 
           <div className={styles.inputContainer}>
-            <label htmlFor="numDePessoas">Numero de Pessoas:</label>
+            <label htmlFor="numDePessoas">Número de Pessoas Esperado:</label>
             <input
               type="Number"
               name="numDePessoas"

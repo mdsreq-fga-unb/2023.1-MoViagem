@@ -100,7 +100,14 @@ export default function Navbar({
         <h1>{pageName}</h1>
         {auth?.userInfo && (
           <div id={styles.topBarMenu}>
-            <Badge badgeContent={notifications.length} color="error" onClick={handleMenuOpen}>
+            <Badge
+              badgeContent={notifications.length}
+              color="error"
+              onClick={handleMenuOpen}
+              style={{
+                zIndex: 1,
+              }}
+            >
               <NotificationIcon fontSize="large" />
             </Badge>
             <Menu

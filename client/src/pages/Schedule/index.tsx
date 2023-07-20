@@ -32,7 +32,6 @@ const Schedule: React.FC = () => {
   const [allMonths, setAllMonths] = useState<string[]>([]);
   const [diffYears, setDiffYears] = useState<number>(0); // Keeps track of the difference between the current year in rl and the year of the calendar
   const currYearRef = useRef<number>(date.getFullYear());
-  const [eventsGuests, setEventGuests] = useState<EventGuestResponseDTO[]>([]);
   const [dayEvents, setDayEvents] = useState<EventResponseDTO[]>([]);
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventResponseDTO>();
@@ -93,7 +92,7 @@ const Schedule: React.FC = () => {
           }
         >
           {lastDateOfLastMonth - i + 1}
-        </div>,
+        </div>
       );
     }
 
@@ -112,7 +111,7 @@ const Schedule: React.FC = () => {
           onClick={() => handleDayClick(i, currMonth, currYearRef.current)}
         >
           {i}
-        </div>,
+        </div>
       );
     }
 
@@ -125,7 +124,7 @@ const Schedule: React.FC = () => {
           onClick={() => handleDayClick(i - lastDayOfMonth + 1, currMonth + 1, currYearRef.current)}
         >
           {i - lastDayOfMonth + 1}
-        </div>,
+        </div>
       );
     }
 
@@ -152,13 +151,6 @@ const Schedule: React.FC = () => {
       return;
     }
 
-    const response2 = await requestGetEventGuests(params.id!);
-
-    if (response2 instanceof ErrorResponse) {
-      alert("Erro nos convidados do evento " + response2.message);
-      return;
-    }
-
     const dayEvents: EventResponseDTO[] = [];
 
     response.data.forEach((event) => {
@@ -181,9 +173,8 @@ const Schedule: React.FC = () => {
       return timeA - timeB;
     });
 
-    setEventGuests(response2.data);
     setDayEvents(dayEvents);
-  }, [currentDateForSidebar, params.id]);
+  }, [currentDateForSidebar]);
 
   useEffect(() => {
     renderCalendar();
@@ -237,7 +228,7 @@ const Schedule: React.FC = () => {
       }
 
       await requestAddGuestToEvent(auth.userInfo.id, event.id);
-      alert("Adicionado com sucesso");
+      alert("Participação confirmada");
     } catch (error) {
       alert(error);
     }
@@ -251,7 +242,7 @@ const Schedule: React.FC = () => {
       }
 
       await requestRemoveGuestFromEvent(auth.userInfo.id, event.id);
-      alert("Removido com sucesso");
+      alert("Participação removida");
     } catch (error) {
       alert(error);
     }
@@ -283,7 +274,6 @@ const Schedule: React.FC = () => {
           )}
           {showEventModal && selectedDate && selectedEvent && (
             <EventInfoModal
-              eventGuests={eventsGuests}
               selectedEvent={selectedEvent}
               selectedDate={selectedDate}
               closeModal={() => handleEventInfoModalClose()}
@@ -302,25 +292,29 @@ const Schedule: React.FC = () => {
                         className={styles.buttonEvent}
                         onClick={() => handleEventInfoModalOpen(event)}
                       >
-                        <div>
+                        {/* <div>
                           <label>{event.departureLocation}</label>
                           <p className={isDisponible ? styles.true : styles.false}>
                             {isDisponible ? "Irá participar :)" : "Não ira participar :("}
                           </p>
+                        </div> */}
+                        <div>
+                          <p>{event.departureLocation}</p>
                         </div>
                         <div>
                           <p>{new Date(event.eventTime).toLocaleTimeString()}</p>
                         </div>
                       </button>
                       <label htmlFor="">Vai participar?</label>
-                      <div className={styles.particip}>
-                        <button onClick={() => handleDisponibilityAsTrue(event)}>
-                          {/* Mudar isso aqui para o dado que o dayEvents vai trazer, algo como */}
-                          {/* 'event.isDisponible */}
+                      <div className={styles.buttonGroup}>
+                        <button
+                          className={styles.submitButton}
+                          onClick={() => handleDisponibilityAsTrue(event)}
+                        >
                           Sim
                         </button>
                         <button
-                          className={styles.cancel}
+                          className={styles.deleteButton}
                           onClick={() => handleDisponibilityAsFalse(event)}
                         >
                           Não
