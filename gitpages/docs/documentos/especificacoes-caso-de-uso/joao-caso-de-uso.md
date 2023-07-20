@@ -49,32 +49,33 @@
 
 1. O usuário selecionou uma data inválida.
 
-   - No passo 2 do fluxo principal, se o usuário selecionar uma data inválida, o sistema não permitirá a criação de eventos até que o usuário selecione uma data válida. O sistema retorna ao passo 1 do fluxo principal.
+   a. No passo 2 do fluxo principal, se o usuário selecionar uma data inválida, o sistema não permitirá a criação de eventos até que o usuário selecione uma data válida. O sistema retorna ao passo 1 do fluxo principal.
      <br></br>
 
 1. O usuário não digitou as informações necessárias.
 
-   - No passo 6 do fluxo principal, se o usuário deixar alguma informação obrigatória sem ser preenchida, o sistema impedirá a criação do evento até que o usuário insira tal informação. O sistema retorna ao passo 5 do fluxo principal.
+   a. No passo 6 do fluxo principal, se o usuário deixar alguma informação obrigatória sem ser preenchida, o sistema impedirá a criação do evento até que o usuário insira tal informação. O sistema retorna ao passo 5 do fluxo principal.
      <br></br>
 
 1. Validação dos dados inseridos.
 
-   - No passo 6 do fluxo principal, se o sistema verificar que as informações inseridas não são válidas (formato e/ou tamanho da inserção), o sistema impedirá a criação do evento e informará o usuário de qual informação causou tal problema. O sistema retorna ao passo 5 do fluxo principal.
+   a. No passo 6 do fluxo principal, se o sistema verificar que as informações inseridas não são válidas (formato e/ou tamanho da inserção), o sistema impedirá a criação do evento e informará o usuário de qual informação causou tal problema. O sistema retorna ao passo 5 do fluxo principal.
      <br></br>
 
 1. Cancelamento da criação do evento.
 
-   - No passo 4 do fluxo principal, se o usuário selecionar a opção de cancelar criação, o sistema retorna ao passo 8 do fluxo principal.
+   a. No passo 4 do fluxo principal, se o usuário selecionar a opção de cancelar criação, o sistema retorna ao passo 8 do fluxo principal.
 
 ## **Regras de Negócio**
 
 1. Validação da data selecionada.
 
-   - Para ser considerada válida, a data selecionada pelo usuário deve ser igual ou posterior em comparação a data atual do sistema, que segue o fuso horário de Brasília, DF (GMT-3).
+   a. Para ser considerada válida, a data selecionada pelo usuário deve ser igual ou posterior em comparação a data atual do sistema, que segue o fuso horário de Brasília, DF (GMT-3).
      <br></br>
 
 1. Validação de Informações.
-   - As seguintes validações devem ser realizadas:
+
+   a. As seguintes validações devem ser realizadas:
 
 |        Nome        |         Formato          | Obrigatoriedade |
 | :----------------: | :----------------------: | :-------------: |

@@ -35,7 +35,6 @@
 
 1. Selecionado o filtro “Passadas” o usuário terá uma lista das viagens que já ocorreram em relação ao dia que ele está acessando o site. O sistema retorna ao passo 5 do fluxo principal.
 
-
 1. Selecionado o filtro “Atuais” o usuário terá uma lista das viagens que já estão ocorrendo em relação ao dia que ele está acessando o site. O sistema retorna ao passo 5 do fluxo principal.
 
 1. Selecionado o filtro “Futuras” o usuário terá uma lista das viagens que irão ocorrer em relação ao dia que ele está acessando o site. O sistema retorna ao passo 5 do fluxo principal.
@@ -45,10 +44,10 @@
 ## **Fluxos de Exceção**
 
 1. O usuário não selecionou nenhum filtro para listar suas viagens.
-   - Se nenhum filtro for selecionado, o usuário terá novamente acesso a todas as viagens criadas.
+   a. Se nenhum filtro for selecionado, o usuário terá novamente acesso a todas as viagens criadas.
 
 ## **Regras de Negócio**
 
 1. Escolha do filtro.
-   - Quando os filtros de tempo forem selecionados, deve-se mostrar as respectivas viagens em relação a data que o usuário está acessando o site.
-   - Quando o filtro de viagem como convidado for selecionado, deve-se mostrar as viagens que o usuário está como convidado.
+   a. Quando os filtros de tempo forem selecionados, deve-se mostrar as respectivas viagens em relação a data que o usuário está acessando o site.
+   b. Quando o filtro de viagem como convidado for selecionado, deve-se mostrar as viagens que o usuário está como convidado.
