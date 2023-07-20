@@ -1,11 +1,19 @@
-import CheckIcon from "@mui/icons-material/Check";
+import CardTravelIcon from "@mui/icons-material/CardTravel";
+import GroupsIcon from "@mui/icons-material/Groups";
+import { IconButton } from "@mui/material";
 import { parse } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance.ts";
-import { EventResponseDTO } from "../../api/dto/travels-dto.ts";
-import { requestGetEvents } from "../../api/requests/travels-requests.ts";
+import { EventGuestResponseDTO, EventResponseDTO } from "../../api/dto/travels-dto.ts";
+import {
+  requestAddGuestToEvent,
+  requestGetEventGuests,
+  requestGetEvents,
+  requestRemoveGuestFromEvent,
+} from "../../api/requests/travels-requests.ts";
+import useAuth from "../../auth/context/auth-hook.tsx";
 import Navbar from "../../components/Navbar/index.tsx";
 import EventInfoModal from "./EventInfoModal/index.tsx";
 import EventModal from "./Modal/eventModal.tsx";
@@ -13,6 +21,7 @@ import styles from "./styles.module.scss";
 
 const Schedule: React.FC = () => {
   const params = useParams();
+  const searchParams = useSearchParams()[0];
   const date = useMemo(() => new Date(), []);
   // const [currentDate, setCurrentDate] = useState("");
   const [currentDateForSidebar, setCurrentDateForSidebar] = useState("");
@@ -27,6 +36,8 @@ const Schedule: React.FC = () => {
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventResponseDTO>();
   const [isDisponible, setIsDisponible] = useState<boolean>();
+
+  const auth = useAuth();
 
   // Render the calendar
   const renderCalendar = useCallback(() => {
@@ -132,7 +143,7 @@ const Schedule: React.FC = () => {
     setDays(updatedDays);
   }, [currMonth, date]);
 
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     const response = await requestGetEvents(params.id!);
 
     if (response instanceof ErrorResponse) {
@@ -163,16 +174,15 @@ const Schedule: React.FC = () => {
     });
 
     setDayEvents(dayEvents);
-  };
+  }, [currentDateForSidebar]);
 
   useEffect(() => {
     renderCalendar();
-    fetchEvents()
   }, [renderCalendar]);
 
   useEffect(() => {
     fetchEvents();
-  }, [currentDateForSidebar]);
+  }, [fetchEvents]);
 
   // Handle click on previous/next month icon
   const handleIconClick = (increment: number) => {
@@ -196,14 +206,47 @@ const Schedule: React.FC = () => {
     });
   };
 
+  /**
+   * TODO: Fazer com que Disponibility
+   * Já venha setado defatult com o valor true
+   * caso já tenha uma cadastro daquele usuario na quele evento
+   * ou falso caso contrario
+   *
+   * TODO: Adicionar icone ao botao de exclusao estilizacao as botoes
+   * @param event
+   */
   const handleEventInfoModalOpen = (event: EventResponseDTO) => {
     setSelectedEvent(event);
     setShowEventModal(true);
   };
 
-  const handleDisponibility = () => {
-    setIsDisponible(!isDisponible);
-  };
+  async function handleDisponibilityAsTrue(event: EventResponseDTO) {
+    setIsDisponible(true);
+    try {
+      if (auth.userInfo == null) {
+        throw new Error("Usuário não logado");
+      }
+
+      await requestAddGuestToEvent(auth.userInfo.id, event.id);
+      alert("Participação confirmada");
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  async function handleDisponibilityAsFalse(event: EventResponseDTO) {
+    setIsDisponible(false);
+    try {
+      if (auth.userInfo == null) {
+        throw new Error("Usuário não logado");
+      }
+
+      await requestRemoveGuestFromEvent(auth.userInfo.id, event.id);
+      alert("Participação removida");
+    } catch (error) {
+      alert(error);
+    }
+  }
 
   const handleEventInfoModalClose = () => {
     setShowEventModal(false);
@@ -238,29 +281,49 @@ const Schedule: React.FC = () => {
           )}
           <div className={styles.sidebar}>
             {/* Sidebar Content */}
-            <h2>[ {currentDateForSidebar} ]</h2>
             {/* Fetch and display activities for the selected date */}
-            <div className={styles.activities}>
-              {dayEvents.map((event) => (
-                <div className={styles.eventBox}>
-                  <button
-                    className={styles.insideBox}
-                    onClick={() => handleEventInfoModalOpen(event)}
-                  >
+            <h2>{currentDateForSidebar}</h2>
+            <div className={styles.outBox}>
+              <div className={styles.insideBox}>
+                {dayEvents.map((event) => (
+                  <div className={styles.eventBox}>
                     <div className={styles.infoBox}>
-                      <h3>{event.departureLocation}</h3>
-                      <div className={styles.infoText}>
-                        <p>{new Date(event.eventTime).toLocaleTimeString()}</p>
+                      <button
+                        className={styles.buttonEvent}
+                        onClick={() => handleEventInfoModalOpen(event)}
+                      >
+                        {/* <div>
+                          <label>{event.departureLocation}</label>
+                          <p className={isDisponible ? styles.true : styles.false}>
+                            {isDisponible ? "Irá participar :)" : "Não ira participar :("}
+                          </p>
+                        </div> */}
+                        <div>
+                          <p>{event.departureLocation}</p>
+                        </div>
+                        <div>
+                          <p>{new Date(event.eventTime).toLocaleTimeString()}</p>
+                        </div>
+                      </button>
+                      <label htmlFor="">Vai participar?</label>
+                      <div className={styles.buttonGroup}>
+                        <button
+                          className={styles.submitButton}
+                          onClick={() => handleDisponibilityAsTrue(event)}
+                        >
+                          Sim
+                        </button>
+                        <button
+                          className={styles.deleteButton}
+                          onClick={() => handleDisponibilityAsFalse(event)}
+                        >
+                          Não
+                        </button>
                       </div>
                     </div>
-                  </button>
-                  <button className={styles.checkBox} onClick={handleDisponibility}>
-                    {/* Mudar isso aqui para o dado que o dayEvents vai trazer, algo como 'event.isDisponible*/}
-                    {isDisponible && <CheckIcon fontSize="large" />}
-                    {!isDisponible && <p>Não vou ir</p>}
-                  </button>
-                </div>
-              ))}
+                  </div>
+                ))}
+              </div>
             </div>
             <div className={styles.buttonOutsideContainer}>
               <button className={styles.buttonContainer} onClick={handleModalOpen}>
@@ -303,6 +366,18 @@ const Schedule: React.FC = () => {
           </div>
         </div>
       </div>
+      <Link to={`/travel-info/${params.id}`} id={styles.schedule_link}>
+        <IconButton id={styles.schedule_link}>
+          <CardTravelIcon fontSize="large" />
+        </IconButton>
+      </Link>
+      {searchParams.get("guest") != "true" && (
+        <Link to={`/participants-list/${params.id}`} id={styles.participants_link}>
+          <IconButton id={styles.participants_link}>
+            <GroupsIcon fontSize="large" />
+          </IconButton>
+        </Link>
+      )}
     </Navbar>
   );
 };

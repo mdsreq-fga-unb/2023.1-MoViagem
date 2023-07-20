@@ -6,7 +6,6 @@
 
   h2 {
     text-align: center;
-    margin-bottom: 2rem;
   }
 }
 
@@ -31,8 +30,9 @@
   padding: 5px;
 
   h2 {
-    margin-left: 3rem;
-    margin-right: 2rem;
+    width: 15vw;
+    margin-left: 1rem;
+    margin-right: 1rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
     color: $color-primary;
@@ -52,8 +52,8 @@
   font-size: 1.3rem;
 
   margin-right: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 1.7rem;
+  padding-bottom: 1.7rem;
 
   transition: 0.4s;
   border-radius: 20px;
@@ -82,8 +82,8 @@
   font-size: 1.3rem;
 
   margin-right: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 1.7rem;
+  padding-bottom: 1.7rem;
 
   border-radius: 20px;
   border: 2px solid rgba(201, 255, 153, 1);
@@ -122,10 +122,10 @@
   row-gap: 2rem;
   max-width: 100%;
   max-height: 100%;
-  margin-left: 5rem;
-  margin-top: 3rem;
+  margin-left: 2rem;
+  margin-top: 5vh;
   height: 70vh;
-  width: 85%;
+  width: 76vw;
 
   background: rgba(0, 0, 0, 0.1);
   padding: 2rem;

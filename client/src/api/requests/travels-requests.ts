@@ -4,6 +4,7 @@ import {
   CreateHostRequestDTO,
   CreateTransportRequestDTO,
   CreateTravelRequestDTO,
+  EventGuestResponseDTO,
   EventResponseDTO,
   GuestResponseDTO,
   HostResponseDTO,
@@ -146,6 +147,13 @@ export function requestGetGuests(travelId: string) {
   });
 }
 
+export function requestGetEventGuests(eventId: string) {
+  return request<never, EventGuestResponseDTO[]>({
+    method: "GET",
+    url: `eventguests/${eventId}`,
+  });
+}
+
 export function requestAddGuestToTravel(guestEmail: string, travelId: string) {
   return request<never, never>({
     method: "PATCH",
@@ -157,5 +165,26 @@ export function requestToggleEditGuest(guestId: number, travelId: string) {
   return request<never, never>({
     method: "PATCH",
     url: `/guest/${guestId}/enable-editing/${travelId}`,
+  });
+}
+
+export function requestRemoveGuestFromTravel(guestId: number, travelId: number) {
+  return request<never, never>({
+    method: "PATCH",
+    url: `/guest/${guestId}/remove-from-travel/${travelId}`,
+  });
+}
+
+export function requestAddGuestToEvent(userId: number, eventId: number) {
+  return request<never, never>({
+    method: "PATCH",
+    url: `/eventguests/${userId}/add-to-event/${eventId}`,
+  });
+}
+
+export function requestRemoveGuestFromEvent(userId: number, eventId: number) {
+  return request<never, never>({
+    method: "PATCH",
+    url: `/eventguests/${userId}/remove-from-event/${eventId}`,
   });
 }

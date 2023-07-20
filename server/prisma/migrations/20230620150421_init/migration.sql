@@ -4,11 +4,9 @@ CREATE TABLE `User` (
     `email` VARCHAR(50) NOT NULL,
     `name` VARCHAR(100) NOT NULL,
     `password` VARCHAR(100) NOT NULL,
-
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
 -- CreateTable
 CREATE TABLE `Travel` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -18,10 +16,8 @@ CREATE TABLE `Travel` (
     `endDate` DATE NOT NULL,
     `description` VARCHAR(100) NOT NULL,
     `numParticipants` INTEGER UNSIGNED NOT NULL,
-
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
 -- CreateTable
 CREATE TABLE `Host` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -32,10 +28,8 @@ CREATE TABLE `Host` (
     `price` DECIMAL(10, 2) NOT NULL,
     `contact` VARCHAR(50) NOT NULL,
     `travelId` INTEGER UNSIGNED NOT NULL,
-
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
 -- CreateTable
 CREATE TABLE `Transport` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -47,10 +41,8 @@ CREATE TABLE `Transport` (
     `price` DECIMAL(10, 2) NOT NULL,
     `contacts` VARCHAR(50) NOT NULL,
     `travelId` INTEGER UNSIGNED NOT NULL,
-
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
 -- CreateTable
 CREATE TABLE `Event` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -60,18 +52,17 @@ CREATE TABLE `Event` (
     `eventValue` DECIMAL(10, 2) NOT NULL,
     `eventExtras` TEXT NOT NULL,
     `travelId` INTEGER UNSIGNED NOT NULL,
-
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
 -- AddForeignKey
-ALTER TABLE `Travel` ADD CONSTRAINT `Travel_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
+ALTER TABLE `Travel`
+ADD CONSTRAINT `Travel_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 -- AddForeignKey
-ALTER TABLE `Host` ADD CONSTRAINT `Host_travelId_fkey` FOREIGN KEY (`travelId`) REFERENCES `Travel`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+ALTER TABLE `Host`
+ADD CONSTRAINT `Host_travelId_fkey` FOREIGN KEY (`travelId`) REFERENCES `Travel`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 -- AddForeignKey
-ALTER TABLE `Transport` ADD CONSTRAINT `Transport_travelId_fkey` FOREIGN KEY (`travelId`) REFERENCES `Travel`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+ALTER TABLE `Transport`
+ADD CONSTRAINT `Transport_travelId_fkey` FOREIGN KEY (`travelId`) REFERENCES `Travel`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 -- AddForeignKey
-ALTER TABLE `Event` ADD CONSTRAINT `Event_travelId_fkey` FOREIGN KEY (`travelId`) REFERENCES `Travel`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Event`
+ADD CONSTRAINT `Event_travelId_fkey` FOREIGN KEY (`travelId`) REFERENCES `Travel`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

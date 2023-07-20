@@ -8,7 +8,7 @@ Apesar de sabermos que o processo de engenheria de requisitos (ER) é flexível,
   Aqui conseguimos levantar os possíveis problemas que seriam solucionados pelo projeto.
 
 - **Análise de Concorrente:**
-  Aqui descobrimos que o projeto não possui um concorrente direto, pois estamos cobrindo lacunas das soluções já existes. Além disso, descobrimos o que falta nos apps de organização da atualidade no que tange o planejamento e a  organização viagens.
+  Aqui descobrimos que o projeto não possui um concorrente direto, pois estamos cobrindo lacunas das soluções já existes. Além disso, descobrimos o que falta nos apps de organização da atualidade no que tange o planejamento e a organização viagens.
 
 - **Brainstorming:**
   Nessa fase do processo de Elicitação fizemos uma reunião de Brainstorming e levantamos uma lista de requisitos que poderiam ser desenvolvidos no decorrer da disciplina.
@@ -38,34 +38,36 @@ Apesar de sabermos que o processo de engenheria de requisitos (ER) é flexível,
 
 - **User Stories:**
   Nossos requisitos foram estruturados como User Stories, seguindo este padrão:
-  - Eu, como *QUEM SOU EU*, desejo *QUAL O REQUISITO*, para *QUAL O VALOR DE NEGÓCIO DO REQUISITO*
+  - Eu, como _QUEM SOU EU_, desejo _QUAL O REQUISITO_, para _QUAL O VALOR DE NEGÓCIO DO REQUISITO_
 
 ## Na fase de Verificação e Validação foram utilizadas as seguintes técnicas:
 
 - **Feedback:**
-  - *Verificação:*
+
+  - _Verificação:_
     Recebemos o feedback da verificação de nossos requisitos através do professor George Marsicano. Devido à isso, retiramos um requisito e fizemos leves alterações em outros.
-  
-  - *Validação:*
+  - _Validação:_
     Recebemos o feedback da validação de nossos requisitos através do nosso cliente. Foi feita uma reunião na qual ele validou os requisitos decididos e o escopo do projeto.
 
 ## Na fase de Organização e Atualização foram utilizadas as seguintes técnicas:
 
 - **Pontos por história:**
   Para decidirmos quais requisitos entrariam no MVP1 e quais entrariam no MVP2, atribuímos uma pontuação para cada requisito. Os requisitos foram avaliados em:
-  - *Valor de Negócio :* Pontuação varia de 1 à 10;
-  - *Viabilidade      :* Pontuação varia de 1 à 5;
-  - *Complexidade     :* Pontuação varia de 5 à 1;
+
+  - _Valor de Negócio :_ Pontuação varia de 1 à 10;
+  - _Viabilidade :_ Pontuação varia de 1 à 5;
+  - _Complexidade :_ Pontuação varia de 5 à 1;
 
   Totalizando então um máximo de 20 pontos para cada requisito.
 
 - **MoSCoW (Must Have, Should Have, Could Have, Won't Have):**
   A partir da pontuação obtida por cada requisito, alocamos eles em suas devidas categorias do MoSCoW de acordo com estes critérios:
-  - *Must Have:* Requisitos com pontuação maior que 15, ou aqueles com pontuação igual à 15 e valor de negócio igual à 10.
-  - *Should Have:* Requisitos com pontuação igual à 15 e valor de negócio menor que 10, ou aqueles com pontuação igual à 14.
-  - *Could Have:* Requisitos com pontuação menor que 14.
-  - *Won't Have:* Não teve requisitos nesta categoria.
-  <br></br>
-  [Tabela de pontuação dos requisitos](https://mdsreq-fga-unb.github.io/2023.1-MoViagem/documentos/pontuacao-requisitos/)<br></br>
-  
+
+  - _Must Have:_ Requisitos com pontuação maior que 15, ou aqueles com pontuação igual à 15 e valor de negócio igual à 10.
+  - _Should Have:_ Requisitos com pontuação igual à 15 e valor de negócio menor que 10, ou aqueles com pontuação igual à 14.
+  - _Could Have:_ Requisitos com pontuação menor que 14.
+  - _Won't Have:_ Não teve requisitos nesta categoria.
+    <br></br>
+    [Tabela de pontuação dos requisitos](https://mdsreq-fga-unb.github.io/2023.1-MoViagem/documentos/pontuacao-requisitos/)<br></br>
+
   Com base nisto definimos o [MVP1](https://mdsreq-fga-unb.github.io/2023.1-MoViagem/documentos/mvp1/) como os requisitos presentes na categoria Must Have e o [MVP2](https://mdsreq-fga-unb.github.io/2023.1-MoViagem/documentos/mvp2/) como os requisitos presentes nas categorias Should Have e Could Have.

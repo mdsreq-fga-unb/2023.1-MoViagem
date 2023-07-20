@@ -32,6 +32,17 @@ export class GuestRepository {
     });
   }
 
+  async removeGuestFromTravel(userId: number, travelId: number): Promise<void> {
+    await this.prismaService.guests.delete({
+      where: {
+        userId_travelId: {
+          userId,
+          travelId,
+        },
+      },
+    });
+  }
+
   async doesUserIsGuest(userId: number, travelId: number): Promise<boolean> {
     const guest = await this.prismaService.guests.findUnique({
       where: {

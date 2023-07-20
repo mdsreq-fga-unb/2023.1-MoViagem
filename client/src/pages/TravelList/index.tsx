@@ -8,6 +8,10 @@ import {
   requestGetTravelsBeingGuest,
 } from "../../api/requests/travels-requests";
 import FundoViagem from "../../assets/FundoViagem.png";
+import ViagemPassada from "../../assets/PessoaVoltandoDeViagem.png";
+import ViagemAtual from "../../assets/PessoaNaViagem.png";
+import ViagemFutura from "../../assets/PessoaArrumandoMalas.png";
+import ViagemEmGrupo from "../../assets/GrupoIndoViajar.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
 
@@ -198,7 +202,7 @@ export default function TravelList() {
                   <button className={styles.insideBox}>
                     <div className={styles.infoBox}>
                       <h3>{travel.local}</h3>
-                      <img alt="Fundo Viagem" src={FundoViagem}></img>
+                      <img alt="Fundo Viagem" src={ViagemPassada}></img>
                       <div className={styles.infoText}>
                         <p>
                           {new Date(travel.startDate).toLocaleDateString()} até{" "}
@@ -225,7 +229,7 @@ export default function TravelList() {
                   <button className={styles.insideBox}>
                     <div className={styles.infoBox}>
                       <h3>{travel.local}</h3>
-                      <img alt="Fundo Viagem" src={FundoViagem}></img>
+                      <img alt="Fundo Viagem" src={ViagemAtual}></img>
                       <div className={styles.infoText}>
                         <p>
                           {new Date(travel.startDate).toLocaleDateString()} até{" "}
@@ -252,7 +256,7 @@ export default function TravelList() {
                   <button className={styles.insideBox}>
                     <div className={styles.infoBox}>
                       <h3>{travel.local}</h3>
-                      <img alt="Fundo Viagem" src={FundoViagem}></img>
+                      <img alt="Fundo Viagem" src={ViagemFutura}></img>
                       <div className={styles.infoText}>
                         <p>
                           {new Date(travel.startDate).toLocaleDateString()} até{" "}
@@ -279,7 +283,7 @@ export default function TravelList() {
                   <button className={styles.insideBox}>
                     <div className={styles.infoBox}>
                       <h3>{travel.local}</h3>
-                      <img alt="Fundo Viagem" src={FundoViagem}></img>
+                      <img alt="Fundo Viagem" src={ViagemEmGrupo}></img>
                       <div className={styles.infoText}>
                         <p>
                           {new Date(travel.startDate).toLocaleDateString()} até{" "}

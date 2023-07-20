@@ -5,7 +5,7 @@
 
   h2 {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2vh;
   }
 }
 
@@ -16,13 +16,13 @@
   flex-wrap: wrap;
   justify-content: center;
   text-align: left;
-  width: 50%;
+  width: 40%;
   padding: 25px;
 
-  margin-bottom: 100px;
   margin: 0px auto;
 
   background: #ffffff;
+  box-shadow: 0px 0px 4px black;
 
   border: 1px solid #dddfe4;
   border-radius: 12px;
@@ -34,7 +34,6 @@
 
 .inputContainer {
   padding: 10px;
-
   border: none;
 }
 
@@ -47,7 +46,7 @@
 }
 
 .inputBox {
-  width: 100%;
+  width: 97%;
   height: 2rem;
   background-color: rgba(79, 119, 45, 0.5);
   border: none;
@@ -59,10 +58,12 @@
 
 .inputNum {
   width: 50px;
-  height: 2rem;
+  height: 1.5rem;
   border: none;
   border-radius: 10px;
   padding: 10px;
+  margin-left: 10px;
+  margin-bottom: 3vh;
   text-align: left;
   background-color: rgba(79, 119, 45, 0.5);
 }
@@ -74,14 +75,17 @@
   padding: 10px;
   color: #666;
   border-radius: 10px;
+  margin-left: 10px;
 
   font-size: 12pt;
   text-align: left;
 }
 
 .textAreaBox {
-  width: 100%;
-  height: 5rem;
+  width: 97%;
+  resize: none;
+  font-size: 1rem;
+  height: 3rem;
   background: rgba(79, 119, 45, 0.5);
   border: #111;
   border-radius: 10px;

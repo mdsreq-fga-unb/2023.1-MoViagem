@@ -87,3 +87,8 @@ export interface GuestResponseDTO {
   name: string;
   canEdit: boolean;
 }
+
+export interface EventGuestResponseDTO {
+  id: number;
+  name: string;
+}

@@ -11,6 +11,8 @@ import {
   convertDateToDateTimeInputValue,
 } from "../../utils/date-utilities";
 import styles from "./styles.module.scss";
+import { IconButton } from "@mui/material";
+import CardTravelIcon from "@mui/icons-material/CardTravel";
 
 interface TransportFormsProps {
   isEditing: boolean;
@@ -116,110 +118,125 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
     }
   }
 
+  const returnToTravelInfo = () => {
+    navigate(-1);
+  };
+
   return (
-    <form className={styles.insideBox} onSubmit={handleSubmit}>
-      <h2>Dados do Transporte:</h2>
-      <div className={styles.inputContainer}>
-        <label htmlFor="tipo">Tipo de transporte:</label>
-        <input
-          type="text"
-          name="tipo"
-          placeholder="Digite aqui o tipo da transporte (avião, ônibus, ...)"
-          className={styles.inputBox}
-          required
-          value={tipoTransporte}
-          onChange={(event) => {
-            setTipoTransporte(event.target.value);
-          }}
-        />
-      </div>
-      <div className={styles.inputGroup}>
-        <div className="column">
-          <label htmlFor="text">Local de saída:</label>
-          <input
-            type="text"
-            placeholder="Local de saída"
-            className={styles.inputContato}
-            required
-            value={localIda}
-            onChange={(event) => {
-              setLocalIda(event.target.value);
-            }}
-          />
-        </div>
-        <div className="column">
-          <label htmlFor="text">Local de chegada:</label>
-          <input
-            type="text"
-            placeholder="Local de chegada"
-            className={styles.inputContato}
-            required
-            value={localChegada}
-            onChange={(event) => {
-              setLocalChegada(event.target.value);
-            }}
-          />
-        </div>
-      </div>
-
-      <div className={styles.inputGroup}>
-        <div className="column">
-          <label htmlFor="text">Horário de saída:</label>
-          <input
-            type="datetime-local"
-            className={styles.inputContato}
-            required
-            value={convertDateToDateTimeInputValue(horaSaida)}
-            onChange={(event) => setHoraSaida(convertDateInputValueToDate(event.target.value))}
-          />
-        </div>
-        <div className="column">
-          <label htmlFor="text">Horário de chegada:</label>
-          <input
-            type="datetime-local"
-            className={styles.inputContato}
-            required
-            value={convertDateToDateTimeInputValue(horaChegada)}
-            onChange={(event) => setHoraChegada(convertDateInputValueToDate(event.target.value))}
-          />
-        </div>
-      </div>
-
-      <div className={styles.inputGroup}>
+    <>
+      <form className={styles.insideBox} onSubmit={handleSubmit}>
+        <h2>Dados do Transporte:</h2>
         <div className={styles.inputContainer}>
-          <label htmlFor="preco">Preço:</label>
-          <input
-            type="Number"
-            name="preco"
-            placeholder="R$"
-            className={styles.inputNum}
-            required
-            value={preco}
-            onChange={(event) => {
-              setPreco(event.target.valueAsNumber);
-            }}
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <label htmlFor="contato">Contato:</label>
+          <label htmlFor="tipo">Tipo de transporte:</label>
           <input
             type="text"
-            name="contato"
-            placeholder="Celular, e-mail, ..."
-            className={styles.inputContato}
+            name="tipo"
+            placeholder="Digite aqui o tipo da transporte (avião, ônibus, ...)"
+            className={styles.inputBox}
             required
-            value={contato}
+            value={tipoTransporte}
             onChange={(event) => {
-              setContato(event.target.value);
+              setTipoTransporte(event.target.value);
             }}
           />
         </div>
-      </div>
+        <div className={styles.inputGroup}>
+          <div className={styles.column}>
+            <label htmlFor="text">Local de saída:</label>
+            <input
+              type="text"
+              placeholder="Local de saída"
+              className={styles.inputText}
+              required
+              value={localIda}
+              onChange={(event) => {
+                setLocalIda(event.target.value);
+              }}
+            />
+          </div>
+          <div className={styles.column}>
+            <label htmlFor="data" className={styles.labelStyle}>
+              Horário de saída:
+            </label>
+            <input
+              type="datetime-local"
+              className={styles.inputDate}
+              required
+              value={convertDateToDateTimeInputValue(horaSaida)}
+              onChange={(event) => setHoraSaida(convertDateInputValueToDate(event.target.value))}
+            />
+          </div>
+        </div>
 
-      <button className={styles.submitButton} type="submit">
-        SALVAR
-      </button>
-    </form>
+        <div className={styles.inputGroup}>
+          <div className={styles.column}>
+            <label htmlFor="text">Local de chegada:</label>
+            <input
+              type="text"
+              placeholder="Local de chegada"
+              className={styles.inputText}
+              required
+              value={localChegada}
+              onChange={(event) => {
+                setLocalChegada(event.target.value);
+              }}
+            />
+          </div>
+          <div className={styles.column}>
+            <label htmlFor="data" className={styles.labelStyle}>
+              Horário de chegada:
+            </label>
+            <input
+              type="datetime-local"
+              className={styles.inputDate}
+              required
+              value={convertDateToDateTimeInputValue(horaChegada)}
+              onChange={(event) => setHoraChegada(convertDateInputValueToDate(event.target.value))}
+            />
+          </div>
+        </div>
+
+        <div className={styles.inputGroup}>
+          <div className={styles.column}>
+            <label htmlFor="preco">Preço:</label>
+            <input
+              type="Number"
+              name="preco"
+              placeholder="R$"
+              className={styles.inputNum}
+              required
+              value={preco}
+              onChange={(event) => {
+                setPreco(event.target.valueAsNumber);
+              }}
+            />
+          </div>
+          <div className={styles.column}>
+            <label htmlFor="contato">Contato:</label>
+            <input
+              type="text"
+              name="contato"
+              placeholder="Celular, e-mail, ..."
+              className={styles.inputContato}
+              required
+              value={contato}
+              onChange={(event) => {
+                setContato(event.target.value);
+              }}
+            />
+          </div>
+        </div>
+
+        <button className={styles.submitButton} type="submit">
+          SALVAR
+        </button>
+      </form>
+      <div onClick={returnToTravelInfo} id={styles.schedule_link}>
+        <IconButton id={styles.schedule_link}>
+          <CardTravelIcon fontSize="large" />
+        </IconButton>
+      </div>
+    </>
   );
 };
 

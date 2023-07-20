@@ -1,4 +1,5 @@
 import CalendarIcon from "@mui/icons-material/CalendarToday";
+import GroupsIcon from "@mui/icons-material/Groups";
 import FlightIcon from "@mui/icons-material/Flight";
 import GiteIcon from "@mui/icons-material/Gite";
 import { IconButton } from "@mui/material";
@@ -137,7 +138,7 @@ export default function TravelInfo() {
 
     alert("Viagem editada com sucesso");
     setWasEdited(!wasEdited);
-    navigate("/travels");
+    location.reload();
   }
 
   const handleDeleteTravel = () => {
@@ -229,6 +230,7 @@ export default function TravelInfo() {
                 rows={3}
                 className={styles.textAreaBox}
                 required
+                maxLength={100}
                 value={proposito}
                 onChange={(event) => {
                   setProposito(event.target.value);
@@ -237,7 +239,7 @@ export default function TravelInfo() {
             </div>
 
             <div className={styles.inputContainer}>
-              <label htmlFor="numDePessoas">Numero de Pessoas:</label>
+              <label htmlFor="numDePessoas">Número de Pessoas (Esperado):</label>
               <input
                 type="Number"
                 name="numDePessoas"
@@ -250,18 +252,13 @@ export default function TravelInfo() {
                 }}
               />
             </div>
-            {searchParams.get("guest") != "true" && (
-              <div id={styles.link}>
-                <Link to={`/participants-list/${params.id}`}>Participantes</Link>
-              </div>
-            )}
             <div className={styles.buttonContainer}>
               <button className={styles.submitButton} type="submit">
                 SALVAR DADOS
               </button>
 
               <button className={styles.deleteButton} onClick={handleDeleteTravel} type="reset">
-                <p>DELETAR VIAGEM</p>
+                <span>DELETAR VIAGEM</span>
               </button>
             </div>
           </form>
@@ -377,6 +374,13 @@ export default function TravelInfo() {
           <CalendarIcon fontSize="large" />
         </IconButton>
       </Link>
+      {searchParams.get("guest") != "true" && (
+        <Link to={`/participants-list/${params.id}`} id={styles.participants_link}>
+          <IconButton id={styles.participants_link}>
+            <GroupsIcon fontSize="large" />
+          </IconButton>
+        </Link>
+      )}
     </Navbar>
   );
 }

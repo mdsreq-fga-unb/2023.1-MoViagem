@@ -92,4 +92,8 @@ export class GuestService {
 
     await this.guestRepository.toggleGuestEditing(user.id, travel.id);
   }
+
+  async delete(userId: number, travelId: number): Promise<void> {
+    return this.guestRepository.removeGuestFromTravel(userId, travelId);
+  }
 }

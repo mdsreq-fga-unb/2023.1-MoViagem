@@ -10,7 +10,12 @@ interface EventModalProps {
   fetchDayEvents: () => void;
 }
 
-const EventModal: React.FC<EventModalProps> = ({ travelId: id, selectedDate, closeModal, fetchDayEvents }) => {
+const EventModal: React.FC<EventModalProps> = ({
+  travelId: id,
+  selectedDate,
+  closeModal,
+  fetchDayEvents,
+}) => {
   const [transportType, setTransportType] = useState("");
   const [departureLocation, setDepartureLocation] = useState("");
   const [eventTime, setEventTime] = useState("");
@@ -113,7 +118,7 @@ const EventModal: React.FC<EventModalProps> = ({ travelId: id, selectedDate, clo
             <button className={styles.submitButton} onClick={handleSaveEvent}>
               Salvar
             </button>
-            <button className={styles.submitButton} onClick={closeModal}>
+            <button className={styles.cancelButton} onClick={closeModal}>
               Cancelar
             </button>
           </div>

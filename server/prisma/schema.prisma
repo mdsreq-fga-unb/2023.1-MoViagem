@@ -11,12 +11,13 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement()) @db.UnsignedInt
-  email    String   @unique @db.VarChar(50)
-  name     String   @db.VarChar(100)
-  password String   @db.VarChar(100)
-  travels  Travel[]
-  guests   Guests[]
+  id          Int           @id @default(autoincrement()) @db.UnsignedInt
+  email       String        @unique @db.VarChar(50)
+  name        String        @db.VarChar(100)
+  password    String        @db.VarChar(100)
+  travels     Travel[]
+  guests      Guests[]
+  EventGuests EventGuests[]
 }
 
 model Travel {
@@ -37,8 +38,8 @@ model Travel {
 model Host {
   id        Int      @id @default(autoincrement()) @db.UnsignedInt
   type      String   @db.VarChar(50)
-  startTime DateTime @db.DateTime
-  endTime   DateTime @db.DateTime
+  startTime DateTime @db.DateTime(0)
+  endTime   DateTime @db.DateTime(0)
   local     String   @db.VarChar(100)
   price     Decimal  @db.Decimal(10, 2)
   contact   String   @db.VarChar(50)
@@ -51,8 +52,8 @@ model Transport {
   type       String   @db.VarChar(50)
   startLocal String   @db.VarChar(100)
   endLocal   String   @db.VarChar(100)
-  startTime  DateTime @db.DateTime
-  endTime    DateTime @db.DateTime
+  startTime  DateTime @db.DateTime(0)
+  endTime    DateTime @db.DateTime(0)
   price      Decimal  @db.Decimal(10, 2)
   contacts   String   @db.VarChar(50)
   travelId   Int      @unique @db.UnsignedInt
@@ -60,14 +61,15 @@ model Transport {
 }
 
 model Event {
-  id                Int      @id @default(autoincrement()) @db.UnsignedInt
-  transportType     String   @db.VarChar(50)
-  departureLocation String   @db.VarChar(100)
-  eventTime         DateTime @db.DateTime
-  eventValue        Decimal  @db.Decimal(10, 2)
-  eventExtras       String   @db.Text
-  travelId          Int      @db.UnsignedInt
-  travel            Travel   @relation(fields: [travelId], references: [id], onDelete: Cascade)
+  id                Int           @id @default(autoincrement()) @db.UnsignedInt
+  transportType     String        @db.VarChar(50)
+  departureLocation String        @db.VarChar(100)
+  eventTime         DateTime      @db.DateTime(0)
+  eventValue        Decimal       @db.Decimal(10, 2)
+  eventExtras       String        @db.Text
+  travelId          Int           @db.UnsignedInt
+  travel            Travel        @relation(fields: [travelId], references: [id], onDelete: Cascade)
+  guests            EventGuests[]
 }
 
 model Guests {
@@ -79,4 +81,13 @@ model Guests {
   canEdit Boolean @default(false) @db.TinyInt
 
   @@id([userId, travelId])
+}
+
+model EventGuests {
+  userId  Int   @db.UnsignedInt
+  eventId Int   @db.UnsignedInt
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@id([userId, eventId])
 }

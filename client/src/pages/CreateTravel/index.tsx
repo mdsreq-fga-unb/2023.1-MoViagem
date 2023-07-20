@@ -101,10 +101,11 @@ export default function CreateTravel() {
           <div className={styles.inputContainer}>
             <label htmlFor="proposito">Proposito:</label>
             <textarea
-              placeholder="Proposito"
+              placeholder="Ex: Ir visitar ..."
               name="proposito"
               rows={3}
               className={styles.textAreaBox}
+              maxLength={100}
               required
               value={proposito}
               onChange={(event) => {
@@ -114,7 +115,7 @@ export default function CreateTravel() {
           </div>
 
           <div className={styles.inputContainer}>
-            <label htmlFor="numDePessoas">Numero de Pessoas:</label>
+            <label htmlFor="numDePessoas">Número de Pessoas Esperado:</label>
             <input
               type="Number"
               name="numDePessoas"
