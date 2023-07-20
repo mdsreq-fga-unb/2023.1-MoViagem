@@ -6,6 +6,7 @@ import {
   CreateTravelRequestDTO,
   TravelsResponseDTO,
   TravelsWithInfoResponseDTO,
+  UpdateTravelRequestDTO,
 } from "../dto/travel.dto";
 import { TravelRepository } from "./../repositories/travel.repository";
 import { WeatherForecastService } from "./weather-forecast.service";
@@ -65,7 +66,7 @@ export class TravelService {
     return new TravelsResponseDTO(travel);
   }
 
-  async edit_Travel(id: number, dto: CreateTravelRequestDTO): Promise<void> {
+  async edit_Travel(id: number, dto: UpdateTravelRequestDTO): Promise<void> {
     if (dto.startDate > dto.endDate) {
       throw new BadRequestException("data de inicio não pode ser depois da data de fim");
     }
@@ -80,9 +81,16 @@ export class TravelService {
       numParticipants: dto.numParticipants,
       latitude: coordinates !== null ? coordinates.lat : null,
       longitude: coordinates !== null ? coordinates.lon : null,
+      Atmosphere: dto.Atmosphere,
+      Clear: dto.Clear,
+      Clouds: dto.Clouds,
+      Drizzle: dto.Drizzle,
+      Rain: dto.Rain,
+      Snow: dto.Snow,
+      Thunderstorm: dto.Thunderstorm,
     });
 
-    this.weatherForecastService.getForecastsOfAllTravels();
+    await this.weatherForecastService.getForecastsOfAllTravels();
   }
 
   async delete(id: number): Promise<void> {

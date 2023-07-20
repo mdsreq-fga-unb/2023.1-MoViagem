@@ -3,13 +3,13 @@ import CancelIcon from "@mui/icons-material/CancelOutlined";
 import PlaneIcon from "@mui/icons-material/Flight";
 import NotificationIcon from "@mui/icons-material/Notifications";
 import { Badge, IconButton, Menu } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { WeatherForecastResponseDTO } from "../../api/dto/notification.dto";
 import { requestGetNotifications } from "../../api/requests/notification-requests";
 import LogoMoViagem from "../../assets/LogoMoViagem.png";
-import { AuthContext } from "../../auth/context/auth-provider";
+import useAuth from "../../auth/context/auth-hook";
 import Notification from "./Notification";
 import styles from "./styles.module.scss";
 
@@ -26,7 +26,7 @@ export default function Navbar({
   pageName,
   selectedPage,
 }: React.PropsWithChildren<NavbarProps>) {
-  const auth = useContext(AuthContext);
+  const auth = useAuth();
   const navigate = useNavigate();
 
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
@@ -35,26 +35,27 @@ export default function Navbar({
   const [notifications, setNotifications] = useState<WeatherForecastResponseDTO[]>([]);
 
   useEffect(() => {
-    if (auth?.userInfo) {
-      async function getNotifications() {
-        const response = await requestGetNotifications();
+    async function getNotifications() {
+      const response = await requestGetNotifications();
 
-        if (response instanceof ErrorResponse) {
-          alert(response.message);
-          return;
-        }
-
-        setNotifications(response.data);
+      if (response instanceof ErrorResponse) {
+        alert(response.message);
+        return;
       }
 
+      setNotifications(response.data);
+    }
+
+    if (auth.userInfo !== null) {
       getNotifications();
-      const interval = setInterval(getNotifications, 60000);
+      // 10 seconds
+      const interval = setInterval(getNotifications, 10000);
 
       return () => {
         clearInterval(interval);
       };
     }
-  }, []);
+  }, [auth?.userInfo]);
 
   function handleMenuOpen(event: React.MouseEvent<HTMLButtonElement>) {
     setAnchorElement(event.currentTarget);

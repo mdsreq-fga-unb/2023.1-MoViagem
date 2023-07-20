@@ -7,6 +7,7 @@ import {
   CreateTravelRequestDTO,
   TravelsResponseDTO,
   TravelsWithInfoResponseDTO,
+  UpdateTravelRequestDTO,
 } from "../dto/travel.dto";
 import { TravelService } from "./../services/travel.service";
 
@@ -22,7 +23,7 @@ export class TravelController {
   }
 
   @Put("/:id")
-  async edit(@Param("id") id: number, @Body() dto: CreateTravelRequestDTO): Promise<void> {
+  async edit(@Param("id") id: number, @Body() dto: UpdateTravelRequestDTO): Promise<void> {
     return this.travelService.edit_Travel(id, dto);
   }
 

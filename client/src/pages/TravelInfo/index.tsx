@@ -3,6 +3,7 @@ import FlightIcon from "@mui/icons-material/Flight";
 import GiteIcon from "@mui/icons-material/Gite";
 import GroupsIcon from "@mui/icons-material/Groups";
 import {
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -25,6 +26,16 @@ import {
   convertDateToDateInputValue,
 } from "../../utils/date-utilities";
 import styles from "./styles.module.scss";
+
+interface TravelNotifications {
+  Thunderstorm: boolean;
+  Drizzle: boolean;
+  Rain: boolean;
+  Snow: boolean;
+  Atmosphere: boolean;
+  Clouds: boolean;
+  Clear: boolean;
+}
 
 export default function TravelInfo() {
   const params = useParams();
@@ -57,6 +68,18 @@ export default function TravelInfo() {
   const [horaChegadaTransport, setHoraChegadaTransport] = useState<Date | null>(null);
   const [precoTransport, setPrecoTransport] = useState<number>(0);
   const [contatoTransport, setContatoTransport] = useState<string>("");
+
+  // Modal variables
+  const [travelNotifications, setTravelNotifications] = useState<TravelNotifications>({
+    Thunderstorm: false,
+    Drizzle: false,
+    Rain: false,
+    Snow: false,
+    Atmosphere: false,
+    Clouds: false,
+    Clear: false,
+  });
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [tryingDeleteTravel, setTryingDeleteTravel] = useState<boolean>(false);
 
@@ -119,6 +142,17 @@ export default function TravelInfo() {
       setPrecoTransport(0);
       setTipoTransporteTransport("");
     }
+
+    // Set modal variables
+    setTravelNotifications({
+      Thunderstorm: response.data.Thunderstorm,
+      Drizzle: response.data.Drizzle,
+      Rain: response.data.Rain,
+      Snow: response.data.Snow,
+      Atmosphere: response.data.Atmosphere,
+      Clouds: response.data.Clouds,
+      Clear: response.data.Clear,
+    });
   }, [params.id]);
 
   useEffect(() => {
@@ -139,6 +173,7 @@ export default function TravelInfo() {
       endDate: dataFim,
       description: proposito,
       numParticipants: parseInt(numDePessoas),
+      ...travelNotifications,
     });
 
     if (response instanceof ErrorResponse) {
@@ -149,6 +184,33 @@ export default function TravelInfo() {
     alert("Viagem editada com sucesso");
     setWasEdited(!wasEdited);
     navigate("/travels");
+  }
+
+  async function handleChangeSwitch(dataToUpdate: TravelNotifications) {
+    setTravelNotifications(dataToUpdate);
+
+    if (!dataInicio || !dataFim) {
+      alert("Data inválida");
+      return;
+    }
+
+    setLoading(true);
+
+    const response = await requestEditTravel(parseInt(params.id!), {
+      local,
+      startDate: dataInicio,
+      endDate: dataFim,
+      description: proposito,
+      numParticipants: parseInt(numDePessoas),
+      ...dataToUpdate,
+    });
+
+    if (response instanceof ErrorResponse) {
+      alert("Erro ao editar viagem\n" + response.message);
+      return;
+    }
+
+    setLoading(false);
   }
 
   const handleDeleteTravel = () => {
@@ -406,36 +468,99 @@ export default function TravelInfo() {
           <DialogContentText>
             Para limitar as notificações de clima que irá receber, selecione alguma opção abaixo.
           </DialogContentText>
-          <div id={styles.switch_container}>
-            <div>
-              <p>Tempestade</p>
-              <Switch />
+          {loading ? (
+            <div className={styles.loading_container}>
+              <CircularProgress />
+              <p>Modificando configuração das notificações...</p>
             </div>
-            <div>
-              <p>Garoa</p>
-              <Switch />
+          ) : (
+            <div id={styles.switch_container}>
+              <div>
+                <p>Tempestade</p>
+                <Switch
+                  checked={travelNotifications.Thunderstorm}
+                  onChange={() => {
+                    handleChangeSwitch({
+                      ...travelNotifications,
+                      Thunderstorm: !travelNotifications.Thunderstorm,
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <p>Garoa</p>
+                <Switch
+                  checked={travelNotifications.Drizzle}
+                  onChange={() => {
+                    handleChangeSwitch({
+                      ...travelNotifications,
+                      Drizzle: !travelNotifications.Drizzle,
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <p>Chuva</p>
+                <Switch
+                  checked={travelNotifications.Rain}
+                  onChange={() => {
+                    handleChangeSwitch({
+                      ...travelNotifications,
+                      Rain: !travelNotifications.Rain,
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <p>Neve</p>
+                <Switch
+                  checked={travelNotifications.Snow}
+                  onChange={() => {
+                    handleChangeSwitch({
+                      ...travelNotifications,
+                      Snow: !travelNotifications.Snow,
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <p>Atmosfera</p>
+                <Switch
+                  checked={travelNotifications.Atmosphere}
+                  onChange={() => {
+                    handleChangeSwitch({
+                      ...travelNotifications,
+                      Atmosphere: !travelNotifications.Atmosphere,
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <p>Nublado</p>
+                <Switch
+                  checked={travelNotifications.Clouds}
+                  onChange={() => {
+                    handleChangeSwitch({
+                      ...travelNotifications,
+                      Clouds: !travelNotifications.Clouds,
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <p>Céu Limpo</p>
+                <Switch
+                  checked={travelNotifications.Clear}
+                  onChange={() => {
+                    handleChangeSwitch({
+                      ...travelNotifications,
+                      Clear: !travelNotifications.Clear,
+                    });
+                  }}
+                />
+              </div>
             </div>
-            <div>
-              <p>Chuva</p>
-              <Switch />
-            </div>
-            <div>
-              <p>Neve</p>
-              <Switch />
-            </div>
-            <div>
-              <p>Atmosfera</p>
-              <Switch />
-            </div>
-            <div>
-              <p>Nublado</p>
-              <Switch />
-            </div>
-            <div>
-              <p>Céu Limpo</p>
-              <Switch />
-            </div>
-          </div>
+          )}
         </DialogContent>
         <DialogActions>
           <button className={styles.normalbutton} type="reset" onClick={toggleModal}>

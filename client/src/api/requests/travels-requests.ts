@@ -11,6 +11,7 @@ import {
   TransportResponseDTO,
   TravelsResponseDTO,
   TravelsWithInfoResponseDTO,
+  UpdateTravelRequestDTO,
 } from "../dto/travels-dto";
 
 export function requestCreateTravel(form: CreateTravelRequestDTO) {
@@ -51,8 +52,8 @@ export async function requestDeleteTravel(id: number) {
   });
 }
 
-export function requestEditTravel(id: number, form: CreateTravelRequestDTO) {
-  return request<CreateTravelRequestDTO, never>({
+export function requestEditTravel(id: number, form: UpdateTravelRequestDTO) {
+  return request<UpdateTravelRequestDTO, never>({
     method: "PUT",
     url: `travel/${id}`,
     body: form,
