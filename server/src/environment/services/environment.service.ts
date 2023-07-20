@@ -45,6 +45,10 @@ export class EnvironmentService {
     return corsOriginStr.split(";");
   }
 
+  get openWeatherMapAppId(): string {
+    return this.config.get("OPEN_WEATHER_MAP_APP_ID", "invalid_key");
+  }
+
   private parseStringToSeconds(env: string): number {
     return ms(env) / 1000;
   }

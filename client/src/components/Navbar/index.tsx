@@ -1,11 +1,16 @@
 import AccountIcon from "@mui/icons-material/AccountCircle";
 import CancelIcon from "@mui/icons-material/CancelOutlined";
 import PlaneIcon from "@mui/icons-material/Flight";
-import { IconButton } from "@mui/material";
-import { useContext } from "react";
+import NotificationIcon from "@mui/icons-material/Notifications";
+import { Badge, IconButton, Menu } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ErrorResponse } from "../../api/api-instance";
+import { WeatherForecastResponseDTO } from "../../api/dto/notification.dto";
+import { requestGetNotifications } from "../../api/requests/notification-requests";
 import LogoMoViagem from "../../assets/LogoMoViagem.png";
-import { AuthContext } from "../../auth/context/auth-provider";
+import useAuth from "../../auth/context/auth-hook";
+import Notification from "./Notification";
 import styles from "./styles.module.scss";
 
 const NavbarPages = {
@@ -21,8 +26,44 @@ export default function Navbar({
   pageName,
   selectedPage,
 }: React.PropsWithChildren<NavbarProps>) {
-  const auth = useContext(AuthContext);
+  const auth = useAuth();
   const navigate = useNavigate();
+
+  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  const menuOpen = anchorElement !== null;
+
+  const [notifications, setNotifications] = useState<WeatherForecastResponseDTO[]>([]);
+
+  useEffect(() => {
+    async function getNotifications() {
+      const response = await requestGetNotifications();
+
+      if (response instanceof ErrorResponse) {
+        alert(response.message);
+        return;
+      }
+
+      setNotifications(response.data);
+    }
+
+    if (auth.userInfo !== null) {
+      getNotifications();
+      // 10 seconds
+      const interval = setInterval(getNotifications, 10000);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [auth?.userInfo]);
+
+  function handleMenuOpen(event: React.MouseEvent<HTMLButtonElement>) {
+    setAnchorElement(event.currentTarget);
+  }
+
+  function handleMenuClose() {
+    setAnchorElement(null);
+  }
 
   function handleLogout() {
     if (auth === undefined || auth.userInfo === null) {
@@ -58,9 +99,41 @@ export default function Navbar({
       <div id={styles.topBar}>
         <h1>{pageName}</h1>
         {auth?.userInfo && (
-          <div id={styles.topBarMenu} onClick={navigateToUserInfo}>
-            <AccountIcon fontSize="large" />
-            <p>{auth.userInfo.name}</p>
+          <div id={styles.topBarMenu}>
+            <Badge
+              badgeContent={notifications.length}
+              color="error"
+              onClick={handleMenuOpen}
+              style={{
+                zIndex: 1,
+              }}
+            >
+              <NotificationIcon fontSize="large" />
+            </Badge>
+            <Menu
+              anchorEl={anchorElement}
+              open={menuOpen}
+              onClose={handleMenuClose}
+              slotProps={{
+                paper: {
+                  style: {
+                    minHeight: "50vh",
+                    maxHeight: "80vh",
+                    width: "20vw",
+                  },
+                },
+              }}
+            >
+              <div className={styles.notificationMenu}>
+                {notifications.map((notification) => (
+                  <Notification data={notification} />
+                ))}
+              </div>
+            </Menu>
+            <span onClick={navigateToUserInfo}>
+              <AccountIcon fontSize="large" />
+              <p>{auth.userInfo.name}</p>
+            </span>
           </div>
         )}
       </div>

@@ -1,5 +1,5 @@
 import { Prisma, Travel } from "@prisma/client";
-import { IsDate, IsInt, IsPositive, Length } from "class-validator";
+import { IsBoolean, IsDate, IsInt, IsPositive, Length } from "class-validator";
 import { HostResponseDTO } from "./host.dto";
 import { TransportResponseDTO } from "./transport.dto";
 
@@ -30,6 +30,29 @@ export class CreateTravelRequestDTO {
   numParticipants: number;
 }
 
+export class UpdateTravelRequestDTO extends CreateTravelRequestDTO {
+  @IsBoolean()
+  Thunderstorm: boolean;
+
+  @IsBoolean()
+  Drizzle: boolean;
+
+  @IsBoolean()
+  Rain: boolean;
+
+  @IsBoolean()
+  Snow: boolean;
+
+  @IsBoolean()
+  Atmosphere: boolean;
+
+  @IsBoolean()
+  Clear: boolean;
+
+  @IsBoolean()
+  Clouds: boolean;
+}
+
 export class TravelsResponseDTO {
   id: number;
   local: string;
@@ -37,6 +60,13 @@ export class TravelsResponseDTO {
   endDate: Date;
   numParticipants: number;
   description: string;
+  Thunderstorm: boolean;
+  Drizzle: boolean;
+  Rain: boolean;
+  Snow: boolean;
+  Atmosphere: boolean;
+  Clear: boolean;
+  Clouds: boolean;
 
   constructor(travel: Travel) {
     this.id = travel.id;
@@ -45,6 +75,13 @@ export class TravelsResponseDTO {
     this.endDate = travel.endDate;
     this.description = travel.description;
     this.numParticipants = travel.numParticipants;
+    this.Thunderstorm = travel.Thunderstorm;
+    this.Drizzle = travel.Drizzle;
+    this.Rain = travel.Rain;
+    this.Snow = travel.Snow;
+    this.Atmosphere = travel.Atmosphere;
+    this.Clear = travel.Clear;
+    this.Clouds = travel.Clouds;
   }
 }
 

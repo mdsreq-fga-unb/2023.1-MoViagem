@@ -21,18 +21,29 @@ model User {
 }
 
 model Travel {
-  id              Int        @id @default(autoincrement()) @db.UnsignedInt
-  userId          Int        @db.UnsignedInt
-  user            User       @relation(fields: [userId], references: [id], onDelete: Restrict)
-  local           String     @db.VarChar(100)
-  startDate       DateTime   @db.Date
-  endDate         DateTime   @db.Date
-  description     String     @db.VarChar(100)
-  numParticipants Int        @db.UnsignedInt
+  id              Int              @id @default(autoincrement()) @db.UnsignedInt
+  userId          Int              @db.UnsignedInt
+  user            User             @relation(fields: [userId], references: [id], onDelete: Restrict)
+  local           String           @db.VarChar(100)
+  latitude        Float?           @db.Double
+  longitude       Float?           @db.Double
+  startDate       DateTime         @db.Date
+  endDate         DateTime         @db.Date
+  description     String           @db.VarChar(100)
+  numParticipants Int              @db.UnsignedInt
   host            Host?
   transport       Transport?
   events          Event[]
   guests          Guests[]
+  weatherForecast WeatherForecast?
+
+  Thunderstorm  Boolean @db.TinyInt @default(true)
+  Drizzle Boolean @db.TinyInt @default(true)
+  Rain Boolean @db.TinyInt @default(true)
+  Snow Boolean @db.TinyInt @default(true)
+  Atmosphere Boolean @db.TinyInt @default(true)
+  Clear Boolean @db.TinyInt @default(true)
+  Clouds Boolean @db.TinyInt @default(true)
 }
 
 model Host {
@@ -90,4 +101,32 @@ model EventGuests {
   event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@id([userId, eventId])
+}
+
+model WeatherForecast {
+  travelId Int    @id @db.UnsignedInt
+  travel   Travel @relation(fields: [travelId], references: [id], onDelete: Cascade)
+
+  date      DateTime @db.Date
+  minTemp   Float    @db.Double
+  maxTemp   Float    @db.Double
+  humidity  Float    @db.Double
+  windSpeed Float    @db.Double
+  rainProb  Float    @db.Double
+
+  weatherType WeatherType
+  weatherDesc String      @db.VarChar(50)
+  weatherIcon String      @db.VarChar(10)
+
+  alert String? @db.Text
+}
+
+enum WeatherType {
+  Thunderstorm
+  Drizzle
+  Rain
+  Snow
+  Atmosphere
+  Clear
+  Clouds
 }

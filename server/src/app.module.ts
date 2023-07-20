@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { APP_GUARD } from "@nestjs/core";
+import { ScheduleModule } from "@nestjs/schedule";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { AuthModule } from "./auth/auth.module";
 import { EnvironmentModule } from "./environment/environment.module";
@@ -14,6 +15,7 @@ import { TravelModule } from "./travel/travel.module";
     EnvironmentModule,
     AuthModule,
     TravelModule,
+    ScheduleModule.forRoot(),
   ],
   providers: [
     {

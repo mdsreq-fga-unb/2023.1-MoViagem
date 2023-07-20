@@ -1,0 +1,51 @@
+@import "../../../variables.scss";
+
+.notificationBox {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  text-align: center;
+
+  height: 20vh;
+  width: 100%;
+
+  background: $color-primary;
+  border: 3px solid rgba(201, 255, 153, 1);
+  border-radius: 20px;
+  color: rgba(201, 255, 153, 1);
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  row-gap: 0px;
+}
+
+.notificationTitle {
+  margin: 2vh auto;
+  font-size: 1.2rem;
+}
+
+.notificationText {
+  margin: 0 auto;
+  font-style: italic;
+}
+
+.notificationDate {
+  margin: 2vh auto;
+}
+
+.notificationImage {
+  margin: 0 auto;
+  height: 12vh;
+  width: 12vh;
+}
+
+.notificationDescription {
+  margin: 0 auto;
+  font-style: italic;
+  font-size: 1.1rem;
+}

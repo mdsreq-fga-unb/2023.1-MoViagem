@@ -1,18 +1,23 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
+import { GeocodingService } from "src/travel/services/geocoding.service";
 import { HostResponseDTO } from "../dto/host.dto";
 import { TransportResponseDTO } from "../dto/transport.dto";
 import {
   CreateTravelRequestDTO,
   TravelsResponseDTO,
   TravelsWithInfoResponseDTO,
+  UpdateTravelRequestDTO,
 } from "../dto/travel.dto";
 import { GuestRepository } from "../repositories/guest.repository";
 import { TravelRepository } from "./../repositories/travel.repository";
+import { WeatherForecastService } from "./weather-forecast.service";
 
 @Injectable()
 export class TravelService {
   constructor(
     private travelRepository: TravelRepository,
+    private geocodingService: GeocodingService,
+    private weatherForecastService: WeatherForecastService,
     private guestRepository: GuestRepository
   ) {}
 
@@ -33,6 +38,8 @@ export class TravelService {
       throw new BadRequestException("data de inicio não pode ser depois da data de fim");
     }
 
+    const coordinates = await this.geocodingService.getCoordinates(dto.local);
+
     await this.travelRepository.create({
       user: {
         connect: {
@@ -44,7 +51,11 @@ export class TravelService {
       endDate: dto.endDate,
       description: dto.description,
       numParticipants: dto.numParticipants,
+      latitude: coordinates?.lat,
+      longitude: coordinates?.lon,
     });
+
+    this.weatherForecastService.getForecastsOfAllTravels();
   }
 
   async getTravels(id: number): Promise<TravelsResponseDTO> {
@@ -60,11 +71,13 @@ export class TravelService {
   async edit_Travel(
     loggedInUserId: number,
     travelId: number,
-    dto: CreateTravelRequestDTO
+    dto: UpdateTravelRequestDTO
   ): Promise<void> {
     if (dto.startDate > dto.endDate) {
       throw new BadRequestException("data de inicio não pode ser depois da data de fim");
     }
+
+    const coordinates = await this.geocodingService.getCoordinates(dto.local);
 
     const loggedInIsGuest = await this.guestRepository.doesUserIsGuest(loggedInUserId, travelId);
 
@@ -82,7 +95,18 @@ export class TravelService {
       endDate: dto.endDate,
       description: dto.description,
       numParticipants: dto.numParticipants,
+      latitude: coordinates !== null ? coordinates.lat : null,
+      longitude: coordinates !== null ? coordinates.lon : null,
+      Atmosphere: dto.Atmosphere,
+      Clear: dto.Clear,
+      Clouds: dto.Clouds,
+      Drizzle: dto.Drizzle,
+      Rain: dto.Rain,
+      Snow: dto.Snow,
+      Thunderstorm: dto.Thunderstorm,
     });
+
+    await this.weatherForecastService.getForecastsOfAllTravels();
   }
 
   async delete(loggedInUserId: number, travelId: number): Promise<void> {
@@ -107,13 +131,7 @@ export class TravelService {
     }
 
     return new TravelsWithInfoResponseDTO({
-      id: travel.id,
-      description: travel.description,
-      startDate: travel.startDate,
-      endDate: travel.endDate,
-      local: travel.local,
-      numParticipants: travel.numParticipants,
-      userId: travel.userId,
+      ...travel,
       host: travel.host != null ? new HostResponseDTO(travel.host) : null,
       transport: travel.transport != null ? new TransportResponseDTO(travel.transport) : null,
     });

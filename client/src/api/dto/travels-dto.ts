@@ -8,6 +8,16 @@ export interface CreateTravelRequestDTO {
   numParticipants: number;
 }
 
+export interface UpdateTravelRequestDTO extends CreateTravelRequestDTO {
+  Thunderstorm: boolean;
+  Drizzle: boolean;
+  Rain: boolean;
+  Snow: boolean;
+  Atmosphere: boolean;
+  Clear: boolean;
+  Clouds: boolean;
+}
+
 export interface CreateTransportRequestDTO {
   type: string;
   startLocal: string;
@@ -64,6 +74,13 @@ export interface TravelsResponseDTO {
   endDate: string;
   description: string;
   numParticipants: number;
+  Thunderstorm: boolean;
+  Drizzle: boolean;
+  Rain: boolean;
+  Snow: boolean;
+  Atmosphere: boolean;
+  Clear: boolean;
+  Clouds: boolean;
 }
 
 export interface TransportResponseDTO {
