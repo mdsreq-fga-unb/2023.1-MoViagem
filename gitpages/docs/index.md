@@ -1,15 +1,15 @@
 ## Link para as apresentações das unidades
 
-<a href="https://youtu.be/pDSMaeipmTE"> Link para a apresentação da unidade 1.</a>
+<a href="https://youtu.be/pDSMaeipmTE"> Link para a apresentação da unidade 1</a>
 
-<a href="https://youtu.be/hxYFbL8RVpI"> Link para a apresentação da unidade 2.</a>
+<a href="https://youtu.be/hxYFbL8RVpI"> Link para a apresentação da unidade 2</a>
 
 <a href= "https://youtu.be/bC1H2pZSZYM"> Link para a apresentação da unidade 4</a>
 
-[Link da gravação da reunião da entrega do Mvp 1](https://youtu.be/M7iDWWLVH5U)
+[Link da gravação da apresentação para o cliente do Mvp 1](https://youtu.be/M7iDWWLVH5U)
 <br>
 
-[Link da gravação da reunião da entrega do Mvp 2](https://youtu.be/RGKqq9TrIJY)
+[Link da gravação da apresentação para o cliente do Mvp 2](https://youtu.be/RGKqq9TrIJY)
 <br>
 
 ## Sobre
