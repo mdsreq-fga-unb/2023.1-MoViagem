@@ -44,10 +44,13 @@
 ## **Fluxos de Exceção**
 
 1. O usuário não selecionou nenhum filtro para listar suas viagens.
+   <br></br>
    a. Se nenhum filtro for selecionado, o usuário terá novamente acesso a todas as viagens criadas.
 
 ## **Regras de Negócio**
 
 1. Escolha do filtro.
+   <br></br>
    a. Quando os filtros de tempo forem selecionados, deve-se mostrar as respectivas viagens em relação a data que o usuário está acessando o site.
+   <br></br>
    b. Quando o filtro de viagem como convidado for selecionado, deve-se mostrar as viagens que o usuário está como convidado.
