@@ -167,7 +167,11 @@ export class WeatherForecastService {
 
   async getForecastOfUserTravels(userId: number): Promise<WeatherForecastResponseDTO[]> {
     const travelIds = await this.travelRepository.findAllIdsByUser(userId);
-    const forecasts = await this.weatherForecastRepository.findAllByTravelIds(travelIds);
+    const guestTravelIds = await this.travelRepository.findAllIdsBeingGuest(userId);
+    const forecasts = await this.weatherForecastRepository.findAllByTravelIds([
+      ...travelIds,
+      ...guestTravelIds,
+    ]);
 
     return forecasts.map((forecast) => new WeatherForecastResponseDTO(forecast));
   }

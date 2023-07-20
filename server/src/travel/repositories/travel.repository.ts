@@ -67,6 +67,23 @@ export class TravelRepository {
     return travels.map((travel) => travel.id);
   }
 
+  async findAllIdsBeingGuest(userId: number): Promise<number[]> {
+    const travels = await this.prismaService.travel.findMany({
+      where: {
+        guests: {
+          some: {
+            userId,
+          },
+        },
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    return travels.map((travel) => travel.id);
+  }
+
   async deleteById(id: number): Promise<void> {
     await this.prismaService.travel.delete({
       where: {
