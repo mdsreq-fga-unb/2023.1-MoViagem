@@ -36,6 +36,14 @@ model Travel {
   events          Event[]
   guests          Guests[]
   weatherForecast WeatherForecast?
+
+  Thunderstorm  Boolean @db.TinyInt @default(true)
+  Drizzle Boolean @db.TinyInt @default(true)
+  Rain Boolean @db.TinyInt @default(true)
+  Snow Boolean @db.TinyInt @default(true)
+  Atmosphere Boolean @db.TinyInt @default(true)
+  Clear Boolean @db.TinyInt @default(true)
+  Clouds Boolean @db.TinyInt @default(true)
 }
 
 model Host {

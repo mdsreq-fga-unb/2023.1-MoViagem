@@ -1,8 +1,16 @@
 import CalendarIcon from "@mui/icons-material/CalendarToday";
-import GroupsIcon from "@mui/icons-material/Groups";
 import FlightIcon from "@mui/icons-material/Flight";
 import GiteIcon from "@mui/icons-material/Gite";
-import { IconButton } from "@mui/material";
+import GroupsIcon from "@mui/icons-material/Groups";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  Switch,
+} from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
@@ -51,6 +59,8 @@ export default function TravelInfo() {
   const [contatoTransport, setContatoTransport] = useState<string>("");
 
   const [tryingDeleteTravel, setTryingDeleteTravel] = useState<boolean>(false);
+
+  const [open, setOpen] = useState<boolean>(false);
 
   // Travel fetch request
   const fetchTravel = useCallback(async () => {
@@ -173,6 +183,10 @@ export default function TravelInfo() {
   const handleEditTransport = () => {
     navigate(`/edit-transport/${transportId}`);
   };
+
+  async function toggleModal() {
+    setOpen(!open);
+  }
 
   return (
     <Navbar pageName="Informações da Viagem">
@@ -380,6 +394,55 @@ export default function TravelInfo() {
           </IconButton>
         </Link>
       )}
+      <div id={styles.forecast_button}>
+        <button className={styles.normalbutton} onClick={toggleModal}>
+          Personalizar notificações
+        </button>
+      </div>
+      <Dialog open={open} onClose={toggleModal} fullWidth>
+        <DialogTitle>Adicionar Participante</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText>
+            Para limitar as notificações de clima que irá receber, selecione alguma opção abaixo.
+          </DialogContentText>
+          <div id={styles.switch_container}>
+            <div>
+              <p>Tempestade</p>
+              <Switch />
+            </div>
+            <div>
+              <p>Garoa</p>
+              <Switch />
+            </div>
+            <div>
+              <p>Chuva</p>
+              <Switch />
+            </div>
+            <div>
+              <p>Neve</p>
+              <Switch />
+            </div>
+            <div>
+              <p>Atmosfera</p>
+              <Switch />
+            </div>
+            <div>
+              <p>Nublado</p>
+              <Switch />
+            </div>
+            <div>
+              <p>Céu Limpo</p>
+              <Switch />
+            </div>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <button className={styles.normalbutton} type="reset" onClick={toggleModal}>
+            Fechar
+          </button>
+        </DialogActions>
+      </Dialog>
     </Navbar>
   );
 }

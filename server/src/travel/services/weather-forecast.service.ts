@@ -153,15 +153,18 @@ export class WeatherForecastService {
         windSpeed: forecast.daily.wind_speed,
         alert: forecast.alert !== undefined ? forecast.alert.description : null,
       };
-
-      await this.weatherForecastRepository.upsert(travel.id, data, {
-        ...data,
-        travel: {
-          connect: {
-            id: travel.id,
+      if (travel[data.weatherType]) {
+        await this.weatherForecastRepository.upsert(travel.id, data, {
+          ...data,
+          travel: {
+            connect: {
+              id: travel.id,
+            },
           },
-        },
-      });
+        });
+      } else {
+        await this.weatherForecastRepository.deleteByTravelId(travel.id);
+      }
     }
   }
 

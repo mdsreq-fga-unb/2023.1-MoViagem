@@ -38,18 +38,18 @@ export default function Navbar({
     if (auth?.userInfo) {
       async function getNotifications() {
         const response = await requestGetNotifications();
-  
+
         if (response instanceof ErrorResponse) {
           alert(response.message);
           return;
         }
-  
+
         setNotifications(response.data);
       }
-  
+
       getNotifications();
       const interval = setInterval(getNotifications, 60000);
-  
+
       return () => {
         clearInterval(interval);
       };
@@ -99,7 +99,7 @@ export default function Navbar({
         <h1>{pageName}</h1>
         {auth?.userInfo && (
           <div id={styles.topBarMenu}>
-            <Badge badgeContent={1} color="error" onClick={handleMenuOpen}>
+            <Badge badgeContent={notifications.length} color="error" onClick={handleMenuOpen}>
               <NotificationIcon fontSize="large" />
             </Badge>
             <Menu
