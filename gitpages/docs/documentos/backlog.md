@@ -41,3 +41,6 @@ Nossos requisitos foram todos estruturados em forma de User Stories, gerando o s
 | US022 | Eu, como usuário, desejo poder excluir atividades do cronograma de uma viagem para ter um planejamento sempre atualizado e organizado.                                                                            | EP006 |
 | US023 | Eu, como usuário, desejo receber notícias sobre o destino de minhas viagens para me manter atualizado sobre a situação do local.                                                                                  | EP006 |
 | US024 | Eu, como usuário, desejo poder criar alertas personalizados sobre o destino de minhas viagens para que eu tenha controle das notificações que irei receber.                                                       | EP006 |
+
+### Foi retirada a seguinte User Story durante a execução da Unidade 4:
+ - Antiga US23 | Eu, como usuário, desejo receber notificações de eventos que possam ser um impedimento para a viagem para que possa fazer mudanças na programação.
