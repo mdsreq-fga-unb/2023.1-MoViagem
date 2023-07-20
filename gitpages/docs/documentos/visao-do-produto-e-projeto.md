@@ -337,11 +337,21 @@ Algo importante a se destacar é da ferramenta como chatGPT que foi utilizada co
 
 <br>
 
-Na unidade 3, foi introduzida os metodos de construção de backlog PBB E BDD que consiste em metodos que auxiliam na construção do Product Backlog. Também foi iniciada o processo de deselvovimento do produto de sotware representado pelo nosso backlog.
+Na unidade 3, foram introduzidos os métodos de construção de backlog PBB E BDD que consiste em metodos que auxiliam na construção do Product Backlog. Também foi iniciada o processo de desenvolvimento do produto de sotware representado pelo nosso backlog.
 
 Na disciplina foram realizadas aulas de trabalho com o grupo para a construção do Canvas PBB, BDD e Backlog Safe.
 
 Para o grupo, a unidade 3 foi muito proveitosa e trabalhosa na mesma proporção. Lidar com as atividades de Engenharia de requisitos e também lidar com os problemas da implementação foi um grande desafio para todos da equipe. O que nos demandou um trabalho em equipe bem estruturado. O grupo sofreu um pouco com um dos riscos levantados no gerenciamento, que foi a ausencia de alguns integrantes por motivos de problemas de saude que impactou um pouco no ritmo de desenvolvimento, mas que foi sanado com esforço a mais de todos.
+
+<br></br>
+
+### 4.4 Unidade 4
+
+<br>
+
+Na unidade 4, foram introduzidos os métodos de User Stories Mapping, que consiste em representar visualmente o backlog do produto, Diagrama Casos de Uso, que consiste em apresentar uma visão externa das funções e serviços que o sistema deverá oferecer aos usuários, e por fim as Declarações de Casos de Uso, que consistem em Descreve uma sequência de interações entre um sistema e um ator externo que resulta em algum resultado que agrega valor ao ator. Também teve o continuamento do processo de desenvolvimento do produto de sotware representado pelo nosso backlog.
+
+Para o grupo, a unidade 4 foi, por um lado, muito trabalhosa, e por outro, bem produtiva. Um dos melhores pontos desta unidade foi a equipe ter aprendido com os erros de planejamento da Unidade 3 e, consequentemente, melhorado o nosso planejamento. Em relação aos riscos apontados na seção 2.4, a equipe sofreu com a inviabilidade de um de nossos requisitos, o que foi resolvido ao retirá-lo do nosso escopo com antecedência, portanto, não gerando maiores problemas. No quesito do relacionamento entre a equipe, a comunicação falhou em alguns momentos, mas o resto foi uma ótima experiência.
 
 <br></br>
 
