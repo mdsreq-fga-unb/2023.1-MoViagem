@@ -43,8 +43,16 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 50px;
   cursor: pointer;
+
+  > span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
 }
 
 #sideBarIcon {

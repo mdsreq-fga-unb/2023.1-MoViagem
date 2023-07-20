@@ -39,10 +39,14 @@ export class EnvironmentService {
   get corsOrigin(): string[] {
     const corsOriginStr = this.config.get(
       "CORS_ORIGIN",
-      "http://localhost:5173;http://127.0.0.1:5173",
+      "http://localhost:5173;http://127.0.0.1:5173"
     );
 
     return corsOriginStr.split(";");
+  }
+
+  get openWeatherMapAppId(): string {
+    return this.config.get("OPEN_WEATHER_MAP_APP_ID", "invalid_key");
   }
 
   private parseStringToSeconds(env: string): number {

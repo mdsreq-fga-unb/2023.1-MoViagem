@@ -1,5 +1,13 @@
 import { plainToInstance } from "class-transformer";
-import { IsEnum, IsNumber, IsOptional, Length, Matches, validateSync } from "class-validator";
+import {
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+  Matches,
+  validateSync,
+} from "class-validator";
 
 enum Environment {
   Development = "development",
@@ -30,6 +38,9 @@ class EnvironmentVariables {
   @IsOptional()
   @Matches(/^(?:https?:\/\/)(?:.*)$/)
   CORS_ORIGIN?: string;
+
+  @IsString()
+  OPEN_WEATHER_MAP_APP_ID: string;
 }
 
 export function validate(config: Record<string, unknown>) {
