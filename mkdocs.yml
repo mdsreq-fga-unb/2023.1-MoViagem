@@ -22,7 +22,7 @@ nav:
       - PBB e BDD: documentos/pbb-e-bdd.md
       - BACKLOG SAFe: documentos/backlog-SAFe.md
   - Sprints:
-      - Sprints: documentos/relato-sprints.md 
+      - Sprints: documentos/relato-iteracoes.md 
 
 extra_css:
   - css/custom.css

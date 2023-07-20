@@ -8,8 +8,9 @@
 | -------- | ------ | --------------------------------- | ------------------ |
 | 26/04/23 | 0.1    | Início do documento               | Equipe Mochileiros |
 | 27/04/23 | 1.0    | Documento pronto para a Entrega 1 | Equipe Mochileiros |
-| 24/05/23 | 2.0pre | Documento pronto para a Entrega 2 | Equipe Mochileiros |
+| 24/05/23 | 2.0    | Documento pronto para a Entrega 2 | Equipe Mochileiros |
 | 29/06/23 | 2.1    | Documento revisado após entrega 3 | Equipe Mochileiros |
+| 19/07/23 | 2.2    | Ultimas atualizações              | Equipe Mochileiros |
 
 <br></br>
 
@@ -148,14 +149,14 @@ Por fim, embora o aspecto diferencial do projeto seja a capacidade de realizar c
 
 <br>
 
-| Fase                 | Produto (entrega)                                                         | Data Início | Data Fim |
-| -------------------- | ------------------------------------------------------------------------- | ----------- | -------- |
-| Fase de concepção    | Documento de Visão de Produto e Projeto, GitPages                         | 10/04/23    | 27/04/23 |
-| Fase de elaboração   | Visão de Produto e Projeto, Backlog do Produto e Definição dos MVPs       | 28/04/23    | 25/05/23 |
-| Fase de construção 1 | Visão de Produto e Projeto e Backlog atualizados, funcionalidades do MVP1 | 26/05/23    | 22/07/23 |
-| Fase de construção 2 | Visão de Produto e Projeto e Backlog atualizados, funcionalidades do MVP2 | 23/07/23    | 20/07/23 |
+| Fase                 | Produto (entrega)                                                                                                | Data Início | Data Fim |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------- | -------- |
+| Fase de concepção    | Documento de Visão de Produto e Projeto, GitPages                                                                | 10/04/23    | 27/04/23 |
+| Fase de elaboração   | Visão de Produto e Projeto, Backlog do Produto e Definição dos MVPs                                              | 28/04/23    | 25/05/23 |
+| Fase de construção 1 | Visão de Produto e Projeto e Backlog atualizados, funcionalidades do MVP1 <br> Iterações desenvolvidas: 1, 2 e 3 | 26/05/23    | 20/06/23 |
+| Fase de construção 2 | Visão de Produto e Projeto e Backlog atualizados, funcionalidades do MVP2 <br> Iterações desenvolvidas 4, 5 e 6  | 23/06/23    | 20/07/23 |
 
-<br></br>
+[Relato que contém as iterações do projeto](./relato-iteracoes.md)
 
 ### 2.3 Matriz de Comunicação
 
