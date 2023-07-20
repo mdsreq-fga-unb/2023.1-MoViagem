@@ -25,6 +25,7 @@ Os BDDs foram construídos deste modo:
 <br>
 
 - Eu, como organizador da viagem, posso criar instâncias de viagem para facilitar o acesso à informações.
+
       - Dado que o usuário tenha uma conta cadastrada
       - Quando ele preencher todos os campos corretamente, com 16/06/2023 (data de início), 20/06/2023 (data de término), Paris (local), 3 (quantidade de pessoas)
       - Então uma viagem deverá ser criada e enviada uma mensagem “Viagem criada com sucesso”

@@ -21,6 +21,15 @@ nav:
   - Entregas Unidade 3:
       - PBB e BDD: documentos/pbb-e-bdd.md
       - BACKLOG SAFe: documentos/backlog-SAFe.md
+  - Entregas Unidade 4:
+      - USM: documentos/usm.md
+      - Diagrama de Casos de Uso: documentos/diagrama-casos-de-uso.md
+      - Especificações de Casos de Uso:
+          - Criar eventos no cronograma: documentos/especificacoes-caso-de-uso/joao-caso-de-uso.md
+          - Visualizar lista de viagens: documentos/especificacoes-caso-de-uso/gabriel-caso-de-uso.md
+          - Definir editores da viagem: documentos/especificacoes-caso-de-uso/eduardo-caso-de-uso.md
+          - Editar informações básicas da viagem: documentos/especificacoes-caso-de-uso/pedro-caso-de-uso.md
+          - Adicionar participantes na viagem: documentos/especificacoes-caso-de-uso/siqueira-caso-de-uso.md
   - Sprints:
       - Sprints: documentos/relato-iteracoes.md 
 
