@@ -1,4 +1,5 @@
 import { WeatherForecastResponseDTO } from "../../../api/dto/notification.dto";
+import styles from "./styles.module.scss"
 
 interface NotificationProps {
   data: WeatherForecastResponseDTO;
@@ -6,17 +7,20 @@ interface NotificationProps {
 
 export default function Notification({ data }: NotificationProps) {
   return (
-    <div>
-      <p>{data.local}</p>
-      <p>MAX: {data.maxTemp}°C</p>
-      <p>MIN: {data.minTemp}°C</p>
-      <p>{new Date(data.date).toLocaleDateString()}</p>
-      <p>Umidade do ar: {data.humidity}%</p>
-      <img src={`https://openweathermap.org/img/wn/${data.weatherIcon}.png`} alt="icon" />
-      <p>Chances de chuva {data.rainProb * 100}%</p>
-      <p>Velocidade do vento: {data.windSpeed}Km/H</p>
-      <p>{data.weatherDesc}</p>
-      {data.alert && <p>Alerta: {data.alert}</p>}
+    <div className={styles.notificationBox}>
+      <div className={styles.infoBox}>
+        <p className={styles.notificationTitle}>{data.local}</p>
+        <div>
+          <p className={styles.notificationText}>MAX: {data.maxTemp}°C</p>
+          <p className={styles.notificationText}>MIN: {data.minTemp}°C</p>
+        </div>
+        <p className={styles.notificationDate}>{new Date(data.date).toLocaleDateString()}</p>
+      </div>
+
+      <div className={styles.infoBox}>
+        <img src={`https://openweathermap.org/img/wn/${data.weatherIcon}.png`} alt="icon" className={styles.notificationImage}/>
+        <p className={styles.notificationDescription}>{data.weatherDesc}</p>
+      </div>
     </div>
   );
 }

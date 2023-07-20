@@ -35,23 +35,25 @@ export default function Navbar({
   const [notifications, setNotifications] = useState<WeatherForecastResponseDTO[]>([]);
 
   useEffect(() => {
-    async function getNotifications() {
-      const response = await requestGetNotifications();
-
-      if (response instanceof ErrorResponse) {
-        alert(response.message);
-        return;
+    if (auth?.userInfo) {
+      async function getNotifications() {
+        const response = await requestGetNotifications();
+  
+        if (response instanceof ErrorResponse) {
+          alert(response.message);
+          return;
+        }
+  
+        setNotifications(response.data);
       }
-
-      setNotifications(response.data);
+  
+      getNotifications();
+      const interval = setInterval(getNotifications, 60000);
+  
+      return () => {
+        clearInterval(interval);
+      };
     }
-
-    getNotifications();
-    const interval = setInterval(getNotifications, 60000);
-
-    return () => {
-      clearInterval(interval);
-    };
   }, []);
 
   function handleMenuOpen(event: React.MouseEvent<HTMLButtonElement>) {
@@ -108,15 +110,17 @@ export default function Navbar({
                 paper: {
                   style: {
                     minHeight: "50vh",
-                    maxHeight: "100vh",
+                    maxHeight: "80vh",
                     width: "20vw",
                   },
                 },
               }}
             >
-              {notifications.map((notification) => (
-                <Notification data={notification} />
-              ))}
+              <div className={styles.notificationMenu}>
+                {notifications.map((notification) => (
+                  <Notification data={notification} />
+                ))}
+              </div>
             </Menu>
             <span onClick={navigateToUserInfo}>
               <AccountIcon fontSize="large" />
