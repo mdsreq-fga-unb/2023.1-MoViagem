@@ -9,6 +9,9 @@
 [Link da gravação da reunião da entrega do Mvp 1](https://youtu.be/M7iDWWLVH5U)
 <br>
 
+[Link da gravação da reunião da entrega do Mvp 2](https://youtu.be/RGKqq9TrIJY)
+<br>
+
 ## Sobre
 
 Este repositório contém a documentação do planejamento e execução, além de demais artefatos gerados ao longo da avaliação de Requisitos de software. Este projeto tem como intuito promover uma solução integrada para o gerenciamento de viagens. Desde a criação de um itinerário até recomendações sobre destinos turísticos!
