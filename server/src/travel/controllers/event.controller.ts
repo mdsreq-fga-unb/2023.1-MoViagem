@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Param, Post, Put, Delete } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
+import { User } from "src/auth/decorators/user.decorator";
+import { UserInTokenDTO } from "src/auth/dto/user.dto";
 import { CreateEventRequestDTO, EventResponseDTO } from "../../travel/dto/event.dto";
 import { EventService } from "../services/event.service";
 
@@ -11,13 +13,21 @@ export class EventController {
   constructor(private eventService: EventService) {}
 
   @Post("/:id")
-  async create(@Param("id") id: number, @Body() dto: CreateEventRequestDTO): Promise<void> {
-    return this.eventService.create(id, dto);
+  async create(
+    @User() user: UserInTokenDTO,
+    @Param("id") id: number,
+    @Body() dto: CreateEventRequestDTO
+  ): Promise<void> {
+    return this.eventService.create(user.id, id, dto);
   }
 
   @Put("/:id")
-  async edit(@Param("id") id: number, @Body() dto: CreateEventRequestDTO): Promise<void> {
-    return this.eventService.edit(id, dto);
+  async edit(
+    @User() user: UserInTokenDTO,
+    @Param("id") id: number,
+    @Body() dto: CreateEventRequestDTO
+  ): Promise<void> {
+    return this.eventService.edit(user.id, id, dto);
   }
 
   @Get("/:travelId")

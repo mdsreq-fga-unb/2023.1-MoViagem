@@ -76,5 +76,7 @@ model Guests {
   user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   travel   Travel @relation(fields: [travelId], references: [id], onDelete: Cascade)
 
+  canEdit Boolean @default(false) @db.TinyInt
+
   @@id([userId, travelId])
 }

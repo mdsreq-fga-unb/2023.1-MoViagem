@@ -71,13 +71,6 @@
   border: 3px solid #dddfe4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
-
-  transition: 0.4s;
-  cursor: pointer;
-  &:hover {
-    transform: translateX(-5px);
-    border: 3px solid $color-primary;
-  }
 }
 
 .infoBox {
@@ -137,4 +130,16 @@
 
 #buttonText {
   margin-left: 10%;
+}
+
+#editButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  cursor: pointer;
+  &:hover {
+    text-decoration: solid underline rgba(79, 119, 45, 1);
+  }
 }

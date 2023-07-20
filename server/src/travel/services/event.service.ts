@@ -1,10 +1,11 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { CreateEventRequestDTO, EventResponseDTO } from "../../travel/dto/event.dto";
 import { EventRepository } from "../repositories/event.repository";
+import { GuestRepository } from "../repositories/guest.repository";
 
 @Injectable()
 export class EventService {
-  constructor(private eventRepository: EventRepository) {}
+  constructor(private eventRepository: EventRepository, private guestRepository: GuestRepository) {}
 
   async getEventsByTravel(travelId: number): Promise<EventResponseDTO[]> {
     const events = await this.eventRepository.findAllByTravel(travelId);
@@ -12,15 +13,29 @@ export class EventService {
     return events.map((event) => new EventResponseDTO(event));
   }
 
-  async create(id: number, dto: CreateEventRequestDTO): Promise<void> {
+  async create(
+    loggedInUserId: number,
+    travelId: number,
+    dto: CreateEventRequestDTO
+  ): Promise<void> {
     if (dto.eventTime < new Date()) {
       throw new BadRequestException("data de evento não pode ser no passado");
+    }
+
+    const loggedInIsGuest = await this.guestRepository.doesUserIsGuest(loggedInUserId, travelId);
+
+    if (loggedInIsGuest) {
+      const doesGuestCanEdit = await this.guestRepository.doesUserCanEdit(loggedInUserId, travelId);
+
+      if (!doesGuestCanEdit) {
+        throw new BadRequestException("Você não pode editar essa viagem");
+      }
     }
 
     await this.eventRepository.create({
       travel: {
         connect: {
-          id,
+          id: travelId,
         },
       },
       departureLocation: dto.departureLocation,
@@ -35,8 +50,18 @@ export class EventService {
     return this.eventRepository.deleteById(id);
   }
 
-  async edit(id: number, dto: CreateEventRequestDTO): Promise<void> {
-    await this.eventRepository.update(id, {
+  async edit(loggedInUserId: number, travelId: number, dto: CreateEventRequestDTO): Promise<void> {
+    const loggedInIsGuest = await this.guestRepository.doesUserIsGuest(loggedInUserId, travelId);
+
+    if (loggedInIsGuest) {
+      const doesGuestCanEdit = await this.guestRepository.doesUserCanEdit(loggedInUserId, travelId);
+
+      if (!doesGuestCanEdit) {
+        throw new BadRequestException("Você não pode editar essa viagem");
+      }
+    }
+
+    await this.eventRepository.update(travelId, {
       departureLocation: dto.departureLocation,
       eventTime: dto.eventTime,
       eventExtras: dto.eventExtras,

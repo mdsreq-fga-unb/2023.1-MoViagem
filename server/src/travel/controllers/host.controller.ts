@@ -1,6 +1,8 @@
 import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { EnableAuth } from "src/auth/decorators/auth.decorator";
+import { User } from "src/auth/decorators/user.decorator";
+import { UserInTokenDTO } from "src/auth/dto/user.dto";
 import { CreateHostRequestDTO, HostResponseDTO } from "../dto/host.dto";
 import { HostService } from "../services/host.service";
 
@@ -11,20 +13,22 @@ export class HostController {
   constructor(private hostService: HostService) {}
 
   @Post("/:id")
-  async create(@Param("id") id: number, @Body() dto: CreateHostRequestDTO): Promise<void> {
-    return this.hostService.create(id, dto);
+  async create(
+    @User() user: UserInTokenDTO,
+    @Param("id") id: number,
+    @Body() dto: CreateHostRequestDTO
+  ): Promise<void> {
+    return this.hostService.create(user.id, id, dto);
   }
 
   @Put("/:id")
-  async edit(@Param("id") id: number, @Body() dto: CreateHostRequestDTO): Promise<void> {
-    return this.hostService.edit(id, dto);
+  async edit(
+    @User() user: UserInTokenDTO,
+    @Param("id") id: number,
+    @Body() dto: CreateHostRequestDTO
+  ): Promise<void> {
+    return this.hostService.edit(user.id, id, dto);
   }
-
-  // // Pega a lista de hopedagens ou estadias a partir do id da viagem
-  // @Get("/:travelId")
-  // async listByUser(@Param("travelId") travelId: number): Promise<HostResponseDTO[]> {
-  //   return this.hostService.getHostsByTravel(travelId);
-  // }
 
   @Get("/:id")
   async get(@Param("id") id: number): Promise<HostResponseDTO> {

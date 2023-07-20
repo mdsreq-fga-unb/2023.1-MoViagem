@@ -12,6 +12,7 @@ export class GuestRepository {
         travelId,
       },
       select: {
+        canEdit: true,
         user: {
           select: {
             id: true,
@@ -28,6 +29,71 @@ export class GuestRepository {
         userId,
         travelId,
       },
+    });
+  }
+
+  async doesUserIsGuest(userId: number, travelId: number): Promise<boolean> {
+    const guest = await this.prismaService.guests.findUnique({
+      where: {
+        userId_travelId: {
+          userId,
+          travelId,
+        },
+      },
+    });
+
+    return guest !== null;
+  }
+
+  async doesUserCanEdit(userId: number, travelId: number): Promise<boolean> {
+    const guest = await this.prismaService.guests.findUnique({
+      where: {
+        userId_travelId: {
+          userId,
+          travelId,
+        },
+      },
+      select: {
+        canEdit: true,
+      },
+    });
+
+    if (guest === null) {
+      return false;
+    }
+
+    return guest.canEdit;
+  }
+
+  async toggleGuestEditing(userId: number, travelId: number): Promise<void> {
+    await this.prismaService.$transaction(async (transaction) => {
+      const guest = await transaction.guests.findUnique({
+        where: {
+          userId_travelId: {
+            userId,
+            travelId,
+          },
+        },
+        select: {
+          canEdit: true,
+        },
+      });
+
+      if (guest === null) {
+        return;
+      }
+
+      await transaction.guests.update({
+        where: {
+          userId_travelId: {
+            userId,
+            travelId,
+          },
+        },
+        data: {
+          canEdit: !guest.canEdit,
+        },
+      });
     });
   }
 }

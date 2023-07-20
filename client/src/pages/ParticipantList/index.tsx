@@ -1,3 +1,4 @@
+import { Cancel, Check } from "@mui/icons-material";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import {
   Dialog,
@@ -10,7 +11,11 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { GuestResponseDTO } from "../../api/dto/travels-dto";
-import { requestAddGuestToTravel, requestGetGuests } from "../../api/requests/travels-requests";
+import {
+  requestAddGuestToTravel,
+  requestGetGuests,
+  requestToggleEditGuest,
+} from "../../api/requests/travels-requests";
 import PersonIcon from "../../assets/PessoaIndoViajar.png";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
@@ -63,6 +68,19 @@ export default function ParticipantList() {
     toggleModal();
   }
 
+  async function handleToggleEditGuest(guestId: number) {
+    const response = await requestToggleEditGuest(guestId, travelId);
+
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
+    }
+
+    alert("Permissão alterada com sucesso!");
+
+    fetchGuests();
+  }
+
   return (
     <>
       <Navbar pageName="Lista de participantes da viagem">
@@ -81,7 +99,20 @@ export default function ParticipantList() {
                     <h3>{participant.name}</h3>
                     <img className={styles.personImage} alt="Fundo Pessoa" src={PersonIcon}></img>
                     <div className={styles.infoText}>
-                      <p>{/* participant.canEdit */}</p>
+                      <div
+                        onClick={() => handleToggleEditGuest(participant.id)}
+                        id={styles.editButton}
+                      >
+                        {participant.canEdit ? (
+                          <>
+                            <Check /> Pode editar
+                          </>
+                        ) : (
+                          <>
+                            <Cancel /> Não pode editar
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </button>
