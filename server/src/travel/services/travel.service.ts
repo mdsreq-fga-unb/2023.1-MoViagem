@@ -6,11 +6,15 @@ import {
   TravelsResponseDTO,
   TravelsWithInfoResponseDTO,
 } from "../dto/travel.dto";
+import { GuestRepository } from "../repositories/guest.repository";
 import { TravelRepository } from "./../repositories/travel.repository";
 
 @Injectable()
 export class TravelService {
-  constructor(private travelRepository: TravelRepository) {}
+  constructor(
+    private travelRepository: TravelRepository,
+    private guestRepository: GuestRepository
+  ) {}
 
   async getTravelsByUser(userId: number): Promise<TravelsResponseDTO[]> {
     const travels = await this.travelRepository.findAllByUser(userId);
@@ -53,12 +57,26 @@ export class TravelService {
     return new TravelsResponseDTO(travel);
   }
 
-  async edit_Travel(id: number, dto: CreateTravelRequestDTO): Promise<void> {
+  async edit_Travel(
+    loggedInUserId: number,
+    travelId: number,
+    dto: CreateTravelRequestDTO
+  ): Promise<void> {
     if (dto.startDate > dto.endDate) {
       throw new BadRequestException("data de inicio não pode ser depois da data de fim");
     }
 
-    this.travelRepository.update(id, {
+    const loggedInIsGuest = await this.guestRepository.doesUserIsGuest(loggedInUserId, travelId);
+
+    if (loggedInIsGuest) {
+      const doesGuestCanEdit = await this.guestRepository.doesUserCanEdit(loggedInUserId, travelId);
+
+      if (!doesGuestCanEdit) {
+        throw new BadRequestException("Você não pode editar essa viagem");
+      }
+    }
+
+    this.travelRepository.update(travelId, {
       local: dto.local,
       startDate: dto.startDate,
       endDate: dto.endDate,
@@ -67,8 +85,18 @@ export class TravelService {
     });
   }
 
-  async delete(id: number): Promise<void> {
-    return this.travelRepository.deleteById(id);
+  async delete(loggedInUserId: number, travelId: number): Promise<void> {
+    const loggedInIsGuest = await this.guestRepository.doesUserIsGuest(loggedInUserId, travelId);
+
+    if (loggedInIsGuest) {
+      const doesGuestCanEdit = await this.guestRepository.doesUserCanEdit(loggedInUserId, travelId);
+
+      if (!doesGuestCanEdit) {
+        throw new BadRequestException("Você não pode editar essa viagem");
+      }
+    }
+
+    return this.travelRepository.deleteById(travelId);
   }
 
   async getTravelsWithInfo(id: number): Promise<TravelsWithInfoResponseDTO> {

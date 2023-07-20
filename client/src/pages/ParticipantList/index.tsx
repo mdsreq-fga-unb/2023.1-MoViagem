@@ -1,3 +1,4 @@
+import { Cancel, Check } from "@mui/icons-material";
 import CalendarIcon from "@mui/icons-material/CalendarToday";
 import CardTravelIcon from "@mui/icons-material/CardTravel";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
@@ -17,11 +18,12 @@ import {
   requestAddGuestToTravel,
   requestGetGuests,
   requestRemoveGuestFromTravel,
+  requestToggleEditGuest,
 } from "../../api/requests/travels-requests";
 import PersonIcon from "../../assets/PessoaIndoViajar.png";
+import useAuth from "../../auth/context/auth-hook";
 import Navbar from "../../components/Navbar";
 import styles from "./styles.module.scss";
-import useAuth from "../../auth/context/auth-hook";
 
 export default function ParticipantList() {
   const travelId = useParams().id!;
@@ -86,6 +88,19 @@ export default function ParticipantList() {
     toggleModal();
   }
 
+  async function handleToggleEditGuest(guestId: number) {
+    const response = await requestToggleEditGuest(guestId, travelId);
+
+    if (response instanceof ErrorResponse) {
+      alert(response.message);
+      return;
+    }
+
+    alert("Permissão alterada com sucesso!");
+
+    fetchGuests();
+  }
+
   async function handleRemoveGuest() {
     try {
       await requestRemoveGuestFromTravel(currentId, parseInt(travelId));
@@ -113,7 +128,22 @@ export default function ParticipantList() {
                   <div className={styles.infoBox}>
                     <h3>{participant.name}</h3>
                     <img className={styles.personImage} alt="Fundo Pessoa" src={PersonIcon}></img>
-                    <div className={styles.infoText}>Não pode editar a viagem</div>
+                    <div
+                      className={styles.infoText}
+                      onClick={() => handleToggleEditGuest(participant.id)}
+                    >
+                      <div id={styles.permission_button}>
+                        {participant.canEdit ? (
+                          <>
+                            <Check /> Pode editar
+                          </>
+                        ) : (
+                          <>
+                            <Cancel /> Não pode editar
+                          </>
+                        )}
+                      </div>
+                    </div>
                     <div className={styles.sideBarLinkContainer}>
                       <button
                         className={styles.deleteButton}

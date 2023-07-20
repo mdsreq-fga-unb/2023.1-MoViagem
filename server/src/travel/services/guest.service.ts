@@ -17,20 +17,80 @@ export class GuestService {
     return guest.map((guest) => new GuestResponseDTO(guest));
   }
 
-  async addGuestToTravel(guestEmail: string, travelId: number): Promise<void> {
+  async addGuestToTravel(
+    loggedInUserId: number,
+    guestEmail: string,
+    travelId: number
+  ): Promise<void> {
     const user = await this.userRepository.findByEmail(guestEmail);
 
     if (!user) {
-      throw new BadRequestException("User not found");
+      throw new BadRequestException("Usuário não encontrado");
     }
 
     const travel = await this.travelRepository.findById(travelId);
 
     if (!travel) {
-      throw new BadRequestException("Travel not found");
+      throw new BadRequestException("Viagem não encontrada");
+    }
+
+    if (user.id === loggedInUserId) {
+      throw new BadRequestException("Você não pode adicionar a si mesmo como convidado");
+    }
+
+    const doesUserIsGuest = await this.guestRepository.doesUserIsGuest(user.id, travel.id);
+
+    if (doesUserIsGuest) {
+      throw new BadRequestException("Esse usuário já é um convidado");
+    }
+
+    const loggedInIsGuest = await this.guestRepository.doesUserIsGuest(loggedInUserId, travel.id);
+
+    if (loggedInIsGuest) {
+      const loggedInCanEdit = await this.guestRepository.doesUserCanEdit(loggedInUserId, travel.id);
+
+      if (!loggedInCanEdit) {
+        throw new BadRequestException("Você não pode adicionar convidados");
+      }
     }
 
     await this.guestRepository.addGuestToTravel(user.id, travel.id);
+  }
+
+  async toggleGuestEditing(
+    loggedInUserId: number,
+    guestId: number,
+    travelId: number
+  ): Promise<void> {
+    const user = await this.userRepository.findById(guestId);
+
+    if (!user) {
+      throw new BadRequestException("Usuário não encontrado");
+    }
+
+    const travel = await this.travelRepository.findById(travelId);
+
+    if (!travel) {
+      throw new BadRequestException("Viagem não encontrada");
+    }
+
+    const doesUserIsGuest = await this.guestRepository.doesUserIsGuest(user.id, travel.id);
+
+    if (!doesUserIsGuest) {
+      throw new BadRequestException("Esse usuário não é um convidado");
+    }
+
+    const loggedInIsGuest = await this.guestRepository.doesUserIsGuest(loggedInUserId, travel.id);
+
+    if (loggedInIsGuest) {
+      const loggedInCanEdit = await this.guestRepository.doesUserCanEdit(loggedInUserId, travel.id);
+
+      if (!loggedInCanEdit) {
+        throw new BadRequestException("Você não pode editar permissões de convidados");
+      }
+    }
+
+    await this.guestRepository.toggleGuestEditing(user.id, travel.id);
   }
 
   async delete(userId: number, travelId: number): Promise<void> {
