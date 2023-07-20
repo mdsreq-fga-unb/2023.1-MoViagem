@@ -1,3 +1,6 @@
+import CardTravelIcon from "@mui/icons-material/CardTravel";
+import { IconButton } from "@mui/material";
+import moment from "moment";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
@@ -6,13 +9,7 @@ import {
   requestEditTransport,
   requestGetTransport,
 } from "../../api/requests/travels-requests";
-import {
-  convertDateInputValueToDate,
-  convertDateToDateTimeInputValue,
-} from "../../utils/date-utilities";
 import styles from "./styles.module.scss";
-import { IconButton } from "@mui/material";
-import CardTravelIcon from "@mui/icons-material/CardTravel";
 
 interface TransportFormsProps {
   isEditing: boolean;
@@ -23,8 +20,8 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
   const [tipoTransporte, setTipoTransporte] = useState<string>("");
   const [localIda, setLocalIda] = useState<string>("");
   const [localChegada, setLocalChegada] = useState<string>("");
-  const [horaChegada, setHoraChegada] = useState<Date | null>(null);
-  const [horaSaida, setHoraSaida] = useState<Date | null>(null);
+  const [horaChegada, setHoraChegada] = useState<string>("");
+  const [horaSaida, setHoraSaida] = useState<string>("");
   const [preco, setPreco] = useState<number>(0);
   const [contato, setContato] = useState<string>("");
 
@@ -47,8 +44,8 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
     }
 
     setContato(response.data.contacts);
-    setHoraChegada(new Date(response.data.endTime));
-    setHoraSaida(new Date(response.data.startTime));
+    setHoraChegada(response.data.endTime);
+    setHoraSaida(response.data.startTime);
     setLocalChegada(response.data.endLocal);
     setLocalIda(response.data.startLocal);
     setPreco(response.data.price);
@@ -67,8 +64,16 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
       return;
     }
 
-    if (horaSaida > horaChegada) {
-      alert("Hora de saída não pode ser maior que a hora de chegada");
+    const horaSaidaTimestamp = Date.parse(horaSaida);
+    const horaChegadaTimestamp = Date.parse(horaChegada);
+
+    if (isNaN(horaSaidaTimestamp) || isNaN(horaChegadaTimestamp)) {
+      alert("horarios invalidos");
+      return;
+    }
+
+    if (horaSaidaTimestamp > horaChegadaTimestamp) {
+      alert("horario de saida nao pode ser maior que o de chegada");
       return;
     }
 
@@ -81,10 +86,10 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
         {
           contacts: contato,
           endLocal: localChegada,
-          endTime: horaChegada,
+          endTime: new Date(horaChegadaTimestamp),
           price: preco,
           startLocal: localIda,
-          startTime: horaSaida,
+          startTime: new Date(horaSaidaTimestamp),
           type: tipoTransporte,
         },
         parseInt(id)
@@ -102,8 +107,8 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
         contacts: contato,
         endLocal: localChegada,
         startLocal: localIda,
-        endTime: horaChegada,
-        startTime: horaSaida,
+        endTime: new Date(horaChegadaTimestamp),
+        startTime: new Date(horaSaidaTimestamp),
         price: preco,
         type: tipoTransporte,
       });
@@ -162,8 +167,8 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
               type="datetime-local"
               className={styles.inputDate}
               required
-              value={convertDateToDateTimeInputValue(horaSaida)}
-              onChange={(event) => setHoraSaida(convertDateInputValueToDate(event.target.value))}
+              value={moment(horaSaida).format("YYYY-MM-DDTHH:mm")}
+              onChange={(event) => setHoraSaida(event.target.value)}
             />
           </div>
         </div>
@@ -190,8 +195,8 @@ const TransportForms: React.FC<TransportFormsProps> = ({ isEditing, id }) => {
               type="datetime-local"
               className={styles.inputDate}
               required
-              value={convertDateToDateTimeInputValue(horaChegada)}
-              onChange={(event) => setHoraChegada(convertDateInputValueToDate(event.target.value))}
+              value={moment(horaChegada).format("YYYY-MM-DDTHH:mm")}
+              onChange={(event) => setHoraChegada(event.target.value)}
             />
           </div>
         </div>

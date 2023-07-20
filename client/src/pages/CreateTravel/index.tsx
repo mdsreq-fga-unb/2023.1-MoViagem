@@ -3,16 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
 import { requestCreateTravel } from "../../api/requests/travels-requests";
 import Navbar from "../../components/Navbar";
-import {
-  convertDateInputValueToDate,
-  convertDateToDateInputValue,
-} from "../../utils/date-utilities";
 import styles from "./styles.module.scss";
 
 export default function CreateTravel() {
   const [local, setLocal] = useState<string>("");
-  const [dataInicio, setDataInicio] = useState<Date | null>(null);
-  const [dataFim, setDataFim] = useState<Date | null>(null);
+  const [dataInicio, setDataInicio] = useState<string>("");
+  const [dataFim, setDataFim] = useState<string>("");
   const [proposito, setProposito] = useState<string>("");
   const [numDePessoas, setNumDePessoas] = useState("");
 
@@ -26,7 +22,15 @@ export default function CreateTravel() {
       return;
     }
 
-    if (dataInicio > dataFim) {
+    const dataInicioTimestamp = Date.parse(dataInicio);
+    const dataFimTimestamp = Date.parse(dataFim);
+
+    if (isNaN(dataInicioTimestamp) || isNaN(dataFimTimestamp)) {
+      alert("Data inválida");
+      return;
+    }
+
+    if (dataInicioTimestamp > dataFimTimestamp) {
       alert("Data de início não pode ser maior que a data de fim");
       return;
     }
@@ -38,8 +42,8 @@ export default function CreateTravel() {
 
     const response = await requestCreateTravel({
       local,
-      startDate: dataInicio,
-      endDate: dataFim,
+      startDate: new Date(dataInicioTimestamp),
+      endDate: new Date(dataFimTimestamp),
       description: proposito,
       numParticipants: parseInt(numDePessoas),
     });
@@ -81,8 +85,8 @@ export default function CreateTravel() {
                 placeholder="Data"
                 className={styles.inputDate}
                 required
-                value={convertDateToDateInputValue(dataInicio)}
-                onChange={(event) => setDataInicio(convertDateInputValueToDate(event.target.value))}
+                value={dataInicio}
+                onChange={(event) => setDataInicio(event.target.value)}
               />
             </div>
             <div className="column">
@@ -92,8 +96,8 @@ export default function CreateTravel() {
                 placeholder="Data"
                 className={styles.inputDate}
                 required
-                value={convertDateToDateInputValue(dataFim)}
-                onChange={(event) => setDataFim(convertDateInputValueToDate(event.target.value))}
+                value={dataFim}
+                onChange={(event) => setDataFim(event.target.value)}
               />
             </div>
           </div>

@@ -12,6 +12,7 @@ import {
   IconButton,
   Switch,
 } from "@mui/material";
+import moment from "moment";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ErrorResponse } from "../../api/api-instance";
@@ -21,10 +22,6 @@ import {
   requestGetTravelWithInfo,
 } from "../../api/requests/travels-requests";
 import Navbar from "../../components/Navbar";
-import {
-  convertDateInputValueToDate,
-  convertDateToDateInputValue,
-} from "../../utils/date-utilities";
 import styles from "./styles.module.scss";
 
 interface TravelNotifications {
@@ -44,8 +41,8 @@ export default function TravelInfo() {
 
   // Travel variables
   const [local, setLocal] = useState<string>("");
-  const [dataInicio, setDataInicio] = useState<Date | null>(null);
-  const [dataFim, setDataFim] = useState<Date | null>(null);
+  const [dataInicio, setDataInicio] = useState<string>("");
+  const [dataFim, setDataFim] = useState<string>("");
   const [proposito, setProposito] = useState<string>("");
   const [numDePessoas, setNumDePessoas] = useState("");
   const [wasEdited, setWasEdited] = useState<boolean>(false);
@@ -53,8 +50,8 @@ export default function TravelInfo() {
   // Host variables
   const [hostId, setHostId] = useState<number>(0);
   const [localHost, setLocalHost] = useState<string>("");
-  const [dataInicioHost, setDataInicioHost] = useState<Date | null>(null);
-  const [dataFimHost, setDataFimHost] = useState<Date | null>(null);
+  const [dataInicioHost, setDataInicioHost] = useState<string>("");
+  const [dataFimHost, setDataFimHost] = useState<string>("");
   const [tipoEstadiaHost, setTipoEstadiaHost] = useState<string>("");
   const [precoHost, setPrecoHost] = useState<number>(0);
   const [contatoHost, setContatoHost] = useState<string>("");
@@ -64,8 +61,8 @@ export default function TravelInfo() {
   const [tipoTransporteTransport, setTipoTransporteTransport] = useState<string>("");
   const [localIdaTransport, setLocalIdaTransport] = useState<string>("");
   const [localChegadaTransport, setLocalChegadaTransport] = useState<string>("");
-  const [horaSaidaTransport, setHoraSaidaTransport] = useState<Date | null>(null);
-  const [horaChegadaTransport, setHoraChegadaTransport] = useState<Date | null>(null);
+  const [horaSaidaTransport, setHoraSaidaTransport] = useState<string>("");
+  const [horaChegadaTransport, setHoraChegadaTransport] = useState<string>("");
   const [precoTransport, setPrecoTransport] = useState<number>(0);
   const [contatoTransport, setContatoTransport] = useState<string>("");
 
@@ -95,8 +92,8 @@ export default function TravelInfo() {
     }
 
     // Set travel variables
-    setDataFim(new Date(response.data.endDate));
-    setDataInicio(new Date(response.data.startDate));
+    setDataFim(response.data.endDate);
+    setDataInicio(response.data.startDate);
     setLocal(response.data.local);
     setNumDePessoas(response.data.numParticipants.toString());
     setProposito(response.data.description);
@@ -108,15 +105,15 @@ export default function TravelInfo() {
       setHostId(host.id);
       setContatoHost(host.contact);
       setPrecoHost(host.price);
-      setDataFimHost(new Date(host.endTime));
-      setDataInicioHost(new Date(host.startTime));
+      setDataFimHost(host.endTime);
+      setDataInicioHost(host.startTime);
       setLocalHost(host.local);
       setTipoEstadiaHost(host.type);
     } else {
       setContatoHost("");
       setPrecoHost(0);
-      setDataFimHost(null);
-      setDataInicioHost(null);
+      setDataFimHost("");
+      setDataInicioHost("");
       setLocalHost("");
       setTipoEstadiaHost("");
     }
@@ -127,16 +124,16 @@ export default function TravelInfo() {
 
       setTransportId(transport.id);
       setContatoTransport(transport.contacts);
-      setHoraChegadaTransport(new Date(transport.endTime));
-      setHoraSaidaTransport(new Date(transport.startTime));
+      setHoraChegadaTransport(transport.endTime);
+      setHoraSaidaTransport(transport.startTime);
       setLocalChegadaTransport(transport.endLocal);
       setLocalIdaTransport(transport.startLocal);
       setPrecoTransport(transport.price);
       setTipoTransporteTransport(transport.type);
     } else {
       setContatoTransport("");
-      setHoraChegadaTransport(null);
-      setHoraSaidaTransport(null);
+      setHoraChegadaTransport("");
+      setHoraSaidaTransport("");
       setLocalChegadaTransport("");
       setLocalIdaTransport("");
       setPrecoTransport(0);
@@ -167,10 +164,28 @@ export default function TravelInfo() {
       return;
     }
 
+    const dataInicioTimestamp = Date.parse(dataInicio);
+    const dataFimTimestamp = Date.parse(dataFim);
+
+    if (isNaN(dataInicioTimestamp) || isNaN(dataFimTimestamp)) {
+      alert("Data inválida");
+      return;
+    }
+
+    if (dataInicioTimestamp > dataFimTimestamp) {
+      alert("Data de início não pode ser maior que a data de fim");
+      return;
+    }
+
+    if (numDePessoas === "") {
+      alert("Número de pessoas inválido");
+      return;
+    }
+
     const response = await requestEditTravel(parseInt(params.id!), {
       local,
-      startDate: dataInicio,
-      endDate: dataFim,
+      startDate: new Date(dataInicioTimestamp),
+      endDate: new Date(dataFimTimestamp),
       description: proposito,
       numParticipants: parseInt(numDePessoas),
       ...travelNotifications,
@@ -194,12 +209,30 @@ export default function TravelInfo() {
       return;
     }
 
+    const dataInicioTimestamp = Date.parse(dataInicio);
+    const dataFimTimestamp = Date.parse(dataFim);
+
+    if (isNaN(dataInicioTimestamp) || isNaN(dataFimTimestamp)) {
+      alert("Data inválida");
+      return;
+    }
+
+    if (dataInicioTimestamp > dataFimTimestamp) {
+      alert("Data de início não pode ser maior que a data de fim");
+      return;
+    }
+
+    if (numDePessoas === "") {
+      alert("Número de pessoas inválido");
+      return;
+    }
+
     setLoading(true);
 
     const response = await requestEditTravel(parseInt(params.id!), {
       local,
-      startDate: dataInicio,
-      endDate: dataFim,
+      startDate: new Date(dataInicioTimestamp),
+      endDate: new Date(dataFimTimestamp),
       description: proposito,
       numParticipants: parseInt(numDePessoas),
       ...dataToUpdate,
@@ -279,10 +312,8 @@ export default function TravelInfo() {
                   placeholder="Data"
                   className={styles.inputDate}
                   required
-                  value={convertDateToDateInputValue(dataInicio)}
-                  onChange={(event) =>
-                    setDataInicio(convertDateInputValueToDate(event.target.value))
-                  }
+                  value={moment(dataInicio).format("YYYY-MM-DD")}
+                  onChange={(event) => setDataInicio(event.target.value)}
                 />
               </div>
               <div className="column">
@@ -292,8 +323,8 @@ export default function TravelInfo() {
                   placeholder="Data"
                   className={styles.inputDate}
                   required
-                  value={convertDateToDateInputValue(dataFim)}
-                  onChange={(event) => setDataFim(convertDateInputValueToDate(event.target.value))}
+                  value={moment(dataFim).format("YYYY-MM-DD")}
+                  onChange={(event) => setDataFim(event.target.value)}
                 />
               </div>
             </div>
@@ -357,11 +388,11 @@ export default function TravelInfo() {
               </div>
               Dia de chegada:
               <div className={styles.cardInfo}>
-                <span>{dataInicioHost ? dataInicioHost.toISOString().split("T")[0] : ""}</span>
+                <span>{moment(dataInicioHost).format("DD/MM/YYYY")}</span>
               </div>
               Dia de saída:
               <div className={styles.cardInfo}>
-                <span>{dataFimHost ? dataFimHost.toISOString().split("T")[0] : ""}</span>
+                <span>{moment(dataFimHost).format("DD/MM/YYYY")}</span>
               </div>
               Local:
               <div className={styles.cardInfo}>
@@ -409,8 +440,8 @@ export default function TravelInfo() {
               Duração do percurso:
               <div className={styles.cardInfo}>
                 <span>
-                  {horaSaidaTransport?.toLocaleString()} até{" "}
-                  {horaChegadaTransport?.toLocaleString()}
+                  {moment(horaSaidaTransport).locale("pt-br").format("DD/MM/YYYY HH:mm")} até{" "}
+                  {moment(horaChegadaTransport).locale("pt-br").format("DD/MM/YYYY HH:mm")}
                 </span>
               </div>
               Preço:

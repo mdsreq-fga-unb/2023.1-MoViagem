@@ -126,7 +126,7 @@ export default function Navbar({
             >
               <div className={styles.notificationMenu}>
                 {notifications.map((notification) => (
-                  <Notification data={notification} />
+                  <Notification key={notification.travelId} data={notification} />
                 ))}
               </div>
             </Menu>

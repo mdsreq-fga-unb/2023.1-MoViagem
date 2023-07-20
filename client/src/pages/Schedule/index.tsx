@@ -172,7 +172,7 @@ const Schedule: React.FC = () => {
     });
 
     setDayEvents(dayEvents);
-  }, [currentDateForSidebar]);
+  }, [currentDateForSidebar, params.id]);
 
   useEffect(() => {
     renderCalendar();

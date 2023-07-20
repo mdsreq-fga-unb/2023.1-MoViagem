@@ -8,10 +8,6 @@ import {
   requestEditHost,
   requestGetHost,
 } from "../../api/requests/travels-requests";
-import {
-  convertDateInputValueToDate,
-  convertDateToDateInputValue,
-} from "../../utils/date-utilities";
 import styles from "./styles.module.scss";
 
 interface StayFormsProps {
@@ -21,8 +17,8 @@ interface StayFormsProps {
 
 const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
   const [local, setLocal] = useState<string>("");
-  const [dataInicio, setDataInicio] = useState<Date | null>(null);
-  const [dataFim, setDataFim] = useState<Date | null>(null);
+  const [dataInicio, setDataInicio] = useState<string>("");
+  const [dataFim, setDataFim] = useState<string>("");
   const [tipoEstadia, setTipoEstadia] = useState<string>("");
   const [preco, setPreco] = useState<number>(0);
   const [contato, setContato] = useState<string>("");
@@ -47,8 +43,8 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
 
     setContato(response.data.contact);
     setPreco(response.data.price);
-    setDataFim(new Date(response.data.endTime));
-    setDataInicio(new Date(response.data.startTime));
+    setDataFim(response.data.endTime);
+    setDataInicio(response.data.startTime);
     setLocal(response.data.local);
     setTipoEstadia(response.data.type);
   }, [id, isEditing]);
@@ -65,7 +61,15 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
       return;
     }
 
-    if (dataInicio > dataFim) {
+    const dataInicioTimestamp = Date.parse(dataInicio);
+    const dataFimTimestamp = Date.parse(dataFim);
+
+    if (isNaN(dataInicioTimestamp) || isNaN(dataFimTimestamp)) {
+      alert("Data inválida");
+      return;
+    }
+
+    if (dataInicioTimestamp > dataFimTimestamp) {
       alert("Data de início não pode ser maior que a data de fim");
       return;
     }
@@ -78,10 +82,10 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
       const response = await requestEditHost(
         {
           contact: contato,
-          endTime: dataFim,
+          endTime: new Date(dataFimTimestamp),
           local,
           price: preco,
-          startTime: dataInicio,
+          startTime: new Date(dataInicioTimestamp),
           type: tipoEstadia,
         },
         parseInt(id)
@@ -97,10 +101,10 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
     } else {
       const createdHost = await requestCreateHost(parseInt(id), {
         contact: contato,
-        endTime: dataFim,
+        endTime: new Date(dataFimTimestamp),
         local,
         price: preco,
-        startTime: dataInicio,
+        startTime: new Date(dataInicioTimestamp),
         type: tipoEstadia,
       });
 
@@ -144,8 +148,8 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
               placeholder="Data"
               className={styles.inputDate}
               required
-              value={convertDateToDateInputValue(dataInicio)}
-              onChange={(event) => setDataInicio(convertDateInputValueToDate(event.target.value))}
+              value={dataInicio}
+              onChange={(event) => setDataInicio(event.target.value)}
             />
           </div>
           <div className="column">
@@ -155,8 +159,8 @@ const StayForms: React.FC<StayFormsProps> = ({ isEditing, id }) => {
               placeholder="Data"
               className={styles.inputDate}
               required
-              value={convertDateToDateInputValue(dataFim)}
-              onChange={(event) => setDataFim(convertDateInputValueToDate(event.target.value))}
+              value={dataFim}
+              onChange={(event) => setDataFim(event.target.value)}
             />
           </div>
         </div>
